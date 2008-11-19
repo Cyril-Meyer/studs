@@ -147,9 +147,7 @@ else {
 				$compteur++;
 			}
 		}
-		
-
-		
+	
 //recuperation des utilisateurs du sondage
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
 
