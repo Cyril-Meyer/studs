@@ -1,0 +1,9 @@
+<?php
+
+connection_base(){
+
+
+}
+
+
+?>
