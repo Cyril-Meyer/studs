@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+include 'fonctions.php';
+
+$connect=connexion_base();
+
 $sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$_SESSION[numsondage]'");
 $sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$_SESSION[numsondage]'");
 $user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$_SESSION[numsondage]' order by id_users");

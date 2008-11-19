@@ -2,6 +2,7 @@
 session_start();
 setlocale(LC_TIME, "fr_FR");
 include 'bandeaux.php';
+include 'fonctions.php';
 
 // Le fichier studs.php sert a afficher les résultats d'un sondage à un simple utilisateur. 
 // C'est également l'interface pour ajouter une valeur à un sondage deja créé.
@@ -12,7 +13,7 @@ include 'bandeaux.php';
 $numsondage=$_GET["sondage"];
 
 // Ouverture de la base de données
-$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+$connect=connexion_base();
 
 if (eregi("[a-z0-9]{16}",$numsondage)){
 
@@ -107,7 +108,7 @@ else {
 #				$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\n";
 
 				if ($dsondage->mailsonde=="yes"){
-					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), utf8_decode ("\"$nom\" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
+					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), utf8_decode ("\"$nom\" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
 				}
 			}
 		}

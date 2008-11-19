@@ -1,6 +1,7 @@
 <?php
 
 include '../variables.php';
+include '../fonctions.php';
 
 // Ce fichier index.php se trouve dans le sous-repertoire ADMIN de Studs. Il sert à afficher l'intranet de studs 
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
@@ -32,7 +33,8 @@ echo '<table width=100% align=center valign=center bgcolor="#003399"><tr><td><br
 echo '<table class="sousbandeau"><tr><td width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=5%><input type=submit class=boutonsousbandeau name=historique value=Historique></td><td width=90%> </td></tr></table><br>'."\n";
 
 // ouverture de la base de données
-$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+$connect=connexion_base();
+
 $sondage=pg_exec($connect, "select * from sondage");
 
 // Nbre de sondages
@@ -69,18 +71,10 @@ for ($i=0;$i<$nbsondages;$i++){
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$dsondage->id_sondage'");
 	$nbuser=pg_numrows($user_studs);
 
-	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td><td>'.$dsondage->mail_admin.'</td>';
-	if ($dsondage->date_fin>time()){
-		echo '<td>'.date("d/m/y",$dsondage->date_fin).'</td>';
-	}
-	else{
-		echo '<td><font color=#FF0000>'.date("d/m/y",$dsondage->date_fin).'</font></td>';
-	}
-	echo'<td>'.str_replace("°","'",$dsujets->sujet).'</td><td>'.$nbuser.'</td>'."\n";
+	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td><td>'.$dsondage->mail_admin.'</td><td>'.date("d/m/y",$dsondage->date_fin).'</td><td>'.str_replace("°","'",$dsujets->sujet).'</td><td>'.$nbuser.'</td>'."\n";
 
-	echo '<td><a href="http://studs.u-strasbg.fr/studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
-	echo '<td><a href="http://studs.u-strasbg.fr/studsplus.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage PLUS</a></td>'."\n";
-	echo '<td><a href="http://studs.u-strasbg.fr/adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
+	echo '<td><a href="http://'.$nom_serveur.'/studs/studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
+	echo '<td><a href="http://'.$nom_serveur.'/studs/adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
 	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="Supprimer le sondage"></td>'."\n";
 
 	echo '</tr>'."\n";
@@ -107,7 +101,7 @@ for ($i=0;$i<$nbsondages;$i++){
 		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
 
 		// ecriture des traces dans le fichier de logs
-	        $fichier_log=fopen('/www-root/studs/admin/logs_studs.txt','a');
+	        $fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
 	        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
 	        fclose($fichier_log);
 

@@ -1,22 +1,21 @@
 <?php
 
 #Nom du serveur
-$nom_serveur="studs.u-strasbg.fr";
+putenv("NOMSERVEUR=studs.u-strasbg.fr");
 
 #racine du serveur web
-$racine_serveur_studs="/www-root/studs";
+putenv("RACINESERVEUR=/www-root/studs");
 
 #adresse mail de l'administrateur de la base
-$adresse_mail_administrateur="borghesi@dpt-info.u-strasbg.fr";
+putenv("ADRESSEMAILADMIN=studs@dpt-info.u-strasbg.fr");
 
-#nom de la base de données
-$base="studs";
+#nom de la base de donnees
+putenv("BASE=studs");
 
 #nom de l'utilisateur de la base
-$userbase="borghesi";
+putenv("USERBASE=borghesi");
 
-#nom du serveur de base de données
-$serveurbase="localhost";
-
+#nom du serveur de base de donnees
+putenv("SERVEURBASE=localhost");
 
 ?>

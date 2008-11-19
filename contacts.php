@@ -17,7 +17,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	mail ("borghesi@dpt-info.u-strasbg.fr", "[CONTACT STUdS] Envoi de question STUdS", utf8_decode ("Vous avez une question d'utilisateur de STUdS. \nVoici la question :\n\nUtilisateur : $_POST[nom]\n\nAdresse utilisateur : $_POST[adresse_mail]\n\nMessage : $message "));
+	mail (getenv('ADRESSEMAILADMIN'), "[CONTACT STUdS] Envoi de question STUdS", utf8_decode ("Vous avez une question d'utilisateur de STUdS. \nVoici la question :\n\nUtilisateur : $_POST[nom]\n\nAdresse utilisateur : $_POST[adresse_mail]\n\nMessage : $message "));
 	if ($_POST["adresse_mail"]!=""){
 		mail ("$_POST[adresse_mail]", "[COPIE] Envoi de question STUdS", utf8_decode ("Vous avez posé une question dans STUdS. \nVoici votre question :\n\n Message : $message \n\nNous allons vous répondre dans les plus brefs délais. \n\nMerci de votre confiance\nSTUdS !"));
 	}

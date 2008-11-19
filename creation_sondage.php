@@ -2,6 +2,7 @@
 session_start();
 
 include 'variables.php';
+include 'fonctions.php';
 
 //Generer une chaine de caractere unique et aleatoire
 function random($car) {
@@ -39,16 +40,17 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$date=date('H:i:s d/m/Y');
 	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\n";
 
-	$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+	$connect=connexion_base();
+	
 	pg_exec ($connect, "insert into sondage values('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', '$date_fin', '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
 	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", utf8_decode ("[STUdS][Pour diffusion aux sondés] Sondage : $_SESSION[titre]"), utf8_decode ("Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.\n\n$_SESSION[nom] vient de créer un sondage intitulé : \"$_SESSION[titre]\".\nMerci de bien vouloir remplir le sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$sondage \n\nMerci de votre confiance,\nSTUdS !"),$headers);
+	mail ("$_SESSION[adresse]", utf8_decode ("[STUdS][Pour diffusion aux sondés] Sondage : $_SESSION[titre]"), utf8_decode ("Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.\n\n$_SESSION[nom] vient de créer un sondage intitulé : \"$_SESSION[titre]\".\nMerci de bien vouloir remplir le sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$sondage \n\nMerci de votre confiance,\nSTUdS !"),$headers);
 	mail ("$_SESSION[adresse]", utf8_decode ("[STUdS][Réservé à l'auteur] Sondage : $_SESSION[titre]"), utf8_decode ("Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\nMerci de votre confiance,\nSTUdS !"),$headers);
 
 
-	$fichier_log=fopen('/www-root/studs/admin/logs_studs.txt','a');
+	$fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
 	fwrite($fichier_log,"   [CREATION] $date\t$sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n");
 	fclose($fichier_log);
 

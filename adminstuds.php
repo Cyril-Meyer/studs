@@ -1,6 +1,7 @@
 <?php
 setlocale(LC_TIME, "fr_FR");
 include 'variables.php';
+include 'fonctions.php';
 
 // recuperation du numero de sondage admin (24 car.) dans l'URL
 $numsondageadmin=$_GET["sondage"];
@@ -8,7 +9,7 @@ $numsondageadmin=$_GET["sondage"];
 $numsondage=substr($numsondageadmin, 0, 16);
 
 //ouverture de la connection avec la base SQL
-$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+$connect=connexion_base();
 
 
 if (eregi("[a-z0-9]{16}",$numsondage)){
@@ -239,7 +240,7 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement du titre du sondage avec STUdS", utf8_decode ("Vous avez changé le titre de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
+			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement du titre du sondage avec STUdS", utf8_decode ("Vous avez changé le titre de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=utf8_encode($_POST["nouveautitre"]);
 			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -248,7 +249,7 @@ else {
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement des commentaires du sondage avec STUdS", utf8_decode ("Vous avez changé les commentaires de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
+			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement des commentaires du sondage avec STUdS", utf8_decode ("Vous avez changé les commentaires de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=utf8_encode($_POST["nouveauxcommentaires"]);
 			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -257,7 +258,7 @@ else {
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$_POST[nouvelleadresse]", "[ADMINISTRATEUR STUdS] Changement d'adresse électronique de l'administrateur avec STUdS", utf8_decode ("Vous avez changé votre adresse électronique sur STUdS. \n Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$numsondageadmin\n\n Merci de votre confiance !"));
+			mail ("$_POST[nouvelleadresse]", "[ADMINISTRATEUR STUdS] Changement d'adresse électronique de l'administrateur avec STUdS", utf8_decode ("Vous avez changé votre adresse électronique sur STUdS. \n Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n Merci de votre confiance !"));
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -672,12 +673,12 @@ if ($_POST["confirmesuppression"]){
         $date=date('H:i:s d/m/Y');
 
 	//on ecrit dans le fichier de logs la suppression du sondage
-        $fichier_log=fopen('/www-root/studs/admin/logs_studs.txt','a');
+        $fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
         fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
         fclose($fichier_log);
 
 	//envoi du mail a l'administrateur du sondage
-	mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Suppression de sondage avec STUdS", utf8_decode ("Vous avez supprimé un sondage sur STUdS. \n Vous pouvez créer de nouveaux sondages à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/index.php \n\n Merci de votre confiance !"));
+	mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Suppression de sondage avec STUdS", utf8_decode ("Vous avez supprimé un sondage sur STUdS. \n Vous pouvez créer de nouveaux sondages à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n Merci de votre confiance !"));
 
 	//destruction des données dans la base SQL
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
