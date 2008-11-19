@@ -55,6 +55,12 @@ else {
 		exit();
 
 	}
+	if ($_POST["exportcsv"]){
+		$_SESSION["numsondage"]=$_GET["sondage"];
+		header("Location:exportcsv.php");
+		exit();
+
+	}
 
 
 
@@ -182,7 +188,7 @@ else {
 // debut du formulaire et affichage des bandeanx
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
  	echo '<table class="bandeau"><tr><td><br><H1>STUdS !</H1></td></tr></table>'."\n";
-	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=5%><td width=95%> </td></tr></table>'."\n";
+	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td align=center width=5%><input type=submit class=boutonsousbandeau name=exportcsv value="Export CSV"></td><td width=90%> </td></tr></table>'."\n";
 	echo '<center><div class="presentationdate"> '."\n";
 
 //affichage du titre du sondage

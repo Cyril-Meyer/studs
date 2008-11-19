@@ -49,3 +49,4 @@ $v->setConfig( "filename", $_SESSION["numsondage"].".ics" ); // set file name
 
 $v->returnCalendar(); 
 
+?>
