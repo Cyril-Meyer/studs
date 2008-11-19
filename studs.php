@@ -61,13 +61,14 @@ else {
 //On récupere les données et les sujets du sondage
 	$dsondage=pg_fetch_object($sondage,0);
 	$dsujet=pg_fetch_object($sujets,0);
-	$taille=substr_count($dsujet->sujet,',')+1;
+	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
+	$nblignes=pg_numrows($user_studs);
 
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
 	//Si le nom est bien entré
 		if ($_POST["nom"]){
-			for ($i=0;$i<$taille;$i++){
+			for ($i=0;$i<$nbcolonnes;$i++){
 				
 				// Si la checkbox est enclenchée alors la valeur est 1
 				if (isset($_POST["choix$i"])){
@@ -105,6 +106,50 @@ else {
 			}
 		}
 	}
+	
+			//on teste pour voir si une ligne doit etre modifiée
+		for ($i=0;$i<$nblignes;$i++){
+			if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+				$ligneamodifier=$i;
+				$testligneamodifier="true";
+			}
+		}	
+
+			//test pour voir si une ligne est a modifier
+
+		for ($i=0;$i<$nblignes;$i++){
+			if ($_POST['validermodifier'.$i.'_x']){
+				$modifier=$i;
+				$testmodifier="true";
+			}
+		}
+		//si le test est valide alors on affiche des checkbox pour entrer de nouvelles valeurs
+		if ($testmodifier){
+
+			for ($i=0;$i<$nbcolonnes;$i++){
+				//recuperation des nouveaux choix de l'utilisateur
+				if (isset($_POST["choix$i"])){
+					$nouveauchoix.="1";
+				}
+				else {
+					$nouveauchoix.="0";
+				}
+			}
+
+			$compteur=0;
+			while ($compteur<pg_numrows($user_studs)){
+
+				$data=pg_fetch_object($user_studs,$compteur);
+				//mise a jour des données de l'utilisateur dans la base SQL
+				if ($compteur==$modifier){
+					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
+				}
+				$compteur++;
+			}
+		}
+		
+
+		
 //recuperation des utilisateurs du sondage
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
 
@@ -265,23 +310,68 @@ else {
 // Les réponses qu'il a choisit
 		$ensemblereponses=$data->reponses;
 
-		for ($i=0;$i<$taille;$i++){
-			$car=substr($ensemblereponses,$i,1);
-// Si la valeur est 1 alors il a choisit cette case donc OK dans case verte
-			if ($car=="1"){
-				echo '<td class="ok">OK</td>'."\n";
-				$somme[$i]++;
+			//si la ligne n'est pas a changer, on affiche les données
+			if (!$testligneamodifier){
+				for ($k=0;$k<$nbcolonnes;$k++){
+					$car=substr($ensemblereponses,$k,1);
+					if ($car=="1"){
+						echo '<td class="ok">OK</td>'."\n";
+						$somme[$k]++;
+					}
+					else {
+						echo '<td class="non"></td>'."\n";
+					}
+				}
 			}
-// sinon "rien" et case rouge.
+			//sinon on remplace les choix de l'utilisateur par une ligne de checkbox pour recuperer de nouvelles valeurs
 			else {
-				echo '<td class="non"></td>'."\n";
-			}
-		}
-		$compteur++;
-		echo '</td>'."\n";
-		echo '</tr>'."\n";
-	}
+				//si c'est bien la ligne a modifier on met les checkbox
+				if ($compteur=="$ligneamodifier"){
+					for ($j=0;$j<$nbcolonnes;$j++){
+							
+						$car=substr($ensemblereponses,$j,1);
+						if ($car=="1"){
+							echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value="" checked></td>'."\n";
+						}
+						else {
+							echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value=""></td>'."\n";
+						}
+					}
+				}
+				//sinon on affiche les lignes normales
+				else {
+					for ($k=0;$k<$nbcolonnes;$k++){
+						$car=substr($ensemblereponses,$k,1);
+						if ($car=="1"){
+							echo '<td class="ok">OK</td>'."\n";
+							$somme[$k]++;
+						}
+						else {
+							echo '<td class="non"></td>'."\n";
+						}
+					}
+				}
 
+			}
+			
+			//a la fin de chaque ligne se trouve les boutons modifier
+			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+")){
+				echo '<td><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
+			}
+			
+			//demande de confirmation pour modification de ligne
+			for ($i=0;$i<$nblignes;$i++){
+				if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+					if ($compteur==$i){
+						echo '<td><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
+					}
+				}
+			}
+			$compteur++;
+			echo '</td>'."\n";
+			echo '</tr>'."\n";
+	}
+	
 // affichage de la ligne pour un nouvel utilisateur
 	echo '<tr>'."\n";
 	echo '<td class=nom>'."\n";
@@ -289,7 +379,7 @@ else {
 	echo '</td>'."\n";
 
 // affichage des cases de formulaire checkbox pour un nouveau choix
-	for ($i=0;$i<$taille;$i++){
+	for ($i=0;$i<$nbcolonnes;$i++){
 		echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
 	}
 	// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
@@ -299,7 +389,7 @@ else {
 //determination de la meilleure date
 
 // On cherche la meilleure colonne
-	for ($i=0;$i<$taille;$i++){
+	for ($i=0;$i<$nbcolonnes;$i++){
 		if ($i=="0"){
 			$meilleurecolonne=$somme[$i];
 		}
@@ -312,7 +402,7 @@ else {
 	echo '<tr>'."\n";
 	echo '<td align="right">Somme</td>'."\n";
 
-	for ($i=0;$i<$taille;$i++){
+	for ($i=0;$i<$nbcolonnes;$i++){
 		$affichesomme=$somme[$i];
 		if ($affichesomme==""){$affichesomme="0";}
 		echo '<td class="somme">'.$affichesomme.'</td>'."\n";
@@ -321,7 +411,7 @@ else {
 	
 	echo '<tr>'."\n";
 	echo '<td class="somme"></td>'."\n";
-	for ($i=0;$i<$taille;$i++){
+	for ($i=0;$i<$nbcolonnes;$i++){
 		if ($somme[$i]==$meilleurecolonne&&$somme[$i]){
 			echo '<td class="somme"><img src="images/medaille.png"></td>'."\n";
 		}
@@ -349,7 +439,7 @@ else {
 //  on concatene le resultat dans $meilleursujet
 
 	$compteursujet=0;
-	for ($i=0;$i<$taille;$i++){
+	for ($i=0;$i<$nbcolonnes;$i++){
 		if ($somme[$i]==$meilleurecolonne){
 			$meilleursujet.=", ";
 			  	if ($dsondage->format=="D"||$dsondage->format=="D+"){
