@@ -1,0 +1,64 @@
+<?php
+session_start();
+
+include 'variables.php';
+
+// action du bouton annuler
+if ($_POST["annuler"]){
+        header("Location:index.php");
+        exit();
+}
+
+
+
+	//affichage de la page
+
+	echo '<html>'."\n";
+	echo '<head>'."\n";
+	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
+	echo '<title>STUdS</title>'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+	echo '</head>'."\n";
+	echo '<body>'."\n";
+
+        //debut du formulaire
+        echo '<form name=formulaire action="versions.php" method="POST">'."\n";
+
+	//bandeaux de tete
+	echo '<table class="bandeau"><tr><td><br><H1> STUdS !</H1></td></tr></table>'."\n";
+	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=95%> </td></tr></table><br>'."\n";
+
+	//blablabla
+	echo '<div class=body>'."\n";
+	print "<CENTER><H2>Todo-list de STUdS</H2></center><br>"."\n";
+
+	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
+	echo '- Rien pour l\'instant...<br><br>'."\n";
+	
+	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
+
+	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b><br><br>'."\n";
+	
+	echo '<u>Changelog version 0.2 (novembre 2008) : </u><br><br>'."\n";
+	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, classement des dates par ordre croissant,<br>'."\n";
+	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, accepter les horaires au format "8h" ou "8H",<br>'."\n";
+	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, possibilit&eacute de copier des horaires entre les dates,<br>'."\n";
+	echo '- Lors d\'une modification de ligne, cocher les cases initialement choisies et non pas des cases vides,<br>'."\n";
+	echo '- Changement du format d\'affichage des dates pour un formatage type : "Mardi 13/06",<br>'."\n";
+	echo '- Meilleure visualisation des choix les plus vot&eacute;s,<br>'."\n";
+	echo '- Possibilit&eacute; pour l\'administrateur du sondage de choisir de recevoir un mail d\'alerte &agrave; chaque participation d\'un sond&eacute;,<br>'."\n";
+	echo '- Remplacement des boutons de formulaire par des images moins aust&egrave;res,<br>'."\n";
+	echo '- Correction de quelques petits bugs d\'affichage,<br>'."\n";
+	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage AUTRE,<br>'."\n";
+	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage DATE.<br>'."\n";
+
+	echo '</div>'."\n";
+	echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>'."\n";
+
+	//bandeau de pied
+	echo '<table class="bandeaupied"><tr><td>Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+	echo '</form>'."\n";
+	echo '</body>'."\n";
+	echo '</html>'."\n";
+
+?>
