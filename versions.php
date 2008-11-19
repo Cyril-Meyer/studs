@@ -33,11 +33,19 @@ if ($_POST["annuler"]){
 	print "<CENTER><H2>Todo-list de STUdS</H2></center><br>"."\n";
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
-	echo '- Rien pour l\'instant...<br><br>'."\n";
+	echo '- Rien pour l\'instant<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
 	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b><br><br>'."\n";
+	
+	echo '<u>Changelog version 0.3 (novembre 2008) : </u><br><br>'."\n";
+	echo '- Possibilit&eacute; de faire un export CSV pour exploiter le sondage dans un tableur,<br>'."\n";
+	echo '- Mise en place d\'un repository Subversion pour les nouvelles versions de STUdS,<br>'."\n";
+	echo '- Amélioration de la CSS pour un meilleur affichage,<br>'."\n";
+	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
+	echo '- Modification du code source pour le rendre portable vers une autre machine,<br>'."\n";
+	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
 	
 	echo '<u>Changelog version 0.2 (novembre 2008) : </u><br><br>'."\n";
 	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, classement des dates par ordre croissant,<br>'."\n";
