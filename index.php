@@ -30,7 +30,7 @@ if ($_POST["sources"]){
 }
 
 if ($_POST["exemple"]){
-	header("Location:studsplus.php?sondage=aqg259dth55iuhwm");
+	header("Location:studs.php?sondage=aqg259dth55iuhwm");
 	exit();
 }
 
