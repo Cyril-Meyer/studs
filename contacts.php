@@ -2,6 +2,7 @@
 session_start();
 
 include 'variables.php';
+include 'bandeaux.php';
 
 // action du bouton annuler
 if ($_POST["annuler"]){
@@ -31,13 +32,15 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
-	echo '<table class="bandeau"><tr><td><br><H1>STUdS !</H1></td></tr></table>'."\n";
-	echo '<div class=body>'."\n";
+	bandeau_tete();
+	
+	echo '<div class=corps>'."\n";
 	print "<br><br><br><br><CENTER><H2>Votre message a bien &eacute;t&eacute; envoy&eacute; !</H2><br><br>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
 	echo '</div>'."\n";
-	echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>'."\n";
-	echo '<table class="bandeaupied"><tr><td>Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table>'."\n";
+
+	bandeau_pied();
+
 	session_unset();
 
 }
@@ -61,11 +64,11 @@ else {
 	echo '<form name=formulaire action="contacts.php" method="POST">'."\n";
 
 	//bandeaux de tete
-	echo '<table class="bandeau"><tr><td><br><H1> STUdS !</H1></td></tr></table>'."\n";
-	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=95%> </td></tr></table><br>'."\n";
+	bandeau_tete();
+	sous_bandeau_light();
 
 	//blablabla
-	echo '<div class=body>'."\n";
+	echo '<div class=corps>'."\n";
 	echo 'Pour toutes questions ou suggestions relatives &agrave; STUdS vous pouvez laisser un message via ce formulaire. <br><br>'."\n";
 
 	echo 'Votre nom :<br>'."\n";
@@ -98,7 +101,7 @@ else {
 	echo '<br><br><br><br><br><br><br><br><br><br><br>'."\n";
 
 	//bandeau de pied
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+	bandeau_pied();
 
 	echo '</body>'."\n";
 	echo '</html>'."\n";

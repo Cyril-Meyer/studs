@@ -2,6 +2,7 @@
 
 include '../variables.php';
 include '../fonctions.php';
+include '../bandeaux.php';
 
 // Ce fichier index.php se trouve dans le sous-repertoire ADMIN de Studs. Il sert à afficher l'intranet de studs 
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
@@ -29,8 +30,8 @@ echo '<body>'."\n";
 
 //Affichage des bandeaux et début du formulaire
 echo '<form action="index.php" method="POST">'."\n";
-echo '<table width=100% align=center valign=center bgcolor="#003399"><tr><td><br><H1> Administration STUdS !</H1></td></tr></table>'."\n";
-echo '<table class="sousbandeau"><tr><td width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=5%><input type=submit class=boutonsousbandeau name=historique value=Historique></td><td width=90%> </td></tr></table><br>'."\n";
+bandeau_tete();
+sous_bandeau_admin();
 
 // ouverture de la base de données
 $connect=connexion_base();
@@ -39,6 +40,8 @@ $sondage=pg_exec($connect, "select * from sondage");
 
 // Nbre de sondages
 $nbsondages=pg_numrows($sondage);
+
+echo'<div class=corps>'."\n";
 
 echo 'Il y a actuellement '.$nbsondages.' sondages dans la base<br><br>'."\n";
 
@@ -71,7 +74,16 @@ for ($i=0;$i<$nbsondages;$i++){
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$dsondage->id_sondage'");
 	$nbuser=pg_numrows($user_studs);
 
-	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td><td>'.$dsondage->mail_admin.'</td><td>'.date("d/m/y",$dsondage->date_fin).'</td><td>'.str_replace("°","'",$dsujets->sujet).'</td><td>'.$nbuser.'</td>'."\n";
+	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.utf8_decode($dsondage->titre).'</td><td>'.$dsondage->nom_admin.'</td><td>'.$dsondage->mail_admin.'</td>';
+	
+	if ($dsondage->date_fin>time()){
+		echo '<td>'.date("d/m/y",$dsondage->date_fin).'</td>';
+	}
+	else{
+		echo '<td><font color=#FF0000>'.date("d/m/y",$dsondage->date_fin).'</font></td>';
+	}
+	
+	echo'<td>'.$nbuser.'</td>'."\n";
 
 	echo '<td><a href="http://'.$nom_serveur.'/studs/studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
 	echo '<td><a href="http://'.$nom_serveur.'/studs/adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
@@ -79,7 +91,7 @@ for ($i=0;$i<$nbsondages;$i++){
 
 	echo '</tr>'."\n";
 }
-
+echo'</div>'."\n";
 // fin du formulaire et de la page web
 echo '</form>'."\n";
 echo '</table>'."\n";	

@@ -14,12 +14,15 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
-	echo '<table class="bandeau"><tr><td><h1><br>Erreur StUdS !</h1></td></tr></table><br>'."\n";
-	print "<br><br><br><br><CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
+	bandeau_tete();
+	echo '<div class=corps>'."\n";
+	print "<br><br><br><br><CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage!</H2>"."\n";
 	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	echo '</div>'."\n";
 	//bandeau de pied
-	echo '<br><br><br><br><br><br><br><br><br>';
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+
+	bandeau_pied();
+
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 
@@ -203,12 +206,12 @@ echo '<body>'."\n";
 
 //Debut du formulaire et bandeaux de tete
 echo '<form name=formulaire action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
-echo '<table class="bandeau"><tr><td><br><H1> Cr&eacute;ation de sondage (2/2)</H1></td></tr></table>'."\n";
-echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td align=center width=5%><input type=submit class=boutonsousbandeau name=retour value=Retour></td><td width=90%> </td></tr></table><br>'."\n";
+bandeau_tete();
+sous_bandeau_choix();
 
 //affichage de l'aide pour les jours
 echo '<div class=bodydate>'."\n";
-echo 'Vous pouvez selectionner les jours disponibles (en vert) ou enlever les jours d&eacute;j&agrave; choisis (en rouge). <br><br>'."\n";
+echo 'Vous pouvez selectionner les jours disponibles (en vert) ou enlever les jours d&eacute;j&agrave; choisis (en rouge).'."\n";
 echo '</div>'."\n";
 
 //debut du tableau qui affiche le calendrier
@@ -474,6 +477,7 @@ echo '<div class=bodydate>'."\n";
 if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 
 	//affichage des jours
+	echo '<br>'."\n";
 	echo '<H2>Jour retenus :</H2>'."\n";
 	//affichage de l'aide pour les jours
 	echo 'Pour chacun des jours que vous avez s&eacute;lectionn&eacute;, vous avez la possibilit&eacute; de choisir ou non, des heures de r&eacute;union avec ce format :<br>'."\n";
@@ -542,7 +546,7 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
 		$date_fin=strftime("%A %e %B %Y",$jour_arret);
-		echo '<br><div class=presentationdate>Votre sondage sera automatiquement effac&eacute; apr&egrave;s la date la plus tardive.<br></td></tr><tr><td><br>Date de destruction : <b>le '.$date_fin.'</b></div><br>'."\n";
+		echo '<br><div class=presentationdatefin>Votre sondage sera automatiquement effac&eacute; apr&egrave;s la date la plus tardive.<br></td></tr><tr><td><br>Date de destruction : <b>le '.$date_fin.'</b></div><br>'."\n";
 		echo '<table>'."\n";
 		echo '<tr><td>Retourner aux horaires</td><td></td><td><input type=image name=retourhoraires src="images/back-32.png"></td></tr>'."\n";
 		echo'<tr><td>Cr&eacute;er le sondage</td><td></td><td><input type=image name=confirmation value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
@@ -555,9 +559,10 @@ echo '<a name=bas></a>'."\n";
 //fin du formulaire et bandeau de pied
 echo '</form>'."\n";
 //bandeau de pied
+echo '<br><br><br><br>'."\n";
+bandeau_pied_mobile();
 echo '</div>'."\n";
-echo '<br><br><br><br><br><br><br><br><br><br><br><br>';
-echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+
 echo '</body>'."\n";
 echo '</html>'."\n";
 

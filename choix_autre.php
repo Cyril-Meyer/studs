@@ -13,12 +13,13 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
-	echo '<table class="bandeau"><tr><td><h1><br>Erreur StUdS !</h1></td></tr></table><br>'."\n";
-	print "<br><br><br><br><CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
+	bandeau_tete();
+	echo '<div class=corps>'."\n";
+	print "<CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
 	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	echo '</div'."\n";
 	//bandeau de pied
-	echo '<br><br><br><br><br><br><br><br><br>';
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";;
+	bandeau_pied();
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 
@@ -75,7 +76,7 @@ else {
 	}
 
 	//bouton retour
-	if ($_POST["retour_creation_autre"]||$_POST["retour_creation_autre_x"]){
+	if ($_POST["retour"]||$_POST["retour_x"]){
 		header("Location:infos_sondage.php");
 		exit();
 	}
@@ -116,11 +117,12 @@ else {
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
-	echo '<form name="formulaire" action="choix_autre.php#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 
-	echo '<table class="bandeau"><tr><td><br><H1> Cr&eacute;ation de sondage (2/2)</H1></td></tr></table>'."\n";
-	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td align=center width=5%><input type=submit class=boutonsousbandeau name=retour_creation_autre value=Retour></td><td width=90%> </td></tr></table><br>'."\n";
-	echo '<div class=body>'."\n";
+	echo '<form name="formulaire" action="choix_autre.php#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	bandeau_tete();
+	sous_bandeau_choix();
+	
+	echo '<div class=corps>'."\n";
 	print "Vous avez cr&eacute;&eacute; un sondage pour d&eacute;terminer un choix entre plusieurs choses."."\n";
 	echo '<br><br>Entrez les diff&eacute;rents choix &agrave; proposer au vote:<br><br>'."\n";
 	echo '<table>'."\n";
@@ -168,7 +170,7 @@ else {
 		//demande de la date de fin du sondage
 
 		echo '<br>'."\n";
-		echo '<div class=presentationautre>'."\n";
+		echo '<div class=presentationdatefin>'."\n";
 		echo '<br>Votre sondage sera automatiquement effac&eacute; dans 6 mois.<br> N&eacute;anmoins vous pouvez d&eacute;cider ci-dessous d\'une date plus rapproch&eacute;e pour la destruction de votre sondage.<br><br>'."\n";
 
 		echo 'Date de fin (optionnelle) : <input type="text" name="champdatefin" size="10" maxlength="10"> (format: JJ/MM/AAAA)'."\n";
@@ -184,10 +186,11 @@ else {
 	//fin du formulaire et bandeau de pied
 	echo '</form>'."\n";
 	echo '<a name=bas></a>'."\n";
-	echo '</div>'."\n";
+		echo '<br><br>'."\n";
 	//bandeau de pied
-	echo '<br><br><br><br><br><br><br><br><br>';
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+	bandeau_pied_mobile();
+
+	echo '</div>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 

@@ -105,9 +105,10 @@ if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["cr
 }
 
 //affichage des bandeaux de tete
-echo '<table class="bandeau"><tr><td><br><H1> Cr&eacute;ation de sondage (1/2)</H1> </td></tr></table>'."\n";
-echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td align=center width=5%><td width=95%> </td></tr></table><br>'."\n";
-echo '<div class=body>'."\n";
+bandeau_tete();
+sous_bandeau_light();
+ 
+echo '<div class=corps>'."\n";
 print "<br>Vous avez choisi de cr&eacute;er un nouveau sondage !<br> Merci de remplir les champs obligatoires."."\n";
 
 //Affichage des différents champs textes a remplir
@@ -168,8 +169,7 @@ echo '</table>'."\n";
 echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
-echo '<br><br><br><br><br><br><br>';
-echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+bandeau_pied();
 echo '</body>'."\n";
 echo '</html>'."\n";
 ?>

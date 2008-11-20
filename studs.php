@@ -35,10 +35,11 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
-	echo '<table class="bandeau"><tr><td><h1><br>Erreur StUdS !</h1></td></tr></table><br>'."\n";
+	bandeau_tete();
+	echo '<div class=corps>'."\n";
 	print "<br><br><br><br><CENTER><H2>Ce sondage n'existe pas !</H2>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
-	echo '<br><br><br><br><br><br><br><br><br><br>'."\n";
+	echo '</div>'."\n";
 }
 
 // Sinon il affiche le sondage concerné
@@ -188,9 +189,9 @@ else {
 
 // debut du formulaire et affichage des bandeanx
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
- 	echo '<table class="bandeau"><tr><td><br><H1>STUdS !</H1></td></tr></table>'."\n";
-	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td align=center width=5%><input type=submit class=boutonsousbandeau name=exportcsv value="Export CSV"></td><td width=90%> </td></tr></table>'."\n";
-	echo '<center><div class="presentationdate"> '."\n";
+ 	bandeau_tete();
+	sous_bandeau_studs();
+	echo '<div class="presentationdate"> '."\n";
 
 //affichage du titre du sondage
 	echo '<H2>'.utf8_decode($dsondage->titre).'</H2>'."\n";
@@ -209,7 +210,7 @@ else {
 	}
 	
 	echo '</div>'."\n";
-	echo '<div class="cadre"> '."\n";
+	echo '<center><div class="cadre"> '."\n";
 
 	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec <img src="images/add-16.png">.'."\n";
 
@@ -502,15 +503,16 @@ else {
 	echo '</center></tr>'."\n";
 
 
-echo '<br><br>'."\n";
+echo '<br>'."\n";
 echo '<a name=bas></a>'."\n";
+
+bandeau_pied_mobile();
 echo '</div>'."\n";
 echo '</table>'."\n";
 
 // Affichage du bandeau de pied
-echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+
 echo '</body>'."\n";
 echo '</html>'."\n";
-
 
 ?>

@@ -2,6 +2,7 @@
 setlocale(LC_TIME, "fr_FR");
 include 'variables.php';
 include 'fonctions.php';
+include 'bandeaux.php';
 
 // recuperation du numero de sondage admin (24 car.) dans l'URL
 $numsondageadmin=$_GET["sondage"];
@@ -31,13 +32,12 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
-	echo '<table class="bandeau"><tr><td><br><H1>Erreur STUdS !</H1></td></tr></table>'."\n";
-
-	print "<br><br><br><br><CENTER><H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
+	bandeau_tete();
+	echo '<div class=corps>'."\n";
+	print "<CENTER><H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
-
-	echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>'."\n";
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table>'."\n";
+	echo '</div>'."\n";
+	bandeau_pied();
 	echo '</html>'."\n";
 }
 
@@ -289,9 +289,9 @@ else {
 
 		//debut du formulaire et affichage des bandeaux
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
-		echo '<table class="bandeau"><tr><td><br><H1>Gestion de votre sondage STUdS !</H1></td></tr></table>'."\n";
-		echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=5%><td width=95%> </td></tr></table>'."\n";
-//	
+		bandeau_tete();
+		sous_bandeau_studs();
+	
 		echo '<center><div class="presentationdate"> '."\n";
 
 		//affichage du titre du sondage
@@ -651,8 +651,9 @@ else {
 	}
 
 	//fin de la partie GESTION et beandeau de pied
+	bandeau_pied_mobile();
 	echo '</div>'."\n";
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table>'."\n";
+
 
 	echo '<a name=bas></a>'."\n";
 	echo '</html>'."\n";
@@ -692,13 +693,14 @@ if ($_POST["confirmesuppression"]){
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
-	echo '<table class="bandeau"><tr><td><br><H1>Suppression de sondage STUdS !</H1></td></tr></table>'."\n";
+	bandeau_tete();
 
-	print "<br><br><br><br><CENTER><H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
+	echo '<div class=corps>'."\n";
+	print "<CENTER><H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
 	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
-
-	echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>'."\n";
-	echo '<table class="bandeaupied"><tr><td>Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table>'."\n";
+	echo '</div>'."\n";
+	bandeau_pied();
+	echo '</body>'."\n";
 	echo '</html>'."\n";
 }
 

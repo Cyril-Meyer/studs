@@ -2,6 +2,7 @@
 session_start();
 
 include 'variables.php';
+include 'bandeaux.php';
 
 // action du bouton annuler
 if ($_POST["annuler"]){
@@ -21,15 +22,15 @@ if ($_POST["annuler"]){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
-        //debut du formulaire
-        echo '<form name=formulaire action="versions.php" method="POST">'."\n";
+    //debut du formulaire
+    echo '<form name=formulaire action="versions.php" method="POST">'."\n";
 
 	//bandeaux de tete
-	echo '<table class="bandeau"><tr><td><br><H1> STUdS !</H1></td></tr></table>'."\n";
-	echo '<table class="sousbandeau"><tr><td align=center width=5%><input type=submit class=boutonsousbandeau name=annuler value=Accueil></td><td width=95%> </td></tr></table><br>'."\n";
+	bandeau_tete();
+	sous_bandeau_light();
 
 	//blablabla
-	echo '<div class=body>'."\n";
+	echo '<div class=corps>'."\n";
 	print "<CENTER><H2>Todo-list de STUdS</H2></center><br>"."\n";
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
@@ -61,10 +62,10 @@ if ($_POST["annuler"]){
 	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage DATE.<br>'."\n";
 
 	echo '</div>'."\n";
-	echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>'."\n";
+
 
 	//bandeau de pied
-	echo '<table class="bandeaupied"><tr><td>Cr&eacute;ation : Guilhem BORGHESI - 2008</td></tr></table><br>'."\n";
+	bandeau_pied();
 	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
