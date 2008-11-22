@@ -203,47 +203,52 @@ div.cadre {
 	top:235px;
  	left:1px;
 	right:1px;
-	height:10px;
 }
 /*la table des résultats dans l'affichage de sondage*/
 div.cadre table.resultats {
-	border: blue 5px;
 	background-color: white; 
+	text-align: center; 
+
 }
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {
-	text-align: center;
 	background-color: #66FF99; 
+	height:21px;
+	width:35px;
+	font-size:12px;	
 }
 /*Case de tableau NON dans affichage de sondage*/
 div.cadre td.non {
-	text-align: center;
 	background-color: #FF7777; 
+	height:21px;
+	width:35px;
 }
 /*Case de tableau VIDE dans affichage de sondage*/
 div.cadre td.vide {
-	text-align: center;
 	background-color: #DDDDDD; 
+	height:21px;
+	width:35px;
 }
 /*Case de tableau contenant les noms dans affichage de sondage*/
 div.cadre td.nom {
-	text-align: center;
 	background-color: #DDDDDD; 
+	height:21px;
+	width:35px;
+	font-size:12px;	
 }
 div.cadre td.casevide {
-	text-align: center;
 	background-color: white; 
+	height:21px;
+	width:35px;
 }
 /*les cases contenant les sommes de chaque colonne dans l'affichage de calendrier*/
 div.cadre td.somme {
-	text-align: center;
 	background-color: white; 
 	font-weight:  bold;
 	font-size:14px; 
 }
 /*Case de tableau SUJET dans affichage de sondage*/
 div.cadre td.sujet {
-	text-align: center;
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
@@ -251,7 +256,6 @@ div.cadre td.sujet {
 	padding:1px 5px;
 }
 div.cadre td.annee {
-	text-align: center;
 	border: 2px;
 	background-color: #969696; 
 	font-weight:  bold;
@@ -259,7 +263,6 @@ div.cadre td.annee {
 	padding:1px 5px;
 }
 div.cadre td.mois {
-	text-align: center;
 	border: 2px;
 	background-color: #C0C0C0; 
 	font-weight:  bold;
@@ -267,7 +270,6 @@ div.cadre td.mois {
 	padding:1px 5px;
 }
 div.cadre td.jour {
-	text-align: center;
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
@@ -275,7 +277,6 @@ div.cadre td.jour {
 	padding:1px 5px;
 }
 div.cadre td.heure {
-	text-align: center;
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
