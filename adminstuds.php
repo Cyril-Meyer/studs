@@ -305,10 +305,10 @@ else {
 		//affichage des commentaires du sondage
 		if ($dsondage->commentaires){
 			echo '<br>Commentaires :<br>'."\n";
-                        $commentaires=$dsondage->commentaires;
-                        $commentaires=str_replace("\\","",$commentaires);       
-                        echo utf8_decode($commentaires);
-											       
+            $commentaires=$dsondage->commentaires;
+            $commentaires=str_replace("\\","",$commentaires);       
+            echo utf8_decode($commentaires);
+			echo '<br>'."\n";
 		}
 		echo '<br>'."\n";
 
@@ -653,11 +653,12 @@ else {
 	}
 	echo '<a name=bas></a>'."\n";
 	//fin de la partie GESTION et beandeau de pied
-	bandeau_pied_mobile();
+
 	echo '</div>'."\n";
 
 
-
+	bandeau_pied_mobile();
+	echo '</body>'."\n";
 	echo '</html>'."\n";
 	
 }

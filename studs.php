@@ -211,9 +211,9 @@ else {
                 $commentaires=str_replace("\\","",$commentaires);       
                 echo utf8_decode($commentaires);
 
-		echo '<br><br>'."\n";
+		echo '<br>'."\n";
 	}
-	
+	echo '<br>'."\n";
 	echo '</div>'."\n";
 	echo '<center><div class="cadre"> '."\n";
 
@@ -483,11 +483,10 @@ else {
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;
   		}
-//		echo '</div>'."\n";
 		echo '</center>'."\n";
 	}
 	elseif ($meilleurecolonne){
-		print "<BR><center><img src=\"images/medaille.png\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center><br>\n";
+		print "<BR><center><img src=\"images/medaille.png\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center>\n";
 	}
 
 	pg_close($connect);
@@ -512,12 +511,9 @@ else {
 
 echo '<br>'."\n";
 echo '<a name=bas></a>'."\n";
-
-bandeau_pied_mobile();
 echo '</div>'."\n";
-
 echo '</table>'."\n";
-
+bandeau_pied_mobile();
 // Affichage du bandeau de pied
 
 echo '</body>'."\n";

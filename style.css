@@ -15,7 +15,7 @@ div.bandeau{
 	font-family:arial;
 	padding:8px; 
 	height:35px;
-	position:absolute;
+	position:static;
 	top:6px;
 	left:6px;
 	right:6px;
@@ -31,7 +31,7 @@ div.bandeautitre{
 	vertical-align:middle;
 	font-family:arial;
  	padding:3px; 
-	position:absolute;
+	position:static;
 	top:57px;
 	left:6px;
 	right:6px;
@@ -44,7 +44,7 @@ div.sousbandeau{
 	vertical-align:middle;
 	font-family:arial;
 	padding:3px;
-	position:absolute;
+	position:static;
 	top:80px;
 	left:6px;
 	right:6px;
@@ -94,7 +94,7 @@ div.bandeaupiedmobile{
 	color:white;
 	font-size:11px;
 	position:absolute; 
-	right:0px;
+	right:10px;
 }
 /*titre de niveau 1*/
 h1 {
@@ -174,10 +174,11 @@ div.presentationdate {
 	border-width:1px;
 	border-style:solid;
 	border-color:#969696;
-	position:absolute;
+	position:static;
 	top:110px;
  	right:1px;
 	left:1px;
+	margin-top:10px;
 	margin-left:30%;
 	margin-right: 30%; 
 }
@@ -203,6 +204,7 @@ div.cadre {
 	top:235px;
  	left:1px;
 	right:1px;
+	position:static;
 }
 /*la table des résultats dans l'affichage de sondage*/
 div.cadre table.resultats {
