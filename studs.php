@@ -367,14 +367,14 @@ else {
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
 			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+")){
-				echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
+				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
 			}
 			
 			//demande de confirmation pour modification de ligne
 			for ($i=0;$i<$nblignes;$i++){
 				if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
 					if ($compteur==$i){
-						echo '<td><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
+						echo '<td class=casevide><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
 					}
 				}
 			}
@@ -499,13 +499,13 @@ else {
 	echo '<tr>'."\n";
 	// S'il a oublié de remplir un nom
 	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<td class=somme colspan=2><font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !<br></font></td>\n";
+			print "<td class=casevide colspan=2><font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !<br></font></td>\n";
 		}
 	if ($erreur_prénom){
-			print "<td class=somme colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !<br></font></td>\n";
+			print "<td class=casevide colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !<br></font></td>\n";
 	}
 	if ($erreur_injection){
-			print "<td  class=somme colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !<br></font></td>\n";
+			print "<td  class=casevide colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !<br></font></td>\n";
 	}
 	echo '</tr>'."\n";
 
@@ -515,6 +515,7 @@ echo '<a name=bas></a>'."\n";
 
 bandeau_pied_mobile();
 echo '</div>'."\n";
+
 echo '</table>'."\n";
 
 // Affichage du bandeau de pied

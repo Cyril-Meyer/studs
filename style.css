@@ -196,45 +196,50 @@ div.presentationdatefin {
 }
 /*cadre principal de studs.php*/
 div.cadre {
-	padding:10px;
+	padding:10px; 
 	font-family:arial;
 	font-size:12px;	
 	position:absolute;
 	top:235px;
  	left:1px;
 	right:1px;
+	height:10px;
+}
+/*la table des résultats dans l'affichage de sondage*/
+div.cadre table.resultats {
+	border: blue 5px;
+	background-color: white; 
 }
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {
-	height:20px;
 	text-align: center;
-/* 	border: 2px; */
 	background-color: #66FF99; 
-	font-size:  12px;
-	font-family:arial;
 }
 /*Case de tableau NON dans affichage de sondage*/
 div.cadre td.non {
-	height:20px;
 	text-align: center;
-/* 	border: 2px; */
 	background-color: #FF7777; 
 }
 /*Case de tableau VIDE dans affichage de sondage*/
 div.cadre td.vide {
 	text-align: center;
-/* 	border: 2px; */
-	height:20px;
 	background-color: #DDDDDD; 
 }
 /*Case de tableau contenant les noms dans affichage de sondage*/
 div.cadre td.nom {
 	text-align: center;
-	height:20px;
-/* 	border: 2px; */
 	background-color: #DDDDDD; 
-	font-family:arial;
-	font-size:12;
+}
+div.cadre td.casevide {
+	text-align: center;
+	background-color: white; 
+}
+/*les cases contenant les sommes de chaque colonne dans l'affichage de calendrier*/
+div.cadre td.somme {
+	text-align: center;
+	background-color: white; 
+	font-weight:  bold;
+	font-size:14px; 
 }
 /*Case de tableau SUJET dans affichage de sondage*/
 div.cadre td.sujet {
@@ -242,7 +247,6 @@ div.cadre td.sujet {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-family:arial;
 	font-size:14;
 	padding:1px 5px;
 }
@@ -251,7 +255,6 @@ div.cadre td.annee {
 	border: 2px;
 	background-color: #969696; 
 	font-weight:  bold;
-	font-family:arial;
 	font-size:14;
 	padding:1px 5px;
 }
@@ -260,7 +263,6 @@ div.cadre td.mois {
 	border: 2px;
 	background-color: #C0C0C0; 
 	font-weight:  bold;
-	font-family:arial;
 	font-size:14;
 	padding:1px 5px;
 }
@@ -269,7 +271,6 @@ div.cadre td.jour {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-family:arial;
 	font-size:14;
 	padding:1px 5px;
 }
@@ -278,24 +279,10 @@ div.cadre td.heure {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-family:arial;
 	font-size:14;
 	padding:1px 5px;
 }
-/*la table des résultats dans l'affichage de sondage*/
-div.cadre table.resultats {
-	border: blue 5px;
-	background-color: white; 
-}
-/*les cases contenant les sommes de chaque colonne dans l'affichage de calendrier*/
-div.cadre td.somme {
-	text-align: center;
-	background-color: white; 
-	font-weight:  bold;
-	font-family:arial;
-	font-size:14px;
-	height:20px;
-}
+
 /*affichage du calendrier*/
 div.calendrier {
 	padding:10px;
