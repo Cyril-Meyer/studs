@@ -24,6 +24,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	}
 
 	//affichage de la page de confirmation d'envoi
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<title>Envoi STUdS</title>'."\n";
@@ -33,10 +34,11 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	echo '<body>'."\n";
 
 	bandeau_tete();
+	bandeau_titre();
 	
-	echo '<div class=corps>'."\n";
-	print "<br><br><br><br><CENTER><H2>Votre message a bien &eacute;t&eacute; envoy&eacute; !</H2><br><br>"."\n";
-	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Votre message a bien &eacute;t&eacute; envoy&eacute; !</H2><br><br>"."\n";
+	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '</div>'."\n";
 
 	bandeau_pied();
@@ -51,7 +53,7 @@ else {
 	$_SESSION["adresse_mail"]=$_POST["adresse_mail"];
 
 	//affichage de la page
-
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -65,6 +67,7 @@ else {
 
 	//bandeaux de tete
 	bandeau_tete();
+	bandeau_titre_contact();
 	sous_bandeau_light();
 
 	//blablabla

@@ -13,7 +13,7 @@ if ($_POST["annuler"]){
 
 
 	//affichage de la page
-
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -27,11 +27,11 @@ if ($_POST["annuler"]){
 
 	//bandeaux de tete
 	bandeau_tete();
+	bandeau_titre_version();
 	sous_bandeau_light();
 
 	//blablabla
 	echo '<div class=corps>'."\n";
-	print "<CENTER><H2>Todo-list de STUdS</H2></center><br>"."\n";
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
 	echo '- Rien pour l\'instant<br><br>'."\n";

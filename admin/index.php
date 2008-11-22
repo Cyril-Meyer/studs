@@ -20,6 +20,7 @@ if ($_POST["historique"]){
 }
 
 // Affichage des balises standards
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -31,6 +32,7 @@ echo '<body>'."\n";
 //Affichage des bandeaux et début du formulaire
 echo '<form action="index.php" method="POST">'."\n";
 bandeau_tete();
+bandeau_titre_admin();
 sous_bandeau_admin();
 
 // ouverture de la base de données
@@ -74,7 +76,7 @@ for ($i=0;$i<$nbsondages;$i++){
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$dsondage->id_sondage'");
 	$nbuser=pg_numrows($user_studs);
 
-	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.utf8_decode($dsondage->titre).'</td><td>'.$dsondage->nom_admin.'</td><td>'.$dsondage->mail_admin.'</td>';
+	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.utf8_decode($dsondage->titre).'</td><td>'.utf8_decode($dsondage->nom_admin).'</td><td>'.$dsondage->mail_admin.'</td>';
 	
 	if ($dsondage->date_fin>time()){
 		echo '<td>'.date("d/m/y",$dsondage->date_fin).'</td>';
@@ -85,8 +87,8 @@ for ($i=0;$i<$nbsondages;$i++){
 	
 	echo'<td>'.$nbuser.'</td>'."\n";
 
-	echo '<td><a href="http://'.$nom_serveur.'/studs/studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
-	echo '<td><a href="http://'.$nom_serveur.'/studs/adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
+	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
+	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
 	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="Supprimer le sondage"></td>'."\n";
 
 	echo '</tr>'."\n";

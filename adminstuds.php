@@ -23,7 +23,7 @@ if (eregi("[a-z0-9]{16}",$numsondage)){
 
 //verification de l'existence du sondage, s'il n'existe pas on met une page d'erreur
 if (!$sondage||pg_numrows($sondage)=="0"){
-
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -33,9 +33,10 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<body>'."\n";
 
 	bandeau_tete();
-	echo '<div class=corps>'."\n";
-	print "<CENTER><H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
-	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	bandeau_titre_erreur();
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
+	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
 	echo '</html>'."\n";
@@ -278,7 +279,7 @@ else {
 		$nbcolonnes=substr_count($dsujet->sujet,',')+1;
 
 /*DEBUT DE L'AFFICHAGE DE LA PAGE HTML*/
-
+		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 		echo '<html>'."\n";
 		echo '<head>'."\n";
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -290,9 +291,10 @@ else {
 		//debut du formulaire et affichage des bandeaux
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		bandeau_tete();
+		bandeau_titre();
 		sous_bandeau_studs();
 	
-		echo '<center><div class="presentationdate"> '."\n";
+		echo '<div class="presentationdate"> '."\n";
 
 		//affichage du titre du sondage
 		echo '<H2>'.utf8_decode($dsondage->titre).'</H2>'."\n";
@@ -329,7 +331,7 @@ else {
 
 		//boucle pour l'affichage des boutons de suppression de colonne
 		for ($i=0;$toutsujet[$i];$i++){
-			echo '<td><center><input type="image" name="effacecolonne'.$i.'" value="Effacer la colonne" src="images/cancel.png"></center></td>'."\n";
+			echo '<td class=somme><input type="image" name="effacecolonne'.$i.'" value="Effacer la colonne" src="images/cancel.png"></td>'."\n";
 		}
 
 		echo '</tr>'."\n";
@@ -471,8 +473,8 @@ else {
 
                         //a la fin de chaque ligne se trouve les boutons modifier
                         if (!$testligneamodifier=="true"){
-                	        echo '<td><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
-                	        echo '<td><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png" width="16" height="16" border="0"></td>'."\n";
+                	        echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
+                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png" width="16" height="16" border="0"></td>'."\n";
                         }
 
                         //demande de confirmation pour modification de ligne
@@ -649,13 +651,13 @@ else {
 		echo 'Confirmer la suppression de votre sondage : <input type="submit" name="confirmesuppression" value="Je supprime ce sondage !">'."\n";
 		echo '<input type="submit" name="annullesuppression" value="Je garde ce sondage !"><br><br>'."\n";
 	}
-
+	echo '<a name=bas></a>'."\n";
 	//fin de la partie GESTION et beandeau de pied
 	bandeau_pied_mobile();
 	echo '</div>'."\n";
 
 
-	echo '<a name=bas></a>'."\n";
+
 	echo '</html>'."\n";
 	
 }
@@ -687,6 +689,7 @@ if ($_POST["confirmesuppression"]){
 	pg_query($connect,"delete from sujet_studs where id_sondage = '$numsondage' ");
 
 	//affichage de l'ecran de confirmation de suppression de sondage
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<title>Suppression STUdS</title>'."\n";
@@ -695,9 +698,9 @@ if ($_POST["confirmesuppression"]){
 	echo '<body>'."\n";
 	bandeau_tete();
 
-	echo '<div class=corps>'."\n";
-	print "<CENTER><H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
-	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
+	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
 	echo '</body>'."\n";

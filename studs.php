@@ -28,6 +28,7 @@ if (eregi("[a-z0-9]{16}",$numsondage)){
 // S'il n'existe pas, il affiche une page d'erreur
 if (!$sondage||pg_numrows($sondage)=="0"){
 
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -36,10 +37,12 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	bandeau_tete();
-	echo '<div class=corps>'."\n";
-	print "<br><br><br><br><CENTER><H2>Ce sondage n'existe pas !</H2>"."\n";
-	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	bandeau_titre_erreur();
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Ce sondage n'existe pas !</H2>"."\n";
+	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '</div>'."\n";
+	bandeau_pied();
 }
 
 // Sinon il affiche le sondage concerné
@@ -160,6 +163,7 @@ else {
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
 
 // Affichage des balises standards et du titre de la page
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -190,6 +194,7 @@ else {
 // debut du formulaire et affichage des bandeanx
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
  	bandeau_tete();
+	bandeau_titre();
 	sous_bandeau_studs();
 	echo '<div class="presentationdate"> '."\n";
 
@@ -362,7 +367,7 @@ else {
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
 			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+")){
-				echo '<td><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
+				echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
 			}
 			
 			//demande de confirmation pour modification de ligne
@@ -473,11 +478,13 @@ else {
 	if ($compteursujet=="1"&&$meilleurecolonne){
 			print "<BR><center><img src=\"images/medaille.png\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
   		if ($dsondage->format=="D"||$dsondage->format=="D+"){
-  			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png">)</center>';
+  			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png">)';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;
   		}
+//		echo '</div>'."\n";
+		echo '</center>'."\n";
 	}
 	elseif ($meilleurecolonne){
 		print "<BR><center><img src=\"images/medaille.png\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center><br>\n";
@@ -489,18 +496,18 @@ else {
 	echo '<tr>'."\n";
 	echo '<td><br></td>'."\n";
 	echo '</tr>'."\n";
-	echo '<tr><center>'."\n";
+	echo '<tr>'."\n";
 	// S'il a oublié de remplir un nom
 	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<td colspan=2><font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !</font></td>\n";
+			print "<td class=somme colspan=2><font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !<br></font></td>\n";
 		}
 	if ($erreur_prénom){
-			print "<td colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font></td>\n";
+			print "<td class=somme colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !<br></font></td>\n";
 	}
 	if ($erreur_injection){
-			print "<td colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td>\n";
+			print "<td  class=somme colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !<br></font></td>\n";
 	}
-	echo '</center></tr>'."\n";
+	echo '</tr>'."\n";
 
 
 echo '<br>'."\n";

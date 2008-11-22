@@ -6,6 +6,7 @@ include 'bandeaux.php';
 //si les variables de session ne sont pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
 
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -14,9 +15,10 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	bandeau_tete();
-	echo '<div class=corps>'."\n";
-	print "<CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
-	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	bandeau_titre_erreur();
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
+	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '</div'."\n";
 	//bandeau de pied
 	bandeau_pied();
@@ -89,7 +91,7 @@ else {
 		$_SESSION["nbrecases"]=$_SESSION["nbrecases"]+5;
 	}
 
-
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -120,6 +122,7 @@ else {
 
 	echo '<form name="formulaire" action="choix_autre.php#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	bandeau_tete();
+	bandeau_titre_autre();
 	sous_bandeau_choix();
 	
 	echo '<div class=corps>'."\n";

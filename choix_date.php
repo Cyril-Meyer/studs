@@ -7,6 +7,7 @@ include 'bandeaux.php';
 //si les variables de session ne snot pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
 
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -15,9 +16,10 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	bandeau_tete();
-	echo '<div class=corps>'."\n";
-	print "<br><br><br><br><CENTER><H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage!</H2>"."\n";
-	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>.</CENTER> "."\n";
+	bandeau_titre_erreur();
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage!</H2>"."\n";
+	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
 
@@ -176,6 +178,7 @@ if ($_SESSION["mois"]==11){$motmois="novembre";}
 if ($_SESSION["mois"]==12){$motmois="d&eacute;cembre";}
 
 //debut de la page web
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -207,6 +210,7 @@ echo '<body>'."\n";
 //Debut du formulaire et bandeaux de tete
 echo '<form name=formulaire action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 bandeau_tete();
+bandeau_titre_date();
 sous_bandeau_choix();
 
 //affichage de l'aide pour les jours
@@ -492,15 +496,15 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	for ($i=0;$i<$_SESSION["nbrecaseshoraires"];$i++){
 		$j=$i+1;
 		if ($j==1){
-			echo '<td><center>'.$j.'<sup>er</sup> horaire</center></td>'."\n";
+			echo '<td classe=somme>'.$j.'<sup>er</sup> horaire</center></td>'."\n";
 		}
 		else{
-			echo '<td><center>'.$j.'<sup>&egrave;me</sup> horaire</center></td>'."\n";
+			echo '<td classe=somme>'.$j.'<sup>&egrave;me</sup> horaire</center></td>'."\n";
 		}
 	
 	}
 	if ($_SESSION["nbrecaseshoraires"]<10){
-		echo '<td><input type="image" name="ajoutcases" src="images/add-16.png"></td>'."\n";
+		echo '<td classe=somme><input type="image" name="ajoutcases" src="images/add-16.png"></td>'."\n";
 	}
 	echo '</tr>'."\n";	
 

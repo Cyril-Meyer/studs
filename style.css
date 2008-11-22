@@ -5,37 +5,39 @@ de Studs.
 */
 /*bandeau de titre*/
 div.bandeau{ 
-	line-height:46px;
+	line-height:35px;
 	text-align:center;
-	background-color: #003399;
+	background-color: #0b419b;
 	color:white;
 	vertical-align:middle;
-	font-size:38px;
+	font-size:35px;
 	font-style:bold;
 	font-family:arial;
-	padding:15px; 
-	height:50px;
+	padding:8px; 
+	height:35px;
 	position:absolute;
 	top:6px;
 	left:6px;
 	right:6px;
 }
 /*Sous bandeau avec bouton de navigation*/
-div.sousbandeautete{ 
-	height:18px;
-	background-color: #DDDDDD;
-	font-size:11px;
+div.bandeautitre{ 
+	height:17px;
+	background-color: #0077DD;
+	font-size:14px;
+	font-style:bold;
+	text-align:center;
 	color:white;
 	vertical-align:middle;
 	font-family:arial;
-	padding:3px;
+ 	padding:3px; 
 	position:absolute;
-	top:86px;
+	top:57px;
 	left:6px;
 	right:6px;
 } 
 div.sousbandeau{ 
-	height:18px;
+	height:17px;
 	background-color: #DDDDDD;
 	font-size:11px;
 	color:white;
@@ -43,14 +45,14 @@ div.sousbandeau{
 	font-family:arial;
 	padding:3px;
 	position:absolute;
-	top:86px;
+	top:80px;
 	left:6px;
 	right:6px;
 }
 /*bandeau de pied*/
 div.bandeaupied{ 
 	text-align:center;
-	background-color: #003399;
+	background-color: #0b419b;
 	color:white;
 	font-size:11px;
 	font-family:arial;
@@ -62,7 +64,7 @@ div.bandeaupied{
 }
 div.bandeaupiedmobile{ 
 	text-align:center;
-	background-color: #003399;
+	background-color: #0b419b;
 	color:white;
 	font-size:11px;
 	font-family:arial;
@@ -71,7 +73,7 @@ div.bandeaupiedmobile{
 }
 /*les boutons se trouvant dans le sousbandeau*/
 .boutonsousbandeau {
-	background-color: #0033CC;
+ 	background-color: #0b419b; 
 	width: 65px;
 	border:0px;
 	margin-left:10px;
@@ -81,7 +83,19 @@ div.bandeaupiedmobile{
 	color:white;
 	font-size:11px;
 }
-
+.boutonsousbandeaudroite {
+ 	background-color: #0b419b; 
+	width: 65px;
+	border:0px;
+ 	margin-left:10px;
+	margin-right:10px;  
+	cursor:pointer; 
+	font-family:arial;
+	color:white;
+	font-size:11px;
+	position:absolute; 
+	right:0px;
+}
 /*titre de niveau 1*/
 h1 {
 	text-align: center;
@@ -102,6 +116,16 @@ div.corps  table{
 	font-family:arial;
 	font-size:12px;	
 	font-weight:bold;
+}
+div.corpscentre{ 
+	font-size:12px;
+	font-family:arial;
+	text-align:center;
+	position:absolute;
+	top:150px;
+	margin-right:10%;
+	margin-left:10%;
+	width:80%;
 }
 /*affichage des jours*/
 div.jourschoisis {
@@ -143,31 +167,31 @@ div.bodydate table{
 }
 /*cadre de commentaires*/
 div.presentationdate {
-	width:50%;
-	padding:10px;
+	width:40%;
 	font-family:arial;
 	text-align:center;
 	font-size:12px;	
-	border-width:1;
-	border-style:dotted;
+	border-width:1px;
+	border-style:solid;
+	border-color:#969696;
 	position:absolute;
-	top:120px;
-	right:10px;
-	left:10px;
-	margin-left: auto;
-    margin-right: auto; 
+	top:110px;
+ 	right:1px;
+	left:1px;
+	margin-left:30%;
+	margin-right: 30%; 
 }
 div.presentationdatefin {
-	width:50%;
+	width:40%;
 	padding:10px;
 	font-family:arial;
 	text-align:center;
 	font-size:12px;	
-	border-width:1;
-	border-style:dotted;
-	margin-top: 20px;
-	margin-left: auto;
-    margin-right: auto; 
+	border-width:1px;
+	border-style:solid;
+	margin-top: 30px;
+	margin-left: 30%;
+    margin-right: 30%; 
 	position:static;
 }
 /*cadre principal de studs.php*/
@@ -176,40 +200,38 @@ div.cadre {
 	font-family:arial;
 	font-size:12px;	
 	position:absolute;
-	top:270px;
+	top:235px;
  	left:1px;
-	right:1px; 
-}
-/*titre de niveau 2 dans cadre*/
-div.cadre h2 {
+	right:1px;
 }
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {
-	height:18;
+	height:20px;
 	text-align: center;
-	border: 2px;
+/* 	border: 2px; */
 	background-color: #66FF99; 
 	font-size:  12px;
 	font-family:arial;
 }
 /*Case de tableau NON dans affichage de sondage*/
 div.cadre td.non {
-	height:18;
+	height:20px;
 	text-align: center;
-	border: 2px;
+/* 	border: 2px; */
 	background-color: #FF7777; 
 }
 /*Case de tableau VIDE dans affichage de sondage*/
 div.cadre td.vide {
 	text-align: center;
-	border: 2px;
+/* 	border: 2px; */
+	height:20px;
 	background-color: #DDDDDD; 
 }
 /*Case de tableau contenant les noms dans affichage de sondage*/
 div.cadre td.nom {
 	text-align: center;
-	height:18;
-	border: 2px;
+	height:20px;
+/* 	border: 2px; */
 	background-color: #DDDDDD; 
 	font-family:arial;
 	font-size:12;
@@ -271,7 +293,8 @@ div.cadre td.somme {
 	background-color: white; 
 	font-weight:  bold;
 	font-family:arial;
-	font-size:14;
+	font-size:14px;
+	height:20px;
 }
 /*affichage du calendrier*/
 div.calendrier {
@@ -280,8 +303,8 @@ div.calendrier {
 	width:490px;
 	font-size:12px;
 	font-family:arial;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 30%;
+    margin-right: 30%;
 	position:absolute;
 	top:150px;
 	left:20px;

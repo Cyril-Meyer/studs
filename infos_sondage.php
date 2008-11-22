@@ -60,6 +60,7 @@ if ($_POST["annuler"]||$_POST["annuler_x"]){
 
 //affichage de la page
 
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
@@ -106,6 +107,7 @@ if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["cr
 
 //affichage des bandeaux de tete
 bandeau_tete();
+bandeau_titre_infos();
 sous_bandeau_light();
  
 echo '<div class=corps>'."\n";
