@@ -43,6 +43,10 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
+	
+	echo '</body>'."\n";
+	echo '</html>'."\n";
+
 }
 
 // Sinon il affiche le sondage concerné
@@ -490,7 +494,7 @@ else {
 	}
 
 	pg_close($connect);
-}
+
 	
 	echo '<tr>'."\n";
 	echo '<td><br></td>'."\n";
@@ -508,15 +512,14 @@ else {
 	}
 	echo '</tr>'."\n";
 
+	echo '<br>'."\n";
+	echo '<a name=bas></a>'."\n";
+	echo '</div>'."\n";
+	echo '</table>'."\n";
+	bandeau_pied_mobile();
+	// Affichage du bandeau de pied
 
-echo '<br>'."\n";
-echo '<a name=bas></a>'."\n";
-echo '</div>'."\n";
-echo '</table>'."\n";
-bandeau_pied_mobile();
-// Affichage du bandeau de pied
-
-echo '</body>'."\n";
-echo '</html>'."\n";
-
+	echo '</body>'."\n";
+	echo '</html>'."\n";
+}
 ?>

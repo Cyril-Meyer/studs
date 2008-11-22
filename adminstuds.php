@@ -39,6 +39,8 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
+	
+	echo'</body>'."\n";
 	echo '</html>'."\n";
 }
 
@@ -698,6 +700,7 @@ if ($_POST["confirmesuppression"]){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	bandeau_tete();
+	bandeau_titre();
 
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
@@ -711,5 +714,3 @@ if ($_POST["confirmesuppression"]){
 }
 ?>
 
-</body>
-</html>
