@@ -18,6 +18,8 @@ div.bandeau{
 	top:6px;
 	left:6px;
 	right:6px;
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 /*Sous bandeau avec bouton de navigation*/
 div.bandeautitre{ 
@@ -34,6 +36,8 @@ div.bandeautitre{
 	top:57px;
 	left:6px;
 	right:6px;
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 } 
 div.sousbandeau{ 
 	height:17px;
@@ -47,6 +51,8 @@ div.sousbandeau{
 	top:80px;
 	left:6px;
 	right:6px;
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 /*bandeau de pied*/
 div.bandeaupied{ 
@@ -60,6 +66,8 @@ div.bandeaupied{
 	bottom:6px;
 	left:6px;
 	right:6px; 
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 div.bandeaupiedmobile{ 
 	text-align:center;
@@ -69,6 +77,8 @@ div.bandeaupiedmobile{
 	font-family:arial;
 	padding:6px; 
 	position:static; 
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 /*les boutons se trouvant dans le sousbandeau*/
 .boutonsousbandeau {
@@ -81,6 +91,8 @@ div.bandeaupiedmobile{
 	font-family:arial;
 	color:white;
 	font-size:11px;
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 .boutonsousbandeaudroite {
  	background-color: #0b419b; 
@@ -94,6 +106,8 @@ div.bandeaupiedmobile{
 	font-size:11px;
 	position:absolute; 
 	right:10px;
+	border-radius: 5px 5px; 
+	-moz-border-radius: 5px; 
 }
 /*corps de la page index.php*/
 div.corps{ 
