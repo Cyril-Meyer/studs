@@ -185,7 +185,7 @@ else {
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
  	bandeau_tete();
 	bandeau_titre();
-	sous_bandeau_studs();
+	sous_bandeau_light();
 	echo '<div class="presentationdate"> '."\n";
 
 //affichage du titre du sondage
@@ -424,7 +424,7 @@ else {
 
 	echo '</table>'."\n";
 	echo '</div>'."\n";
-	echo '</form>'."\n";
+
 
 // Focus javascript sur la case de texte du formulaire
 	echo '<script type="text/javascript">'."\n";
@@ -479,7 +479,8 @@ else {
 	}
 
 	pg_close($connect);
-
+	echo '<br>'."\n";
+//	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export iCal"> ou meilleure date (.ICS) <input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">'."\n";
 
 	echo '<br>'."\n";
 	// S'il a oublié de remplir un nom
@@ -498,7 +499,7 @@ else {
 
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied
-
+	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 }

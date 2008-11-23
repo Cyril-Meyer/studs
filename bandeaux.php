@@ -40,9 +40,6 @@ function sous_bandeau(){
 function sous_bandeau_light(){
 	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil></div>'."\n";
 }
-function sous_bandeau_studs(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil><input type=submit class=boutonsousbandeau name=exportcsv value="Export CSV"></div>'."\n";
-}
 function sous_bandeau_admin(){
 	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil><input type=submit class=boutonsousbandeau name=historique value=Historique></div>'."\n";
 }
