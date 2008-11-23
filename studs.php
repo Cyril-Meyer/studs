@@ -173,25 +173,10 @@ else {
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
 	echo '<title>STUdS</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+	
 	#bloquer la touche entrée
-	print "
-	<script language=\"JavaScript\">
-		if (document.layers)
-		document.captureEvents(Event.KEYPRESS)
-
-		function process_keypress(e) {
-			if(window.event){
-				if (window.event.type == \"keypress\" & window.event.keyCode == 13)
-					return !(window.event.type == \"keypress\" & window.event.keyCode == 13);
-				}
-			if(e){
-				if (e.type == \"keypress\" & e.keyCode == 13)
-				return !e;
-			}
-		}
-	document.onkeypress = process_keypress;
-	</script>\n";
-
+	blocage_touche_entree();
+	
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
@@ -221,7 +206,7 @@ else {
 	echo '</div>'."\n";
 	echo '<center><div class="cadre"> '."\n";
 
-	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec <img src="images/add-16.png">.'."\n";
+	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec <img src="images/add-16.png" alt="Ajouter">.'."\n";
 
 	echo '<br><br>'."\n";
 
@@ -371,7 +356,7 @@ else {
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
 			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+")){
-				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
+				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png"></td>'."\n";
 			}
 			
 			//demande de confirmation pour modification de ligne
@@ -383,7 +368,6 @@ else {
 				}
 			}
 			$compteur++;
-			echo '</td>'."\n";
 			echo '</tr>'."\n";
 	}
 	
@@ -428,7 +412,7 @@ else {
 	echo '<td class="somme"></td>'."\n";
 	for ($i=0;$i<$nbcolonnes;$i++){
 		if ($somme[$i]==$meilleurecolonne&&$somme[$i]){
-			echo '<td class="somme"><img src="images/medaille.png"></td>'."\n";
+			echo '<td class="somme"><img src="images/medaille.png" alt="Meilleur choix"></td>'."\n";
 		}
 		else {
 			echo '<td class="somme"></td>'."\n";
@@ -437,9 +421,11 @@ else {
 		}
 	echo '</tr>'."\n";
 
-	echo '</CENTER>'."\n";
+
 	echo '</div>'."\n";
+	echo '</CENTER>'."\n";
 	echo '</table>'."\n";
+	echo '</form>'."\n";
 
 // Focus javascript sur la case de texte du formulaire
 	echo '<script type="text/javascript">'."\n";
@@ -480,7 +466,7 @@ else {
 	
 	// Affichage du meilleur choix
 	if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<BR><center><img src=\"images/medaille.png\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
+			print "<BR><center><img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
   		if ($dsondage->format=="D"||$dsondage->format=="D+"){
   			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png">)';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;
@@ -490,7 +476,7 @@ else {
 		echo '</center>'."\n";
 	}
 	elseif ($meilleurecolonne){
-		print "<BR><center><img src=\"images/medaille.png\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center>\n";
+		print "<BR><center><img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center>\n";
 	}
 
 	pg_close($connect);
@@ -514,8 +500,7 @@ else {
 
 	echo '<br>'."\n";
 	echo '<a name=bas></a>'."\n";
-	echo '</div>'."\n";
-	echo '</table>'."\n";
+
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied
 

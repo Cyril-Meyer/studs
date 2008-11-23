@@ -96,12 +96,6 @@ div.bandeaupiedmobile{
 	position:absolute; 
 	right:10px;
 }
-/*titre de niveau 1*/
-h1 {
-	text-align: center;
-	color: white;
-	font-family: sans-serif;
-}
 /*corps de la page index.php*/
 div.corps{ 
 	font-size:12px;
@@ -198,8 +192,7 @@ div.cadre {
 /*la table des résultats dans l'affichage de sondage*/
 div.cadre table.resultats {
 	background-color: white; 
-	text-align: center; 
-
+	text-align: center;
 }
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {

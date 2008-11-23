@@ -185,25 +185,7 @@ echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 
 #bloquer la touche entrée
-print "
-<script language=\"JavaScript\">
-	if (document.layers)
-	document.captureEvents(Event.KEYPRESS)
-
-	function process_keypress(e) {
-		if(window.event){
-			if (window.event.type == \"keypress\" & window.event.keyCode == 13)
-				return !(window.event.type == \"keypress\" & window.event.keyCode == 13);
-			}
-		if(e){
-			if (e.type == \"keypress\" & e.keyCode == 13)
-			return !e;
-		}
-	}
-document.onkeypress = process_keypress;
-</script>\n";
-
-
+blocage_touche_entree();
 echo '</head>'."\n";
 echo '<body>'."\n";
 

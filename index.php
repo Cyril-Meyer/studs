@@ -34,6 +34,11 @@ if ($_POST["exemple"]){
 	exit();
 }
 
+if ($_POST["apropos"]){
+	header("Location:apropos.php");
+	exit();
+}
+
 //affichage de la page
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
@@ -66,7 +71,6 @@ echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
 bandeau_pied();
-
 
 echo '</body>'."\n";
 echo '</html>'."\n";
