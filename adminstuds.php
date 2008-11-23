@@ -300,7 +300,7 @@ else {
 
 		echo '</div>'."\n";
 
-		echo '<center><div class="cadre"> '."\n";
+		echo '<div class="cadre"> '."\n";
 		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
 
 		echo '<br><br>'."\n";
@@ -552,7 +552,6 @@ else {
 		//fin du tableau
 		echo '</table>'."\n";
 		echo '</div>'."\n";
-		echo '</CENTER>'."\n";
 
 		//focus en javascript sur le champ texte pour le nom d'utilisateur
 		echo '<script type="text/javascript">'."\n";

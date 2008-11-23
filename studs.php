@@ -204,7 +204,7 @@ else {
 	}
 	echo '<br>'."\n";
 	echo '</div>'."\n";
-	echo '<center><div class="cadre"> '."\n";
+	echo '<div class="cadre"> '."\n";
 
 	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec <img src="images/add-16.png" alt="Ajouter">.'."\n";
 
@@ -423,7 +423,6 @@ else {
 
 	echo '</table>'."\n";
 	echo '</div>'."\n";
-	echo '</CENTER>'."\n";
 	echo '</form>'."\n";
 
 // Focus javascript sur la case de texte du formulaire

@@ -184,13 +184,14 @@ div.cadre {
 	font-size:12px;	
 	position:static;
 	top:235px;
- 	left:1px;
-	right:1px;
+	text-align:center;
+	margin:0 auto;
 }
 /*la table des résultats dans l'affichage de sondage*/
 div.cadre table.resultats {
 	background-color: white; 
 	text-align: center;
+	margin:0 auto;
 }
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {
