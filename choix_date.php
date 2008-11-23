@@ -4,6 +4,7 @@ setlocale(LC_TIME, "fr_FR");
 include 'creation_sondage.php';
 include 'bandeaux.php';
 
+
 //si les variables de session ne snot pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
 

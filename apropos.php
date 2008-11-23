@@ -37,9 +37,10 @@ if ($_POST["annuler"]){
 	echo '- Subversion 1.5<br><br>'."\n";
 	
 	echo '<b>Validations</b><br><br>'."\n";
-	echo '- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict. '."\n";
+	echo '- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>'."\n";
+	echo '- La CSS de STUdS dispose de la validation CSS 2.1 du W3C. '."\n";
  	echo '<p>'."\n"; 
-	echo '<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88"></a>'."\n";
+	echo '<img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !">'."\n";
  	echo'</p>'."\n"; 
 
 	echo '<b>Questions</b><br><br>'."\n";

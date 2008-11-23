@@ -421,10 +421,9 @@ else {
 		}
 	echo '</tr>'."\n";
 
-
+	echo '</table>'."\n";
 	echo '</div>'."\n";
 	echo '</CENTER>'."\n";
-	echo '</table>'."\n";
 	echo '</form>'."\n";
 
 // Focus javascript sur la case de texte du formulaire
@@ -465,41 +464,37 @@ else {
 	if ($meilleurecolonne!="1"){$pluriel="s";}
 	
 	// Affichage du meilleur choix
+	echo '<p class=affichageresultats>'."\n";
 	if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<BR><center><img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
   		if ($dsondage->format=="D"||$dsondage->format=="D+"){
-  			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png">)';
+  			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">)';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;
   		}
-		echo '</center>'."\n";
 	}
 	elseif ($meilleurecolonne){
-		print "<BR><center><img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.</center>\n";
+		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
 	}
 
 	pg_close($connect);
 
-	
-	echo '<tr>'."\n";
-	echo '<td><br></td>'."\n";
-	echo '</tr>'."\n";
-	echo '<tr>'."\n";
-	// S'il a oublié de remplir un nom
-	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<td class=casevide colspan=2><font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !<br></font></td>\n";
-		}
-	if ($erreur_prénom){
-			print "<td class=casevide colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !<br></font></td>\n";
-	}
-	if ($erreur_injection){
-			print "<td  class=casevide colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !<br></font></td>\n";
-	}
-	echo '</tr>'."\n";
 
 	echo '<br>'."\n";
-	echo '<a name=bas></a>'."\n";
+	// S'il a oublié de remplir un nom
+	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
+			print "<font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !</font>\n";
+		}
+	if ($erreur_prénom){
+			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
+	}
+	if ($erreur_injection){
+			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font>\n";
+	}
+
+	echo '<br><br>'."\n";
+	echo '<a name=bas></a></p>'."\n";
 
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied

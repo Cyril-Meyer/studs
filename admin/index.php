@@ -87,17 +87,16 @@ for ($i=0;$i<$nbsondages;$i++){
 	
 	echo'<td>'.$nbuser.'</td>'."\n";
 
-	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'" target=_new>Voir le sondage</a></td>'."\n";
-	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'" target=_new>Modifier le sondage</a></td>'."\n";
+	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'">Voir le sondage</a></td>'."\n";
+	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'">Modifier le sondage</a></td>'."\n";
 	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="Supprimer le sondage"></td>'."\n";
 
 	echo '</tr>'."\n";
 }
+echo '</table>'."\n";	
 echo'</div>'."\n";
 // fin du formulaire et de la page web
 echo '</form>'."\n";
-echo '</table>'."\n";	
-
 echo '</body>'."\n";
 echo '</html>'."\n";
 

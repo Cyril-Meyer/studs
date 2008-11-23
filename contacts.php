@@ -89,7 +89,7 @@ else {
 	echo '<br><br>';
 
 	echo 'Question :<br>'."\n";
-	echo '<textarea name="question" rows="7" cols="40" maxlength="64">'.$_SESSION["question"].'</textarea>';
+	echo '<textarea name="question" rows="7" cols="40">'.$_SESSION["question"].'</textarea>';
 
 	if ($_POST["envoiquestion"]&&$_SESSION["question"]==""){
 		echo ' <font color="#FF0000">&nbsp;Il faut poser une question !</font>';
@@ -97,11 +97,10 @@ else {
 
 	echo '<br><br>'."\n";
 	echo '<table>'."\n";
-	echo '<tr><td>Envoyer votre question</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr><br>'."\n";
+	echo '<tr><td>Envoyer votre question</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
 	echo '</table>'."\n";
 	echo '</div>'."\n";
 	echo '</form>'."\n";
-	echo '<br><br><br><br><br><br><br><br><br><br><br>'."\n";
 
 	//bandeau de pied
 	bandeau_pied();

@@ -67,9 +67,6 @@ else {
 
 	}
 
-	#bloquer la touche entrée
-	blocage_touche_entree();
-
 
 	//si il n'y a pas suppression alors on peut afficher normalement le tableau
 	if (!$_POST["confirmesuppression"]){
@@ -270,6 +267,10 @@ else {
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
 		echo '<title>ADMINISTRATEUR de sondage STUdS</title>'."\n";
 		echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+		
+		#bloquer la touche entrée
+		blocage_touche_entree();
+
 		echo '</head>'."\n";
 		echo '<body>'."\n";
 
@@ -300,7 +301,7 @@ else {
 		echo '</div>'."\n";
 
 		echo '<center><div class="cadre"> '."\n";
-		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png">. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
+		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
 
 		echo '<br><br>'."\n";
 
@@ -312,7 +313,7 @@ else {
 	$toutsujet=explode(",",$dsujet->sujet);	
 		
 		echo '<tr>'."\n";
-		echo '<td></center></td>'."\n";
+		echo '<td></td>'."\n";
 
 		//boucle pour l'affichage des boutons de suppression de colonne
 		for ($i=0;$toutsujet[$i];$i++){
@@ -458,15 +459,15 @@ else {
 
                         //a la fin de chaque ligne se trouve les boutons modifier
                         if (!$testligneamodifier=="true"){
-                	        echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" width="16" height="16" border="0"></td>'."\n";
-                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png" width="16" height="16" border="0"></td>'."\n";
+                	        echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" alt="Icone infos"></td>'."\n";
+                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png"  alt="Icone efface"></td>'."\n";
                         }
 
                         //demande de confirmation pour modification de ligne
                        for ($i=0;$i<$nblignes;$i++){
 				if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
 					if ($compteur==$i){
-						echo '<td><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
+						echo '<td><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png"  alt="Icone valider"></td>'."\n";
 					}
 				}
 			}
@@ -474,11 +475,9 @@ else {
 
 
 			$compteur++;
-			echo '</td>'."\n";
 			echo '</tr>'."\n";
 
 		}
-
 
 		//affichage de la case vide de texte pour un nouvel utilisateur
 		echo '<tr>'."\n";
@@ -491,7 +490,7 @@ else {
 			echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
 		}
 		// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
-		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png"></td>'."\n";
+		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png" alt="Ajouter"></td>'."\n";
 
 		echo '</tr>'."\n";
 
@@ -524,7 +523,7 @@ else {
                echo '<td class="somme"></td>'."\n";
 	               for ($i=0;$i<$nbcolonnes;$i++){
 	                       if ($somme[$i]==$meilleurecolonne&&$somme[$i]){
-	                               echo '<td class="somme"><img src="images/medaille.png"></td>'."\n";
+	                               echo '<td class="somme"><img src="images/medaille.png" alt="Meilleur resultat"></td>'."\n";
 	                       }
 	                       else {
 	                               echo '<td class="somme"></td>'."\n";
@@ -532,29 +531,28 @@ else {
                        }
                echo '</tr>'."\n";
 
-		echo '<tr>'."\n";
 
-		//affichage du bouton participer en fin de ligne
-		echo '</td>'."\n";
 		// S'il a oublié de remplir un nom
 		if (($_POST["boutonp"]||$_POST["boutonp_x"])&&$_POST["nom"]=="") {
+			echo '<tr>'."\n";
 			print "<td colspan=3><font color=#FF0000>&nbsp;Il faut un nom !</font>\n";
+			echo '</tr>'."\n"; 
 		}
 		if ($erreur_prénom){
+			echo '<tr>'."\n";
 			print "<td colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font></td>\n";
+			echo '</tr>'."\n"; 
 		}
 		if ($erreur_injection){
+			echo '<tr>'."\n";
 			print "<td colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td>\n";
+			echo '</tr>'."\n"; 
 		}
-	
-		echo '</tr>'."\n";
-	
-
+		
 		//fin du tableau
-		echo '</tr>'."\n";
-		echo '</CENTER>'."\n";
-		echo '</div>'."\n";
 		echo '</table>'."\n";
+		echo '</div>'."\n";
+		echo '</CENTER>'."\n";
 
 		//focus en javascript sur le champ texte pour le nom d'utilisateur
 		echo '<script type="text/javascript">'."\n";
@@ -593,22 +591,25 @@ else {
 		//ajout du S si plusieurs votes
 		if ($meilleurecolonne!="1"){$pluriel="s";}
 
+		echo '<p class=affichageresultats>'."\n";
+		
 		//affichage de la phrase annoncant le meilleur sujet
 		if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<BR> <img src=\"images/medaille.png\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
 		}
 		elseif ($meilleurecolonne){
-			print "<BR><img src=\"images/medaille.png\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
 		}
 
+		echo '</p>'."\n";
 		echo '</form>'."\n";
 		echo '<form name="formulaire2" action="adminstuds.php?sondage='.$numsondageadmin.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		//Gestion du sondage
-		echo '<br><H3> Gestion de votre sondage :</H3>'."\n";
-
+		echo '<div class=titregestionadmin>Gestion de votre sondage :</div>'."\n";
+ 		echo '<p class=affichageresultats>'."\n"; 
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png"><br><br>'."\n";
+	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//si la valeur du nouveau titre est invalide : message d'erreur
@@ -617,11 +618,11 @@ else {
 	}
 
 	//Changer les commentaires du sondage
-	echo 'Si vous souhaitez changer les commentaires du sondage :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40" maxlength="64">'.utf8_decode($dsondage->commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png"><br><br>'."\n";
+	echo 'Si vous souhaitez changer les commentaires du sondage :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($dsondage->commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//Changer l'adresse de l'administrateur
-	echo 'Si vous souhaitez changer votre adresse de courrier &eacute;lectronique :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png"><br><br>'."\n";
+	echo 'Si vous souhaitez changer votre adresse de courrier &eacute;lectronique :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 	//si l'adresse est invalide ou le champ vide : message d'erreur
 	if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]==""){
@@ -630,7 +631,7 @@ else {
 	}
 
 	//suppression du sondage
-	echo 'Si vous souhaitez supprimer votre sondage : <input type="image" name="suppressionsondage" value="Suppression du sondage" src="images/cancel.png"><br><br>'."\n";
+	echo 'Si vous souhaitez supprimer votre sondage : <input type="image" name="suppressionsondage" value="Suppression du sondage" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
 	if ($_POST["suppressionsondage"]){
 
 		echo 'Confirmer la suppression de votre sondage : <input type="submit" name="confirmesuppression" value="Je supprime ce sondage !">'."\n";
@@ -638,14 +639,12 @@ else {
 	}
 	echo '<a name=bas></a>'."\n";
 	//fin de la partie GESTION et beandeau de pied
-
-	echo '</div>'."\n";
-
+	echo '</p>'."\n";
 
 	bandeau_pied_mobile();
+	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
-	
 }
 
 //action si bouton confirmation de suppression est activé
@@ -690,6 +689,7 @@ if ($_POST["confirmesuppression"]){
 	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
+	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 }

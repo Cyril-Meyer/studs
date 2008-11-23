@@ -11,7 +11,6 @@ div.bandeau{
 	color:white;
 	vertical-align:middle;
 	font-size:35px;
-	font-style:bold;
 	font-family:arial;
 	padding:8px; 
 	height:35px;
@@ -25,7 +24,7 @@ div.bandeautitre{
 	height:17px;
 	background-color: #0077DD;
 	font-size:14px;
-	font-style:bold;
+	font-weight:bold;
 	text-align:center;
 	color:white;
 	vertical-align:middle;
@@ -183,11 +182,10 @@ div.cadre {
 	padding:10px; 
 	font-family:arial;
 	font-size:12px;	
-	position:absolute;
+	position:static;
 	top:235px;
  	left:1px;
 	right:1px;
-	position:static;
 }
 /*la table des résultats dans l'affichage de sondage*/
 div.cadre table.resultats {
@@ -218,7 +216,7 @@ div.cadre td.nom {
 	background-color: #DDDDDD; 
 	height:21px;
 	width:35px;
-	font-size:12px;	
+	font-size:12px;	 
 }
 div.cadre td.casevide {
 	background-color: white; 
@@ -236,35 +234,35 @@ div.cadre td.sujet {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-size:14;
+	font-size:14px;
 	padding:1px 5px;
 }
 div.cadre td.annee {
 	border: 2px;
 	background-color: #969696; 
 	font-weight:  bold;
-	font-size:14;
+	font-size:14px;
 	padding:1px 5px;
 }
 div.cadre td.mois {
 	border: 2px;
 	background-color: #C0C0C0; 
 	font-weight:  bold;
-	font-size:14;
+	font-size:14px;
 	padding:1px 5px;
 }
 div.cadre td.jour {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-size:14;
+	font-size:14px;
 	padding:1px 5px;
 }
 div.cadre td.heure {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
-	font-size:14;
+	font-size:14px;
 	padding:1px 5px;
 }
 
@@ -321,6 +319,19 @@ div.calendrier td.choisi {
 	text-align: center;
 	border: 2px;
 	background-color: #FF6666; 
+}
+/* Le paragraphe de fin */
+p.affichageresultats{
+	text-align: center;
+}
+/* Le paragraphe de fin */
+p.textesouligne{
+	text-decoration: underline;
+}
+div.titregestionadmin{
+	text-align: center;
+	font-weight:bold;
+	font-size:18px;
 }
 /*les boutons pour choisir un jour non selectionné*/
 .boutonON {

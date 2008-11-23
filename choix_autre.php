@@ -3,6 +3,7 @@ session_start();
 include 'creation_sondage.php';
 include 'bandeaux.php';
 
+
 //si les variables de session ne sont pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
 
@@ -19,7 +20,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
 	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
-	echo '</div'."\n";
+	echo '</div>'."\n";
 	//bandeau de pied
 	bandeau_pied();
 	echo '</body>'."\n";

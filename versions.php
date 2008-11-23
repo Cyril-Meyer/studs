@@ -38,17 +38,17 @@ if ($_POST["annuler"]){
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
-	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b><br><br>'."\n";
+	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b>'."\n";
 	
-	echo '<u>Changelog version 0.3 (novembre 2008) : </u><br><br>'."\n";
+	echo '<p class=textesouligne>Changelog version 0.3 (novembre 2008) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export CSV pour exploiter le sondage dans un tableur,<br>'."\n";
 	echo '- Mise en place d\'un repository Subversion pour les nouvelles versions de STUdS,<br>'."\n";
 	echo '- Amélioration de la CSS pour un meilleur affichage,<br>'."\n";
 	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
 	echo '- Modification du code source pour le rendre portable vers une autre machine,<br>'."\n";
-	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
+	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br>'."\n";
 	
-	echo '<u>Changelog version 0.2 (novembre 2008) : </u><br><br>'."\n";
+	echo '<p class=textesouligne>Changelog version 0.2 (novembre 2008) : </p>'."\n";
 	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, classement des dates par ordre croissant,<br>'."\n";
 	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, accepter les horaires au format "8h" ou "8H",<br>'."\n";
 	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, possibilit&eacute de copier des horaires entre les dates,<br>'."\n";
