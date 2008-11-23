@@ -60,7 +60,7 @@ if ($_POST["annuler"]){
 	echo '- Correction de quelques petits bugs d\'affichage,<br>'."\n";
 	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage AUTRE,<br>'."\n";
 	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage DATE.<br>'."\n";
-
+	echo '<br><br>'."\n";
 	echo '</div>'."\n";
 
 

@@ -151,7 +151,7 @@ echo '<td><input type="image" name="creation_sondage_date" value="Trouver une da
 echo '<tr><td>Autre sondage</td><td></td> '."\n";
 echo '<td><input type="image" name="creation_sondage_autre" value="Faire un sondage" src="images/chart-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
-
+echo '<br><br>'."\n";
 echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied

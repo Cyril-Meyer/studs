@@ -37,6 +37,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
+	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
 	
@@ -686,6 +687,7 @@ if ($_POST["confirmesuppression"]){
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
 	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
+	echo '<br><br>'."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
 	echo '</form>'."\n";

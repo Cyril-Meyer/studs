@@ -14,6 +14,7 @@ bandeau_tete();
 echo '<div class=corpscentre>'."\n";
 print "<H2>Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de StUdS.</H2><br><br>"."\n";
 print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"../index.php\"> STUdS</A>. "."\n";
+echo '<br><br>'."\n";
 echo '</div>'."\n";
 
 

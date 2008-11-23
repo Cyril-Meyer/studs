@@ -41,6 +41,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Ce sondage n'existe pas !</H2>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
+	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 	bandeau_pied();
 	

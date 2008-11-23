@@ -66,7 +66,8 @@ echo '<br>'."\n";
 echo '<table>'."\n";
 echo'<tr><td><b>Cr&eacute;er un sondage</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
-
+echo '<br>'."\n";
+echo '<br>'."\n";
 echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
