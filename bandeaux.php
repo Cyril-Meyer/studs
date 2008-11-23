@@ -52,10 +52,10 @@ function sous_bandeau_choix(){
 
 #les bandeaux de pied
 function bandeau_pied(){
-	echo '<div class="bandeaupied">Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
+	echo '<div class="bandeaupied">Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
 }
 function bandeau_pied_mobile(){
-	echo '<div class="bandeaupiedmobile">Universit&eacute; Louis Pasteur - Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
+	echo '<div class="bandeaupiedmobile">Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
 }
 
 
