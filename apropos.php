@@ -36,6 +36,14 @@ if ($_POST["annuler"]){
 	echo '- PostgreSQL 8.0<br>'."\n";
 	echo '- Subversion 1.5<br><br>'."\n";
 	
+	echo '<b>Compatibilit&eacute;s</b><br><br>'."\n";
+	echo '- Firefox 2.0 <br>'."\n";
+	echo '- Op&eacute;ra 9 <br>'."\n";
+	echo '- Konqueror 3.5 <br>'."\n";
+	echo '- Links 2.2 <br>'."\n";
+	echo '- Safari 3.1 <br>'."\n";
+	echo '- IE 7 <br><br>'."\n";
+
 	echo '<b>Validations</b><br><br>'."\n";
 	echo '- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>'."\n";
 	echo '- La CSS de STUdS dispose de la validation CSS 2.1 du W3C. '."\n";
