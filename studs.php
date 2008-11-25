@@ -495,10 +495,10 @@ else {
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;
   		}
+	echo '<br><br>'."\n";
+	echo '<a name=bas></a>'."\n";
 	echo '</p>'."\n";
 
-	echo '<br>'."\n";
-	echo '<a name=bas></a></p>'."\n";
 	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied

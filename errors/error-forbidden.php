@@ -15,7 +15,7 @@ bandeau_titre();
 echo '<div class=corpscentre>'."\n";
 print "<H2>Vous n'avez pas l'autorisation de voir ce r&eacute;pertoire.<br> </H2>Vous devez, pour cela, initier votre connexion depuis une machine de l'Universit&eacute;.<br> Si vous avez un compte &agrave; l'Universit&eacute;, vous pouvez &eacute;galement utiliser le <a href=\"https://www-crc.u-strasbg.fr/osiris/services/vpn\">VPN s&eacute;curis&eacute;</a>.<br><br>"."\n";
 print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"../index.php\"> STUdS</A>."."\n";
-echo '<br><br>'."\n";
+echo '<br><br><br>'."\n";
 echo '</div>'."\n";
 
 

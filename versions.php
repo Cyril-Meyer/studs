@@ -34,7 +34,8 @@ if ($_POST["annuler"]){
 	echo '<div class=corps>'."\n";
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
-	echo '- Rien pour l\'instant<br><br>'."\n";
+	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
+	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
@@ -42,11 +43,9 @@ if ($_POST["annuler"]){
 	
 	echo '<p class=textesouligne>Changelog version 0.3 (novembre 2008) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export CSV pour exploiter le sondage dans un tableur,<br>'."\n";
-	echo '- Mise en place d\'un repository Subversion pour les nouvelles versions de STUdS,<br>'."\n";
+	echo '- Mise en place d\'un repository Subversion pour partager les nouvelles versions de STUdS,<br>'."\n";
 	echo '- Amélioration de la CSS pour un meilleur affichage,<br>'."\n";
-	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
-	echo '- Modification du code source pour le rendre portable vers une autre machine,<br>'."\n";
-	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br>'."\n";
+	echo '- Modification du code source pour le rendre portable vers une autre machine.<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.2 (novembre 2008) : </p>'."\n";
 	echo '- Lors de la cr&eacute;ation d\'un sondage DATE, classement des dates par ordre croissant,<br>'."\n";
@@ -60,7 +59,7 @@ if ($_POST["annuler"]){
 	echo '- Correction de quelques petits bugs d\'affichage,<br>'."\n";
 	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage AUTRE,<br>'."\n";
 	echo '- Possibilit&eacute; de rajouter des cases suppl&eacute;mentaires lors de la cr&eacute;ation d\'un sondage DATE.<br>'."\n";
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 
 

@@ -21,7 +21,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage!</H2>"."\n";
 	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
 	sur_bandeau_pied();

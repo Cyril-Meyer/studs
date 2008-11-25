@@ -15,7 +15,7 @@ bandeau_tete();
 echo '<div class=corpscentre>'."\n";
 print "<H2>L'application STUdS est pour l'instant en maintenance.<br> </H2>"."\n";
 print "Merci de votre compr&eacute;hension."."\n";
-echo '<br><br>'."\n";
+echo '<br><br><br>'."\n";
 echo '</div>'."\n";
 
 // Affichage du bandeau de pied

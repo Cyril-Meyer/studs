@@ -39,7 +39,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Votre message a bien &eacute;t&eacute; envoy&eacute; !</H2><br><br>"."\n";
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();
 	bandeau_pied();
@@ -96,11 +96,11 @@ else {
 		echo ' <font color="#FF0000">&nbsp;Il faut poser une question !</font>';
 	}
 
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '<table>'."\n";
 	echo '<tr><td>Envoyer votre question</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
 	echo '</table>'."\n";
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	echo '</form>'."\n";
 

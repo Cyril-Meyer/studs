@@ -640,6 +640,7 @@ else {
 		echo '<input type="submit" name="annullesuppression" value="Je garde ce sondage !"><br><br>'."\n";
 	}
 	echo '<a name=bas></a>'."\n";
+	echo '<br><br>'."\n";
 	//fin de la partie GESTION et beandeau de pied
 	echo '</p>'."\n";
 	sur_bandeau_pied_mobile();
