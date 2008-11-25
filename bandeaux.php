@@ -55,6 +55,9 @@ function sur_bandeau_pied(){
 function bandeau_pied(){
 	echo '<div class="bandeaupied">Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
 }
+function sur_bandeau_pied_mobile(){
+	echo '<div class="surbandeaupiedmobile"></div>'."\n";
+}
 function bandeau_pied_mobile(){
 	echo '<div class="bandeaupiedmobile">Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
 }

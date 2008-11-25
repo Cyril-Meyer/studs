@@ -43,6 +43,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
+	sur_bandeau_pied();
 	bandeau_pied();
 	
 	echo '</body>'."\n";
@@ -498,7 +499,7 @@ else {
 
 	echo '<br>'."\n";
 	echo '<a name=bas></a></p>'."\n";
-
+	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied
 	echo '</form>'."\n";

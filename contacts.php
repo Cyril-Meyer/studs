@@ -41,7 +41,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br>'."\n";
 	echo '</div>'."\n";
-
+	sur_bandeau_pied();
 	bandeau_pied();
 
 	session_unset();
@@ -105,6 +105,7 @@ else {
 	echo '</form>'."\n";
 
 	//bandeau de pied
+	sur_bandeau_pied();
 	bandeau_pied();
 
 	echo '</body>'."\n";

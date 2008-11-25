@@ -65,6 +65,7 @@ if ($_POST["annuler"]){
 
 
 	//bandeau de pied
+	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</form>'."\n";
 	echo '</body>'."\n";

@@ -39,6 +39,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
+	sur_bandeau_pied();
 	bandeau_pied();
 	
 	echo'</body>'."\n";
@@ -592,7 +593,6 @@ else {
 		if ($meilleurecolonne!="1"){$pluriel="s";}
 
 		echo '<p class=affichageresultats>'."\n";
-		
 		//affichage de la phrase annoncant le meilleur sujet
 		if ($compteursujet=="1"&&$meilleurecolonne){
 			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
@@ -601,12 +601,14 @@ else {
 			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
 		}
 
+		echo '<br><br>'."\n";
 		echo '</p>'."\n";
 		echo '</form>'."\n";
 		echo '<form name="formulaire2" action="adminstuds.php?sondage='.$numsondageadmin.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		//Gestion du sondage
 		echo '<div class=titregestionadmin>Gestion de votre sondage :</div>'."\n";
  		echo '<p class=affichageresultats>'."\n"; 
+		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
 	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
@@ -640,7 +642,7 @@ else {
 	echo '<a name=bas></a>'."\n";
 	//fin de la partie GESTION et beandeau de pied
 	echo '</p>'."\n";
-
+	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	echo '</form>'."\n";
 	echo '</body>'."\n";
@@ -687,8 +689,9 @@ if ($_POST["confirmesuppression"]){
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
 	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
-	echo '<br><br>'."\n";
+	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
+	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</form>'."\n";
 	echo '</body>'."\n";

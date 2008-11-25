@@ -19,6 +19,7 @@ echo '<br><br>'."\n";
 echo '</div>'."\n";
 
 // Affichage du bandeau de pied
+sur_bandeau_pied();
 bandeau_pied();
 echo '</body>'."\n";
 echo '</html>'."\n";

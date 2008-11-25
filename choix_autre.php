@@ -23,6 +23,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
+	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</body>'."\n";
 	echo '</html>'."\n";
@@ -175,8 +176,9 @@ else {
 	//fin du formulaire et bandeau de pied
 	echo '</form>'."\n";
 	echo '<a name=bas></a>'."\n";
-		echo '<br><br>'."\n";
+	echo '<br><br>'."\n";
 	//bandeau de pied
+	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 
 	echo '</div>'."\n";

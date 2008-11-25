@@ -24,7 +24,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
-
+	sur_bandeau_pied();
 	bandeau_pied();
 
 	echo '</body>'."\n";
@@ -339,7 +339,6 @@ echo '</tr>'."\n";
 echo '</table>'."\n";
 echo '</div>'."\n";
 
-
 //traitement de l'entrée des heures dans les cases texte
 if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 	
@@ -548,9 +547,10 @@ echo '<a name=bas></a>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
 echo '<br><br><br><br>'."\n";
-bandeau_pied_mobile();
-echo '</div>'."\n";
 
+echo '</div>'."\n";
+sur_bandeau_pied_mobile();
+bandeau_pied_mobile();
 echo '</body>'."\n";
 echo '</html>'."\n";
 
