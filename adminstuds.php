@@ -279,7 +279,7 @@ else {
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		bandeau_tete();
 		bandeau_titre();
-		sous_bandeau_studs();
+		sous_bandeau_light();
 	
 		echo '<div class="presentationdate"> '."\n";
 

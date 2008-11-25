@@ -71,6 +71,7 @@ echo '<br>'."\n";
 echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
+sur_bandeau_pied();
 bandeau_pied();
 
 echo '</body>'."\n";

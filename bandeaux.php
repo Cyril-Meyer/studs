@@ -47,7 +47,11 @@ function sous_bandeau_choix(){
 	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil><input type=submit class=boutonsousbandeau name=retour value=Retour></div>'."\n";
 }
 
+
 #les bandeaux de pied
+function sur_bandeau_pied(){
+	echo '<div class="surbandeaupied"></div>'."\n";
+}
 function bandeau_pied(){
 	echo '<div class="bandeaupied">Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008</div>'."\n";
 }

@@ -425,7 +425,18 @@ else {
 	echo '</table>'."\n";
 	echo '</div>'."\n";
 
-
+	echo '<p class=affichageresultats>'."\n";
+	// S'il a oublié de remplir un nom
+	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
+			print "<font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !</font>\n";
+		}
+	if ($erreur_prénom){
+			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
+	}
+	if ($erreur_injection){
+			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font>\n";
+	}
+	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire
 	echo '<script type="text/javascript">'."\n";
 	echo 'document.formulaire.nom.focus();'."\n";
@@ -464,37 +475,28 @@ else {
 	if ($meilleurecolonne!="1"){$pluriel="s";}
 	
 	// Affichage du meilleur choix
-	echo '<p class=affichageresultats>'."\n";
+
 	if ($compteursujet=="1"&&$meilleurecolonne){
 			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
-  		if ($dsondage->format=="D"||$dsondage->format=="D+"){
-  			echo ' (Export iCal :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">)';
-  			$_SESSION["meilleursujet"]=$meilleursujetexport;
-  			$_SESSION["numsondage"]=$numsondage;
-  			$_SESSION["sondagetitre"]=$dsondage->titre;
-  		}
-	}
+ 	}
 	elseif ($meilleurecolonne){
 		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
 	}
 
 	pg_close($connect);
-	echo '<br>'."\n";
-//	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export iCal"> ou meilleure date (.ICS) <input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">'."\n";
-
-	echo '<br>'."\n";
-	// S'il a oublié de remplir un nom
-	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !</font>\n";
-		}
-	if ($erreur_prénom){
-			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
-	}
-	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font>\n";
-	}
-
+	
 	echo '<br><br>'."\n";
+	echo '<p class=affichageexport>'."\n";
+	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.ico" alt="Export iCal">  ';
+ 		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
+  			echo ' &nbsp;Agenda (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
+  			$_SESSION["meilleursujet"]=$meilleursujetexport;
+  			$_SESSION["numsondage"]=$numsondage;
+  			$_SESSION["sondagetitre"]=$dsondage->titre;
+  		}
+	echo '</p>'."\n";
+
+	echo '<br>'."\n";
 	echo '<a name=bas></a></p>'."\n";
 
 	bandeau_pied_mobile();

@@ -49,6 +49,14 @@ div.sousbandeau{
 	right:6px;
 }
 /*bandeau de pied*/
+div.surbandeaupied{ 
+	background-color: #0077DD;
+	position:fixed;
+	bottom:32px;
+	left:6px;
+	right:6px; 
+	height:6px;
+}
 div.bandeaupied{ 
 	text-align:center;
 	background-color: #0b419b;
@@ -326,10 +334,16 @@ p.affichageresultats{
 	text-align: center;
 	font-family:arial;
 	font-size:13px;
+	margin:-10px;
 }
 /* Le paragraphe de fin */
 p.textesouligne{
 	text-decoration: underline;
+}
+p.affichageexport{
+	text-align: center;
+	font-family:arial;
+	font-size:10px;
 }
 div.titregestionadmin{
 	text-align: center;
