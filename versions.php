@@ -35,6 +35,7 @@ if ($_POST["annuler"]){
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
 	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
+	echo '- Possibilit&eacute; de faire un export PDF pour imprimer proprement un sondage,<br>'."\n";
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
