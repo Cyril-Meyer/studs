@@ -114,7 +114,7 @@ else {
 
 
 		//action quand on ajoute une colonne au format DATE
-		if ($_POST["ajoutercolonne"] && $_POST["nouvellecolonne"]!=""&&$dsondage->format=="A"){
+		if ($_POST["ajoutercolonne"] && $_POST["nouvellecolonne"]!=""&&($dsondage->format=="A"||$dsondage->format=="A+")){
 
 			$nouveauxsujets=$dsujet->sujet;
 

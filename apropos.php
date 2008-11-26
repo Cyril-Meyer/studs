@@ -31,12 +31,12 @@ if ($_POST["annuler"]){
 	//blablabla
 	echo '<div class=corps>'."\n";
 
-	echo '<b>Technologies </b><br><br>'."\n";
+	echo '<b>Technologies utilis&eacute;es</b><br><br>'."\n";
 	echo '- PHP 5.2<br>'."\n";
 	echo '- PostgreSQL 8.0<br>'."\n";
 	echo '- Subversion 1.5<br><br>'."\n";
 	
-	echo '<b>Compatibilit&eacute;s</b><br><br>'."\n";
+	echo '<b>Compatibilit&eacute;s des navigateurs</b><br><br>'."\n";
 	echo '- Firefox 2.0 <br>'."\n";
 	echo '- Op&eacute;ra 9 <br>'."\n";
 	echo '- Konqueror 3.5 <br>'."\n";
@@ -44,13 +44,18 @@ if ($_POST["annuler"]){
 	echo '- Safari 3.1 <br>'."\n";
 	echo '- IE 7 <br><br>'."\n";
 
-	echo '<b>Validations</b><br><br>'."\n";
+	echo '<b>Validations des pages</b><br><br>'."\n";
 	echo '- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>'."\n";
 	echo '- La CSS de STUdS dispose de la validation CSS 2.1 du W3C. '."\n";
  	echo '<p>'."\n"; 
 	echo '<img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !">'."\n";
  	echo'</p>'."\n"; 
 
+	echo '<b>Remerciements</b><br><br>'."\n";
+	echo '- Pour leurs contributions techniques : Guy, Christophe, Julien, Pierre et Catherine <br>'."\n";
+	echo '- Pour leurs apports innovants : Romaric et Matthieu <br>'."\n";
+	echo '- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique <br><br>'."\n";
+	
 	echo '<b>Questions</b><br><br>'."\n";
 	echo 'Si vous avez une question &agrave; propos de STUdS, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";	
 	echo '</div>'."\n";
