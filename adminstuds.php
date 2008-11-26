@@ -113,6 +113,27 @@ else {
 		}
 
 
+		//action quand on ajoute une colonne au format DATE
+		if ($_POST["ajoutercolonne"] && $_POST["nouvellecolonne"]!=""&&$dsondage->format=="A"){
+
+			$nouveauxsujets=$dsujet->sujet;
+
+			//on rajoute la valeur a la fin de tous les sujets deje entrés
+			$nouveauxsujets.=",";
+			$nouveauxsujets.=str_replace(","," ",$_POST["nouvellecolonne"]);
+			$nouveauxsujets=str_replace("'","°",$nouveauxsujets);
+
+			//mise a jour avec les nouveaux sujets dans la base
+			pg_query($connect,"update sujet_studs set sujet = '$nouveauxsujets' where id_sondage = '$numsondage' ");
+			$reloadmodifier="yes";
+
+			//envoi d'un mail pour prévenir l'administrateur du changement
+			$adresseadmin=$dsondage->mail_admin;
+			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Ajout d'une nouvelle colonne au sondage STUdS", utf8_decode ("Vous avez ajouté une colonne à votre sondage sur STUdS. \n  Vous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante : \n\nhttps://dpt-info.u-strasbg.fr/studs/studs.php?sondage=$numsondage \n\n Merci de votre confiance !"));
+
+		}
+
+		
 		//suppression de ligne dans la base
 		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST["effaceligne$i"]||$_POST['effaceligne'.$i.'_x']){
@@ -614,6 +635,10 @@ else {
 	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
+	if ($dsondage->format=="A"||$dsondage->format=="A+"){
+		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	}
+	
 	//si la valeur du nouveau titre est invalide : message d'erreur
 	if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]==""){
 		echo '<font color="#FF0000">Veuillez entrer un nouveau titre !</font><br><br>'."\n";
