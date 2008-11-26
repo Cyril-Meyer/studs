@@ -1,7 +1,7 @@
 order         deny,allow
 satisfy       all
 
-ErrorDocument 403 "/studs_dev/files/errors/error-forbidden.php"
+ErrorDocument 403 "/errors/error-forbidden.php"
 
 deny from all
 allow from 130.79.0.0/16

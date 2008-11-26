@@ -51,8 +51,8 @@ div.sousbandeau{
 /*bandeau de pied*/
 div.surbandeaupied{ 
 	background-color: #0077DD;
-	position:fixed;
-	bottom:32px;
+	position:absolute;
+	bottom:30px;
 	left:6px;
 	right:6px; 
 	height:6px;
