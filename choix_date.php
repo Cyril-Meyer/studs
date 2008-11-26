@@ -533,7 +533,11 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
 		$date_fin=strftime("%A %e %B %Y",$jour_arret);
-		echo '<br><div class=presentationdatefin>Votre sondage sera automatiquement effac&eacute; apr&egrave;s la date la plus tardive.<br></td></tr><tr><td><br>Date de destruction : <b>le '.$date_fin.'</b></div><br>'."\n";
+		echo '<br><div class=presentationdatefin>Votre sondage sera automatiquement effac&eacute; apr&egrave;s la date la plus tardive.<br></td></tr><tr><td><br>Date de destruction : <b>le '.$date_fin.'</b><br><br>'."\n";
+		echo'</div>'."\n";
+		echo'<p class=affichageexport>'."\n";
+		echo 'Pour finir la cr&eacute;ation du sondage, cliquez sur le bouton <img src="images/add-16.png" alt="ajout"> ci-dessous'."\n";
+		echo '</p>'."\n";
 		echo '<table>'."\n";
 		echo '<tr><td>Retourner aux horaires</td><td></td><td><input type=image name=retourhoraires src="images/back-32.png"></td></tr>'."\n";
 		echo'<tr><td>Cr&eacute;er le sondage</td><td></td><td><input type=image name=confirmation value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
