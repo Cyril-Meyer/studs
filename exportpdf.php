@@ -14,85 +14,21 @@ $dsondage=pg_fetch_object($sondage,0);
 $dsujet=pg_fetch_object($sujets,0);
 $nbcolonnes=substr_count($dsujet->sujet,',')+1;
 
-//$toutsujet=explode(",",$dsujet->sujet);
-$toutsujet=str_replace("°","'",$toutsujet);	
-$toutsujet=str_replace("'","\",\"",$toutsujet);	
+$datereunion=explode("@",$_SESSION["meilleursujet"]);
 
 //creation du fichier PDF
 $PDF=new phpToPDF();
 $PDF->AddPage();
-$PDF->SetFont('Arial','B',16);
+$PDF->SetFont('Arial','B',12);
 
-//affichage du titre du sondage
+//affichage de la date de convocation
+$PDF->Text(140,10,"Strasbourg, le ".date("d/m/Y"));
+$PDF->Text(40,150,"Convocation à la réunion : ".utf8_decode($dsondage->titre));
+$PDF->Text(20,160,"Vous êtes conviés à la réunion organisée par ".utf8_decode($dsondage->nom_admin).".");
+$PDF->Text(20,170,"Cette réunion aura lieu le ".date("d/m/Y", "$datereunion[0]")." à ".$datereunion[1]);
 
 
-//affichage des sujets du sondage
-$PDF->Text(40,10,utf8_decode($dsondage->titre));
-$PDF->Write(10,"\n");
-
-
-// Définition des propriétés du tableau.
-$proprietesTableau = array(
-	'TB_ALIGN' => 'C',
-	'L_MARGIN' => 10,
-	'BRD_COLOR' => array(0,92,177),
-	'BRD_SIZE' => '0.3',
-	);
-
-// Définition des propriétés du header du tableau.	
-$proprieteHeader = array(
-	'T_COLOR' => array(150,10,10),
-	'T_SIZE' => 12,
-	'T_FONT' => 'Arial',
-	'T_ALIGN' => 'C',
-	'V_ALIGN' => 'T',
-	'T_TYPE' => 'B',
-	'LN_SIZE' => 7,
-	'BG_COLOR_COL0' => array(170, 240, 230),
-	'BG_COLOR' => array(170, 240, 230),
-	'BRD_COLOR' => array(0,92,177),
-	'BRD_SIZE' => 0.2,
-	'BRD_TYPE' => '1',
-	'BRD_TYPE_NEW_PAGE' => '',
-	);
-
-// Contenu du header du tableau.	
-$contenuHeader = array(
-	10, 10, 10,
-	"", 
-	"$toutsujet"
-	);
-
-// Définition des propriétés du reste du contenu du tableau.	
-$proprieteContenu = array(
-	'T_COLOR' => array(0,0,0),
-	'T_SIZE' => 10,
-	'T_FONT' => 'Arial',
-	'T_ALIGN_COL0' => 'L',
-	'T_ALIGN' => 'R',
-	'V_ALIGN' => 'M',
-	'T_TYPE' => '',
-	'LN_SIZE' => 6,
-	'BG_COLOR_COL0' => array(245, 245, 150),
-	'BG_COLOR' => array(255,255,255),
-	'BRD_COLOR' => array(0,92,177),
-	'BRD_SIZE' => 0.1,
-	'BRD_TYPE' => '1',
-	'BRD_TYPE_NEW_PAGE' => '',
-	);	
-
-// Contenu du tableau.	
-$contenuTableau = array(
-	"champ 1", 1, 2,
-	"champ 2", 3, 4,
-	"champ 3", 5, 6,
-	"champ 4", 7, 8,
-	);
-
-// D'abord le PDF, puis les propriétés globales du tableau. 
-// Ensuite, le header du tableau (propriétés et données) puis le contenu (propriétés et données)
-$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $contenuTableau);
-
+//Sortie
 $PDF->Output();
 
 
