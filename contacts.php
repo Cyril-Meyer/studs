@@ -18,9 +18,9 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	mail (getenv('ADRESSEMAILADMIN'), "[CONTACT STUdS] Envoi de question STUdS", utf8_decode ("Vous avez une question d'utilisateur de STUdS. \nVoici la question :\n\nUtilisateur : $_POST[nom]\n\nAdresse utilisateur : $_POST[adresse_mail]\n\nMessage : $message "));
+	mail (getenv('ADRESSEMAILADMIN'), "[CONTACT STUdS] Envoi de question STUdS", utf8_decode ("Vous avez une question d'utilisateur de STUdS. \n\nUtilisateur : ").$_POST["nom"].utf8_decode("\n\nAdresse utilisateur : $_POST[adresse_mail]\n\nMessage :").$message);
 	if ($_POST["adresse_mail"]!=""){
-		mail ("$_POST[adresse_mail]", "[COPIE] Envoi de question STUdS", utf8_decode ("Vous avez posé une question dans STUdS. \nVoici votre question :\n\n Message : $message \n\nNous allons vous répondre dans les plus brefs délais. \n\nMerci de votre confiance\nSTUdS !"));
+		mail ("$_POST[adresse_mail]", "[COPIE] Envoi de question STUdS", utf8_decode ("Vous avez posé une question dans STUdS. \n\nVoici votre question :\n\n").$message.utf8_decode(" \n\nNous allons vous répondre dans les plus brefs délais. \n\nMerci de votre confiance\nSTUdS !"));
 	}
 
 	//affichage de la page de confirmation d'envoi

@@ -123,7 +123,7 @@ else {
 #				$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\n";
 
 				if ($dsondage->mailsonde=="yes"){
-					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), utf8_decode ("\"$nom\" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
+					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), "\"$nom\"".utf8_decode (" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
 				}
 			}
 		}
@@ -213,7 +213,7 @@ else {
 	echo '</div>'."\n";
 	echo '<div class="cadre"> '."\n";
 
-	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec <img src="images/add-16.png" alt="Ajouter">.'."\n";
+	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec le bouton en bout de ligne.'."\n";
 
 	echo '<br><br>'."\n";
 
