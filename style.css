@@ -68,6 +68,7 @@ div.bandeaupied{
 	bottom:6px;
 	left:6px;
 	right:6px; 
+	margin:2px;
 }
 div.surbandeaupiedmobile{ 
 	background-color: #0077DD;
@@ -115,11 +116,11 @@ div.bandeaupiedmobile{
 div.corps{ 
 	font-size:12px;
 	font-family:arial;
-	position:absolute;
-	top:150px;
+	position:static;
+	top:170px;
 	left:20px;
 	right:20px;
-	padding:10px;
+	padding:30px;
 }
 div.corps  table{
 	font-family:arial;

@@ -177,11 +177,11 @@ else {
 	echo '</form>'."\n";
 	echo '<a name=bas></a>'."\n";
 	echo '<br><br><br>'."\n";
+	echo '</div>'."\n";
 	//bandeau de pied
 	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 
-	echo '</div>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 
