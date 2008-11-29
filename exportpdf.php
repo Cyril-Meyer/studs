@@ -19,14 +19,30 @@ $datereunion=explode("@",$_SESSION["meilleursujet"]);
 //creation du fichier PDF
 $PDF=new phpToPDF();
 $PDF->AddPage();
-$PDF->SetFont('Arial','B',12);
+$PDF->SetFont('Arial','',11);
 
 //affichage de la date de convocation
-$PDF->Text(140,10,"Strasbourg, le ".date("d/m/Y"));
-$PDF->Text(40,150,"Convocation à la réunion : ".utf8_decode($dsondage->titre));
-$PDF->Text(20,160,"Vous êtes conviés à la réunion organisée par ".utf8_decode($dsondage->nom_admin).".");
-$PDF->Text(20,170,"Cette réunion aura lieu le ".date("d/m/Y", "$datereunion[0]")." à ".$datereunion[1]);
-$PDF->Text(20,180,"Le lieu de celle-ci sera : $_SESSION[lieureunion]");
+$PDF->Text(140,30,"Strasbourg, le ".date("d/m/Y"));
+
+$PDF->Image("./images/logo_uds.jpg",20,20,65,40);
+$PDF->Text(40,90,"De la part de ".utf8_decode($dsondage->nom_admin)."");
+
+$PDF->SetFont('Arial','U',11);
+$PDF->Text(40,150,"Objet : ");
+$PDF->SetFont('Arial','',11);
+$PDF->Text(55,150," Convocation");
+
+$PDF->Text(40,160,"Vous êtes conviés à la réunion \"".utf8_decode($dsondage->titre)."\".");
+$PDF->Text(40,165,"Cette réunion aura lieu le ".date("d/m/Y", "$datereunion[0]")." à ".$datereunion[1]);
+$lieureunion=str_replace("\\","",$_SESSION["lieureunion"]);
+$PDF->Text(40,170,"Le lieu de celle-ci sera : $lieureunion");
+
+$PDF->Text(40,200,"Cordialement,");
+
+$PDF->Text(140,240,utf8_decode($dsondage->nom_admin));
+
+$PDF->SetFont('Arial','B',8);
+$PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par STUdS sur http://studs.u-strasbg.fr");
 
 //Sortie
 $PDF->Output();

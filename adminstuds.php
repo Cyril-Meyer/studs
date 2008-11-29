@@ -71,8 +71,9 @@ else {
 
 	}
 
-	if ($_POST["exportpdf_x"]){
+	if ($_POST["exportpdf_x"]&&$_POST["lieureunion"]){
 		$_SESSION["numsondage"]=$numsondage;
+		$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
 		$_SESSION["lieureunion"]=$_POST["lieureunion"];
 		header("Location:exportpdf.php");
 		exit();
@@ -647,10 +648,16 @@ else {
 	}
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		echo 'Si vous souhaitez produire la lettre de convocation (en PDF), choississez un lieu de r&eacute;union et validez<br>';
-		echo '<input type="text" name="lieureunion" size="100">';
+		echo '<input type="text" name="lieureunion" size="100" value="'.$_SESSION["lieureunion"].'">';
 		echo ' <input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
+			$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
 			$_SESSION["meilleursujet"]=$meilleursujetexport;
 	}
+		
+	if ($_POST["exportpdf_x"]&&!$_POST["lieureunion"]){
+		echo '<font color="#FF0000">Veuillez entrer un lieu de r&eacute;union !</font><br><br>'."\n";
+	}
+	
 	//si la valeur du nouveau titre est invalide : message d'erreur
 	if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]==""){
 		echo '<font color="#FF0000">Veuillez entrer un nouveau titre !</font><br><br>'."\n";
