@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 setlocale(LC_TIME, "fr_FR");
 include 'variables.php';
 include 'fonctions.php';
@@ -69,6 +71,12 @@ else {
 
 	}
 
+	if ($_POST["exportpdf_x"]){
+		$_SESSION["numsondage"]=$numsondage;
+		$_SESSION["lieureunion"]=$_POST["lieureunion"];
+		header("Location:exportpdf.php");
+		exit();
+	}
 
 	//si il n'y a pas suppression alors on peut afficher normalement le tableau
 	if (!$_POST["confirmesuppression"]){
@@ -634,11 +642,15 @@ else {
 	$adresseadmin=$dsondage->mail_admin;
 	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
-
 	if ($dsondage->format=="A"||$dsondage->format=="A+"){
 		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
 	}
-	
+	if ($dsondage->format=="D"||$dsondage->format=="D+"){
+		echo 'Si vous souhaitez produire la lettre de convocation (en PDF), choississez un lieu de r&eacute;union et validez<br>';
+		echo '<input type="text" name="lieureunion" size="100">';
+		echo ' <input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
+			$_SESSION["meilleursujet"]=$meilleursujetexport;
+	}
 	//si la valeur du nouveau titre est invalide : message d'erreur
 	if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]==""){
 		echo '<font color="#FF0000">Veuillez entrer un nouveau titre !</font><br><br>'."\n";

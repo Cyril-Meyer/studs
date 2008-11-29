@@ -72,13 +72,6 @@ else {
 		exit();
 
 	}
-	if ($_POST["exportpdf_x"]){
-		$_SESSION["numsondage"]=$_GET["sondage"];
-		header("Location:exportpdf.php");
-		exit();
-
-	}
-
 
 //On récupere les données et les sujets du sondage
 	$dsondage=pg_fetch_object($sondage,0);
@@ -494,7 +487,6 @@ else {
 	echo '<br><br>'."\n";
 	echo '<p class=affichageexport>'."\n";
 	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.ico" alt="Export CSV">  ';
-	echo 'Version imprimable (.PDF) <input type="image" name="exportpdf" value="Export en PDF" src="images/csv.ico" alt="Export PDF">  ';
  		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
   			echo ' &nbsp;Agenda (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;

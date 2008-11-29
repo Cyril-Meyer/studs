@@ -26,7 +26,7 @@ $PDF->Text(140,10,"Strasbourg, le ".date("d/m/Y"));
 $PDF->Text(40,150,"Convocation à la réunion : ".utf8_decode($dsondage->titre));
 $PDF->Text(20,160,"Vous êtes conviés à la réunion organisée par ".utf8_decode($dsondage->nom_admin).".");
 $PDF->Text(20,170,"Cette réunion aura lieu le ".date("d/m/Y", "$datereunion[0]")." à ".$datereunion[1]);
-
+$PDF->Text(20,180,"Le lieu de celle-ci sera : $_SESSION[lieureunion]");
 
 //Sortie
 $PDF->Output();
