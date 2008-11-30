@@ -60,8 +60,6 @@ if ($_POST["annuler"]){
 	echo '- Pour leurs am&eacute;liorations ergonomiques : Christine et Olivier <br>'."\n";
 	echo '- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique de l\'Universit&eacute; de Strasbourg <br><br>'."\n";
 	
-	echo '<b>Questions</b><br><br>'."\n";
-	echo 'Si vous avez une question &agrave; propos de STUdS, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";	
 	echo '</div>'."\n";
 
 	//bandeau de pied

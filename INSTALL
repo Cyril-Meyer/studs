@@ -1,2 +1,55 @@
 ﻿Ceci est le fichier qui explique comment procéder à l'installation de STUdS.
 
+=============================================================================
+Nom de la base de données
+=============================================================================
+Le nom de la base se configure dans variables.php
+
+=============================================================================
+Utilisateur de la base de données
+=============================================================================
+L'utilisateur qui fait les modifications dans la base se configure dans variables.php
+
+
+=============================================================================
+Tables de la base de données
+=============================================================================
+
+Voici la structure des tables de l'application. La base se compose de trois tables :
+
+- sondage : Le contenu de chacun des sondages,
+- sujet_studs : les sujets ou dates de tous les sondages,
+- user_studs : les identifiants des sondés de tous les sondages.
+
+Chacune des tables contient les champs suivants :
+
+SONDAGE 
+
+	Nom du champ				format				description
+	
+	id_sondage (clé primaire)	alpha-numérique		numéro du sondage aléatoire
+	commentaires				text				commentaires liés au sondage
+	mail_admin					text				adresse de l'auteur du sondage
+	nom_admin					text				nom de l'auteur du sondage
+	titre						text				titre du sondage
+	id_sondage_admin			alpha-numérique		numéro du sondage pour le lien d'administration
+	date_fin					alpha-numérique		date de fin su sondage au format Unix
+	format						text				format du sondage : D/D+ pour Date, A/A+ pour Autre
+	mailsonde					text				envoi de mail a l'auteur du sondage a chaque participation ("yes" ou vide)
+	
+SUJET_STUDS
+
+	Nom du champ				format				description
+	
+	id_sondage (clé primaire)	alpha-numérique		numéro du sondage aléatoire
+	sujet						text				tous les sujets du sondage
+	
+USER_STUDS
+
+	Nom du champ				format				description
+	
+	user						text				nom du participant
+	id_sondage (clé primaire)	alpha-numérique		numéro du sondage aléatoire
+	reponses					text				reponses a chacun des sujets proposés au vote (0 pour non, 1 pour OK)
+	user_id						alpha-numérique		numéro d'utilisateur par ordre croissant de participation pour garder l'ordre de participation
+	
