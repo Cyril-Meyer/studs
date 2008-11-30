@@ -34,7 +34,10 @@ if ($_POST["annuler"]){
 	echo '<b>Technologies utilis&eacute;es</b><br><br>'."\n";
 	echo '- PHP 5.2<br>'."\n";
 	echo '- PostgreSQL 8.0<br>'."\n";
-	echo '- Subversion 1.5<br><br>'."\n";
+	echo '- Apache 2.2<br>'."\n";
+	echo '- Subversion 1.5<br>'."\n";
+	echo '- iCalcreator 2.4.3<br>'."\n";
+	echo '- FPDF 1.53<br><br>'."\n";
 	
 	echo '<b>Compatibilit&eacute;s des navigateurs</b><br><br>'."\n";
 	echo '- Firefox 2.0 <br>'."\n";
@@ -54,7 +57,8 @@ if ($_POST["annuler"]){
 	echo '<b>Remerciements</b><br><br>'."\n";
 	echo '- Pour leurs contributions techniques : Guy, Christophe, Julien, Pierre et Catherine <br>'."\n";
 	echo '- Pour leurs apports innovants : Romaric et Matthieu <br>'."\n";
-	echo '- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique <br><br>'."\n";
+	echo '- Pour leurs am&eacute;liorations ergonomiques : Christine et Olivier <br>'."\n";
+	echo '- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique de l\'Universit&eacute; de Strasbourg <br><br>'."\n";
 	
 	echo '<b>Questions</b><br><br>'."\n";
 	echo 'Si vous avez une question &agrave; propos de STUdS, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";	

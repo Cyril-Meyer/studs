@@ -7,15 +7,6 @@ Licence du Logiciel
 ?
 
 =============================================================================
-Logiciels requis
-=============================================================================
-
-PostgreSQL >= 8.0
-PHP >= 4.0
-Apache >= 2.0
-
-
-=============================================================================
 Fichiers de l'application
 =============================================================================
 
@@ -53,11 +44,21 @@ bandeaux.php
 	Le fichier contenant tous les bandeaux des pages PHP de l'application
 favicon.ico
 	L'icone de favoris de l'application
+sources.php
+	La page qui propose les sources de l'application
+exportics.php
+	Le fichier d'export de la meilleure date au format iCAL (fichier .ICS)
+exportcsv.php
+	Le fichier d'export de tous le tableau des participants avec leurs réponses dans un tableur (format .CSV)
+exportpdf.php
+	Le fichier d'export de la lettre de convocation que le créateur du sondage pourra envoyer aux participants (format .PDF)
 
 admin/
 	Le répertoire réservé à l'administrateur de l'application
 admin/.htaccess
 	Le fichier gérant les droits restreints du répertoire ADMIN
+admin/.htpasswd
+	Le fichier contenant les passwd des logins ayant accès au répertoire ADMIN
 admin/index.php
 	La page présentant tous les sondages actuellement dans la base à l'administrateur
 admin/log_studs.txt
@@ -78,14 +79,44 @@ iCalcreator/
 
 php2pdf/
 	Le répertoire qui contient les librairies d'export en PDF
-	
-save/
-	Le répertoire qui contient le script de sauvegarde de l'application
 
 scripts/
 	Le répertoire qui contient tous les scripts de l'application
+	
+sources/
+	Le répertoire qui contient les sources de l'application disponible sur la page sources.php
 
 
+=============================================================================
+	Validations des pages
+=============================================================================
+
+Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C.
+La CSS de STUdS dispose de la validation CSS 2.1 du W3C. 
+
+=============================================================================
+Technologies utilisées
+=============================================================================
+
+- PHP 5.2
+- PostgreSQL 8.0
+- Apache 2.2
+- Subversion 1.5
+- iCalcreator 2.4.3
+- FPDF 1.53
+
+
+=============================================================================
+Compatibilités des navigateurs
+=============================================================================
+
+- Firefox 2.0
+- Opéra 9
+- Konqueror 3.5
+- Links 2.2
+- Safari 3.1
+- IE 7 
+	
 -----------------
 Décembre 2008
 Guilhem BORGHESI
