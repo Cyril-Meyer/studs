@@ -1,2 +1,92 @@
-﻿Ceci est le fichier README de l'application STUdS ecrite par G. BORGHESI.
+﻿Ceci est le fichier README de l'application STUdS.
 
+
+=============================================================================
+Licence du Logiciel
+=============================================================================
+?
+
+=============================================================================
+Logiciels requis
+=============================================================================
+
+PostgreSQL >= 8.0
+PHP >= 4.0
+Apache >= 2.0
+
+
+=============================================================================
+Fichiers de l'application
+=============================================================================
+
+index.php
+	La page d'accueil de STUdS
+studs.php
+	La page de présentation de sondage
+adminstuds.php
+	La page d'administration réservée à l'auteur du sondage
+infos_sondage.php
+	La page (1/2) de création de sondage récupérant les informations générales
+choix_date.php
+	La page de création (2/2) pour un sondage pour déterminer une date
+choix_autre.php
+	La page de création (2/2) pour un sondage sur un sujet quelconque
+creation_sondage.php
+	Le fichier qui récupérent les informations des pages précédentes pour procéder à l'insertion du nouveau sondage dans la base PostgreSQL
+style.css
+	Le fichier CSS de style pour toute l'application
+variables.php
+	Le fichier contenant les variables à changer en fonction de la machine locale
+fonctions.php
+	Le fichier contenant quelques fonctions récurrentes de l'application
+README
+	Ce fichier
+INSTALL
+	Le fichier contenant les informations d'installation sur l'application
+versions.php
+	La page expliquant les dernieres modifications et celles à venir sur l'application
+contacts.php
+	La page permettant aux usagers de poser une question à l'administrateur de l'application
+apropos.php
+	La page expliquant les détails techniques relatifs à l'application
+bandeaux.php
+	Le fichier contenant tous les bandeaux des pages PHP de l'application
+favicon.ico
+	L'icone de favoris de l'application
+
+admin/
+	Le répertoire réservé à l'administrateur de l'application
+admin/.htaccess
+	Le fichier gérant les droits restreints du répertoire ADMIN
+admin/index.php
+	La page présentant tous les sondages actuellement dans la base à l'administrateur
+admin/log_studs.txt
+	Le fichier contenant un historique de toutes les creations/suppressions de sondage dans la base
+
+errors/
+	Le répertoire contenant toutes les pages d'erreurs
+errors/error-forbidden.php
+	La page qui indique dans la charte graphique de l'application l'erreur "501 forbidden"
+errors/maintenance.php
+	La page qui indique que l'application est en maintenance temporaire
+
+export/
+	Le répertoire qui contient tous les exports ICS
+
+iCalcreator/
+	Le répertoire qui contient les librairies d'export en iCal
+
+php2pdf/
+	Le répertoire qui contient les librairies d'export en PDF
+	
+save/
+	Le répertoire qui contient le script de sauvegarde de l'application
+
+scripts/
+	Le répertoire qui contient tous les scripts de l'application
+
+
+-----------------
+Décembre 2008
+Guilhem BORGHESI
+Université de Strasbourg
