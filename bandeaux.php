@@ -6,7 +6,7 @@ function bandeau_tete(){
 
 #les bandeaux de titre
 function bandeau_titre(){
-	echo '<div class="bandeautitre">Se Trouver &agrave; l\'Universit&eacute; de Strabourg</div>'."\n";
+	echo '<div class="bandeautitre">Se Trouver &agrave; l\'Universit&eacute; de Strasbourg</div>'."\n";
 }
 function bandeau_titre_infos(){
 	echo '<div class="bandeautitre">Cr&eacute;ation de sondage (1 sur 2)</div>'."\n";
