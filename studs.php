@@ -486,7 +486,7 @@ else {
 	
 	echo '<br><br>'."\n";
 	echo '<p class=affichageexport>'."\n";
-	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.ico" alt="Export CSV">  ';
+	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
  		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
   			echo ' &nbsp;Agenda (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;

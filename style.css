@@ -214,8 +214,8 @@ div.cadre table.resultats {
 div.cadre td.ok {
 	background-color: #66FF99; 
 	height:21px;
-	width:35px;
 	font-size:12px;	
+	text-align:center;
 }
 /*Case de tableau NON dans affichage de sondage*/
 div.cadre td.non {
@@ -227,19 +227,19 @@ div.cadre td.non {
 div.cadre td.vide {
 	background-color: #DDDDDD; 
 	height:21px;
-	width:35px;
+	text-align:center;
 }
 /*Case de tableau contenant les noms dans affichage de sondage*/
 div.cadre td.nom {
 	background-color: #DDDDDD; 
 	height:21px;
-	width:35px;
 	font-size:12px;	 
+	text-align:center;
 }
 div.cadre td.casevide {
 	background-color: white; 
 	height:21px;
-	width:35px;
+	text-align:center;
 }
 /*les cases contenant les sommes de chaque colonne dans l'affichage de calendrier*/
 div.cadre td.somme {
