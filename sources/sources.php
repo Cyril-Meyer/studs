@@ -11,6 +11,7 @@ echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
 bandeau_tete();
+bandeau_titre();
 echo '<div class=corpscentre>'."\n";
 print "<H2>Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de StUdS.</H2><br><br>"."\n";
 print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"../index.php\"> STUdS</A>. "."\n";
