@@ -188,7 +188,8 @@ else {
 	echo '<div class="presentationdate"> '."\n";
 
 //affichage du titre du sondage
-	echo '<H2>'.utf8_decode($dsondage->titre).'</H2>'."\n";
+        $titre=str_replace("\\","",$dsondage->titre);       
+	echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
 
 //affichage du nom de l'auteur du sondage
 	echo 'Auteur du sondage : '.utf8_decode($dsondage->nom_admin).'<br><br>'."\n";
