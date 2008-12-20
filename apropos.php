@@ -32,20 +32,21 @@ if ($_POST["annuler"]){
 	echo '<div class=corps>'."\n";
 
 	echo '<b>Technologies utilis&eacute;es</b><br><br>'."\n";
-	echo '- PHP 5.2<br>'."\n";
-	echo '- PostgreSQL 8.0<br>'."\n";
-	echo '- Apache 2.2<br>'."\n";
-	echo '- Subversion 1.5<br>'."\n";
-	echo '- iCalcreator 2.4.3<br>'."\n";
-	echo '- FPDF 1.53<br><br>'."\n";
+	echo '- <a href="http://www.php.net/">PHP</a> 5.2<br>'."\n";
+	echo '- <a href="http://www.postgresql.org/">PostgreSQL</a> 8.0<br>'."\n";
+	echo '- <a href="http://www.apache.org/">Apache</a> 2.2<br>'."\n";
+	echo '- <a href="http://subversion.tigris.org/">Subversion</a> 1.5<br>'."\n";
+	echo '- <a href="http://www.kigkonsult.se/iCalcreator/">iCalcreator</a> 2.4.3<br>'."\n";
+	echo '- <a href="http://www.fpdf.org/">FPDF</a> 1.53<br>'."\n";
+	echo '- Ic&ocirc;nes : <a href="http://deleket.deviantart.com/">Deleket</a> et <a href="http://dryicons.com">DryIcons</a><br><br>'."\n";
 	
 	echo '<b>Compatibilit&eacute;s des navigateurs</b><br><br>'."\n";
-	echo '- Firefox 2.0 <br>'."\n";
-	echo '- Op&eacute;ra 9 <br>'."\n";
-	echo '- Konqueror 3.5 <br>'."\n";
-	echo '- Links 2.2 <br>'."\n";
-	echo '- Safari 3.1 <br>'."\n";
-	echo '- IE 7 <br><br>'."\n";
+	echo '- <a href="http://www.mozilla.com/firefox/">Firefox</a> 2.0 <br>'."\n";
+	echo '- <a href="http://www.opera.com/">Op&eacute;ra</a> 9 <br>'."\n";
+	echo '- <a href="http://www.konqueror.org/">Konqueror</a> 3.5 <br>'."\n";
+	echo '- <a href="http://www.jikos.cz/~mikulas/links/">Links</a> 2.2 <br>'."\n";
+	echo '- <a href="http://www.apple.com/fr/safari/">Safari</a> 3.1 <br>'."\n";
+	echo '- <a href="http://www.mozilla.com/firefox/">IE</a> 7 <br><br>'."\n";
 
 	echo '<b>Validations des pages</b><br><br>'."\n";
 	echo '- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>'."\n";
@@ -55,15 +56,13 @@ if ($_POST["annuler"]){
  	echo'</p>'."\n"; 
 
 	echo '<b>Remerciements</b><br><br>'."\n";
-	echo '- Pour leurs contributions techniques : Guy, Christophe, Julien, Pierre et Catherine <br>'."\n";
-	echo '- Pour leurs apports innovants : Romaric et Matthieu <br>'."\n";
+	echo '- Pour leurs contributions techniques : Guy, Christophe, Julien et Pierre <br>'."\n";
+	echo '- Pour leurs apports innovants : Romaric, Matthieu et Catherine<br>'."\n";
 	echo '- Pour leurs am&eacute;liorations ergonomiques : Christine et Olivier <br>'."\n";
 	echo '- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique de l\'Universit&eacute; de Strasbourg <br><br>'."\n";
 	
 	echo '</div>'."\n";
 
-	//bandeau de pied
-//	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</form>'."\n";
 	echo '</body>'."\n";
