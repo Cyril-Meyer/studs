@@ -315,7 +315,8 @@ else {
 		echo '<div class="presentationdate"> '."\n";
 
 		//affichage du titre du sondage
-		echo '<H2>'.utf8_decode($dsondage->titre).'</H2>'."\n";
+		$titre=str_replace("\\","",$dsondage->titre);       
+		echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
 
 		//affichage du nom de l'auteur du sondage
 		echo 'Auteur du sondage : '.utf8_decode($dsondage->nom_admin).'<br>'."\n";
@@ -336,7 +337,6 @@ else {
 		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
 
 		echo '<br><br>'."\n";
-
 
 		//debut de l'affichage de résultats
 		echo '<table class="resultats">'."\n";
@@ -641,7 +641,7 @@ else {
 		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($dsondage->titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 	if ($dsondage->format=="A"||$dsondage->format=="A+"){
 		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
@@ -664,7 +664,7 @@ else {
 	}
 
 	//Changer les commentaires du sondage
-	echo 'Si vous souhaitez changer les commentaires du sondage :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($dsondage->commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo 'Si vous souhaitez changer les commentaires du sondage :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//Changer l'adresse de l'administrateur
