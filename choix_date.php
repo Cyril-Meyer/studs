@@ -199,7 +199,7 @@ sous_bandeau_choix();
 
 //affichage de l'aide pour les jours
 echo '<div class=bodydate>'."\n";
-echo 'Selectionnez vos dates parmi les jours disponibles qui sont en vert. Une fois selectionn&eacute;s, les jours apparaissent en rouge.<br> Vous pouvez &eacute;galement enlever des jours d&eacute;j&agrave; choisis en recliquant sur la case.'."\n";
+echo 'Selectionnez vos dates parmi les jours disponibles qui sont en vert. Une fois selectionn&eacute;s, les jours apparaissent en bleu.<br> Vous pouvez &eacute;galement enlever des jours d&eacute;j&agrave; choisis en recliquant sur la case.'."\n";
 echo '</div>'."\n";
 
 //debut du tableau qui affiche le calendrier

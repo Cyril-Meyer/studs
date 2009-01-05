@@ -333,7 +333,7 @@ div.calendrier td.choisi {
 	width:65px;
 	text-align: center;
 	border: 2px;
-	background-color: #FF6666; 
+	background-color: #0077DD; 
 }
 /* Le paragraphe de fin */
 p.affichageresultats{
@@ -371,7 +371,7 @@ div.titregestionadmin{
 /*les boutons pour deselectionner un jour deja choisi*/
 .boutonOFF {
 	width: 65px;
-	background-color: #FF6666;
+	background-color: #0077DD;
 	border:0px;
 	padding:0px 0 0 0;
 	margin:0px;
