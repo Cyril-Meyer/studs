@@ -68,7 +68,7 @@ else {
 
 	// recuperation des sujets pour sondage AUTRE
 	for ($i=0;$i<$_SESSION["nbrecases"];$i++){
-		if (!ereg("<|>",$_POST["choix"][$i])){
+		if (!ereg("<|>|\"",$_POST["choix"][$i])){
 			$_SESSION["choix$i"]=$_POST["choix"][$i];
 		}
 		else {$erreur_injection="yes";}
@@ -120,7 +120,7 @@ else {
 	//affichage des cases texte de formulaire
 	for ($i=0;$i<$_SESSION["nbrecases"];$i++){
 		$j=$i+1;
-		echo '<tr><td>Choix '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.$_SESSION["choix$i"].'" id="choix'.$i.'"></td></tr>'."\n";
+		echo '<tr><td>Choix '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.str_replace("\\","",$_SESSION["choix$i"]).'" id="choix'.$i.'"></td></tr>'."\n";
 	}	
 
 	echo '</table>'."\n";
@@ -152,7 +152,7 @@ else {
 	}
 
 	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font><br><br>\n";
+			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \", < et > ne sont pas autoris&eacute;s !</font><br><br>\n";
 	}
 	
 	if (($_POST["fin_sondage_autre"]||$_POST["fin_sondage_autre_x"])&&!$erreur&&!$erreur_injection){

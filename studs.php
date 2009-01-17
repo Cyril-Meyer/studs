@@ -104,7 +104,7 @@ else {
 					}
 			}
 
-			if (ereg("<|>", $_POST["nom"])){
+			if (ereg("<|>|\"", $_POST["nom"])){
 				$erreur_injection="yes";
 			}
 
@@ -434,7 +434,7 @@ else {
 			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
 	}
 	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font>\n";
+			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \", < et > ne sont pas autoris&eacute;s !</font>\n";
 	}
 	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire
