@@ -104,16 +104,14 @@ else {
 					}
 			}
 
-			if (ereg("<|>|\"", $_POST["nom"])){
+			if (ereg("<|>|\"|\'", $_POST["nom"])){
 				$erreur_injection="yes";
 			}
 
 			// Ecriture des choix de l'utilisateur dans la base
  			if (!$erreur_prénom&&!$erreur_injection){
-				$nom=str_replace("'","°",$_POST["nom"]);
+				$nom=$_POST["nom"];
  				pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
-
-#				$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\n";
 
 				if ($dsondage->mailsonde=="yes"){
 					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), "\"$nom\"".utf8_decode (" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
@@ -434,7 +432,7 @@ else {
 			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
 	}
 	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \", < et > ne sont pas autoris&eacute;s !</font>\n";
+			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"  '  < et > ne sont pas autoris&eacute;s !</font>\n";
 	}
 	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire

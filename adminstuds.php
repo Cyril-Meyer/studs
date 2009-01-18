@@ -48,6 +48,103 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '</html>'."\n";
 }
 
+if ($_POST["ajoutsujet_x"]){
+
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
+	echo '<html>'."\n";
+	echo '<head>'."\n";
+	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
+	echo '<title>Ajout de colonne</title>'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+	echo '</head>'."\n";
+	echo '<body>'."\n";
+	
+	//on recupere les données et les sujets du sondage
+	$dsujet=pg_fetch_object($sujets,0);
+	$dsondage=pg_fetch_object($sondage,0);
+
+	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	bandeau_tete();
+	bandeau_titre();
+	sous_bandeau_light();
+
+	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	
+	echo '<div class=corpscentre>'."\n";
+	print "<H2>Ajout de colonne</H2><br><br>"."\n";
+	
+	if ($dsondage->format=="A"||$dsondage->format=="A+"){
+		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	}
+	else{
+//ajout d'une date avec creneau horaire 
+		echo 'Vous pouvez ajouter une date &agrave; votre sondage. Si la date existe d&eacute;j&agrave; et que vous ne voulez que rajouter un horaire,<br> mettez le jour en entier avec l\'horaire ou le cr&eacute;neau suppl&eacute;mentaire il sera int&eacute;gr&eacute; normalement au sondage existant.<br><br> '."\n";
+		echo 'Pour ajouter une date :<br><br> Le '."\n";
+		echo '<select name="nouveaujour"> '."\n";
+		echo '<OPTION VALUE="JOUR">JOUR</OPTION>'."\n";
+		for ($i=1;$i<32;$i++){
+			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
+		}
+		echo '</SELECT>'."\n";
+
+		echo '<select name="nouveaumois"> '."\n";
+		echo '<OPTION VALUE="MOIS">MOIS</OPTION>'."\n";
+		for ($i=1;$i<13;$i++){
+			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
+		}
+		echo '</SELECT>'."\n";
+
+		echo '<select name="nouvelleannee"> '."\n";
+		echo '<OPTION VALUE="ANNEE">ANNEE</OPTION>'."\n";
+		for ($i=2009;$i<2015;$i++){
+			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
+		}
+		echo '</SELECT>'."\n";
+		echo '<br><br>Pour ajouter un horaire de d&eacute;but (optionnel) : <br><br>'."\n";
+		echo '<select name="nouvelleheuredebut"> '."\n";
+		echo '<OPTION VALUE="HEURE">HEURE</OPTION>'."\n";
+		for ($i=7;$i<22;$i++){
+			echo '<OPTION VALUE="'.$i.'">'.$i.' H</OPTION>'."\n";
+		}
+		echo '</SELECT>'."\n";
+		echo '<select name="nouvelleminutedebut"> '."\n";
+			echo '<OPTION VALUE="MINUTES">MINUTES</OPTION>'."\n";
+			echo '<OPTION VALUE="00">00</OPTION>'."\n";
+			echo '<OPTION VALUE="15">15</OPTION>'."\n";
+			echo '<OPTION VALUE="30">30</OPTION>'."\n";
+			echo '<OPTION VALUE="45">45</OPTION>'."\n";
+		echo '</SELECT>'."\n";
+		echo '<br><br>Pour ajouter un horaire de fin (optionnel) : <br><br>'."\n";
+		echo '<select name="nouvelleheurefin"> '."\n";
+		echo '<OPTION VALUE="HEURE">HEURE</OPTION>'."\n";
+		for ($i=7;$i<22;$i++){
+			echo '<OPTION VALUE="'.$i.'">'.$i.' H</OPTION>'."\n";
+		}
+		echo '</SELECT>'."\n";
+		echo '<select name="nouvelleminutefin"> '."\n";
+			echo '<OPTION VALUE="MINUTES">MINUTES</OPTION>'."\n";
+			echo '<OPTION VALUE="00">00</OPTION>'."\n";
+			echo '<OPTION VALUE="15">15</OPTION>'."\n";
+			echo '<OPTION VALUE="30">30</OPTION>'."\n";
+			echo '<OPTION VALUE="45">45</OPTION>'."\n";
+		echo '</SELECT>'."\n";
+
+
+		echo'<br><br><input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider">'."\n";
+	
+	}
+
+	echo '</form>'."\n";
+	echo '<br><br><br><br>'."\n";
+	echo '</div>'."\n";
+
+	bandeau_pied();
+	
+	echo'</body>'."\n";
+	echo '</html>'."\n";
+	
+	}
+
 //s'il existe on affiche la page normale
 else {
 
@@ -70,7 +167,7 @@ else {
 	if ($_POST["annulesuppression"]){
 
 	}
-
+	
 	if ($_POST["exportpdf_x"]&&$_POST["lieureunion"]){
 		$_SESSION["numsondage"]=$numsondage;
 		$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
@@ -107,7 +204,7 @@ else {
 						}
 				}
 
-				if (ereg("<|>", $_POST["nom"])){
+				if (ereg("<|>|\"|'", $_POST["nom"])){
 					$erreur_injection="yes";
 				}
 
@@ -122,19 +219,18 @@ else {
 		}
 
 
-		//action quand on ajoute une colonne au format DATE
+		//action quand on ajoute une colonne au format AUTRE
 		if ($_POST["ajoutercolonne"] && $_POST["nouvellecolonne"]!=""&&($dsondage->format=="A"||$dsondage->format=="A+")){
 
 			$nouveauxsujets=$dsujet->sujet;
 
-			//on rajoute la valeur a la fin de tous les sujets deje entrés
+			//on rajoute la valeur a la fin de tous les sujets deja entrés
 			$nouveauxsujets.=",";
 			$nouveauxsujets.=str_replace(","," ",$_POST["nouvellecolonne"]);
 			$nouveauxsujets=str_replace("'","°",$nouveauxsujets);
 
 			//mise a jour avec les nouveaux sujets dans la base
 			pg_query($connect,"update sujet_studs set sujet = '$nouveauxsujets' where id_sondage = '$numsondage' ");
-			$reloadmodifier="yes";
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
@@ -142,6 +238,89 @@ else {
 
 		}
 
+		//action quand on ajoute une colonne au format DATE
+		if ($_POST["ajoutercolonne"] &&($dsondage->format=="D"||$dsondage->format=="D+")){
+
+			$nouveauxsujets=$dsujet->sujet;
+
+			if ($_POST["nouveaujour"]!="JOUR"&&$_POST["nouveaumois"]!="MOIS"&&$_POST["nouvelleannee"]!="ANNEE"){
+			
+				$nouvelledate=mktime(0,0,0,$_POST["nouveaumois"],$_POST["nouveaujour"],$_POST["nouvelleannee"]);
+			
+				if ($_POST["nouvelleheuredebut"]!="HEURE"){
+			
+					$nouvelledate.="@";
+					$nouvelledate.=$_POST["nouvelleheuredebut"];
+					$nouvelledate.="h";
+					
+					if ($_POST["nouvelleminutedebut"]!="MINUTES"){
+						$nouvelledate.=$_POST["nouvelleminutedebut"];
+					}
+				}
+				if ($_POST["nouvelleheurefin"]!="HEURE"){
+					$nouvelledate.="-";
+					$nouvelledate.=$_POST["nouvelleheurefin"];
+					$nouvelledate.="h";
+					
+					if ($_POST["nouvelleminutefin"]!="MINUTES"){
+						$nouvelledate.=$_POST["nouvelleminutefin"];
+					}
+				}
+				if($_POST["nouvelleheuredebut"]=="HEURE"||($_POST["nouvelleheuredebut"]&&$_POST["nouvelleheurefin"]&&(($_POST["nouvelleheuredebut"]<$_POST["nouvelleheurefin"])||(($_POST["nouvelleheuredebut"]==$_POST["nouvelleheurefin"])&&($_POST["nouvelleminutedebut"]<$_POST["nouvelleminutefin"]))))){
+				
+				}
+				else {$erreur_ajout_date="yes";print "POUET";}
+				
+				//on rajoute la valeur dans les valeurs
+				$datesbase=explode(",",$dsujet->sujet);
+				array_push ($datesbase,$nouvelledate);
+				sort ($datesbase);
+				$cle=array_search ($nouvelledate,$datesbase);
+				
+				for ($i=0;$i<count($datesbase);$i++){
+					$dateinsertion.=",";
+					$dateinsertion.=$datesbase[$i];
+				}
+				
+				$dateinsertion=substr("$dateinsertion",1);
+				
+				//mise a jour avec les nouveaux sujets dans la base
+				if (!$erreur_ajout_date){
+					pg_query($connect,"update sujet_studs set sujet = '$dateinsertion' where id_sondage = '$numsondage' ");
+				}
+				
+				//mise a jour des reponses actuelles correspondant au sujet ajouté
+				$compteur = 0;
+				while ($compteur<pg_numrows($user_studs)){
+					
+					$data=pg_fetch_object($user_studs,$compteur);
+					$ensemblereponses=$data->reponses;
+					
+					//parcours de toutes les réponses actuelles
+					for ($j=0;$j<$nbcolonnes;$j++){
+						$car=substr($ensemblereponses,$j,1);
+						
+						//si les reponses ne concerne pas la colonne ajoutée, on concatene
+						if ($j==$cle){
+							$newcar.="0";
+						}
+						$newcar.=$car;
+					}
+					$compteur++;
+					//mise a jour des reponses utilisateurs dans la base
+					if (!$erreur_ajout_date){
+						pg_query($connect,"update user_studs set reponses='$newcar' where nom='$data->nom' and id_users=$data->id_users");
+					}
+					$newcar="";
+				}
+				
+				//envoi d'un mail pour prévenir l'administrateur du changement
+				$adresseadmin=$dsondage->mail_admin;
+				mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Ajout d'une nouvelle colonne au sondage STUdS", utf8_decode ("Vous avez ajouté une colonne à votre sondage sur STUdS. \n  Vous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante : \n\nhttps://dpt-info.u-strasbg.fr/studs/studs.php?sondage=$numsondage \n\n Merci de votre confiance !"));
+				
+			}
+			else {$erreur_ajout_date="yes";}
+		}
 		
 		//suppression de ligne dans la base
 		for ($i=0;$i<$nblignes;$i++){
@@ -346,20 +525,20 @@ else {
 		
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
+		echo '<td></td>'."\n";
 
 		//boucle pour l'affichage des boutons de suppression de colonne
 		for ($i=0;$toutsujet[$i];$i++){
 			echo '<td class=somme><input type="image" name="effacecolonne'.$i.'" value="Effacer la colonne" src="images/cancel.png"></td>'."\n";
 		}
-
 		echo '</tr>'."\n";
-
 		
 //si le sondage est un sondage de date
 if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	
 //affichage des sujets du sondage
 	echo '<tr>'."\n";
+	echo '<td></td>'."\n";
 	echo '<td></td>'."\n";
 
 	//affichage des années
@@ -376,6 +555,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";	
 	echo '<td></td>'."\n";
+	echo '<td></td>'."\n";
 	//affichage des mois
 	$colspan=1;
 	for ($i=0;$i<count($toutsujet);$i++){
@@ -390,6 +570,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";		
 	echo '<td></td>'."\n";
+	echo '<td></td>'."\n";
 		//affichage des jours
 	$colspan=1;
 	for ($i=0;$i<count($toutsujet);$i++){
@@ -401,10 +582,12 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan=1;
 		}
 	}
+	echo '<td class="sujet"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 			//affichage des horaires	
 	if (eregi("@",$dsujet->sujet)){
 		echo '<tr>'."\n";
+		echo '<td></td>'."\n";
 		echo '<td></td>'."\n";
 				
 		for ($i=0;$toutsujet[$i];$i++){
@@ -414,6 +597,8 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		echo '</tr>'."\n";
 	}
 	
+	
+	
 }
 
 else {
@@ -422,11 +607,13 @@ else {
 //affichage des sujets du sondage
 	echo '<tr>'."\n";
 	echo '<td></td>'."\n";
+	echo '<td></td>'."\n";
 
 	for ($i=0;$toutsujet[$i];$i++){
 	
 		echo '<td class="sujet">'.$toutsujet[$i].'</td>'."\n";
 	}
+	echo '<td class="sujet"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 
 }
@@ -439,10 +626,15 @@ else {
 			//recuperation des données
 			$data=pg_fetch_object($user_studs,$compteur);
 			$ensemblereponses=$data->reponses;
+
+			echo '<tr>'."\n";
 			
+       	        echo '<td><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png"  alt="Icone efface"></td>'."\n";
+  
+
 			//affichage du nom
 			$nombase=str_replace("°","'",$data->nom);
-			echo '<tr>'."\n";
+
 			echo '<td class="nom">'.$nombase.'</td>'."\n";
 
 			//si la ligne n'est pas a changer, on affiche les données
@@ -492,7 +684,7 @@ else {
                         //a la fin de chaque ligne se trouve les boutons modifier
                         if (!$testligneamodifier=="true"){
                 	        echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" alt="Icone infos"></td>'."\n";
-                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png"  alt="Icone efface"></td>'."\n";
+//                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png"  alt="Icone efface"></td>'."\n";
                         }
 
                         //demande de confirmation pour modification de ligne
@@ -513,6 +705,7 @@ else {
 
 		//affichage de la case vide de texte pour un nouvel utilisateur
 		echo '<tr>'."\n";
+		echo '<td></td>'."\n";
 		echo '<td class=nom>'."\n";
 		echo '<input type=text name="nom"><br>'."\n";
 		echo '</td>'."\n";
@@ -538,6 +731,7 @@ else {
 
               //affichage de la ligne contenant les sommes de chaque colonne
               echo '<tr>'."\n";
+			  echo '<td></td>'."\n";
               echo '<td align="right">Somme</td>'."\n";
 
               for ($i=0;$i<$nbcolonnes;$i++){
@@ -552,6 +746,7 @@ else {
               }
 
 	       echo '<tr>'."\n";
+		   echo '<td></td>'."\n";
                echo '<td class="somme"></td>'."\n";
 	               for ($i=0;$i<$nbcolonnes;$i++){
 	                       if ($somme[$i]==$meilleurecolonne&&$somme[$i]){
@@ -567,20 +762,24 @@ else {
 		// S'il a oublié de remplir un nom
 		if (($_POST["boutonp"]||$_POST["boutonp_x"])&&$_POST["nom"]=="") {
 			echo '<tr>'."\n";
-			print "<td colspan=3><font color=#FF0000>&nbsp;Il faut un nom !</font>\n";
+			print "<td colspan=10><font color=#FF0000>&nbsp;Il faut un nom !</font>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_prénom){
 			echo '<tr>'."\n";
-			print "<td colspan=3><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_injection){
 			echo '<tr>'."\n";
-			print "<td colspan=3><font color=#FF0000>&nbsp;Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>&nbsp;Les caract&egrave;res \" ' < et > ne sont pas autoris&eacute;s !</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
-		
+		if ($erreur_ajout_date){
+			echo '<tr>'."\n";
+			print "<td colspan=10><font color=#FF0000>&nbsp;La date choisie n'est pas correcte !</font></td>\n";
+			echo '</tr>'."\n"; 
+		}
 		//fin du tableau
 		echo '</table>'."\n";
 		echo '</div>'."\n";
@@ -643,9 +842,7 @@ else {
 	$adresseadmin=$dsondage->mail_admin;
 	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
-	if ($dsondage->format=="A"||$dsondage->format=="A+"){
-		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
-	}
+
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		echo 'Si vous souhaitez produire la lettre de convocation (en PDF), choississez un lieu de r&eacute;union et validez<br>';
 		echo '<input type="text" name="lieureunion" size="100" value="'.$_SESSION["lieureunion"].'">';

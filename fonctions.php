@@ -27,4 +27,5 @@ function blocage_touche_entree(){
 	</script>\n";
 }
 
+
 ?>
