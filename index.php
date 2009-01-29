@@ -1,5 +1,26 @@
 <?php
+
+
 session_start();
+//session_unset();
+
+
+if ($_POST["uk_x"]){
+	$_SESSION["langue"]="EN";
+}
+
+elseif ($_POST["germany_x"]){
+	$_SESSION["langue"]="DE";
+}
+
+else {$_SESSION["langue"]="FR";}
+
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+
+
+//print $_SESSION["langue"];
 
 include 'bandeaux.php';
 //action si bouton intranet est activé. Entrée dans l'intranet
@@ -58,13 +79,11 @@ bandeau_titre();
 sous_bandeau();
 
 echo '<div class=corps>'."\n";
-//blablabla
-print "<p><b>A quoi sert STUdS ?</b></p><p>A faire des sondages pour que vous puissiez trouver une date de r&eacute;union qui convienne &agrave; toutes les personnes concern&eacute;es. <br>Vous pouvez &eacute;galement utiliser STUdS pour d&eacute;terminer &agrave; plusieurs un choix quelconque comme un lieu de RV, un th&egrave;me de r&eacute;union ou la marque de votre prochaine machine &agrave; caf&eacute;.</p>\n";
 
-echo '<br>'."\n";
+echo $tt_index_presentation;
 
 echo '<table>'."\n";
-echo'<tr><td><b>Cr&eacute;er un sondage</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
+echo'<tr><td>'.$tt_index_bouton.'</td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br>'."\n";
 echo '<br><br>'."\n";
@@ -77,7 +96,6 @@ bandeau_pied();
 echo '</body>'."\n";
 echo '</html>'."\n";
 
-session_unset();
 
 
 ?>
