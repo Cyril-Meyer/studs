@@ -130,7 +130,8 @@ if ($_POST["ajoutsujet_x"]){
 		echo '</SELECT>'."\n";
 
 
-		echo'<br><br><input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider">'."\n";
+		echo '<br><br><input type="image" name="retoursondage" value="Retourner au sondage" src="images/cancel.png"> '."\n";
+		echo' <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider">'."\n";
 	
 	}
 
@@ -513,7 +514,7 @@ else {
 		echo '</div>'."\n";
 
 		echo '<div class="cadre"> '."\n";
-		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
+		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. <br>Si vous avez oubli&eacute; de mettre un choix vous pouvez rajouter une colonne en cliquant sur <img src="images/add-16.png" alt="Annuler"> <br> en bout de ligne des noms de colonne. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
 
 		echo '<br><br>'."\n";
 
@@ -552,6 +553,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan=1;
 		}
 	}
+	echo '<td class="annee"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";	
 	echo '<td></td>'."\n";
@@ -567,6 +569,8 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan=1;
 		}
 	}
+
+	echo '<td class="mois"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";		
 	echo '<td></td>'."\n";
@@ -582,7 +586,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan=1;
 		}
 	}
-	echo '<td class="sujet"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+	echo '<td class="jour"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 			//affichage des horaires	
 	if (eregi("@",$dsujet->sujet)){
@@ -594,10 +598,9 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$heures=explode("@",$toutsujet[$i]);
 			echo '<td class="heure">'.$heures[1].'</td>'."\n";
 		}
+		echo '<td class="heure"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 		echo '</tr>'."\n";
 	}
-	
-	
 	
 }
 

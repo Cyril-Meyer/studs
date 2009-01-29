@@ -33,7 +33,7 @@ else {
 
 	//partie creation du sondage dans la base SQL
 	//On prépare les données pour les inserer dans la base
-	if ($_POST["confirmecreation"]){ 
+	if ($_POST["confirmecreation_x"]){ 
 
 	//recuperation des données de champs textes
 		for ($i=0;$i<$_SESSION["nbrecases"]+1;$i++){

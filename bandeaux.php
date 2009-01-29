@@ -35,7 +35,7 @@ function bandeau_titre_apropos(){
 
 #Les sous-bandeaux contenant les boutons de navigation
 function sous_bandeau(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil><input type=submit class=boutonsousbandeau name=exemple value=Exemple><input type=submit class=boutonsousbandeau name=contact value=Contact><input type=submit class=boutonsousbandeau name=versions value=Versions><input type=submit class=boutonsousbandeau name=sources value=Sources><input type=submit class=boutonsousbandeau name=apropos value="A propos"><input type=submit class=boutonsousbandeaudroite name=intranet value=Intranet></div>'."\n";
+	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil><input type=submit class=boutonsousbandeau name=exemple value=Exemple><input type=submit class=boutonsousbandeau name=contact value=Contact><input type=submit class=boutonsousbandeau name=versions value=Versions><input type=submit class=boutonsousbandeau name=sources value=Sources><input type=submit class=boutonsousbandeau name=apropos value="A propos"><input type=image class=drapeausousbandeau alt=france src="images/france.png"><input type=image class=drapeausousbandeau alt=uk src="images/uk.png"><input type=image class=drapeausousbandeau alt=deutschland src="images/germany.png"><input type=submit class=boutonsousbandeaudroite name=intranet value=Intranet></div>'."\n";
 }
 function sous_bandeau_light(){
 	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value=Accueil></div>'."\n";

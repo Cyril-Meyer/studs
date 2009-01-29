@@ -39,7 +39,8 @@ div.sousbandeau{
 	height:17px;
 	background-color: #DDDDDD;
 	font-size:11px;
-	color:white;
+/*	color:white;*/
+	color:black;
 	vertical-align:middle;
 	font-family:arial;
 	padding:3px;
@@ -111,6 +112,13 @@ div.bandeaupiedmobile{
 	font-size:11px;
 	position:absolute; 
 	right:10px;
+}
+.drapeausousbandeau {
+	border:0px;
+	margin-left:10px;
+	margin-right:10px;
+	vertical-align:middle;
+	cursor:pointer; 
 }
 /*corps de la page index.php*/
 div.corps{ 

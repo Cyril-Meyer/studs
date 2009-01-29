@@ -35,13 +35,17 @@ if ($_POST["annuler"]){
 
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
 	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
-	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
 	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b>'."\n";
 	
+	echo '<p class=textesouligne>Changelog version 0.4 (janvier 2009) : </p>'."\n";
+	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";
+	echo '- Possibilit&eacute; de rajouter des colonnes dans la partie administration de sondage,<br>'."\n";
+	echo '- Correction de bugs d\'affichage avec les caract&egrave;res \' et " .<br>'."\n";
+
 	echo '<p class=textesouligne>Changelog version 0.3 (novembre 2008) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export CSV pour exploiter le sondage dans un tableur,<br>'."\n";
 	echo '- Mise en place d\'un repository Subversion pour partager les nouvelles versions de STUdS,<br>'."\n";
