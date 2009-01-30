@@ -1,6 +1,14 @@
 <?php
 
 include '../bandeaux.php';
+session_start();
+
+//Choix de la langue
+if ($_SESSION["langue"]=="FR"){ include '../lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include '../lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include '../lang/de.inc';}
+
+
 
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";

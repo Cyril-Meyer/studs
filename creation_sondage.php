@@ -4,6 +4,8 @@ session_start();
 include 'variables.php';
 include 'fonctions.php';
 
+
+
 //Generer une chaine de caractere unique et aleatoire
 function random($car) {
 	$string = "";

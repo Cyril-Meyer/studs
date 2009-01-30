@@ -3,6 +3,11 @@ session_start();
 include 'bandeaux.php';
 include 'fonctions.php';
 
+//Choix de la langue
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+
 #tests
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	$_SESSION["titre"]=utf8_encode($_POST["titre"]);
@@ -95,7 +100,7 @@ bandeau_titre_infos();
 sous_bandeau_light();
  
 echo '<div class=corps>'."\n";
-print "<br>Vous avez choisi de cr&eacute;er un nouveau sondage !<br> Merci de remplir les champs obligatoires.<br><br>"."\n";
+print $tt_infos_presentation;
 
 //Affichage des différents champs textes a remplir
 echo '<table>'."\n";

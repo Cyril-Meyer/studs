@@ -9,8 +9,6 @@ if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
 
-print $_SESSION["langue"];
-
 
 // Le fichier studs.php sert a afficher les résultats d'un sondage à un simple utilisateur. 
 // C'est également l'interface pour ajouter une valeur à un sondage deja créé.

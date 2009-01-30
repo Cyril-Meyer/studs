@@ -4,6 +4,13 @@ session_start();
 include 'variables.php';
 include 'bandeaux.php';
 
+//Choix de la langue
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+
+
+
 // action du bouton annuler
 if ($_POST["annuler"]){
         header("Location:index.php");

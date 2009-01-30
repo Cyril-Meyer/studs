@@ -1,5 +1,6 @@
 <?php
 
+include 'bandeaux.php';
 
 session_start();
 //session_unset();
@@ -9,20 +10,21 @@ if ($_POST["uk_x"]){
 	$_SESSION["langue"]="EN";
 }
 
-elseif ($_POST["germany_x"]){
+if ($_POST["germany_x"]){
 	$_SESSION["langue"]="DE";
 }
 
-else {$_SESSION["langue"]="FR";}
+if ($_POST["france_x"]){
+	{$_SESSION["langue"]="FR";}
+}
+
 
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
 
 
-//print $_SESSION["langue"];
 
-include 'bandeaux.php';
 //action si bouton intranet est activé. Entrée dans l'intranet
 if ($_POST["intranet"]){
 
