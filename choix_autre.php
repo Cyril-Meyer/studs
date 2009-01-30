@@ -3,6 +3,12 @@ session_start();
 include 'creation_sondage.php';
 include 'bandeaux.php';
 
+//Choix de langue
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+
+
 
 //si les variables de session ne sont pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
@@ -18,12 +24,11 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage !</H2>"."\n";
-	print "Retournez &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
+	print "<H2>$tt_choixautre_page_erreur_titre !</H2>"."\n";
+	print "$tt_choixautre_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
-	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</body>'."\n";
 	echo '</html>'."\n";
@@ -113,14 +118,13 @@ else {
 	sous_bandeau_choix();
 	
 	echo '<div class=corps>'."\n";
-	print "Vous avez cr&eacute;&eacute; un sondage pour d&eacute;terminer un choix entre plusieurs choses."."\n";
-	echo '<br><br>Entrez les diff&eacute;rents choix &agrave; proposer au vote:<br><br>'."\n";
+	echo '<br>'.$tt_choixautre_presentation.'<br><br>'."\n";
 	echo '<table>'."\n";
 
 	//affichage des cases texte de formulaire
 	for ($i=0;$i<$_SESSION["nbrecases"];$i++){
 		$j=$i+1;
-		echo '<tr><td>Choix '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.str_replace("\\","",$_SESSION["choix$i"]).'" id="choix'.$i.'"></td></tr>'."\n";
+		echo '<tr><td>'.$tt_choixautre_champchoix.' '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.str_replace("\\","",$_SESSION["choix$i"]).'" id="choix'.$i.'"></td></tr>'."\n";
 	}	
 
 	echo '</table>'."\n";
@@ -132,12 +136,12 @@ else {
 
 	//ajout de cases supplementaires
 	echo '<table><tr>'."\n";
-	echo '<td>Pour ajouter 5 cases suppl&eacute;mentaires</td><td><input type="image" name="ajoutcases" value="Retour" src="images/add-16.png"></td>'."\n";
+	echo '<td>'.$tt_choixautre_ajoutcases.'</td><td><input type="image" name="ajoutcases" value="Retour" src="images/add-16.png"></td>'."\n";
 	echo '</tr></table>'."\n";
 	echo'<br>'."\n";
 
 	echo '<table><tr>'."\n";
-	echo '<td>Continuer</td><td><input type="image" name="fin_sondage_autre" value="Cr&eacute;er le sondage" src="images/next-32.png"></td>'."\n";
+	echo '<td>'.$tt_choixautre_continuer.'</td><td><input type="image" name="fin_sondage_autre" value="Cr&eacute;er le sondage" src="images/next-32.png"></td>'."\n";
 	echo '</tr></table>'."\n";
 
 	//test de remplissage des cases
@@ -147,12 +151,12 @@ else {
 
 	//message d'erreur si aucun champ renseigné
 	if ($testremplissage!="ok"&&($_POST["fin_sondage_autre"]||$_POST["fin_sondage_autre_x"])){
-		print "<br><font color=\"#FF0000\">Il faut remplir au moins un champ !</font><br><br>"."\n";
+		print "<br><font color=\"#FF0000\">$tt_choixautre_erreurvide</font><br><br>"."\n";
 		$erreur="yes";
 	}
 
 	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \", < et > ne sont pas autoris&eacute;s !</font><br><br>\n";
+			print "<font color=#FF0000>$tt_choixautre_erreur_injection</font><br><br>\n";
 	}
 	
 	if (($_POST["fin_sondage_autre"]||$_POST["fin_sondage_autre_x"])&&!$erreur&&!$erreur_injection){
@@ -161,14 +165,14 @@ else {
 
 		echo '<br>'."\n";
 		echo '<div class=presentationdatefin>'."\n";
-		echo '<br>Votre sondage sera automatiquement effac&eacute; dans 6 mois.<br> N&eacute;anmoins vous pouvez d&eacute;cider ci-dessous d\'une date plus rapproch&eacute;e pour la destruction de votre sondage.<br><br>'."\n";
+		echo '<br>'.$tt_choixautre_presentationfin.'<br><br>'."\n";
 
-		echo 'Date de fin (optionnelle) : <input type="text" name="champdatefin" size="10" maxlength="10"> (format: JJ/MM/AAAA)'."\n";
+		echo $tt_choixautre_presentationfindate.' : <input type="text" name="champdatefin" size="10" maxlength="10"> '.$tt_choixautre_presentationfinformat."\n";
 		echo '</div>'."\n";
 		echo '<br>'."\n";
 
 		echo '<table>'."\n";
-		echo '<tr><td>Cr&eacute;er le sondage</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
+		echo '<tr><td>'.$tt_choixautre_creation.'</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
 		echo '</table>'."\n";
 	}
 

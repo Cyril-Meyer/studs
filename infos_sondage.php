@@ -100,38 +100,38 @@ bandeau_titre_infos();
 sous_bandeau_light();
  
 echo '<div class=corps>'."\n";
-print $tt_infos_presentation;
+echo '<br>'.$tt_infos_presentation.'<br><br>'."\n";
 
 //Affichage des différents champs textes a remplir
 echo '<table>'."\n";
 
-echo '<tr><td>Titre du sondage * : </td><td><input type="text" name="titre" size="40" maxlength="40" value="'.utf8_decode($_SESSION["titre"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_titre.'</td><td><input type="text" name="titre" size="40" maxlength="40" value="'.utf8_decode($_SESSION["titre"]).'"></td>'."\n";
 if (!$_SESSION["titre"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-	print "<td><font color=\"#FF0000\">Il faut remplir un titre !</font></td>"."\n";
+	print "<td><font color=\"#FF0000\">$tt_infos_erreur_titre</font></td>"."\n";
 }
 elseif ($erreur_injection_titre){
-		print "<td><font color=\"#FF0000\">Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td><br>"."\n";
+		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>Commentaires : </td><td><textarea name="commentaires" rows="7" cols="40">'.utf8_decode($_SESSION["commentaires"]).'</textarea></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_commentaires.'</td><td><textarea name="commentaires" rows="7" cols="40">'.utf8_decode($_SESSION["commentaires"]).'</textarea></td>'."\n";
 if ($erreur_injection_commentaires){
-		print "<td><font color=\"#FF0000\">Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td><br>"."\n";
+		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>Votre nom * : </td><td><input type="text" name="nom" size="40" maxlength="40" value="'.utf8_decode($_SESSION["nom"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_nom.'</td><td><input type="text" name="nom" size="40" maxlength="40" value="'.utf8_decode($_SESSION["nom"]).'"></td>'."\n";
 if (!$_SESSION["nom"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-	print "<td><font color=\"#FF0000\">Il faut remplir un nom !</font></td>"."\n";
+	print "<td><font color=\"#FF0000\">$tt_infos_erreur_nom</font></td>"."\n";
 }
 elseif ($erreur_injection_nom){
-		print "<td><font color=\"#FF0000\">Les caract&egrave;res \"<\" et \">\" ne sont pas autoris&eacute;s !</font></td><br>"."\n";
+		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>Votre adresse e-mail * : </td><td><input type="text" name="adresse" size="40" maxlength="64" value="'.utf8_decode($_SESSION["adresse"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_adressemail.'</td><td><input type="text" name="adresse" size="40" maxlength="64" value="'.utf8_decode($_SESSION["adresse"]).'"></td>'."\n";
 if (!$_SESSION["adresse"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-	print "<td><font color=\"#FF0000\">Il faut remplir une adresse ! </font></td>"."\n";
+	print "<td><font color=\"#FF0000\">$tt_infos_erreur_adressemail </font></td>"."\n";
 }
 elseif ($erreur_adresse=="yes"&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-	print "<td><font color=\"#FF0000\">L'adresse saisie n'est pas correcte !</font> (Il faut une adresse valide pour recevoir le lien vers le sondage)</td>"."\n";
+	print "<td><font color=\"#FF0000\">$tt_infos_erreur_mauvaise_adressemail</font></td>"."\n";
 }
 echo '</tr>'."\n";
 
@@ -142,18 +142,18 @@ echo '<script type="text/javascript">'."\n";
 echo 'document.formulaire.titre.focus();'."\n";
 echo '</script>'."\n";
 
-echo '<br>Les champs marqu&eacute;s d\'une &eacute;toile * sont obligatoires !<br><br>'."\n";
+echo '<br>'.$tt_infos_asterisque.'<br><br>'."\n";
 
 if ($_SESSION["studsplus"]=="+"){$cocheplus="checked";}
-echo '<input type=checkbox name=studsplus '.$cocheplus.'> Vous souhaitez que les sond&eacute;s puissent modifier leur ligne eux-m&ecirc;mes.<br>'."\n";
+echo '<input type=checkbox name=studsplus '.$cocheplus.'>'.$tt_infos_option_modifier.'<br>'."\n";
 if ($_SESSION["mailsonde"]=="yes"){$cochemail="checked";}
-echo '<input type=checkbox name=mailsonde '.$cochemail.'> Vous souhaitez recevoir un mail &agrave; chaque participation d\'un sond&eacute;.<br>'."\n";
+echo '<input type=checkbox name=mailsonde '.$cochemail.'>'.$tt_infos_option_mailconfirme.'<br>'."\n";
 
 //affichage des boutons pour choisir sondage date ou autre
 echo '<br><table >'."\n";
-print "<tr><td>Sondage pour choisir une date</td><td></td> "."\n";
+echo '<tr><td>'.$tt_infos_choix_date.'</td><td></td> '."\n";
 echo '<td><input type="image" name="creation_sondage_date" value="Trouver une date" src="images/calendar-32.png"></td></tr>'."\n";
-echo '<tr><td>Autre sondage</td><td></td> '."\n";
+echo '<tr><td>'.$tt_infos_choix_autre.'</td><td></td> '."\n";
 echo '<td><input type="image" name="creation_sondage_autre" value="Faire un sondage" src="images/chart-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br><br><br>'."\n";

@@ -82,10 +82,11 @@ sous_bandeau();
 
 echo '<div class=corps>'."\n";
 
-echo $tt_index_presentation;
+echo '<p><b>'.$tt_index_titre.'</b></p>';
+echo '<p>'.$tt_index_presentation.'</p>'."\n".'<br>'."\n";
 
 echo '<table>'."\n";
-echo'<tr><td>'.$tt_index_bouton.'</td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
+echo'<tr><td><b>'.$tt_index_bouton.'</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br>'."\n";
 echo '<br><br>'."\n";
