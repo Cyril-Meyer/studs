@@ -491,6 +491,7 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 		echo '<tr>'."\n";
 		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td>'.strftime("%A %e %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
+		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");echo '<td>'.strftime("%A %e de %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
 		if ($_SESSION["langue"]=="EN"){echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
 		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, 'de_DE@euro', 'de_DE', 'de');echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
 		$affichageerreurfindeligne="no";
@@ -531,6 +532,7 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
 		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$date_fin=strftime("%A %e %B %Y",$jour_arret);}
+		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");$date_fin=strftime("%A %e de %B %Y",$jour_arret);}
 		if ($_SESSION["langue"]=="EN"){$date_fin=date("l, F jS Y",$jour_arret);}
 		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
 		echo '<br><div class=presentationdatefin>'.$tt_choixdate_presentationfin.'<br></td></tr><tr><td><br>'.$tt_choixdate_presentationdatefin.' : <b> '.$date_fin.'</b><br><br>'."\n";
