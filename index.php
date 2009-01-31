@@ -1,6 +1,7 @@
 <?php
 
 include 'bandeaux.php';
+include 'variables.php';
 
 session_start();
 //session_unset();
@@ -17,6 +18,10 @@ if ($_POST["france"]){
 }
 if ($_POST["espagne"]){
 	$_SESSION["langue"]="ES";
+}
+
+if ($_SESSION["langue"]==""){
+	$_SESSION["langue"]=getenv('LANGUE');
 }
 
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}

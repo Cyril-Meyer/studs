@@ -53,3 +53,8 @@ USER_STUDS
 	reponses					text				reponses a chacun des sujets proposés au vote (0 pour non, 1 pour OK)
 	user_id						alpha-numérique		numéro d'utilisateur par ordre croissant de participation pour garder l'ordre de participation
 	
+=============================================================================
+Traductions
+=============================================================================
+Pour pouvoir bénéficier de toutes les traductions en FR, EN, DE et ES il faut avoir installé les locales fr_FR, de_DE, en_US et es_ES sur 
+le serveur qui héberge l'application.

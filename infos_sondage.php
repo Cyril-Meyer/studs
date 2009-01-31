@@ -3,6 +3,19 @@ session_start();
 include 'bandeaux.php';
 include 'fonctions.php';
 
+if ($_POST["uk"]){
+	$_SESSION["langue"]="EN";
+}
+if ($_POST["germany"]){
+	$_SESSION["langue"]="DE";
+}
+if ($_POST["france"]){
+	$_SESSION["langue"]="FR";
+}
+if ($_POST["espagne"]){
+	$_SESSION["langue"]="ES";
+}
+
 //Choix de la langue
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}

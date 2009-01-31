@@ -8,11 +8,9 @@ include 'fonctions.php';
 if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";
 }
-
 if ($_POST["germany"]){
 	$_SESSION["langue"]="DE";
 }
-
 if ($_POST["france"]){
 	$_SESSION["langue"]="FR";
 }
@@ -269,7 +267,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		}
 		else {
 			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){setlocale(LC_TIME, "es_ES");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
 			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";}
 			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
 			$colspan=1;
@@ -287,7 +285,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		}
 		else {
 			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){setlocale(LC_TIME, "es_ES");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
 			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";}
 			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}			
 			$colspan=1;
@@ -484,13 +482,13 @@ else {
 					if (eregi("@",$toutsujet[$i])){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="ES"){setlocale(LC_TIME, "es_ES");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 					}
 					else{
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="ES"){setlocale(LC_TIME, "es_ES");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
 						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujet[$i]);}
 						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);}
 					}
