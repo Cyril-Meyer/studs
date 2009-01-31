@@ -10,7 +10,7 @@ $tt_bandeau_titre_contact='Nous contacter';
 $tt_bandeau_titre_version='Les diff&eacute;rentes versions et les am&eacute;liorations pr&eacute;vues';
 $tt_bandeau_titre_erreur='Erreur !';
 $tt_bandeau_titre_apropos='Informations g&eacute;n&eacute;rales';
-$tt_bandeau_pied='Universit&eacute; de Strasbourg - Cr&eacute;ation : Guilhem BORGHESI - 2008';
+$tt_bandeau_pied='Universit&eacute; de Strasbourg. Cr&eacute;ation : Guilhem BORGHESI. 2008-2009';
 
 //texte des boutons dans sous_bandeau
 $tt_bouton_accueil='Accueil';
@@ -163,7 +163,7 @@ $tt_contacts_mail_corps_user='Voici une copie de votre question dans STUdS';
 $tt_contacts_mail_reponse_user='Nous allons prendre en compte votre message rapidement.';
 
 //sources.php
-$tt_sources_lien='Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de StUdS.';
+$tt_sources_lien='Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de STUdS.';
 
 $tt_apropos_techno='Technologies utilis&eacute;es';
 $tt_apropos_compat='Compatibilit&eacute;s des navigateurs';
