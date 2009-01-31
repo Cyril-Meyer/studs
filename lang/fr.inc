@@ -11,6 +11,7 @@ $tt_bandeau_titre_version='Les diff&eacute;rentes versions et les am&eacute;lior
 $tt_bandeau_titre_erreur='Erreur !';
 $tt_bandeau_titre_apropos='Informations g&eacute;n&eacute;rales';
 $tt_bandeau_pied='Universit&eacute; de Strasbourg. Cr&eacute;ation : Guilhem BORGHESI. 2008-2009';
+$tt_bandeau_langue='Langues';
 
 //texte des boutons dans sous_bandeau
 $tt_bouton_accueil='Accueil';
@@ -152,9 +153,6 @@ $tt_adminstuds_ajoutcolonne_date_invit='Pour ajouter une date';
 $tt_adminstuds_ajoutcolonne_date_heuredebut='Pour ajouter un horaire de d&eacute;but (optionnel)';
 $tt_adminstuds_ajoutcolonne_date_heurefin='Pour ajouter un horaire de fin (optionnel)';
 
-
-
-
 //contacts.php
 $tt_contacts_envoimail_titre='Votre message a bien &eacute;t&eacute; envoy&eacute; !';
 $tt_contacts_presentation='Pour toutes questions ou suggestions relatives &agrave; STUdS vous pouvez laisser un message via ce formulaire.';
@@ -174,6 +172,7 @@ $tt_contacts_mail_reponse_user='Nous allons prendre en compte votre message rapi
 //sources.php
 $tt_sources_lien='Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de STUdS.';
 
+//apropos.php
 $tt_apropos_techno='Technologies utilis&eacute;es';
 $tt_apropos_compat='Compatibilit&eacute;s des navigateurs';
 $tt_apropos_validation_titre='Validations des pages';

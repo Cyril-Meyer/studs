@@ -113,13 +113,6 @@ div.bandeaupiedmobile{
 	position:absolute; 
 	right:10px;
 }
-.drapeausousbandeau {
-	border:0px;
-	margin-left:10px;
-	margin-right:10px;
-	vertical-align:middle;
-	cursor:pointer; 
-}
 /*corps de la page index.php*/
 div.corps{ 
 	font-size:12px;
