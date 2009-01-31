@@ -1,10 +1,29 @@
 <?php
 session_start();
 
-setlocale(LC_TIME, "fr_FR");
+//setlocale(LC_TIME, "fr_FR");
 include 'variables.php';
 include 'fonctions.php';
 include 'bandeaux.php';
+
+
+if ($_POST["uk_x"]){
+	$_SESSION["langue"]="EN";
+}
+
+if ($_POST["germany_x"]){
+	$_SESSION["langue"]="DE";
+}
+
+if ($_POST["france_x"]){
+	{$_SESSION["langue"]="FR";}
+}
+
+
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+
 
 // recuperation du numero de sondage admin (24 car.) dans l'URL
 $numsondageadmin=$_GET["sondage"];
@@ -37,8 +56,8 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>Ce sondage n'existe pas !</H2><br><br>"."\n";
-	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
+	print "<H2>$tt_studs_erreur_titre</H2><br><br>"."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();
@@ -235,7 +254,7 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Ajout d'une nouvelle colonne au sondage STUdS", utf8_decode ("Vous avez ajouté une colonne à votre sondage sur STUdS. \n  Vous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante : \n\nhttps://dpt-info.u-strasbg.fr/studs/studs.php?sondage=$numsondage \n\n Merci de votre confiance !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttps://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
 
 		}
 
@@ -317,7 +336,7 @@ else {
 				
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
-				mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Ajout d'une nouvelle colonne au sondage STUdS", utf8_decode ("Vous avez ajouté une colonne à votre sondage sur STUdS. \n  Vous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante : \n\nhttps://dpt-info.u-strasbg.fr/studs/studs.php?sondage=$numsondage \n\n Merci de votre confiance !"));
+				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttps://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
 				
 			}
 			else {$erreur_ajout_date="yes";}
@@ -435,7 +454,7 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement du titre du sondage avec STUdS", utf8_decode ("Vous avez changé le titre de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", utf8_decode ("$tt_adminstuds_mail_corps_changetitre :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !"));
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=utf8_encode($_POST["nouveautitre"]);
 			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -444,7 +463,7 @@ else {
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Changement des commentaires du sondage avec STUdS", utf8_decode ("Vous avez changé les commentaires de votre sondage sur STUdS. \n  Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n Merci de votre confiance !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", utf8_decode ("$tt_adminstuds_mail_corps_changecomm :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !"));
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=utf8_encode($_POST["nouveauxcommentaires"]);
 			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -453,7 +472,7 @@ else {
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$_POST[nouvelleadresse]", "[ADMINISTRATEUR STUdS] Changement d'adresse électronique de l'administrateur avec STUdS", utf8_decode ("Vous avez changé votre adresse électronique sur STUdS. \n Vous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n Merci de votre confiance !"));
+			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", utf8_decode ("$tt_adminstuds_mail_corps_changemail :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\nSTUdS !"));
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -499,11 +518,11 @@ else {
 		echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
 
 		//affichage du nom de l'auteur du sondage
-		echo 'Auteur du sondage : '.utf8_decode($dsondage->nom_admin).'<br>'."\n";
+		echo $tt_studs_auteur.' : '.utf8_decode($dsondage->nom_admin).'<br>'."\n";
 
 		//affichage des commentaires du sondage
 		if ($dsondage->commentaires){
-			echo '<br>Commentaires :<br>'."\n";
+			echo '<br>'.$tt_studs_commentaires.' :<br>'."\n";
             $commentaires=$dsondage->commentaires;
             $commentaires=str_replace("\\","",$commentaires);       
             echo utf8_decode($commentaires);
@@ -514,7 +533,7 @@ else {
 		echo '</div>'."\n";
 
 		echo '<div class="cadre"> '."\n";
-		echo 'En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. <br>Si vous avez oubli&eacute; de mettre un choix vous pouvez rajouter une colonne en cliquant sur <img src="images/add-16.png" alt="Annuler"> <br> en bout de ligne des noms de colonne. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.'."\n";
+		echo $tt_adminstuds_presentation."\n";
 
 		echo '<br><br>'."\n";
 
@@ -565,7 +584,9 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";
+			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
 			$colspan=1;
 		}
 	}
@@ -582,7 +603,9 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";
+			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}			
 			$colspan=1;
 		}
 	}
@@ -687,7 +710,6 @@ else {
                         //a la fin de chaque ligne se trouve les boutons modifier
                         if (!$testligneamodifier=="true"){
                 	        echo '<td class=somme><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png" alt="Icone infos"></td>'."\n";
-//                	        echo '<td class=somme><input type="image" name="effaceligne'.$compteur.'" value="Effacer" src="images/cancel.png"  alt="Icone efface"></td>'."\n";
                         }
 
                         //demande de confirmation pour modification de ligne
@@ -735,7 +757,7 @@ else {
               //affichage de la ligne contenant les sommes de chaque colonne
               echo '<tr>'."\n";
 			  echo '<td></td>'."\n";
-              echo '<td align="right">Somme</td>'."\n";
+              echo '<td align="right">'.$tt_studs_somme.'</td>'."\n";
 
               for ($i=0;$i<$nbcolonnes;$i++){
 	              $affichesomme=$somme[$i];
@@ -765,22 +787,22 @@ else {
 		// S'il a oublié de remplir un nom
 		if (($_POST["boutonp"]||$_POST["boutonp_x"])&&$_POST["nom"]=="") {
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>&nbsp;Il faut un nom !</font>\n";
+			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomvide</font>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_prénom){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomdeja</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_injection){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>&nbsp;Les caract&egrave;res \" ' < et > ne sont pas autoris&eacute;s !</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_injection</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_ajout_date){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>&nbsp;La date choisie n'est pas correcte !</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>$tt_adminstuds_erreur_date</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		//fin du tableau
@@ -804,10 +826,14 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (eregi("@",$toutsujet[$i])){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." &agrave ".$toutsujetdate[1];
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 					}
 					else{
-						$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);}
 					}
 				}
 				else{
@@ -822,15 +848,16 @@ else {
 		$meilleursujet=str_replace("°","'",$meilleursujet);
 
 		//ajout du S si plusieurs votes
-		if ($meilleurecolonne!="1"){$pluriel="s";}
+		if ($meilleurecolonne!="1"&&$_SESSION["langue"]!="DE"){$pluriel="s";}
+		else{$pluriel="n";}
 
 		echo '<p class=affichageresultats>'."\n";
 		//affichage de la phrase annoncant le meilleur sujet
 		if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\">$tt_studs_meilleurchoix : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.<br>\n";
 		}
 		elseif ($meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.<br>\n";
 		}
 
 		echo '<br><br>'."\n";
@@ -838,16 +865,16 @@ else {
 		echo '</form>'."\n";
 		echo '<form name="formulaire2" action="adminstuds.php?sondage='.$numsondageadmin.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		//Gestion du sondage
-		echo '<div class=titregestionadmin>Gestion de votre sondage :</div>'."\n";
+		echo '<div class=titregestionadmin>'.$tt_adminstuds_gestion_titre.' :</div>'."\n";
  		echo '<p class=affichageresultats>'."\n"; 
 		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo 'Si vous souhaitez changer le titre du sondage :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo $tt_adminstuds_gestion_chgttitre.' :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
-		echo 'Si vous souhaitez produire la lettre de convocation (en PDF), choississez un lieu de r&eacute;union et validez<br>';
+		echo $tt_adminstuds_gestion_pdf.'<br>';
 		echo '<input type="text" name="lieureunion" size="100" value="'.$_SESSION["lieureunion"].'">';
 		echo ' <input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
 			$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
@@ -855,33 +882,33 @@ else {
 	}
 		
 	if ($_POST["exportpdf_x"]&&!$_POST["lieureunion"]){
-		echo '<font color="#FF0000">Veuillez entrer un lieu de r&eacute;union !</font><br><br>'."\n";
+		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurpdf.'</font><br><br>'."\n";
 	}
 	
 	//si la valeur du nouveau titre est invalide : message d'erreur
 	if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]==""){
-		echo '<font color="#FF0000">Veuillez entrer un nouveau titre !</font><br><br>'."\n";
+		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurtitre.'</font><br><br>'."\n";
 	}
 
 	//Changer les commentaires du sondage
-	echo 'Si vous souhaitez changer les commentaires du sondage :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo  $tt_adminstuds_gestion_commentaires.' :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//Changer l'adresse de l'administrateur
-	echo 'Si vous souhaitez changer votre adresse de courrier &eacute;lectronique :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo $tt_adminstuds_gestion_adressemail.' :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 	//si l'adresse est invalide ou le champ vide : message d'erreur
 	if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]==""){
-		echo '<font color="#FF0000">Veuillez une nouvelle adresse !</font><br><br>'."\n";
+		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurmail.'</font><br><br>'."\n";
 
 	}
 
 	//suppression du sondage
-	echo 'Si vous souhaitez supprimer votre sondage : <input type="image" name="suppressionsondage" value="Suppression du sondage" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
+	echo $tt_adminstuds_gestion_suppressionsondage.' : <input type="image" name="suppressionsondage" value="'.$tt_adminstuds_gestion_bouton_suppressionsondage.'" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
 	if ($_POST["suppressionsondage"]){
 
-		echo 'Confirmer la suppression de votre sondage : <input type="submit" name="confirmesuppression" value="Je supprime ce sondage !">'."\n";
-		echo '<input type="submit" name="annullesuppression" value="Je garde ce sondage !"><br><br>'."\n";
+		echo $tt_adminstuds_gestion_confirmesuppression.' : <input type="submit" name="confirmesuppression" value="'.$tt_adminstuds_gestion_bouton_confirmesuppression.'">'."\n";
+		echo '<input type="submit" name="annullesuppression" value="'.$tt_adminstuds_gestion_bouton_annulesuppression.'"><br><br>'."\n";
 	}
 	echo '<a name=bas></a>'."\n";
 	echo '<br><br>'."\n";
@@ -913,7 +940,7 @@ if ($_POST["confirmesuppression"]){
         fclose($fichier_log);
 
 	//envoi du mail a l'administrateur du sondage
-	mail ("$adresseadmin", "[ADMINISTRATEUR STUdS] Suppression de sondage avec STUdS", utf8_decode ("Vous avez supprimé un sondage sur STUdS. \n Vous pouvez créer de nouveaux sondages à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n Merci de votre confiance !"));
+	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", utf8_decode ("$tt_adminstuds_mail_corps_supprimesondage :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n$tt_studs_mail_merci\nSTUdS !"));
 
 	//destruction des données dans la base SQL
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
@@ -932,8 +959,8 @@ if ($_POST["confirmesuppression"]){
 	bandeau_titre();
 
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>Votre sondage a &eacute;t&eacute; supprim&eacute; !</H2><br><br>";
-	print "Vous pouvez retourner maintenant &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>. "."\n";
+	print "<H2>$tt_adminstuds_suppression_titre</H2><br><br>";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();

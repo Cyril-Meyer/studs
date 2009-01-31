@@ -8,8 +8,6 @@ if ($_SESSION["langue"]=="FR"){ include '../lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include '../lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include '../lang/de.inc';}
 
-
-
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
@@ -21,8 +19,8 @@ echo '<body>'."\n";
 bandeau_tete();
 bandeau_titre();
 echo '<div class=corpscentre>'."\n";
-print "<H2>Voila les <a href=\"studs.tar.gz\" target=_new>sources</a> de StUdS.</H2><br><br>"."\n";
-print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"../index.php\"> STUdS</A>. "."\n";
+print "<H2>$tt_sources_lien</H2><br><br>"."\n";
+print "$tt_choix_page_erreur_retour<a href=\"../index.php\"> STUdS</A>. "."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";
 

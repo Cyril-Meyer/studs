@@ -6,6 +6,18 @@ include '../variables.php';
 include '../fonctions.php';
 include '../bandeaux.php';
 
+if ($_POST["uk_x"]){
+	$_SESSION["langue"]="EN";
+}
+
+if ($_POST["germany_x"]){
+	$_SESSION["langue"]="DE";
+}
+
+if ($_POST["france_x"]){
+	{$_SESSION["langue"]="FR";}
+}
+
 //Choix de la langue
 if ($_SESSION["langue"]=="FR"){ include '../lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include '../lang/en.inc';}
@@ -53,15 +65,15 @@ $nbsondages=pg_numrows($sondage);
 
 echo'<div class=corps>'."\n";
 
-echo 'Il y a actuellement '.$nbsondages.' sondages dans la base<br><br>'."\n";
+echo $nbsondages.' '.$tt_admin_nbresondage.'<br><br>'."\n";
 
 // Test et affichage du bouton de confirmation en cas de suppression de sondage
 for ($i=0;$i<$nbsondages;$i++){
  	if ($_POST["supprimersondage$i"]){
  		$dsondage=pg_fetch_object($sondage,$i);
 		echo '<table>'."\n";
- 		echo '<tr><td bgcolor="#EE0000" colspan=11>Confirmer la suppression du sondage "'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="Je supprime ce sondage !">'."\n";
- 		echo '<input type="submit" name="annullesuppression" value="Je garde ce sondage !"></td></tr>'."\n";
+ 		echo '<tr><td bgcolor="#EE0000" colspan=11>'.$tt_admin_confirmesuppression.'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'.$tt_admin_bouton_confirmesuppression.'">'."\n";
+ 		echo '<input type="submit" name="annullesuppression" value="'.$tt_admin_bouton_annulesuppression.'"></td></tr>'."\n";
 		echo '</table>'."\n";
 		echo '<br>'."\n";
  	}
@@ -71,7 +83,7 @@ for ($i=0;$i<$nbsondages;$i++){
 // tableau qui affiche tous les sondages de la base
 echo '<table border=1>'."\n";	
 
-echo '<tr align=center><td>ID</td><td>Format</td><td>Titre</td><td>Cr&eacute;ateur</td><td>Date d\'expiration</td><td>Nombre d\'utilisateurs</td><td colspan=3>Actions</td>'."\n";
+echo '<tr align=center><td>'.$tt_admin_colonne_id.'</td><td>'.$tt_admin_colonne_format.'</td><td>'.$tt_admin_colonne_titre.'</td><td>'.$tt_admin_colonne_auteur.'</td><td>'.$tt_admin_colonne_datefin.'</td><td>'.$tt_admin_colonne_nbreuser.'</td><td colspan=3>'.$tt_admin_colonne_actions.'</td>'."\n";
 
 
 for ($i=0;$i<$nbsondages;$i++){
@@ -95,9 +107,9 @@ for ($i=0;$i<$nbsondages;$i++){
 	
 	echo'<td>'.$nbuser.'</td>'."\n";
 
-	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'">Voir le sondage</a></td>'."\n";
-	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'">Modifier le sondage</a></td>'."\n";
-	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="Supprimer le sondage"></td>'."\n";
+	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'">'.$tt_admin_lien_voir.'</a></td>'."\n";
+	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'">'.$tt_admin_lien_modifier.'</a></td>'."\n";
+	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="'.$tt_admin_bouton_supprimer.'"></td>'."\n";
 
 	echo '</tr>'."\n";
 }

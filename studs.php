@@ -1,8 +1,21 @@
 <?php
 session_start();
-setlocale(LC_TIME, "fr_FR");
+//setlocale(LC_TIME, "fr_FR");
 include 'bandeaux.php';
 include 'fonctions.php';
+
+
+if ($_POST["uk_x"]){
+	$_SESSION["langue"]="EN";
+}
+
+if ($_POST["germany_x"]){
+	$_SESSION["langue"]="DE";
+}
+
+if ($_POST["france_x"]){
+	{$_SESSION["langue"]="FR";}
+}
 
 //Choix de la langue
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
@@ -45,8 +58,8 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>Ce sondage n'existe pas !</H2>"."\n";
-	print "Vous pouvez retourner &agrave; la page d'accueil de <a href=\"index.php\"> STUdS</A>."."\n";
+	print "<H2>$tt_studs_erreur_titre</H2>"."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();
@@ -120,7 +133,7 @@ else {
  				pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
 
 				if ($dsondage->mailsonde=="yes"){
-					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] Participation au sondage : $dsondage->titre"), "\"$nom\"".utf8_decode (" vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\nMerci de votre confiance.\nSTUdS !"),$headers);
+					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] $tt_studs_mail_sujet : $dsondage->titre"), "\"$nom\"".utf8_decode ("$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !"),$headers);
 				}
 			}
 		}
@@ -196,11 +209,11 @@ else {
 	echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
 
 //affichage du nom de l'auteur du sondage
-	echo 'Auteur du sondage : '.utf8_decode($dsondage->nom_admin).'<br><br>'."\n";
+	echo $tt_studs_auteur.' : '.utf8_decode($dsondage->nom_admin).'<br><br>'."\n";
 
 //affichage des commentaires du sondage
 	if ($dsondage->commentaires){
-		echo 'Commentaires :<br>'."\n";
+		echo $tt_studs_commentaires.' :<br>'."\n";
                 $commentaires=$dsondage->commentaires;
                 $commentaires=str_replace("\\","",$commentaires);       
                 echo utf8_decode($commentaires);
@@ -211,7 +224,7 @@ else {
 	echo '</div>'."\n";
 	echo '<div class="cadre"> '."\n";
 
-	echo 'Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec le bouton en bout de ligne.'."\n";
+	echo $tt_studs_presentation."\n";
 
 	echo '<br><br>'."\n";
 
@@ -251,7 +264,9 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";
+			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
 			$colspan=1;
 		}
 	}
@@ -266,12 +281,13 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";
+			if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}			
 			$colspan=1;
 		}
 	}
 	echo '</tr>'."\n";
-
 		//affichage des horaires	
 	if (eregi("@",$dsujet->sujet)){
 		echo '<tr>'."\n";
@@ -404,7 +420,7 @@ else {
 
 // Affichage des différentes sommes des colonnes existantes
 	echo '<tr>'."\n";
-	echo '<td align="right">Somme</td>'."\n";
+	echo '<td align="right">'.$tt_studs_somme.'</td>'."\n";
 
 	for ($i=0;$i<$nbcolonnes;$i++){
 		$affichesomme=$somme[$i];
@@ -432,13 +448,13 @@ else {
 	echo '<p class=affichageresultats>'."\n";
 	// S'il a oublié de remplir un nom
 	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<font color=#FF0000>&nbsp;Vous n'avez pas saisi de nom !</font>\n";
+			print "<font color=#FF0000>$tt_studs_erreur_nomvide</font>\n";
 		}
 	if ($erreur_prénom){
-			print "<font color=#FF0000>&nbsp;Le nom que vous avez choisi existe d&eacute;j&agrave; !</font>\n";
+			print "<font color=#FF0000>$tt_studs_erreur_nomdeja</font>\n";
 	}
 	if ($erreur_injection){
-			print "<font color=#FF0000>&nbsp;Les caract&egrave;res \"  '  < et > ne sont pas autoris&eacute;s !</font>\n";
+			print "<font color=#FF0000>$tt_studs_erreur_injection</font>\n";
 	}
 	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire
@@ -461,10 +477,14 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (eregi("@",$toutsujet[$i])){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." &agrave ".$toutsujetdate[1];
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 					}
 					else{
-						$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);}
 					}
 				}
 				else{
@@ -476,24 +496,25 @@ else {
 	$meilleursujet=substr("$meilleursujet",1);
 
 	// Si le résultat est supérieur à 1 on rajoute un S
-	if ($meilleurecolonne!="1"){$pluriel="s";}
+	if ($meilleurecolonne!="1"&&$_SESSION["langue"]!="DE"){$pluriel="s";}
+	else{$pluriel="n";}
 	
 	// Affichage du meilleur choix
 
 	if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Le meilleur choix pour l'instant est : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
  	}
 	elseif ($meilleurecolonne){
-		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> Les meilleurs choix pour l'instant sont : <b>$meilleursujet </b>avec <b>$meilleurecolonne </b>vote$pluriel.\n";
+		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
 	}
 
 	pg_close($connect);
 	
 	echo '<br><br>'."\n";
 	echo '<p class=affichageexport>'."\n";
-	echo 'R&eacute;cup&eacute;ration des donn&eacute;es : Tableau (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
+	echo $tt_studs_export.' (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
  		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
-  			echo ' &nbsp;Agenda (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
+  			echo $tt_studs_agenda.' (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;

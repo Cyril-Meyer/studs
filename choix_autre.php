@@ -24,8 +24,8 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_choixautre_page_erreur_titre !</H2>"."\n";
-	print "$tt_choixautre_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
+	print "<H2>$tt_choix_page_erreur_titre !</H2>"."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -172,7 +172,7 @@ else {
 		echo '<br>'."\n";
 
 		echo '<table>'."\n";
-		echo '<tr><td>'.$tt_choixautre_creation.'</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
+		echo '<tr><td>'.$tt_choix_creation.'</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
 		echo '</table>'."\n";
 	}
 
