@@ -145,6 +145,15 @@ $tt_adminstuds_gestion_bouton_annulesuppression='Je garde ce sondage !';
 $tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATEUR STUdS] Suppression de sondage avec STUdS';
 $tt_adminstuds_mail_corps_supprimesondage="Vous avez fait la suppression d'un sondage sur STUdS. \nVous pouvez faire de nouveaux sondages au lien suivant";
 $tt_adminstuds_suppression_titre='Votre sondage a &eacute;t&eacute; supprim&eacute; !';
+$tt_adminstuds_ajoutcolonne_titre='Ajout de colonne';
+$tt_adminstuds_ajoutcolonne_autre='Si vous souhaitez ajouter une colonne';
+$tt_adminstuds_ajoutcolonne_date_presentation='Vous pouvez ajouter une date &agrave; votre sondage. Si la date existe d&eacute;j&agrave; et que vous ne voulez que rajouter un horaire,<br> mettez le jour en entier avec l\'horaire ou le cr&eacute;neau suppl&eacute;mentaire il sera int&eacute;gr&eacute; normalement au sondage existant.';
+$tt_adminstuds_ajoutcolonne_date_invit='Pour ajouter une date';
+$tt_adminstuds_ajoutcolonne_date_heuredebut='Pour ajouter un horaire de d&eacute;but (optionnel)';
+$tt_adminstuds_ajoutcolonne_date_heurefin='Pour ajouter un horaire de fin (optionnel)';
+
+
+
 
 //contacts.php
 $tt_contacts_envoimail_titre='Votre message a bien &eacute;t&eacute; envoy&eacute; !';

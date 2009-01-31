@@ -93,58 +93,68 @@ if ($_POST["ajoutsujet_x"]){
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>Ajout de colonne</H2><br><br>"."\n";
+	print "<H2>$tt_adminstuds_ajoutcolonne_titre</H2><br><br>"."\n";
 	
 	if ($dsondage->format=="A"||$dsondage->format=="A+"){
-		echo 'Si vous souhaitez ajouter une colonne :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
+		echo $tt_adminstuds_ajoutcolonne_autre.' :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
 	}
 	else{
 //ajout d'une date avec creneau horaire 
-		echo 'Vous pouvez ajouter une date &agrave; votre sondage. Si la date existe d&eacute;j&agrave; et que vous ne voulez que rajouter un horaire,<br> mettez le jour en entier avec l\'horaire ou le cr&eacute;neau suppl&eacute;mentaire il sera int&eacute;gr&eacute; normalement au sondage existant.<br><br> '."\n";
-		echo 'Pour ajouter une date :<br><br> Le '."\n";
+		echo $tt_adminstuds_ajoutcolonne_date_presentation.'<br><br> '."\n";
+		echo $tt_adminstuds_ajoutcolonne_date_invit.' :<br><br>'."\n";
 		echo '<select name="nouveaujour"> '."\n";
-		echo '<OPTION VALUE="JOUR">JOUR</OPTION>'."\n";
+		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=1;$i<32;$i++){
 			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
 		}
 		echo '</SELECT>'."\n";
 
 		echo '<select name="nouveaumois"> '."\n";
-		echo '<OPTION VALUE="MOIS">MOIS</OPTION>'."\n";
-		for ($i=1;$i<13;$i++){
-			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
-		}
+		echo '<OPTION VALUE="vide"></OPTION>'."\n";
+		echo '<OPTION VALUE="1">'.$tt_motmois_un.'</OPTION>'."\n";
+		echo '<OPTION VALUE="2">'.$tt_motmois_deux.'</OPTION>'."\n";
+		echo '<OPTION VALUE="3">'.$tt_motmois_trois.'</OPTION>'."\n";
+		echo '<OPTION VALUE="4">'.$tt_motmois_quatre.'</OPTION>'."\n";
+		echo '<OPTION VALUE="5">'.$tt_motmois_cinq.'</OPTION>'."\n";
+		echo '<OPTION VALUE="6">'.$tt_motmois_six.'</OPTION>'."\n";
+		echo '<OPTION VALUE="7">'.$tt_motmois_sept.'</OPTION>'."\n";
+		echo '<OPTION VALUE="8">'.$tt_motmois_huit.'</OPTION>'."\n";
+		echo '<OPTION VALUE="9">'.$tt_motmois_neuf.'</OPTION>'."\n";
+		echo '<OPTION VALUE="10">'.$tt_motmois_dix.'</OPTION>'."\n";
+		echo '<OPTION VALUE="11">'.$tt_motmois_onze.'</OPTION>'."\n";
+		echo '<OPTION VALUE="12">'.$tt_motmois_douze.'</OPTION>'."\n";		
 		echo '</SELECT>'."\n";
 
+		
 		echo '<select name="nouvelleannee"> '."\n";
-		echo '<OPTION VALUE="ANNEE">ANNEE</OPTION>'."\n";
-		for ($i=2009;$i<2015;$i++){
+		echo '<OPTION VALUE="vide"></OPTION>'."\n";
+		for ($i=date("Y");$i<(date("Y")+5);$i++){
 			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
 		}
 		echo '</SELECT>'."\n";
-		echo '<br><br>Pour ajouter un horaire de d&eacute;but (optionnel) : <br><br>'."\n";
+		echo '<br><br>'.$tt_adminstuds_ajoutcolonne_date_heuredebut.' : <br><br>'."\n";
 		echo '<select name="nouvelleheuredebut"> '."\n";
-		echo '<OPTION VALUE="HEURE">HEURE</OPTION>'."\n";
+		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=7;$i<22;$i++){
 			echo '<OPTION VALUE="'.$i.'">'.$i.' H</OPTION>'."\n";
 		}
 		echo '</SELECT>'."\n";
 		echo '<select name="nouvelleminutedebut"> '."\n";
-			echo '<OPTION VALUE="MINUTES">MINUTES</OPTION>'."\n";
+			echo '<OPTION VALUE="vide"></OPTION>'."\n";
 			echo '<OPTION VALUE="00">00</OPTION>'."\n";
 			echo '<OPTION VALUE="15">15</OPTION>'."\n";
 			echo '<OPTION VALUE="30">30</OPTION>'."\n";
 			echo '<OPTION VALUE="45">45</OPTION>'."\n";
 		echo '</SELECT>'."\n";
-		echo '<br><br>Pour ajouter un horaire de fin (optionnel) : <br><br>'."\n";
+		echo '<br><br>'.$tt_adminstuds_ajoutcolonne_date_heurefin.' : <br><br>'."\n";
 		echo '<select name="nouvelleheurefin"> '."\n";
-		echo '<OPTION VALUE="HEURE">HEURE</OPTION>'."\n";
+		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=7;$i<22;$i++){
 			echo '<OPTION VALUE="'.$i.'">'.$i.' H</OPTION>'."\n";
 		}
 		echo '</SELECT>'."\n";
 		echo '<select name="nouvelleminutefin"> '."\n";
-			echo '<OPTION VALUE="MINUTES">MINUTES</OPTION>'."\n";
+			echo '<OPTION VALUE="vide"></OPTION>'."\n";
 			echo '<OPTION VALUE="00">00</OPTION>'."\n";
 			echo '<OPTION VALUE="15">15</OPTION>'."\n";
 			echo '<OPTION VALUE="30">30</OPTION>'."\n";
@@ -266,33 +276,33 @@ else {
 
 			$nouveauxsujets=$dsujet->sujet;
 
-			if ($_POST["nouveaujour"]!="JOUR"&&$_POST["nouveaumois"]!="MOIS"&&$_POST["nouvelleannee"]!="ANNEE"){
+			if ($_POST["nouveaujour"]!="vide"&&$_POST["nouveaumois"]!="vide"&&$_POST["nouvelleannee"]!="vide"){
 			
 				$nouvelledate=mktime(0,0,0,$_POST["nouveaumois"],$_POST["nouveaujour"],$_POST["nouvelleannee"]);
 			
-				if ($_POST["nouvelleheuredebut"]!="HEURE"){
+				if ($_POST["nouvelleheuredebut"]!="vide"){
 			
 					$nouvelledate.="@";
 					$nouvelledate.=$_POST["nouvelleheuredebut"];
 					$nouvelledate.="h";
 					
-					if ($_POST["nouvelleminutedebut"]!="MINUTES"){
+					if ($_POST["nouvelleminutedebut"]!="vide"){
 						$nouvelledate.=$_POST["nouvelleminutedebut"];
 					}
 				}
-				if ($_POST["nouvelleheurefin"]!="HEURE"){
+				if ($_POST["nouvelleheurefin"]!="vide"){
 					$nouvelledate.="-";
 					$nouvelledate.=$_POST["nouvelleheurefin"];
 					$nouvelledate.="h";
 					
-					if ($_POST["nouvelleminutefin"]!="MINUTES"){
+					if ($_POST["nouvelleminutefin"]!="vide"){
 						$nouvelledate.=$_POST["nouvelleminutefin"];
 					}
 				}
-				if($_POST["nouvelleheuredebut"]=="HEURE"||($_POST["nouvelleheuredebut"]&&$_POST["nouvelleheurefin"]&&(($_POST["nouvelleheuredebut"]<$_POST["nouvelleheurefin"])||(($_POST["nouvelleheuredebut"]==$_POST["nouvelleheurefin"])&&($_POST["nouvelleminutedebut"]<$_POST["nouvelleminutefin"]))))){
+				if($_POST["nouvelleheuredebut"]=="vide"||($_POST["nouvelleheuredebut"]&&$_POST["nouvelleheurefin"]&&(($_POST["nouvelleheuredebut"]<$_POST["nouvelleheurefin"])||(($_POST["nouvelleheuredebut"]==$_POST["nouvelleheurefin"])&&($_POST["nouvelleminutedebut"]<$_POST["nouvelleminutefin"]))))){
 				
 				}
-				else {$erreur_ajout_date="yes";print "POUET";}
+				else {$erreur_ajout_date="yes";}
 				
 				//on rajoute la valeur dans les valeurs
 				$datesbase=explode(",",$dsujet->sujet);
