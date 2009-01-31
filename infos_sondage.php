@@ -7,6 +7,7 @@ include 'fonctions.php';
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
 #tests
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){

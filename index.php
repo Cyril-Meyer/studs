@@ -6,24 +6,23 @@ session_start();
 //session_unset();
 
 
-if ($_POST["uk_x"]){
+if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";
 }
-
-if ($_POST["germany_x"]){
+if ($_POST["germany"]){
 	$_SESSION["langue"]="DE";
 }
-
-if ($_POST["france_x"]){
-	{$_SESSION["langue"]="FR";}
+if ($_POST["france"]){
+	$_SESSION["langue"]="FR";
 }
-
+if ($_POST["espagne"]){
+	$_SESSION["langue"]="ES";
+}
 
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-
-
+if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
 //action si bouton intranet est activé. Entrée dans l'intranet
 if ($_POST["intranet"]){

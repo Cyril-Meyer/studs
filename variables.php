@@ -18,4 +18,11 @@ putenv("USERBASE=borghesi");
 #nom du serveur de base de donnees
 putenv("SERVEURBASE=localhost");
 
+#nom du serveur de base de donnees
+putenv("LANGUE=FR");
+
+if (@file_exists('variables.local.php')) {
+    include('variables.local.php');
+}
+
 ?>

@@ -86,6 +86,14 @@ scripts/
 sources/
 	Le répertoire qui contient les sources de l'application disponible sur la page sources.php
 
+lang/
+	Le répertoire qui contient les traductions de toutes les chaines de caractères
+lang/fr.inc
+	Le fichier qui contient toutes les chaines de caractères en français
+lang/en.inc
+	Le fichier qui contient toutes les chaines de caractères en anglais
+lang/de.inc
+	Le fichier qui contient toutes les chaines de caractères en allemand
 
 =============================================================================
 	Validations des pages
@@ -104,6 +112,7 @@ Technologies utilisées
 - Subversion 1.5
 - iCalcreator 2.4.3
 - FPDF 1.53
+- Icônes : Deleket (http://deleket.deviantart.com/) et DryIcons (http://dryicons.com)
 
 =============================================================================
 Compatibilités des navigateurs

@@ -8,6 +8,7 @@ include 'bandeaux.php';
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
 
 
