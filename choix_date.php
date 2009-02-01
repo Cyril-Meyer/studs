@@ -22,6 +22,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
+	logo();
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
@@ -199,6 +200,7 @@ echo '<body>'."\n";
 
 //Debut du formulaire et bandeaux de tete
 echo '<form name=formulaire action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+logo();
 bandeau_tete();
 bandeau_titre_date();
 sous_bandeau_choix();

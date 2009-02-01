@@ -24,7 +24,7 @@ $PDF->SetFont('Arial','',11);
 //affichage de la date de convocation
 $PDF->Text(140,30,"Strasbourg, le ".date("d/m/Y"));
 
-$PDF->Image("./images/logo_uds.jpg",20,20,65,40);
+$PDF->Image("./images/logo_uds_lettre.jpg",20,20,65,40);
 
 $PDF->SetFont('Arial','U',11);
 $PDF->Text(40,120,"Objet : ");

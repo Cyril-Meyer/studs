@@ -43,6 +43,7 @@ if ($_POST["annuler"]){
     echo '<form name=formulaire action="apropos.php" method="POST">'."\n";
 
 	//bandeaux de tete
+	logo();
 	bandeau_tete();
 	bandeau_titre_apropos();
 	sous_bandeau_light();

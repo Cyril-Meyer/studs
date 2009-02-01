@@ -17,6 +17,7 @@ echo '<title>Sources STUdS</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
+logo();
 bandeau_tete();
 bandeau_titre();
 echo '<div class=corpscentre>'."\n";
@@ -27,7 +28,6 @@ echo '</div>'."\n";
 
 
 // Affichage du bandeau de pied
-//sur_bandeau_pied();
 bandeau_pied();
 echo '</body>'."\n";
 echo '</html>'."\n";

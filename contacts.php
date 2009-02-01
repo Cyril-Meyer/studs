@@ -52,7 +52,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
-
+	logo();
 	bandeau_tete();
 	bandeau_titre();
 	
@@ -61,7 +61,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
-//	sur_bandeau_pied();
+	
 	bandeau_pied();
 
 	session_unset();
@@ -87,6 +87,7 @@ else {
 	echo '<form name=formulaire action="contacts.php" method="POST">'."\n";
 
 	//bandeaux de tete
+	logo();
 	bandeau_tete();
 	bandeau_titre_contact();
 	sous_bandeau_light();

@@ -1,6 +1,6 @@
 <?php
 session_start();
-//setlocale(LC_TIME, "fr_FR");
+
 include 'bandeaux.php';
 include 'fonctions.php';
 
@@ -57,6 +57,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
+	logo();
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
@@ -201,6 +202,7 @@ else {
 
 // debut du formulaire et affichage des bandeanx
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	logo();
  	bandeau_tete();
 	bandeau_titre();
 	sous_bandeau_light();

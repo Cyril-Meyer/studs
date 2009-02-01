@@ -56,6 +56,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
+	logo();
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
@@ -86,6 +87,7 @@ if ($_POST["ajoutsujet_x"]){
 	$dsondage=pg_fetch_object($sondage,0);
 
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	logo();
 	bandeau_tete();
 	bandeau_titre();
 	sous_bandeau_light();
@@ -972,6 +974,7 @@ if ($_POST["confirmesuppression"]){
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
+	logo();
 	bandeau_tete();
 	bandeau_titre();
 

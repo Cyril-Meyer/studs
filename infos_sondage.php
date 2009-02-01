@@ -109,6 +109,7 @@ if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["cr
 }
 
 //affichage des bandeaux de tete
+logo();
 bandeau_tete();
 bandeau_titre_infos();
 sous_bandeau_light();
@@ -174,7 +175,6 @@ echo '<br><br><br>'."\n";
 echo '</div>'."\n";
 echo '</form>'."\n";
 //bandeau de pied
-//sur_bandeau_pied();
 bandeau_pied();
 echo '</body>'."\n";
 echo '</html>'."\n";

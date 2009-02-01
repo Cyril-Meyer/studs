@@ -54,6 +54,7 @@ echo '<body>'."\n";
 
 //Affichage des bandeaux et début du formulaire
 echo '<form action="index.php" method="POST">'."\n";
+logo();
 bandeau_tete();
 bandeau_titre_admin();
 sous_bandeau_admin();

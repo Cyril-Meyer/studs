@@ -10,6 +10,7 @@ echo '<title>Erreur STUdS</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
+logo();
 bandeau_tete();
 bandeau_titre();
 echo '<div class=corpscentre>'."\n";

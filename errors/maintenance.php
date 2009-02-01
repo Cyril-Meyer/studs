@@ -10,6 +10,7 @@ echo '<title>Maintenance STUdS</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
+logo();
 bandeau_tete();
 
 echo '<div class=corpscentre>'."\n";

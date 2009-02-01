@@ -6,7 +6,6 @@ include 'variables.php';
 session_start();
 //session_unset();
 
-
 if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";
 }
@@ -80,6 +79,7 @@ echo '<body>'."\n";
 echo '<form name=formulaire action="index.php" method="POST">'."\n";
 
 //bandeaux de tete
+logo();
 bandeau_tete();
 bandeau_titre();
 sous_bandeau();

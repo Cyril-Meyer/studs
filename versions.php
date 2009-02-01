@@ -34,6 +34,7 @@ if ($_POST["annuler"]){
     echo '<form name=formulaire action="versions.php" method="POST">'."\n";
 
 	//bandeaux de tete
+	logo();
 	bandeau_tete();
 	bandeau_titre_version();
 	sous_bandeau_light();
@@ -48,6 +49,9 @@ if ($_POST["annuler"]){
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
 	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b>'."\n";
+
+	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";
+	echo '- Traduction de STUdS en anglais, allemand et espagnol,<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.4 (janvier 2009) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";
@@ -77,7 +81,6 @@ if ($_POST["annuler"]){
 
 
 	//bandeau de pied
-//	sur_bandeau_pied();
 	bandeau_pied();
 	echo '</form>'."\n";
 	echo '</body>'."\n";
