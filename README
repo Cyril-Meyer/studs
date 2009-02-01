@@ -34,12 +34,10 @@ README
 	Ce fichier
 INSTALL
 	Le fichier contenant les informations d'installation sur l'application
-versions.php
-	La page expliquant les dernieres modifications et celles à venir sur l'application
 contacts.php
 	La page permettant aux usagers de poser une question à l'administrateur de l'application
 apropos.php
-	La page expliquant les détails techniques relatifs à l'application
+	La page expliquant les détails techniques relatifs à l'application et les dernieres modifications et celles à venir sur l'application
 bandeaux.php
 	Le fichier contenant tous les bandeaux des pages PHP de l'application
 favicon.ico

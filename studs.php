@@ -504,8 +504,8 @@ else {
 	$meilleursujet=substr("$meilleursujet",1);
 
 	// Si le résultat est supérieur à 1 on rajoute un S
-	if ($meilleurecolonne!="1"&&$_SESSION["langue"]!="DE"){$pluriel="s";}
-	else{$pluriel="n";}
+	if ($meilleurecolonne!="1"&&($_SESSION["langue"]=="FR"||$_SESSION["langue"]=="EN"||$_SESSION["langue"]=="ES")){$pluriel="s";}
+	if ($meilleurecolonne!="1"&&$_SESSION["langue"]=="DE"){$pluriel="n";}
 	
 	// Affichage du meilleur choix
 

@@ -11,16 +11,14 @@ $tt_bandeau_titre_version='Les diff&eacute;rentes versions et les am&eacute;lior
 $tt_bandeau_titre_erreur='Erreur !';
 $tt_bandeau_titre_apropos='Informations g&eacute;n&eacute;rales';
 $tt_bandeau_pied='Universit&eacute; de Strasbourg. Cr&eacute;ation : Guilhem BORGHESI. 2008-2009';
-$tt_bandeau_langue='Langues';
 
 //texte des boutons dans sous_bandeau
 $tt_bouton_accueil='Accueil';
 $tt_bouton_exemple='Exemple';
 $tt_bouton_contact='Contact';
-$tt_bouton_versions='Versions';
 $tt_bouton_sources='Sources';
 $tt_bouton_apropos='A propos';
-$tt_bouton_intranet='Intranet';
+$tt_bouton_intranet='Admin';
 $tt_bouton_historique='Historique';
 $tt_bouton_retour='Retour';
 

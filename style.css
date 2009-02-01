@@ -109,29 +109,23 @@ div.bandeaupiedmobile{
 	color:white;
 	font-size:11px;
 }
-.boutonsousbandeaudroite {
- 	background-color: #0b419b; 
-	width: 65px;
-	border:0px;
- 	margin-left:10px;
-	margin-right:10px;  
-	cursor:pointer; 
-	font-family:arial;
-	color:white;
-	font-size:11px;
-	position:absolute; 
-	right:10px;
-}
 .boutonsousbandeaulangue {
  	background-color: #0b419b; 
 	width: 35px;
+	height:15px;
 	border:0px;
-	margin-left:8px;
-	margin-right:8px;
+	margin-top:-14px;
+	padding:0px;
+	text-align:center;
+	vertical-align:middle;
+	margin-left:6px;
+	margin-right:6px;
 	cursor:pointer; 
 	font-family:arial;
 	color:white;
-	font-size:11px;
+	font-size:10px;
+	float:right;
+	/*right:10;*/
 }
 /*corps de la page index.php*/
 div.corps{ 

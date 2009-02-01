@@ -45,10 +45,6 @@ if ($_POST["contact"]){
 	header("Location:contacts.php");
 	exit();
 }
-if ($_POST["versions"]){
-	header("Location:versions.php");
-	exit();
-}
 
 if ($_POST["sources"]){
 	header("Location:sources/sources.php");
