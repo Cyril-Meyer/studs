@@ -18,12 +18,15 @@ div.bandeau{
 	top:6px;
 	left:6px;
 	right:6px;
+
 }
 div.logo{ 
-/*	height:35px;*/
-	position:absolute;
+	height:64px;
+	float:right;
 	top:8px;
-	right:6px;
+	right:8px;
+	margin-left: 0;
+	margin-right:0; 
 }
 /*Sous bandeau avec bouton de navigation*/
 div.bandeautitre{ 
