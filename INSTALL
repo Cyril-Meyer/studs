@@ -1,19 +1,48 @@
-﻿Ceci est le fichier qui explique comment procéder à l'installation de STUdS.
-
-=============================================================================
-Nom de la base de données
-=============================================================================
-Le nom de la base se configure dans variables.php
-
-=============================================================================
-Utilisateur de la base de données
-=============================================================================
-L'utilisateur qui fait les modifications dans la base se configure dans variables.php
+﻿Installation de STUdS.
 
 
-=============================================================================
+Paramètres
+==========
+
+Le fichier variables.php contient le paramétrage par défaut de
+l'application STUdS. Pour personnaliser votre installation, copiez
+ce fichier sous le nom variables.local.php et modifiez ce dernier.
+
+
+Base de données
+===============
+
+Après avoir renseigné les paramètres de la base de données, créez la
+base et pré-chargez les données par défaut. Ceci ressemble à :
+
+% su - pgsql
+% createdb studs
+% psql -d studs -f install.sql
+
+NB : STUdS ne fonctionne pour l'instant qu'avec PostgreSQL.
+
+
+Accès aux sources et à la page administrateur
+=============================================
+
+Les répertoires sources/ et admin/ contiennent tous deux un fichier
+.htaccess pour Apache, qui restreint l'accès aux sources de l'appli-
+cation et à la page d'administration de l'application (respectivement).
+Modifiez le contenu de ces fichiers .htaccess pour les adapter à vos
+besoins.
+
+Un fichier admin/logs_studs.txt doit être créé et accessible en écriture
+pour votre serveur Web. Quelque chose comme :
+
+% touch admin/logs_studs.txt
+% chmod 700 admin/logs_studs.txt
+% chown www-data admin/logs_studs.txt
+
+devrait convenir.
+
+
 Tables de la base de données
-=============================================================================
+============================
 
 Voici la structure des tables de l'application. La base se compose de trois tables :
 
@@ -53,8 +82,11 @@ USER_STUDS
 	reponses					text				reponses a chacun des sujets proposés au vote (0 pour non, 1 pour OK)
 	user_id						alpha-numérique		numéro d'utilisateur par ordre croissant de participation pour garder l'ordre de participation
 	
-=============================================================================
+
 Traductions
-=============================================================================
-Pour pouvoir bénéficier de toutes les traductions en FR, EN, DE et ES il faut avoir installé les locales fr_FR, de_DE, en_US et es_ES sur 
-le serveur qui héberge l'application.
+===========
+
+Pour pouvoir bénéficier de toutes les traductions en FR, EN, DE et ES
+il faut avoir installé les locales fr_FR, de_DE, en_US et es_ES sur le
+serveur qui héberge l'application.
+

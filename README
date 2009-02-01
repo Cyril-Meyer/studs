@@ -99,8 +99,8 @@ lang/de.inc
 	Validations des pages
 =============================================================================
 
-Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C.
-La CSS de STUdS dispose de la validation CSS 2.1 du W3C. 
+Toutes les pages de STUdS sont validées HTML 4.01 Strict.
+La CSS de STUdS est validée CSS 2.1.
 
 =============================================================================
 Technologies utilisées
@@ -118,14 +118,14 @@ Technologies utilisées
 Compatibilités des navigateurs
 =============================================================================
 
-- Firefox 2.0
-- Opéra 9
+- Firefox 2.0 et 3.0
+- Opera 9
 - Konqueror 3.5
 - Links 2.2
 - Safari 3.1
 - IE 7 
 	
 -----------------
-Décembre 2008
+Janvier 2008
 Guilhem BORGHESI
 Université de Strasbourg
