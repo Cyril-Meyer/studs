@@ -7,51 +7,51 @@ $tt_bandeau_titre_date='Poll dates (2 on 2)';
 $tt_bandeau_titre_autre='Poll subjects (2 on 2)';
 $tt_bandeau_titre_admin='Polls administrator';
 $tt_bandeau_titre_contact='Contact us';
-$tt_bandeau_titre_erreur='Error !';
-$tt_bandeau_titre_apropos='A propos';
-$tt_bandeau_pied='Universit&eacute; de Strasbourg. Creation : Guilhem BORGHESI. 2008-2009';
+$tt_bandeau_titre_erreur='Error!';
+$tt_bandeau_titre_apropos='About';
+$tt_bandeau_pied='Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009';
 
 //texte des boutons dans sous_bandeau
 $tt_bouton_accueil='Home';
 $tt_bouton_exemple='Example';
 $tt_bouton_contact='Contact';
 $tt_bouton_sources='Sources';
-$tt_bouton_apropos='A propos';
+$tt_bouton_apropos='About';
 $tt_bouton_intranet='Admin';
 $tt_bouton_historique='Logs';
 $tt_bouton_retour='Back';
 
 //Texte de index.php
-$tt_index_titre='What is STUdS about ?';
-$tt_index_presentation='Making polls for scheduling meetings or events quickly and easily. <br> You can as well make polls to determine what will be your meeting place, the meeting subjects or something like the country of your next holidays.';
+$tt_index_titre='What is STUdS about?';
+$tt_index_presentation='Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.';
 $tt_index_bouton='Make a poll';
 
 //texte de infos_sondage.php
-$tt_infos_presentation='You are in the poll creation section. <br> Require fields cannot be left blank';
-$tt_infos_champ_titre='Poll title * : ';
-$tt_infos_champ_commentaires='Comments : ';
-$tt_infos_champ_nom='Your name * : ';
-$tt_infos_champ_adressemail='Your e-mail address * : ';
-$tt_infos_asterisque='The fields marked with * are required !';
-$tt_infos_option_modifier=' The voters can modify themself their vote.';
-$tt_infos_option_mailconfirme=' You want to receive an email for each new vote.';
+$tt_infos_presentation='You are in the poll creation section. <br> Required fields cannot be left blank';
+$tt_infos_champ_titre='Poll title *: ';
+$tt_infos_champ_commentaires='Comments: ';
+$tt_infos_champ_nom='Your name*: ';
+$tt_infos_champ_adressemail='Your e-mail address *: ';
+$tt_infos_asterisque='The fields marked with * are required!';
+$tt_infos_option_modifier=' Voters can modify their vote themselves.';
+$tt_infos_option_mailconfirme=' To receive an email for each new vote.';
 $tt_infos_choix_date='Schedule an event';
 $tt_infos_choix_autre='Make a choice';
 $tt_infos_erreur_titre='Enter a title';
 $tt_infos_erreur_nom='Enter a name';
 $tt_infos_erreur_adressemail='Enter an email address';
 $tt_infos_erreur_injection='Characters < and > are not permitted';
-$tt_infos_erreur_mauvaise_adressemail='The address is not correct ! (You should enter a valid email address in order to receive the link to your poll)';
+$tt_infos_erreur_mauvaise_adressemail='The address is not correct! (You should enter a valid email address in order to receive the link to your poll)';
 
 //texte de choix_autre.php
-$tt_choixautre_presentation='You have chosen to make a poll to make a choice between some subjects.<br>Enter the differents subjects to vote for :';
+$tt_choixautre_presentation='Your poll aim is to make a choice between different subjects.<br>Enter the subjects to vote for:';
 $tt_choixautre_champchoix='Choice';
 $tt_choixautre_continuer='Next';
 $tt_choixautre_ajoutcases='5 choices more';
 $tt_choixautre_erreurvide='Enter at least one choice';
 $tt_choixautre_erreur_injection='Characters \", < and > are not permitted';
-$tt_choixautre_presentationfin='Your poll will be automatically removed in 6 months.<br> But you can fixed another destruction\'s date for it.';
-$tt_choixautre_presentationfindate='Destruction date (optionnal)';
+$tt_choixautre_presentationfin='Your poll will be automatically removed after 6 months.<br> You can fix another removal date for it.';
+$tt_choixautre_presentationfindate='Removal date (optional)';
 $tt_choixautre_presentationfinformat='(DD/MM/YYYY)';
 
 $tt_choix_creation='Create the poll';
@@ -98,20 +98,20 @@ $tt_motjour_sept="sunday";
 
 //studs.php
 $tt_studs_erreur_titre='This poll doesn\'t exist !';
-$tt_studs_auteur='Author of the poll';
+$tt_studs_auteur='Initiator of the poll';
 $tt_studs_commentaires='Comments';
-$tt_studs_presentation='If you want to vote in this poll, you have to give your name, choose between all the values the ones that are correct for you <br>(without paying attention to the choices of the others) and validate with the plus button at the end of the line.';
+$tt_studs_presentation='If you want to vote in this poll, you have to give your name, choose the values that fit best for you<br>(without paying attention to the choices of the other voters) and validate with the plus button at the end of the line.';
 $tt_studs_somme='Addition';
-$tt_studs_erreur_nomdeja='The name you\'ve chosed already exist in this poll !';
+$tt_studs_erreur_nomdeja='The name you\'ve chosen already exist in this poll!';
 $tt_studs_erreur_injection='Characters "  \'  < et > are not permitted';
 $tt_studs_a='for';
 $tt_studs_erreur_nomvide='Enter a name !';
-$tt_studs_meilleurchoix='The best choice for the moment is';
-$tt_studs_meilleurchoix_pluriel='The bests choices for the moment are';
+$tt_studs_meilleurchoix='The best choice at this time is';
+$tt_studs_meilleurchoix_pluriel='The bests choices at this time are';
 $tt_studs_meilleurchoix_avec='with';
 $tt_studs_meilleurchoix_vote='vote';
-$tt_studs_export='Export : Spreadsheet';
-$tt_studs_agenda='Diary';
+$tt_studs_export='Export: Spreadsheet';
+$tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Poll\'s participation';
 $tt_studs_mail_corps='has filled a line.\nYou can find your poll at the link';
 $tt_studs_mail_merci='Thanks for your confidence.';
@@ -124,40 +124,40 @@ $tt_adminstuds_mail_corps_changetitre="You have changed the title of your poll. 
 $tt_adminstuds_mail_sujet_changecomm='[STUdS ADMINISTRATOR] New comments for your poll';
 $tt_adminstuds_mail_corps_changecomm="You have changed the comments of your poll. \nYou can modify this poll with this link";
 $tt_adminstuds_mail_sujet_changemail='[STUdS ADMINISTRATOR] New email address for your poll';
-$tt_adminstuds_mail_corps_changemail="You have changed your email address in your poll. \nYou van modify this poll with this link";
-$tt_adminstuds_presentation='As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="Icone infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Annuler">. <br>You can also add a new column with <img src="images/add-16.png" alt="Ajouter colonne">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.';
+$tt_adminstuds_mail_corps_changemail="You have changed your email address in your poll. \nYou can modify this poll with this link";
+$tt_adminstuds_presentation='As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.';
 $tt_adminstuds_erreur_date='The date is not correct !';
 $tt_adminstuds_gestion_titre='Poll\'s management';
 $tt_adminstuds_gestion_chgttitre='Change the title';
-$tt_adminstuds_gestion_pdf='Make the convocation letter (.PDF), choose the place to meet and validate';
-$tt_adminstuds_gestion_erreurpdf='Enter a meeting place !';
-$tt_adminstuds_gestion_erreurtitre='Enter a new title !';
+$tt_adminstuds_gestion_pdf='Generate the convocation letter (.PDF), choose the place to meet and validate';
+$tt_adminstuds_gestion_erreurpdf='Enter a meeting place!';
+$tt_adminstuds_gestion_erreurtitre='Enter a new title!';
 $tt_adminstuds_gestion_commentaires='Change the comments';
 $tt_adminstuds_gestion_adressemail='Change your email address';
-$tt_adminstuds_gestion_erreurmail='Enter a new email address !';
+$tt_adminstuds_gestion_erreurmail='Enter a new email address!';
 $tt_adminstuds_gestion_suppressionsondage='Remove your poll';
-$tt_adminstuds_gestion_bouton_suppressionsondage='Removing of your poll';
-$tt_adminstuds_gestion_confirmesuppression='Validate the removing of your poll';
-$tt_adminstuds_gestion_bouton_confirmesuppression='I remove this poll !';
-$tt_adminstuds_gestion_bouton_annulesuppression='I keep this poll !';
+$tt_adminstuds_gestion_bouton_suppressionsondage='Remove the poll';
+$tt_adminstuds_gestion_confirmesuppression='Confirm removal of your poll';
+$tt_adminstuds_gestion_bouton_confirmesuppression='Remove this poll!';
+$tt_adminstuds_gestion_bouton_annulesuppression='Keep this poll!';
 $tt_adminstuds_mail_sujet_supprimesondage='[STUdS ADMINISTRATOR] Removing of your poll';
 $tt_adminstuds_mail_corps_supprimesondage="You have removed your poll. \nYou can make new polls with this link";
-$tt_adminstuds_suppression_titre='Your poll has been removed !';
+$tt_adminstuds_suppression_titre='Your poll has been removed!';
 $tt_adminstuds_ajoutcolonne_titre='Column\'s adding';
 $tt_adminstuds_ajoutcolonne_autre='Add a new column';
-$tt_adminstuds_ajoutcolonne_date_presentation='You can add a new scheduling date at your poll.<br> If you just want to add a new hour to an existant date, put the same date and choose a new hour.';
+$tt_adminstuds_ajoutcolonne_date_presentation='You can add a new scheduling date to your poll.<br> If you just want to add a new hour to an existant date, put the same date and choose a new hour.';
 $tt_adminstuds_ajoutcolonne_date_invit='Add a date';
 $tt_adminstuds_ajoutcolonne_date_heuredebut='Add a start hour (optional)';
 $tt_adminstuds_ajoutcolonne_date_heurefin='Add a end hour (optional)';
 
 //contacts.php
-$tt_contacts_envoimail_titre='Your message has been sent !';
+$tt_contacts_envoimail_titre='Your message has been sent!';
 $tt_contacts_presentation='If you have questions about STUdS, you can send a message here.';
 $tt_contacts_nom='Your name';
 $tt_contacts_adressemail='Your email address (optional)';
 $tt_contacts_question='Question';
 $tt_contacts_bouton_question='Send your question';
-$tt_contacts_mail_sujet_admin='[STUdS CONTACT] You have send a question';
+$tt_contacts_mail_sujet_admin='[STUdS CONTACT] You have sent a question';
 $tt_contacts_mail_corps_admin='You have a question from a user.';
 $tt_contacts_mail_utilisateur_admin='User';
 $tt_contacts_mail_adresse_admin='User\'s email address';
@@ -173,15 +173,15 @@ $tt_sources_lien='Here are the <a href=\"studs.tar.gz\" target=_new>sources</a> 
 $tt_apropos_techno='Softwares inside';
 $tt_apropos_compat='Browser compatibility';
 $tt_apropos_validation_titre='HTML validation';
-$tt_apropos_validation='- Every pages of STUdS are validate with the W3C HTML 4.01 Strict specification. <br>- The CSS of STUdS is validate with the W3C CSS 2.1 specification.';
+$tt_apropos_validation='- Every page of STUdS conforms to W3C HTML 4.01 Strict specification. <br>- The CSS of STUdS conforms to W3C CSS 2.1 specification.';
 $tt_apropos_merci_titre='Thanks';
-$tt_apropos_merci='- For thier technical contributions : Guy, Christophe, Julien and Pierre <br>- For their innovating contributions : Romaric, Matthieu and Catherine<br>- For their ergonomics suggestions : Christine and Olivier <br>- For its material contribution : the D&eacute;partement d\'informatique of the Universit&eacute; de Strasbourg';
+$tt_apropos_merci='- For their technical contributions: Guy, Christophe, Julien and Pierre <br>- For their innovating contributions: Romaric, Matthieu and Catherine<br>- For their ergonomical suggestions: Christine and Olivier <br>- For its material contribution: the D&eacute;partement d\'informatique of the Universit&eacute; de Strasbourg';
 
 //admin/index.php
-$tt_admin_nbresondage='polls in the database for the moment';
-$tt_admin_confirmesuppression='Validate the removing of the poll ';
-$tt_admin_bouton_confirmesuppression='I remove this poll !';
-$tt_admin_bouton_annulesuppression='I keep this poll !';
+$tt_admin_nbresondage='polls in the database at this time';
+$tt_admin_confirmesuppression='Confirm removal of the poll ';
+$tt_admin_bouton_confirmesuppression='Remove this poll!';
+$tt_admin_bouton_annulesuppression='Keep this poll!';
 $tt_admin_colonne_id='Poll ID';
 $tt_admin_colonne_format='Format';
 $tt_admin_colonne_titre='Title';
