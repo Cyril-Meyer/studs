@@ -1,7 +1,7 @@
 <?php
 
 //Texte des bandeaux
-$tt_bandeau_titre='Make your polls.';
+$tt_bandeau_titre='Make your polls';
 $tt_bandeau_titre_infos='Poll creation (1 on 2)';
 $tt_bandeau_titre_date='Poll dates (2 on 2)';
 $tt_bandeau_titre_autre='Poll subjects (2 on 2)';
@@ -61,16 +61,16 @@ $tt_choix_page_erreur_retour='Back to the homepage of ';
 //texte de choix_autre.php
 $tt_choixdate_presentation='Select your dates amoung the free days (green). The selected days are in blue.<br> You can unselect a day previously selected by clicking again on it.';
 $tt_choixdate_titreheure='Selected days';
-$tt_choixdate_presentationheure='For each selected day, you can choose, or not, meeting hours in this format :<br>- empty,<br>- "8h", "8H" or "8:00" to give a meeting\'s start hour,<br>- "8-11", "8h-11h", "8H-11H" ou "8:00-11:00" to give a meeting\'s start and end hour,<br>- "8h15-11h15", "8H15-11H15" ou "8:15-11:15" for the same thing but with minutes.';
+$tt_choixdate_presentationheure='For each selected day, you can choose, or not, meeting hours in the following format :<br>- empty,<br>- "8h", "8H" or "8:00" to give a meeting\'s start hour,<br>- "8-11", "8h-11h", "8H-11H" ou "8:00-11:00" to give a meeting\'s start and end hour,<br>- "8h15-11h15", "8H15-11H15" ou "8:15-11:15" for the same thing but with minutes.';
 $tt_choixdate_titrecolonne='Time';
-$tt_choixdate_erreur_format='Bad format !';
+$tt_choixdate_erreur_format='Bad format!';
 $tt_choixdate_erreur_choix='Enter more choices for the voters';
 $tt_choixdate_bouton_effacer_jours='Remove all days';
 $tt_choixdate_bouton_reporter='Copy hours of the first day';
 $tt_choixdate_bouton_effacer_horaires='Remove all hours';
 $tt_choixdate_continuer='Next';
-$tt_choixdate_presentationfin='Your poll will be automatically removed 2 days after the last date of your poll.';
-$tt_choixdate_presentationdatefin='Destruction\'s date';
+$tt_choixdate_presentationfin='Your poll will expire automatically 2 days after the last date of your poll.';
+$tt_choixdate_presentationdatefin='Removal date';
 $tt_choixdate_retour_horaires='Back to hours';
 
 //traduction en francais ecrit des valeurs de mois
