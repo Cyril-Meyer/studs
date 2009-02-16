@@ -178,6 +178,9 @@ else {
 				//mise a jour des données de l'utilisateur dans la base SQL
 				if ($compteur==$modifier){
 					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
+					if ($dsondage->mailsonde=="yes"){
+						mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] $tt_studs_mail_sujet : $dsondage->titre"), "\"$nom\"".utf8_decode ("$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !"),$headers);
+					}
 				}
 				$compteur++;
 			}

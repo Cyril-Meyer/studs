@@ -2,7 +2,7 @@
 
 //le logo
 function logo (){
-	echo '<div class="logo"><img src="images/logo_uds_bandeau.gif" height=74></div>'."\n";
+	echo '<div class="logo"><img src="images/logo_uds_bandeau.gif" height=74 alt=logo></div>'."\n";
 }
 
 #le bandeau principal
