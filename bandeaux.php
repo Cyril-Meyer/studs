@@ -4,6 +4,10 @@
 function logo (){
 	echo '<div class="logo"><img src="images/logo_uds_bandeau.gif" height=74 alt=logo></div>'."\n";
 }
+function sous_logo (){
+	echo '<div class="logo"><img src="../images/logo_uds_bandeau.gif" height=74 alt=logo></div>'."\n";
+}
+
 
 #le bandeau principal
 function bandeau_tete(){

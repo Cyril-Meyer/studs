@@ -4,7 +4,11 @@ include 'bandeaux.php';
 include 'variables.php';
 
 session_start();
-//session_unset();
+
+
+if (!$_POST["uk"]&&!$_POST["uk"]&&!$_POST["espagne"]&&!$_POST["germany"]&&!$_POST["france"]&&!$_POST["creation_sondage_x"]&&!$_POST["intranet"]&&!$_POST["contact"]&&!$_POST["sources"]&&!$_POST["exemple"]&&!$_POST["apropos"]){
+	session_unset();
+}
 
 if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";

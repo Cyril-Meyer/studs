@@ -78,7 +78,6 @@ if ($_POST["annuler"]){
 	echo  $tt_apropos_merci.'<br><br>'."\n";
 	
 	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
-	echo '- Mise en conformit&eacute; de la CSS avec la charte graphique de l\'Universit&eacute; de Strasbourg,<br>'."\n";
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
@@ -87,6 +86,7 @@ if ($_POST["annuler"]){
 
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";
 	echo '- Traduction de STUdS en anglais, allemand et espagnol,<br>'."\n";
+	echo '- Changement de la CSS avec ajout du logo de l\'Universit&eacute; de Strasbourg,<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.4 (janvier 2009) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";
