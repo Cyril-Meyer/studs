@@ -1,5 +1,5 @@
 <?php
-$tt_bandeau_titre='Se Trouver &agrave; l\'Universit&eacute; de Strasbourg';
+$tt_bandeau_titre='Ihre Umfrage erstellen';
 $tt_bandeau_titre_infos='Erstellen einer Umfrage (1 / 2)';
 $tt_bandeau_titre_date='Terminforschl&auml;ge (2 / 2)';
 $tt_bandeau_titre_autre='Themaforschl&auml;ge (2 / 2)';
