@@ -17,7 +17,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
-	echo '<title>Erreur STUdS</title>'."\n";
+	echo '<title>STUdS !</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -104,7 +104,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
-	echo '<title>STUdS</title>'."\n";
+	echo '<title>STUdS !</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	#bloquer la touche entrée
 	blocage_touche_entree();

@@ -70,7 +70,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">'."\n";
-echo '<title>Page d\'accueil de STUdS !</title>'."\n";
+echo '<title>STUdS !</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
