@@ -22,6 +22,10 @@ if ($_POST["espagne"]){
 	$_SESSION["langue"]="ES";
 }
 
+if ($_SESSION["langue"]==""){
+	$_SESSION["langue"]=getenv('LANGUE');
+}
+
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}

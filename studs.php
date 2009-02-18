@@ -18,6 +18,10 @@ if ($_POST["espagne"]){
 	$_SESSION["langue"]="ES";
 }
 
+if ($_SESSION["langue"]==""){
+	$_SESSION["langue"]=getenv('LANGUE');
+}
+
 //Choix de la langue
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
 if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}

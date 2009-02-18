@@ -21,17 +21,17 @@ $tt_bouton_retour='Zur&uuml;ck';
 //Texte de index.php
 $tt_index_titre='Wozu dient STUdS?';
 $tt_index_presentation='Ein Datum zu finden das allen Betroffenen passt. 
-<br>Sie k&ouml;nnen ebenfalls STUdS bentigen um gemeinsam eine Wahl zu treffen f&uuml;r ein Termin ein Treffpunkt, ein Besprechungsthema oder die Marke ihrer n&auml;chsten Kaffeemaschine ';
+<br>Sie k&ouml;nnen ebenfalls STUdS ben&ouml;tigen um gemeinsam eine Wahl zu treffen f&uuml;r ein Termin ein Treffpunkt, ein Besprechungsthema oder die Marke ihrer n&auml;chsten Kaffeemaschine ';
 $tt_index_bouton='Umfrage erstellen';
 
 //texte de infos_sondage.php
 $tt_infos_presentation='Sie mchten eine neue umfrage erstellen !<br> Fullen sie die folgenden Felder aus.';
 $tt_infos_champ_titre='Titel der Umfrage *: ';
 $tt_infos_champ_commentaires='Komentar (optional): ';
-$tt_infos_champ_nom='Name * : ';
+$tt_infos_champ_nom='Name *: ';
 $tt_infos_champ_adressemail='E-mail Adresse *: ';
 $tt_infos_asterisque='Die mit * markierten Felder sind obligatorisch!';
-$tt_infos_option_modifier=' Sie erlauben eine nderung der linien durch die Befragten';
+$tt_infos_option_modifier=' Sie erlauben eine &Auml;nderung der linien durch die Befragten';
 $tt_infos_option_mailconfirme=' Sie m&ouml;chten eine e-mail bei jeder Beteiligung erhalten';
 $tt_infos_choix_date='Terminumfrage';
 $tt_infos_choix_autre='Andere Umfragen';
