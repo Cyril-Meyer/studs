@@ -75,7 +75,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '</html>'."\n";
 }
 
-if ($_POST["ajoutsujet_x"]){
+if ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
@@ -273,7 +273,7 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttps://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
 
 		}
 
@@ -313,7 +313,7 @@ else {
 				//on rajoute la valeur dans les valeurs
 				$datesbase=explode(",",$dsujet->sujet);
 				array_push ($datesbase,$nouvelledate);
-				sort ($datesbase);
+//				sort ($datesbase);
 				$cle=array_search ($nouvelledate,$datesbase);
 				
 				for ($i=0;$i<count($datesbase);$i++){
@@ -355,7 +355,7 @@ else {
 				
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
-				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttps://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
+				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
 				
 			}
 			else {$erreur_ajout_date="yes";}
