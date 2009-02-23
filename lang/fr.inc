@@ -113,7 +113,7 @@ $tt_studs_meilleurchoix_vote='vote';
 $tt_studs_export='Export : Tableur';
 $tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Participation au sondage';
-$tt_studs_mail_corps='vient de compléter une ligne.\nVous pouvez retrouver votre sondage à l\'adresse suivante';
+$tt_studs_mail_corps=" vient de remplir une ligne.\nVous pouvez retrouver votre sondage au lien suivant";
 $tt_studs_mail_merci='Merci de votre confiance.';
 
 //adminstuds.php
