@@ -115,6 +115,10 @@ $tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Participation au sondage';
 $tt_studs_mail_corps=" vient de remplir une ligne.\nVous pouvez retrouver votre sondage au lien suivant";
 $tt_studs_mail_merci='Merci de votre confiance.';
+$tt_studs_ajoutcommentaires='Ajoutez un commentaire dans ce sondage';
+$tt_studs_ajoutcommentaires_nom='Nom';
+$tt_studs_ajoutcommentaires_titre='Commentaires des sond&eacute;s';
+$tt_studs_commentaires_erreurvide='Merci de remplir les deux champs !';
 
 //adminstuds.php
 $tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATEUR STUdS] Ajout d\'une nouvelle colonne au sondage STUdS';

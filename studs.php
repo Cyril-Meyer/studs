@@ -46,6 +46,7 @@ if (eregi("[a-z0-9]{16}",$numsondage)){
 	$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$numsondage'");
 	$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$numsondage'");
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
+	$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
 
 }
 
@@ -105,6 +106,16 @@ else {
 	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
 	$nblignes=pg_numrows($user_studs);
 
+	//quand on ajoute un commentaire utilisateur
+	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
+		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
+			pg_query($connect,"insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
+		}
+		else {
+			$erreur_commentaire_vide="yes";
+		}
+	}
+	
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
 	//Si le nom est bien entré
@@ -522,7 +533,27 @@ else {
 	elseif ($meilleurecolonne){
 		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
 	}
-
+	
+	//affichage des commentaires des utilisateurs existants
+	if (pg_numrows($comment_user)!=0){
+		print "<br><br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
+		for ($i=0;$i<pg_numrows($comment_user);$i++){
+			$dcomment=pg_fetch_object($comment_user,$i);
+			print "$dcomment->usercomment : $dcomment->comment ".pg_numrows($comment_user)." <br>";
+		}
+		echo '<br>';
+	}
+	
+	if ($erreur_commentaire_vide=="yes"){
+		print "<font color=#FF0000>$tt_studs_commentaires_erreurvide</font>";
+	}
+	
+	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
+	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
+	echo $tt_studs_ajoutcommentaires_nom.' : <input type=text name="commentuser"><br>'."\n";
+	echo '<textarea name="comment" rows="2" cols="40" wrap=hard></textarea>'."\n";
+	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
+	
 	pg_close($connect);
 	
 	echo '<br><br>'."\n";
