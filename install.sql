@@ -42,6 +42,17 @@ CREATE TABLE user_studs (
 
 
 --
+-- Name: comments; Type: TABLE;
+--
+
+CREATE TABLE comments (
+    id_sondage text,
+    comment text,
+    usercomment text,
+    id_comment serial NOT NULL
+);
+
+--
 -- Data for Name: sondage; Type: TABLE DATA;
 --
 

@@ -115,6 +115,10 @@ $tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Participaci&oacute;n a la encuesta';
 $tt_studs_mail_corps='acaba de llenar una l&iacute;nea.\nUsted puede retroceder a su encuesta con el enlace siguiente';
 $tt_studs_mail_merci='Gracias por su confianza.';
+$tt_studs_ajoutcommentaires='Dejar un comentario en la encuesta';
+$tt_studs_ajoutcommentaires_nom='Su nombre';
+$tt_studs_ajoutcommentaires_titre='Comentarios';
+$tt_studs_commentaires_erreurvide='Introduzca su nombre y un comentario!';
 
 //adminstuds.php
 $tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRADOR STUdS] A&ntilde;ado de una nueva columna a la encuesta';

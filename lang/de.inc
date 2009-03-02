@@ -113,6 +113,11 @@ $tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Umfragebeteiligung';
 $tt_studs_mail_corps='hat einen Eintrag gemacht.\nSie finden ihre Umfrage unter folgender Adresse';
 $tt_studs_mail_merci='Wir dancken ihnen f&uuml;r Ihr Vertrauen.';
+$tt_studs_ajoutcommentaires='Add a comment in the poll';
+$tt_studs_ajoutcommentaires_nom='Name';
+$tt_studs_ajoutcommentaires_titre='Comments';
+$tt_studs_commentaires_erreurvide='Enter a name and a comment!';
+
 
 //adminstuds.php
 $tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATOR STUdS] Einf&uuml;gen einer neuen Spalte in die STUdS Umfrage';

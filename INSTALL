@@ -80,9 +80,17 @@ USER_STUDS
 	user						text				nom du participant
 	id_sondage (clé primaire)	alpha-numérique		numéro du sondage aléatoire
 	reponses					text				reponses a chacun des sujets proposés au vote (0 pour non, 1 pour OK)
-	user_id						alpha-numérique		numéro d'utilisateur par ordre croissant de participation pour garder l'ordre de participation
+	id_users					alpha-numérique		numéro d'utilisateur par ordre croissant de participation pour garder l'ordre de participation
 	
+COMMENTS
+	Nom du champ				format				description
 
+	id_sondage (clé primaire)	alpha-numérique		numéro du sondage aléatoire
+	comment						text				commentaires d'un participant
+	usercomment					text				nom de l'utilisateur qui laisse le commentaire
+	id_comment					alpha-numérique		numéro de commentaire par ordre croissant de participation pour garder l'ordre de remplissage
+	
+	
 Traductions
 ===========
 

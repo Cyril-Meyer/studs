@@ -87,6 +87,7 @@ if ($_POST["annuler"]){
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";
 	echo '- Traduction de STUdS en anglais, allemand et espagnol,<br>'."\n";
 	echo '- Changement de la CSS avec ajout du logo de l\'Universit&eacute; de Strasbourg,<br>'."\n";
+	echo '- Possibilité d\'ajouter un commentaire pour les sond&eacute;s.<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.4 (janvier 2009) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";

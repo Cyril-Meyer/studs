@@ -92,6 +92,8 @@ lang/en.inc
 	Le fichier qui contient toutes les chaines de caractères en anglais
 lang/de.inc
 	Le fichier qui contient toutes les chaines de caractères en allemand
+lang/es.inc
+	Le fichier qui contient toutes les chaines de caractères en espagnol
 
 =============================================================================
 	Validations des pages

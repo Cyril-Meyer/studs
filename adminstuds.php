@@ -215,6 +215,18 @@ else {
 		exit();
 	}
 
+	
+	//quand on ajoute un commentaire utilisateur
+	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
+		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
+			pg_query($connect,"insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
+		}
+		else {
+			$erreur_commentaire_vide="yes";
+		}
+	}
+	
+	
 	//si il n'y a pas suppression alors on peut afficher normalement le tableau
 	if (!$_POST["confirmesuppression"]){
 
@@ -377,7 +389,16 @@ else {
 			}
 		}
 
+		//suppression d'un commentaire utilisateur
 
+			$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
+			for ($i=0;$i<pg_numrows($comment_user);$i++){
+				$dcomment=pg_fetch_object($comment_user,$i);
+				if ($_POST['suppressioncomment'.$i.'_x']){
+					pg_query ($connect,"delete from comments where id_comment = '$dcomment->id_comment'");
+				}
+			}
+		
 		//on teste pour voir si une ligne doit etre modifiée
 		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
@@ -871,8 +892,8 @@ else {
 		$meilleursujet=str_replace("°","'",$meilleursujet);
 
 		//ajout du S si plusieurs votes
-		if ($meilleurecolonne!="1"&&$_SESSION["langue"]!="DE"){$pluriel="s";}
-		else{$pluriel="n";}
+		if ($meilleurecolonne!="1"&&($_SESSION["langue"]=="FR"||$_SESSION["langue"]=="EN"||$_SESSION["langue"]=="ES")){$pluriel="s";}
+		if ($meilleurecolonne!="1"&&$_SESSION["langue"]=="DE"){$pluriel="n";}
 
 		echo '<p class=affichageresultats>'."\n";
 		//affichage de la phrase annoncant le meilleur sujet
@@ -918,7 +939,7 @@ else {
 
 
 	//Changer l'adresse de l'administrateur
-	echo $tt_adminstuds_gestion_adressemail.' :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo $tt_adminstuds_gestion_adressemail.' :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br>'."\n";
 
 	//si l'adresse est invalide ou le champ vide : message d'erreur
 	if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]==""){
@@ -926,7 +947,30 @@ else {
 
 	}
 
+		//affichage des commentaires des utilisateurs existants
+		$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
+	if (pg_numrows($comment_user)!=0){
+
+		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
+		for ($i=0;$i<pg_numrows($comment_user);$i++){
+			$dcomment=pg_fetch_object($comment_user,$i);
+			print "<input type=\"image\" name=\"suppressioncomment$i\" src=\"images/cancel.png\" alt=\"supprimer commentaires\"> $dcomment->usercomment : $dcomment->comment <br>";
+		}
+		echo '<br>';
+	}
+	
+	if ($erreur_commentaire_vide=="yes"){
+		print "<font color=#FF0000>$tt_studs_commentaires_erreurvide</font>";
+	}
+	
+	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
+	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
+	echo $tt_studs_ajoutcommentaires_nom.' : <input type=text name="commentuser"><br>'."\n";
+	echo '<textarea name="comment" rows="2" cols="40" wrap=hard></textarea>'."\n";
+	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
+	
 	//suppression du sondage
+	echo '<br>'."\n";
 	echo $tt_adminstuds_gestion_suppressionsondage.' : <input type="image" name="suppressionsondage" value="'.$tt_adminstuds_gestion_bouton_suppressionsondage.'" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
 	if ($_POST["suppressionsondage"]){
 

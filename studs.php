@@ -46,7 +46,6 @@ if (eregi("[a-z0-9]{16}",$numsondage)){
 	$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$numsondage'");
 	$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$numsondage'");
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
-	$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
 
 }
 
@@ -99,13 +98,8 @@ else {
 		exit();
 
 	}
-
-//On récupere les données et les sujets du sondage
-	$dsondage=pg_fetch_object($sondage,0);
-	$dsujet=pg_fetch_object($sujets,0);
-	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
-	$nblignes=pg_numrows($user_studs);
-
+	
+	
 	//quand on ajoute un commentaire utilisateur
 	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
 		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
@@ -116,6 +110,14 @@ else {
 		}
 	}
 	
+	
+
+//On récupere les données et les sujets du sondage
+	$dsondage=pg_fetch_object($sondage,0);
+	$dsujet=pg_fetch_object($sujets,0);
+	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
+	$nblignes=pg_numrows($user_studs);
+
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
 	//Si le nom est bien entré
@@ -535,11 +537,13 @@ else {
 	}
 	
 	//affichage des commentaires des utilisateurs existants
+		$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
 	if (pg_numrows($comment_user)!=0){
+
 		print "<br><br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
 		for ($i=0;$i<pg_numrows($comment_user);$i++){
 			$dcomment=pg_fetch_object($comment_user,$i);
-			print "$dcomment->usercomment : $dcomment->comment ".pg_numrows($comment_user)." <br>";
+			print "$dcomment->usercomment : $dcomment->comment <br>";
 		}
 		echo '<br>';
 	}
