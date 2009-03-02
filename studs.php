@@ -536,16 +536,18 @@ else {
 		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
 	}
 	
+	echo '<br>';
+	
 	//affichage des commentaires des utilisateurs existants
 		$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
 	if (pg_numrows($comment_user)!=0){
 
-		print "<br><br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
+		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
 		for ($i=0;$i<pg_numrows($comment_user);$i++){
 			$dcomment=pg_fetch_object($comment_user,$i);
 			print "$dcomment->usercomment : $dcomment->comment <br>";
 		}
-		echo '<br>';
+
 	}
 	
 	if ($erreur_commentaire_vide=="yes"){
