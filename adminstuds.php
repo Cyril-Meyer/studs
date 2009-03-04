@@ -444,7 +444,7 @@ else {
 
 		//suppression de colonnes dans la base
 		for ($i=0;$i<$nbcolonnes;$i++){
-			if ($_POST["effacecolonne$i"]||$_POST['effacecolonne'.$i.'_x']){
+			if (($_POST["effacecolonne$i"]||$_POST['effacecolonne'.$i.'_x'])&&$nbcolonnes>1){
 	
 				$toutsujet=explode(",",$dsujet->sujet);
 				$j=0;
