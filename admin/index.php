@@ -136,6 +136,7 @@ for ($i=0;$i<$nbsondages;$i++){
 		pg_query($connect,"delete from sondage where id_sondage = '$dsondage->id_sondage' ");
 		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
 		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
+		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
 
 		// ecriture des traces dans le fichier de logs
 	        $fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
