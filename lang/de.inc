@@ -103,7 +103,7 @@ $tt_studs_somme='Summe';
 $tt_studs_erreur_nomdeja='Den gew&auml;hlten Namen gibt es schon!';
 $tt_studs_erreur_injection='Die Schriftzeichen < und > sind nicht genehmigt!';
 $tt_studs_a='bis';
-$tt_studs_erreur_nomvide='Sie haben keinen Naamen eingetragen!';
+$tt_studs_erreur_nomvide='Sie haben keinen Namen eingetragen!';
 $tt_studs_meilleurchoix='Vorlaufig ist die beste Wahl:';
 $tt_studs_meilleurchoix_pluriel='Vorl&auml;ufig sind die besten Wahlen: ';
 $tt_studs_meilleurchoix_avec='mit';
@@ -113,10 +113,10 @@ $tt_studs_agenda='Agenda';
 $tt_studs_mail_sujet='Umfragebeteiligung';
 $tt_studs_mail_corps='hat einen Eintrag gemacht.\nSie finden ihre Umfrage unter folgender Adresse';
 $tt_studs_mail_merci='Wir dancken ihnen f&uuml;r Ihr Vertrauen.';
-$tt_studs_ajoutcommentaires='Add a comment in the poll';
+$tt_studs_ajoutcommentaires='Geben sie ein Kommentar ein bitte';
 $tt_studs_ajoutcommentaires_nom='Name';
-$tt_studs_ajoutcommentaires_titre='Comments';
-$tt_studs_commentaires_erreurvide='Enter a name and a comment!';
+$tt_studs_ajoutcommentaires_titre='Kommentar';
+$tt_studs_commentaires_erreurvide='Geben sie irhen Name und ein Kommentar ein bitte!';
 
 
 //adminstuds.php
