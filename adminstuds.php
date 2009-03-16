@@ -1013,6 +1013,7 @@ if ($_POST["confirmesuppression"]){
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
 	pg_query($connect,"delete from user_studs where id_sondage = '$numsondage' ");
 	pg_query($connect,"delete from sujet_studs where id_sondage = '$numsondage' ");
+	pg_query($connect,"delete from comments where id_sondage = '$numsondage' ");
 
 	//affichage de l'ecran de confirmation de suppression de sondage
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
