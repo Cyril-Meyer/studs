@@ -338,6 +338,10 @@ else {
 				//mise a jour avec les nouveaux sujets dans la base
 				if (!$erreur_ajout_date){
 					pg_query($connect,"update sujet_studs set sujet = '$dateinsertion' where id_sondage = '$numsondage' ");
+					if ($nouvelledate>$dsondage->date_fin){
+						$date_fin=$nouvelledate+200000;
+						pg_query($connect,"update sondage set date_fin = '$date_fin' where id_sondage = '$numsondage' ");
+					}
 				}
 				
 				//mise a jour des reponses actuelles correspondant au sujet ajouté
