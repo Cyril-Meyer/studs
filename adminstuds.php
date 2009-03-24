@@ -324,7 +324,28 @@ else {
 				
 				//on rajoute la valeur dans les valeurs
 				$datesbase=explode(",",$dsujet->sujet);
-				array_push ($datesbase,$nouvelledate);
+				
+				//recherche de l'endroit de l'insertion de la nouvelle date dans les dates deja entrées dans le tableau
+				for ($i=0;$i<count($datesbase);$i++){
+					$j=$i-1;
+					
+					if (ereg ("@",$dsujet->sujet)){
+					}
+					else{
+						if ($nouvelledate<$datesbase[$i]&&$nouvelledate>$datesbase[$j]){
+							$cleinsertion=$i;
+						}
+						if ($nouvelledate>$datesbase[count($datesbase)]){
+							$cleinsertion=count($datesbase);
+						}
+						if ($nouvelledate<$datesbase[0]){
+							$cleinsertion=0;
+						}
+					}
+				}
+				
+				array_splice($datesbase,$cleinsertion,0,$nouvelledate);
+//				array_push ($datesbase,$nouvelledate);
 //				sort ($datesbase);
 				$cle=array_search ($nouvelledate,$datesbase);
 				
