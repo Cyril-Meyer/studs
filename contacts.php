@@ -4,6 +4,7 @@ session_start();
 include 'variables.php';
 include 'bandeaux.php';
 
+//tests pour la langue
 if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";
 }
