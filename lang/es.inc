@@ -22,7 +22,7 @@ $tt_bouton_historique='Hist&oacute;rico';
 $tt_bouton_retour='Retroceder';
 
 //Texte de index.php
-$tt_index_titre='¿Para qu&eacute; sirve STUdS?';
+$tt_index_titre='&iquest;Para qu&eacute; sirve STUdS?';
 $tt_index_presentation='Hacer encuestas para planificar un evento como una reun&iacute;n de trabajo o una sortida al cine. Sirve de definir la mejora fecha por todos. <br>Usted puede tambi&eacute;n utilizar STUdS para espicificar su preferencia entre pel&iacute;culas, destinos de viaje o cualquier otra selecci&oacute;n.';
 $tt_index_bouton='Crear una encuesta';
 

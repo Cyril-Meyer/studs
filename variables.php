@@ -7,16 +7,19 @@ putenv("NOMSERVEUR=studs.u-strasbg.fr");
 putenv("RACINESERVEUR=/www-root/studs");
 
 #adresse mail de l'administrateur de la base
-putenv("ADRESSEMAILADMIN=studs@dpt-info.u-strasbg.fr");
+putenv("ADRESSEMAILADMIN=studs@unistra.fr");
 
 #nom de la base de donnees
 putenv("BASE=studs");
 
 #nom de l'utilisateur de la base
-putenv("USERBASE=borghesi");
+putenv("USERBASE=studs");
+
+#nom de l'utilisateur de la base
+putenv("USERPASSWD=Foo|w4Ju");
 
 #nom du serveur de base de donnees
-putenv("SERVEURBASE=localhost");
+putenv("SERVEURBASE=wpgsql.u-strasbg.fr");
 
 #nom du serveur de base de donnees
 putenv("LANGUE=FR");
