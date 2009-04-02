@@ -171,6 +171,9 @@ else {
 
 		echo $tt_choixautre_presentationfindate.' : <input type="text" name="champdatefin" size="10" maxlength="10"> '.$tt_choixautre_presentationfinformat."\n";
 		echo '</div>'."\n";
+		echo '<div class=presentationdatefin>'."\n";
+		echo '<font color=#FF0000>'.$tt_choixautre_presentationenvoimail.'</font>'."\n";
+		echo '</div>'."\n";
 		echo '<br>'."\n";
 
 		echo '<table>'."\n";

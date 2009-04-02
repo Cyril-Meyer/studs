@@ -539,6 +539,9 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 		if ($_SESSION["langue"]=="EN"){$date_fin=date("l, F jS Y",$jour_arret);}
 		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
 		echo '<br><div class=presentationdatefin>'.$tt_choixdate_presentationfin.'<br></td></tr><tr><td><br>'.$tt_choixdate_presentationdatefin.' : <b> '.$date_fin.'</b><br><br>'."\n";
+		echo '</div>'."\n";
+		echo '<div class=presentationdatefin>'."\n";
+		echo '<font color=#FF0000>'.$tt_choixautre_presentationenvoimail.'</font>'."\n";
 		echo'</div>'."\n";
 		// echo'<p class=affichageexport>'."\n";
 		// echo 'Pour finir la cr&eacute;ation du sondage, cliquez sur le bouton <img src="images/add-16.png" alt="ajout"> ci-dessous'."\n";

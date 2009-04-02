@@ -53,6 +53,7 @@ $tt_choixautre_erreur_injection='Characters \", < and > are not permitted';
 $tt_choixautre_presentationfin='Your poll will be automatically removed after 6 months.<br> You can fix another removal date for it.';
 $tt_choixautre_presentationfindate='Removal date (optional)';
 $tt_choixautre_presentationfinformat='(DD/MM/YYYY)';
+$tt_choixautre_presentationenvoimail='Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.';
 
 $tt_choix_creation='Create the poll';
 $tt_choix_page_erreur_titre='You haven\'t filled the first section of the poll creation.';

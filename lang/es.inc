@@ -53,6 +53,7 @@ $tt_choixautre_erreur_injection='Los caracteres " < y > no estan autorizados!';
 $tt_choixautre_presentationfin='Su encuesta ser&aacute; automaticamente borrado dentro de 6 meses.<br> Mientras, usted puede cambiar este fecha aqu&iacute;.';
 $tt_choixautre_presentationfindate='Fecha de fin (opcional)';
 $tt_choixautre_presentationfinformat='(DD/MM/AAAA)';
+$tt_choixautre_presentationenvoimail='Cuando Usted confirmar&agrave; la creacion de su encuesta, Usted ser&agrave; automaticamente redigiriendo a la pagina de su encuesta. <br><br>Alora, Usted recibir&agrave; rapidamente uno correo electrinico conteniendo el enlace de su encuesta para darlo a los encuestados.';
 
 $tt_choix_creation='Crear la encuesta';
 $tt_choix_page_erreur_titre='Usted no habia llenado la primera pagina dela encuesta';

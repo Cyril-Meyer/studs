@@ -53,6 +53,7 @@ $tt_choixautre_erreur_injection='Les caract&egrave;res \", < et > ne sont pas au
 $tt_choixautre_presentationfin='Votre sondage sera automatiquement effac&eacute; dans 6 mois.<br> N&eacute;anmoins vous pouvez d&eacute;cider ci-dessous d\'une date plus rapproch&eacute;e pour la destruction de votre sondage.';
 $tt_choixautre_presentationfindate='Date de fin (optionnelle)';
 $tt_choixautre_presentationfinformat='(JJ/MM/AAAA)';
+$tt_choixautre_presentationenvoimail='Une fois que vous aurez confirm&eacute; la cr&eacute;ation du sondage, vous serez redirig&eacute; automatiquement vers la page de votre sondage. <br><br>En m&ecirc;me temps, vous recevrez un courrier &eacute;lectronique contenant le lien vers votre sondage pour le faire suivre aux futurs sond&eacute;s.';
 
 $tt_choix_creation='Cr&eacute;er le sondage';
 $tt_choix_page_erreur_titre='Vous n\'avez pas renseign&eacute; la premi&egrave;re page du sondage';
