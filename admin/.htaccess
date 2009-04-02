@@ -1,7 +1,7 @@
 authType      basic
 authName      "ADMIN STUDS"
 
-authUserFile  /www-root/studs/admin/.htpasswd
+authUserFile  /www/docs/admin/.htpasswd
 
 order         deny,allow
 
@@ -9,4 +9,4 @@ satisfy       all
 
 allow from all
 
-require user borghesi mongenet karma
+require user studs
