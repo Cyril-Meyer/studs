@@ -51,7 +51,7 @@ $tt_choixautre_erreur_injection='Die Schriftzeichen < und > sind nicht genehmigt
 $tt_choixautre_presentationfin='Ihre Umfrage wird automatisch nach 6 Monaten gelscht.<br> Sie k&ouml;nnen dennoch eine andere Frist w&auml;hlen.';
 $tt_choixautre_presentationfindate='Enddatum (optional)';
 $tt_choixautre_presentationfinformat='(TT/MM/JJJJ)';
-$tt_choixautre_presentationenvoimail='Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.';
+$tt_choixautre_presentationenvoimail='Als Sie die Herschtelung der Umfrage best&auml;tigt haben werden, werden Sie zur Webseite Ihrer Umfrage automatisch wieder geleitet sein<br><br> Gleichzeitig werden Sie ein E-Mail bekommen in dem ein Link zu ihrer Umfrage ist, um in der erforschten Zukunft zu folgen.';
 
 $tt_choix_creation='Umfrage erstellen';
 $tt_choix_page_erreur_titre='Die erste Seite wurde nicht ausgefullt';
