@@ -69,7 +69,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
-	sur_bandeau_pied();
+#	sur_bandeau_pied();
 	bandeau_pied();
 	
 	echo '</body>'."\n";

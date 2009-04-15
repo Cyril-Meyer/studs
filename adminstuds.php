@@ -68,14 +68,14 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
-	sur_bandeau_pied();
+#	sur_bandeau_pied();
 	bandeau_pied();
 	
 	echo'</body>'."\n";
 	echo '</html>'."\n";
 }
 
-if ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
+elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
