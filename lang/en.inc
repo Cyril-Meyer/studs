@@ -172,7 +172,7 @@ $tt_contacts_mail_corps_user='Here is a copy of your question';
 $tt_contacts_mail_reponse_user='We\'re going to answer your question shortly.';
 
 //sources.php
-$tt_sources_lien='Here are the <a href=\"studs.tar.gz\" target=_new>sources</a> of STUdS.';
+$tt_sources_lien='Here are the <a href="studs.tar.gz" target=_new>sources</a> of STUdS.';
 
 //apropos.php
 $tt_apropos_techno='Softwares inside';

@@ -170,7 +170,7 @@ $tt_contacts_mail_corps_user='Kopie ihrer STUdSfrage';
 $tt_contacts_mail_reponse_user='Ihre email wird schnell bearbeitet.';
 
 //sources.php
-$tt_sources_lien='Die <a href=\"studs.tar.gz\" target=_new>Quellen</a> von STUdS.';
+$tt_sources_lien='Die <a href="studs.tar.gz" target=_new>Quellen</a> von STUdS.';
 
 //apropos.php
 $tt_apropos_techno='Benutzertechnologien';
