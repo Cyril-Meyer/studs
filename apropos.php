@@ -77,13 +77,17 @@ if ($_POST["annuler"]){
 
 	echo '<b>'.$tt_apropos_merci_titre.'</b><br><br>'."\n";
 	echo  $tt_apropos_merci.'<br><br>'."\n";
+
+	echo '<b>Licence Logicielle de STUdS</b><br><br>'."\n";
+	echo 'STUdS est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
 	
-	echo '<b>Voila une liste des prochaines am&eacute;liorations de STUdS. </b><br><br>'."\n";
-	echo '- Mise sous la licence CeCILL-B du code source de STUdS.<br><br>'."\n";
+	echo '<b>Les prochaines am&eacute;liorations de STUdS </b><br><br>'."\n";
+	echo '- Mise sous la licence CeCILL-B du code source de STUdS,<br>'."\n";
+	echo '- Correction d\'un bug lors du rajout d\'une colonne dans l\'interface d\'administration des sondages.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
-	echo '<b>Voila la liste des derni&egrave;res am&eacute;liorations de STUdS. </b>'."\n";
+	echo '<b>Les derni&egrave;res am&eacute;liorations de STUdS </b>'."\n";
 
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";
 	echo '- Traduction de STUdS en anglais, allemand et espagnol,<br>'."\n";
