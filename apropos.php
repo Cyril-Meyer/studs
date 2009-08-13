@@ -1,4 +1,42 @@
 <?php
+//==========================================================================
+//
+//Université de Strasbourg - Direction Informatique
+//Auteur : Guilhem BORGHESI
+//Création : Février 2008
+//
+//borghesi@unistra.fr
+//
+//Ce logiciel est régi par la licence CeCILL-B soumise au droit français et
+//respectant les principes de diffusion des logiciels libres. Vous pouvez
+//utiliser, modifier et/ou redistribuer ce programme sous les conditions
+//de la licence CeCILL-B telle que diffusée par le CEA, le CNRS et l'INRIA 
+//sur le site "http://www.cecill.info".
+//
+//Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+//pris connaissance de la licence CeCILL-B, et que vous en avez accepté les
+//termes. Vous pouvez trouver une copie de la licence dans le fichier LICENCE.
+//
+//==========================================================================
+//
+//Université de Strasbourg - Direction Informatique
+//Author : Guilhem BORGHESI
+//Creation : Feb 2008
+//
+//borghesi@unistra.fr
+//
+//This software is governed by the CeCILL-B license under French law and
+//abiding by the rules of distribution of free software. You can  use, 
+//modify and/ or redistribute the software under the terms of the CeCILL-B
+//license as circulated by CEA, CNRS and INRIA at the following URL
+//"http://www.cecill.info". 
+//
+//The fact that you are presently reading this means that you have had
+//knowledge of the CeCILL-B license and that you accept its terms. You can
+//find a copy of this license in the file LICENSE.
+//
+//==========================================================================
+
 session_start();
 
 include 'variables.php';
@@ -83,6 +121,8 @@ if ($_POST["annuler"]){
 	
 	echo '<b>Les prochaines am&eacute;liorations de STUdS </b><br><br>'."\n";
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS,<br>'."\n";
+	echo '- Passage de STUdS en encodage UTF8,<br>'."\n";
+	echo '- Ajout des icones des menus dans toutes les pages et non pas seulement sur la page d\'acceuil,<br>'."\n";
 	echo '- Correction d\'un bug lors du rajout d\'une colonne dans l\'interface d\'administration des sondages.<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
@@ -92,7 +132,7 @@ if ($_POST["annuler"]){
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";
 	echo '- Traduction de STUdS en anglais, allemand et espagnol,<br>'."\n";
 	echo '- Changement de la CSS avec ajout du logo de l\'Universit&eacute; de Strasbourg,<br>'."\n";
-	echo '- Possibilit� d\'ajouter un commentaire pour les sond&eacute;s.<br>'."\n";
+	echo '- Possibilité d\'ajouter un commentaire pour les sond&eacute;s.<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.4 (janvier 2009) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export PDF pour envoyer la lettre de convocation &agrave; la date de r&eacute;union,<br>'."\n";
@@ -102,7 +142,7 @@ if ($_POST["annuler"]){
 	echo '<p class=textesouligne>Changelog version 0.3 (novembre 2008) : </p>'."\n";
 	echo '- Possibilit&eacute; de faire un export CSV pour exploiter le sondage dans un tableur,<br>'."\n";
 	echo '- Mise en place d\'un repository Subversion pour partager les nouvelles versions de STUdS,<br>'."\n";
-	echo '- Am�lioration de la CSS pour un meilleur affichage,<br>'."\n";
+	echo '- Amélioration de la CSS pour un meilleur affichage,<br>'."\n";
 	echo '- Modification du code source pour le rendre portable vers une autre machine.<br>'."\n";
 	
 	echo '<p class=textesouligne>Changelog version 0.2 (novembre 2008) : </p>'."\n";
