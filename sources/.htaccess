@@ -1,8 +1,0 @@
-order         deny,allow
-satisfy       all
-
-ErrorDocument 403 "/errors/error-forbidden.php"
-
-deny from all
-allow from 130.79.0.0/16
-allow from 2001:660:4701::0/24
