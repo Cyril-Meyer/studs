@@ -77,9 +77,9 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin", utf8_decode ("$tt_contacts_mail_corps_admin\n\n$tt_contacts_mail_utilisateur_admin : ").$_POST["nom"].utf8_decode("\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :").$message);
+	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin", "$tt_contacts_mail_corps_admin\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message);
 	if ($_POST["adresse_mail"]!=""){
-		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", utf8_decode ("$tt_contacts_mail_corps_user :\n\n").$message.utf8_decode(" \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\nSTUdS !"));
+		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\nSTUdS !");
 	}
 
 	//affichage de la page de confirmation d'envoi

@@ -62,10 +62,10 @@ if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
 #tests
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-	$_SESSION["titre"]=utf8_encode($_POST["titre"]);
-	$_SESSION["nom"]=utf8_encode($_POST["nom"]);
-	$_SESSION["adresse"]=utf8_encode($_POST["adresse"]);
-	$_SESSION["commentaires"]=utf8_encode($_POST["commentaires"]);
+	$_SESSION["titre"]=$_POST["titre"];
+	$_SESSION["nom"]=$_POST["nom"];
+	$_SESSION["adresse"]=$_POST["adresse"];
+	$_SESSION["commentaires"]=$_POST["commentaires"];
 	if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
 	else {unset($_SESSION["studsplus"]);}
 	
@@ -88,10 +88,10 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 #Si pas d'erreur dans l'adresse alors on change de page vers date ou autre
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])&&$_POST["titre"]&&$_POST["nom"]&&$_POST["adresse"]&&!$erreur_adresse&&!$erreur_injection_titre&&!$erreur_injection_commentaires&&!$erreur_injection_nom){
 	
-	$_SESSION["titre"]=utf8_encode($_POST["titre"]);
-	$_SESSION["nom"]=utf8_encode($_POST["nom"]);
-	$_SESSION["adresse"]=utf8_encode($_POST["adresse"]);
-	$_SESSION["commentaires"]=utf8_encode($_POST["commentaires"]);
+	$_SESSION["titre"]=$_POST["titre"];
+	$_SESSION["nom"]=$_POST["nom"];
+	$_SESSION["adresse"]=$_POST["adresse"];
+	$_SESSION["commentaires"]=$_POST["commentaires"];
 
 	if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
 	else {unset($_SESSION["studsplus"]);}
@@ -136,10 +136,10 @@ echo '<form name="formulaire" action="infos_sondage.php" method="POST" onkeypres
 
 //En cas d'erreur, recuperation des variables deja entrées
 if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-		$_SESSION["titre"]=utf8_encode($_POST["titre"]);
-		$_SESSION["nom"]=utf8_encode($_POST["nom"]);
-		$_SESSION["adresse"]=utf8_encode($_POST["adresse"]);
-		$_SESSION["commentaires"]=utf8_encode($_POST["commentaires"]);
+		$_SESSION["titre"]=$_POST["titre"];
+		$_SESSION["nom"]=$_POST["nom"];
+		$_SESSION["adresse"]=$_POST["adresse"];
+		$_SESSION["commentaires"]=$_POST["commentaires"];
 		if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
 		else {unset($_SESSION["studsplus"]);}
 		if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
@@ -158,7 +158,7 @@ echo '<br>'.$tt_infos_presentation.'<br><br>'."\n";
 //Affichage des différents champs textes a remplir
 echo '<table>'."\n";
 
-echo '<tr><td>'.$tt_infos_champ_titre.'</td><td><input type="text" name="titre" size="40" maxlength="40" value="'.utf8_decode($_SESSION["titre"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_titre.'</td><td><input type="text" name="titre" size="40" maxlength="40" value="'.$_SESSION["titre"].'"></td>'."\n";
 if (!$_SESSION["titre"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_titre</font></td>"."\n";
 }
@@ -166,12 +166,12 @@ elseif ($erreur_injection_titre){
 		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>'.$tt_infos_champ_commentaires.'</td><td><textarea name="commentaires" rows="7" cols="40">'.utf8_decode($_SESSION["commentaires"]).'</textarea></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_commentaires.'</td><td><textarea name="commentaires" rows="7" cols="40">'.$_SESSION["commentaires"].'</textarea></td>'."\n";
 if ($erreur_injection_commentaires){
 		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>'.$tt_infos_champ_nom.'</td><td><input type="text" name="nom" size="40" maxlength="40" value="'.utf8_decode($_SESSION["nom"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_nom.'</td><td><input type="text" name="nom" size="40" maxlength="40" value="'.$_SESSION["nom"].'"></td>'."\n";
 if (!$_SESSION["nom"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_nom</font></td>"."\n";
 }
@@ -179,7 +179,7 @@ elseif ($erreur_injection_nom){
 		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>'.$tt_infos_champ_adressemail.'</td><td><input type="text" name="adresse" size="40" maxlength="64" value="'.utf8_decode($_SESSION["adresse"]).'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_adressemail.'</td><td><input type="text" name="adresse" size="40" maxlength="64" value="'.$_SESSION["adresse"].'"></td>'."\n";
 if (!$_SESSION["adresse"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_adressemail </font></td>"."\n";
 }

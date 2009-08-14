@@ -71,7 +71,7 @@ $PDF->Text(55,120," Convocation");
 
 $PDF->Text(55,140,"Bonjour,");
 
-$PDF->Text(40,150,"Vous êtes conviés à la réunion \"".utf8_decode($dsondage->titre)."\".");
+$PDF->Text(40,150,"Vous êtes conviés à la réunion \"".$dsondage->titre."\".");
 $lieureunion=str_replace("\\","",$_SESSION["lieureunion"]);
 
 $PDF->SetFont('Arial','B',11);
@@ -83,7 +83,7 @@ $PDF->Text(60,185,"Lieu :  ".$lieureunion);
 
 $PDF->Text(55,220,"Cordialement,");
 
-$PDF->Text(140,240,utf8_decode($dsondage->nom_admin));
+$PDF->Text(140,240,$dsondage->nom_admin);
 
 $PDF->SetFont('Arial','B',8);
 $PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par STUdS sur http://studs.u-strasbg.fr");

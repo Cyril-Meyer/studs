@@ -191,7 +191,7 @@ else {
  				pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
 
 				if ($dsondage->mailsonde=="yes"){
-					mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] $tt_studs_mail_sujet : $dsondage->titre"), "\"$nom\"".utf8_decode ("$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !"),$headers);
+					mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 				}
 			}
 		}
@@ -234,7 +234,7 @@ else {
 				if ($compteur==$modifier){
 					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 					if ($dsondage->mailsonde=="yes"){
-						mail ("$dsondage->mail_admin", utf8_decode ("[STUdS] $tt_studs_mail_sujet : $dsondage->titre"), "\"$data->nom\"".utf8_decode ("$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !"),$headers);
+						mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$data->nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 					}
 				}
 				$compteur++;
@@ -268,17 +268,17 @@ else {
 
 //affichage du titre du sondage
         $titre=str_replace("\\","",$dsondage->titre);       
-	echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
+	echo '<H2>'.$titre.'</H2>'."\n";
 
 //affichage du nom de l'auteur du sondage
-	echo $tt_studs_auteur.' : '.utf8_decode($dsondage->nom_admin).'<br><br>'."\n";
+	echo $tt_studs_auteur.' : '.$dsondage->nom_admin.'<br><br>'."\n";
 
 //affichage des commentaires du sondage
 	if ($dsondage->commentaires){
 		echo $tt_studs_commentaires.' :<br>'."\n";
                 $commentaires=$dsondage->commentaires;
                 $commentaires=str_replace("\\","",$commentaires);       
-                echo utf8_decode($commentaires);
+                echo $commentaires;
 
 		echo '<br>'."\n";
 	}

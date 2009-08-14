@@ -138,7 +138,7 @@ for ($i=0;$i<$nbsondages;$i++){
 	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$dsondage->id_sondage'");
 	$nbuser=pg_numrows($user_studs);
 
-	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.utf8_decode($dsondage->titre).'</td><td>'.utf8_decode($dsondage->nom_admin).'</td>';
+	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td>';
 	
 	if ($dsondage->date_fin>time()){
 		echo '<td>'.date("d/m/y",$dsondage->date_fin).'</td>';

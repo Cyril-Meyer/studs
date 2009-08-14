@@ -323,7 +323,7 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !");
 
 		}
 
@@ -430,7 +430,7 @@ else {
 				
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
-				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", utf8_decode ("$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !"));
+				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !");
 				
 			}
 			else {$erreur_ajout_date="yes";}
@@ -557,25 +557,25 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", utf8_decode ("$tt_adminstuds_mail_corps_changetitre :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", "$tt_adminstuds_mail_corps_changetitre :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !");
 			//modification de la base SQL avec le nouveau titre
-			$nouveautitre=utf8_encode($_POST["nouveautitre"]);
+			$nouveautitre=$_POST["nouveautitre"];
 			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
 		}
 
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", utf8_decode ("$tt_adminstuds_mail_corps_changecomm :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !"));
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", "$tt_adminstuds_mail_corps_changecomm :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !");
 			//modification de la base SQL avec les nouveaux commentaires
-			$nouveauxcommentaires=utf8_encode($_POST["nouveauxcommentaires"]);
+			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
 			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
 		}
 
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", utf8_decode ("$tt_adminstuds_mail_corps_changemail :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\nSTUdS !"));
+			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", "$tt_adminstuds_mail_corps_changemail :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\nSTUdS !");
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -618,17 +618,17 @@ else {
 
 		//affichage du titre du sondage
 		$titre=str_replace("\\","",$dsondage->titre);       
-		echo '<H2>'.utf8_decode($titre).'</H2>'."\n";
+		echo '<H2>'.$titre.'</H2>'."\n";
 
 		//affichage du nom de l'auteur du sondage
-		echo $tt_studs_auteur.' : '.utf8_decode($dsondage->nom_admin).'<br>'."\n";
+		echo $tt_studs_auteur.' : '.$dsondage->nom_admin.'<br>'."\n";
 
 		//affichage des commentaires du sondage
 		if ($dsondage->commentaires){
 			echo '<br>'.$tt_studs_commentaires.' :<br>'."\n";
             $commentaires=$dsondage->commentaires;
             $commentaires=str_replace("\\","",$commentaires);       
-            echo utf8_decode($commentaires);
+            echo $commentaires;
 			echo '<br>'."\n";
 		}
 		echo '<br>'."\n";
@@ -977,7 +977,7 @@ else {
 		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo $tt_adminstuds_gestion_chgttitre.' :<br> <input type="text" name="nouveautitre" size="40" value="'.utf8_decode($titre).'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo $tt_adminstuds_gestion_chgttitre.' :<br> <input type="text" name="nouveautitre" size="40" value="'.$titre.'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
@@ -998,7 +998,7 @@ else {
 	}
 
 	//Changer les commentaires du sondage
-	echo  $tt_adminstuds_gestion_commentaires.' :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.utf8_decode($commentaires).'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo  $tt_adminstuds_gestion_commentaires.' :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.$commentaires.'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//Changer l'adresse de l'administrateur
@@ -1070,7 +1070,7 @@ if ($_POST["confirmesuppression"]){
         fclose($fichier_log);
 
 	//envoi du mail a l'administrateur du sondage
-	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", utf8_decode ("$tt_adminstuds_mail_corps_supprimesondage :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n$tt_studs_mail_merci\nSTUdS !"));
+	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", "$tt_adminstuds_mail_corps_supprimesondage :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n$tt_studs_mail_merci\nSTUdS !");
 
 	//destruction des données dans la base SQL
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
