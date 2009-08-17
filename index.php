@@ -69,16 +69,16 @@ if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
 if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
 if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
+if ($_POST["creation_sondage"]||$_POST["creation_sondage_x"]){
+
+	header("Location:infos_sondage.php");
+	exit();
+}
+
 //action si bouton intranet est activé. Entrée dans l'intranet
 if ($_POST["intranet"]){
 
 	header("Location:./admin/index.php");
-	exit();
-}
-
-if ($_POST["creation_sondage"]||$_POST["creation_sondage_x"]){
-
-	header("Location:infos_sondage.php");
 	exit();
 }
 
