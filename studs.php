@@ -124,6 +124,32 @@ else {
 		exit();
 	}
 
+	//action si bouton intranet est activé. Entrée dans l'intranet
+	if ($_POST["intranet"]){
+
+        	header("Location:./admin/index.php");
+	        exit();
+	}
+
+	if ($_POST["contact"]){
+        	header("Location:contacts.php");
+	        exit();
+	}
+
+	if ($_POST["sources"]){
+        	header("Location:sources/sources.php");
+	        exit();
+	}
+
+	if ($_POST["exemple"]){
+        	header("Location:studs.php?sondage=aqg259dth55iuhwm");
+	        exit();
+	}
+
+	if ($_POST["apropos"]){
+        	header("Location:apropos.php");
+	        exit();
+	}
 
 	if ($_POST["exportics_x"]){
 		header("Location:exportics.php");
@@ -263,7 +289,7 @@ else {
 	logo();
  	bandeau_tete();
 	bandeau_titre();
-	sous_bandeau_light();
+	sous_bandeau();
 	echo '<div class="presentationdate"> '."\n";
 
 //affichage du titre du sondage

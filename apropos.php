@@ -68,6 +68,33 @@ if ($_POST["annuler"]){
         exit();
 }
 
+//action si bouton intranet est activé. Entrée dans l'intranet
+if ($_POST["intranet"]){
+
+        header("Location:./admin/index.php");
+        exit();
+}
+
+if ($_POST["contact"]){
+        header("Location:contacts.php");
+        exit();
+}
+
+if ($_POST["sources"]){
+        header("Location:sources/sources.php");
+        exit();
+}
+
+if ($_POST["exemple"]){
+        header("Location:studs.php?sondage=aqg259dth55iuhwm");
+        exit();
+}
+
+if ($_POST["apropos"]){
+        header("Location:apropos.php");
+        exit();
+}
+
 	//affichage de la page
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
@@ -85,7 +112,7 @@ if ($_POST["annuler"]){
 	logo();
 	bandeau_tete();
 	bandeau_titre_apropos();
-	sous_bandeau_light();
+	sous_bandeau();
 
 	//blablabla
 	echo '<div class=corps>'."\n";
@@ -120,7 +147,6 @@ if ($_POST["annuler"]){
 	echo 'STUdS est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
 	
 	echo '<b>Les prochaines am&eacute;liorations de STUdS </b><br><br>'."\n";
-	echo '- Passage de STUdS en encodage UTF8,<br>'."\n";
 	echo '- Ajout des icones des menus dans toutes les pages et non pas seulement sur la page d\'acceuil,<br>'."\n";
 	echo '- Correction d\'un bug lors du rajout d\'une colonne dans l\'interface d\'administration des sondages.<br><br>'."\n";
 	
@@ -130,6 +156,7 @@ if ($_POST["annuler"]){
 
 	echo '<p class=textesouligne>Changelog version 0.6 (ao&ucirc;t 2009) : </p>'."\n";
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS,<br>'."\n";
+	echo '- Passage de STUdS en encodage UTF8,<br>'."\n";
 
 
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";

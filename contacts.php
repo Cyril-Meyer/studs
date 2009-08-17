@@ -70,6 +70,32 @@ if ($_POST["annuler"]){
 	exit();
 }
 
+//action si bouton intranet est activé. Entrée dans l'intranet
+if ($_POST["intranet"]){
+
+        header("Location:./admin/index.php");
+        exit();
+}
+
+if ($_POST["contact"]){
+        header("Location:contacts.php");
+        exit();
+}
+
+if ($_POST["sources"]){
+        header("Location:sources/sources.php");
+        exit();
+}
+
+if ($_POST["exemple"]){
+        header("Location:studs.php?sondage=aqg259dth55iuhwm");
+        exit();
+}
+
+if ($_POST["apropos"]){
+        header("Location:apropos.php");
+        exit();
+}
 
 // action du bouton annuler
 if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
@@ -129,7 +155,7 @@ else {
 	logo();
 	bandeau_tete();
 	bandeau_titre_contact();
-	sous_bandeau_light();
+	sous_bandeau();
 
 	//blablabla
 	echo '<div class=corps>'."\n";

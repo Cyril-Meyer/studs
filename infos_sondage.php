@@ -115,6 +115,33 @@ if ($_POST["annuler"]||$_POST["annuler_x"]){
 	exit();
 }
 
+//action si bouton intranet est activé. Entrée dans l'intranet
+if ($_POST["intranet"]){
+
+        header("Location:./admin/index.php");
+        exit();
+}
+
+if ($_POST["contact"]){
+        header("Location:contacts.php");
+        exit();
+}
+
+if ($_POST["sources"]){
+        header("Location:sources/sources.php");
+        exit();
+}
+
+if ($_POST["exemple"]){
+        header("Location:studs.php?sondage=aqg259dth55iuhwm");
+        exit();
+}
+
+if ($_POST["apropos"]){
+        header("Location:apropos.php");
+        exit();
+}
+
 //affichage de la page
 
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
@@ -150,7 +177,7 @@ if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["cr
 logo();
 bandeau_tete();
 bandeau_titre_infos();
-sous_bandeau_light();
+sous_bandeau();
  
 echo '<div class=corps>'."\n";
 echo '<br>'.$tt_infos_presentation.'<br><br>'."\n";

@@ -132,7 +132,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	logo();
 	bandeau_tete();
 	bandeau_titre();
-	sous_bandeau_light();
+	sous_bandeau();
 
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	
@@ -238,6 +238,33 @@ else {
 	if ($_POST["annuler"]){
 		header("Location:index.php");
 		exit();
+	}
+
+	//action si bouton intranet est activé. Entrée dans l'intranet
+	if ($_POST["intranet"]){
+
+        	header("Location:./admin/index.php");
+	        exit();
+	}
+
+	if ($_POST["contact"]){
+        	header("Location:contacts.php");
+	        exit();
+	}
+
+	if ($_POST["sources"]){
+        	header("Location:sources/sources.php");
+	        exit();
+	}
+
+	if ($_POST["exemple"]){
+        	header("Location:studs.php?sondage=aqg259dth55iuhwm");
+	        exit();
+	}
+
+	if ($_POST["apropos"]){
+        	header("Location:apropos.php");
+	        exit();
 	}
 
 	//si on annule la suppression
@@ -612,7 +639,7 @@ else {
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		bandeau_tete();
 		bandeau_titre();
-		sous_bandeau_light();
+		sous_bandeau();
 	
 		echo '<div class="presentationdate"> '."\n";
 
