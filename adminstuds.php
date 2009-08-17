@@ -637,6 +637,7 @@ else {
 
 		//debut du formulaire et affichage des bandeaux
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+		logo();
 		bandeau_tete();
 		bandeau_titre();
 		sous_bandeau();
