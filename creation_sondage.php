@@ -78,7 +78,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 }
 
 	$date=date('H:i:s d/m/Y');
-	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\n";
+	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
 	$connect=connexion_base();
 	
@@ -86,7 +86,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", "[STUdS][Pour diffusion aux sondés] Sondage : $_SESSION[titre]", "Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.\n\n$_SESSION[nom] vient de créer un sondage intitulé : \"$_SESSION[titre]\".\nMerci de bien vouloir remplir le sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR'."/studs.php?sondage=$sondage \n\nMerci de votre confiance,\nSTUdS !"),$headers);
+	mail ("$_SESSION[adresse]", "[STUdS][Pour diffusion aux sondés] Sondage : $_SESSION[titre]", "Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.\n\n$_SESSION[nom] vient de créer un sondage intitulé : \"$_SESSION[titre]\".\nMerci de bien vouloir remplir le sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$sondage \n\nMerci de votre confiance,\nSTUdS !",$headers);
 	mail ("$_SESSION[adresse]", "[STUdS][Réservé à l'auteur] Sondage : $_SESSION[titre]", "Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\nMerci de votre confiance,\nSTUdS !",$headers);
 
 
