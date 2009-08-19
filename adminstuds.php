@@ -1098,7 +1098,7 @@ if ($_POST["confirmesuppression"]){
         $date=date('H:i:s d/m/Y');
 
 	//on ecrit dans le fichier de logs la suppression du sondage
-        $fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
+        $fichier_log=fopen('admin/logs_studs.txt','a');
         fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
         fclose($fichier_log);
 

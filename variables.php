@@ -42,13 +42,13 @@
 putenv("NOMSERVEUR=studs.u-strasbg.fr");
 
 #racine du serveur web
-putenv("RACINESERVEUR=/www-root/studs");
+putenv("RACINESERVEUR=/docs");
 
 #adresse mail de l'administrateur de la base
 putenv("ADRESSEMAILADMIN=studs@dpt-info.u-strasbg.fr");
 
 #nom de la base de donnees
-putenv("BASE=studs");
+putenv("BASE=studs-dev");
 
 #nom de l'utilisateur de la base
 putenv("USERBASE=studs");

@@ -177,7 +177,7 @@ for ($i=0;$i<$nbsondages;$i++){
 		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
 
 		// ecriture des traces dans le fichier de logs
-	        $fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
+	        $fichier_log=fopen('logs_studs.txt','a');
 	        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
 	        fclose($fichier_log);
 

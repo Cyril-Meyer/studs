@@ -90,7 +90,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	mail ("$_SESSION[adresse]", "[STUdS][Réservé à l'auteur] Sondage : $_SESSION[titre]", "Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\nMerci de votre confiance,\nSTUdS !",$headers);
 
 
-	$fichier_log=fopen(getenv('RACINESERVEUR').'/admin/logs_studs.txt','a');
+	$fichier_log=fopen('admin/logs_studs.txt','a');
 	fwrite($fichier_log,"   [CREATION] $date\t$sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n");
 	fclose($fichier_log);
 
