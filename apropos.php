@@ -147,7 +147,7 @@ if ($_POST["apropos"]){
 	echo 'STUdS est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
 	
 	echo '<b>Les prochaines am&eacute;liorations de STUdS </b><br><br>'."\n";
-	echo '- Correction d\'un bug lors du rajout d\'une colonne dans l\'interface d\'administration des sondages.<br><br>'."\n";
+	echo '- Rien pour l\'instant...<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
@@ -157,6 +157,7 @@ if ($_POST["apropos"]){
 	echo '- Mise sous la licence CeCILL-B du code source de STUdS,<br>'."\n";
 	echo '- Passage de STUdS en encodage UTF8,<br>'."\n";
 	echo '- Ajout des icones des menus dans toutes les pages et non pas seulement sur la page d\'acceuil,<br>'."\n";
+	echo '- Correction d\'un bug lors du rajout d\'une colonne dans l\'interface d\'administration des sondages.<br><br>'."\n";
 
 
 	echo '<p class=textesouligne>Changelog version 0.5 (f&eacute;vrier 2009) : </p>'."\n";

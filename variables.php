@@ -48,7 +48,7 @@ putenv("RACINESERVEUR=/www-root/studs");
 putenv("ADRESSEMAILADMIN=studs@dpt-info.u-strasbg.fr");
 
 #nom de la base de donnees
-putenv("BASE=studs-dev");
+putenv("BASE=studs");
 
 #nom de l'utilisateur de la base
 putenv("USERBASE=studs");
