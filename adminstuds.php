@@ -390,34 +390,27 @@ else {
 				
 				//on rajoute la valeur dans les valeurs
 				$datesbase=explode(",",$dsujet->sujet);
+				$taillebase=sizeof($datesbase);
 				
 				//recherche de l'endroit de l'insertion de la nouvelle date dans les dates deja entrées dans le tableau
-//				for ($i=0;$i<count($datesbase);$i++){
-//					$j=$i-1;
 					
-//					if (ereg ("@",$dsujet->sujet)){
-						// fonction de tri avec le @
-
-						
-
-//					}
-//					else{
-//						if ($nouvelledate<$datesbase[$i]&&$nouvelledate>$datesbase[$j]){
-//							$cleinsertion=$i;
-//						}
-//						if ($nouvelledate>$datesbase[count($datesbase)]){
-//							$cleinsertion=count($datesbase);
-//						}
-//						if ($nouvelledate<$datesbase[0]){
-//							$cleinsertion=0;
-//						}
-//					}
-//				}
+						if ($nouvelledate<$datesbase[0]){
+							$cleinsertion=0;
+						}
+						elseif ($nouvelledate>$datesbase[$taillebase-1]){
+							$cleinsertion=count($datesbase);
+						}
+						else{
+							for ($i=0;$i<count($datesbase);$i++){
+							$j=$i+1;
+								 if ($nouvelledate>$datesbase[$i]&&$nouvelledate<$datesbase[$j]){
+								 $cleinsertion=$j;
+								}
+							 }	
+						 }
 				
-//				array_splice($datesbase,$cleinsertion,0,$nouvelledate);
 
-				array_push ($datesbase,$nouvelledate);
-////				sort ($datesbase);
+				array_splice($datesbase,$cleinsertion,0,$nouvelledate);
 
 				$cle=array_search ($nouvelledate,$datesbase);
 				
