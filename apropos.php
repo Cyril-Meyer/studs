@@ -127,12 +127,12 @@ if ($_POST["apropos"]){
 	echo '- Ic&ocirc;nes : <a href="http://deleket.deviantart.com/">Deleket</a>, <a href ="http://pixel-mixer.com">PixelMixer</a> et <a href="http://dryicons.com">DryIcons</a><br><br>'."\n";
 	
 	echo '<b>'.$tt_apropos_compat.'</b><br><br>'."\n";
-	echo '- <a href="http://www.mozilla.com/firefox/">Firefox</a> 2.0 <br>'."\n";
-	echo '- <a href="http://www.opera.com/">Op&eacute;ra</a> 9 <br>'."\n";
-	echo '- <a href="http://www.konqueror.org/">Konqueror</a> 3.5 <br>'."\n";
-	echo '- <a href="http://www.jikos.cz/~mikulas/links/">Links</a> 2.2 <br>'."\n";
-	echo '- <a href="http://www.apple.com/fr/safari/">Safari</a> 3.1 <br>'."\n";
-	echo '- <a href="http://www.mozilla.com/firefox/">IE</a> 7 <br><br>'."\n";
+	echo '- <a href="http://www.mozilla.com/firefox/">Firefox</a><br>'."\n";
+	echo '- <a href="http://www.opera.com/">Op&eacute;ra</a><br>'."\n";
+	echo '- <a href="http://www.konqueror.org/">Konqueror</a><br>'."\n";
+	echo '- <a href="http://www.jikos.cz/~mikulas/links/">Links</a><br>'."\n";
+	echo '- <a href="http://www.apple.com/fr/safari/">Safari</a><br>'."\n";
+	echo '- <a href="http://www.mozilla.com/firefox/">IE</a><br><br>'."\n";
 
 	echo '<b>'.$tt_apropos_validation_titre.'</b><br><br>'."\n";
 	echo $tt_apropos_validation."\n";
