@@ -39,25 +39,25 @@
 
 
 #Nom du serveur
-putenv("NOMSERVEUR=studs.u-strasbg.fr");
+putenv("NOMSERVEUR=<nom de votre serveur avec domaine>");
 
 #racine du serveur web
-putenv("RACINESERVEUR=/docs");
+putenv("RACINESERVEUR=<repertoire racine du serveur HTTP>");
 
 #adresse mail de l'administrateur de la base
-putenv("ADRESSEMAILADMIN=studs@dpt-info.u-strasbg.fr");
+putenv("ADRESSEMAILADMIN=<adresse mail>");
 
 #nom de la base de donnees
-putenv("BASE=studs-dev");
+putenv("BASE=<nom de la base de données>");
 
 #nom de l'utilisateur de la base
-putenv("USERBASE=studs");
+putenv("USERBASE=<nom de l'utilisateur>");
 
 #nom de l'utilisateur de la base
-putenv("USERPASSWD=Foo|w4Ju");
+putenv("USERPASSWD=<mot de passe>");
 
 #nom du serveur de base de donnees
-putenv("SERVEURBASE=wpgsql.u-strasbg.fr");
+putenv("SERVEURBASE=<nom du serveur avec domaine>");
 
 #nom du serveur de base de donnees
 putenv("LANGUE=FR");

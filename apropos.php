@@ -118,12 +118,12 @@ if ($_POST["apropos"]){
 	echo '<div class=corps>'."\n";
 
 	echo '<b>'.$tt_apropos_techno.'</b><br><br>'."\n";
-	echo '- <a href="http://www.php.net/">PHP</a> 5.2<br>'."\n";
-	echo '- <a href="http://www.postgresql.org/">PostgreSQL</a> 8.0<br>'."\n";
-	echo '- <a href="http://www.apache.org/">Apache</a> 2.2<br>'."\n";
-	echo '- <a href="http://subversion.tigris.org/">Subversion</a> 1.5<br>'."\n";
-	echo '- <a href="http://www.kigkonsult.se/iCalcreator/">iCalcreator</a> 2.4.3<br>'."\n";
-	echo '- <a href="http://www.fpdf.org/">FPDF</a> 1.53<br>'."\n";
+	echo '- <a href="http://www.php.net/">PHP</a><br>'."\n";
+	echo '- <a href="http://www.postgresql.org/">PostgreSQL</a><br>'."\n";
+	echo '- <a href="http://www.apache.org/">Apache</a><br>'."\n";
+	echo '- <a href="http://subversion.tigris.org/">Subversion</a><br>'."\n";
+	echo '- <a href="http://www.kigkonsult.se/iCalcreator/">iCalcreator</a><br>'."\n";
+	echo '- <a href="http://www.fpdf.org/">FPDF</a><br>'."\n";
 	echo '- Ic&ocirc;nes : <a href="http://deleket.deviantart.com/">Deleket</a>, <a href ="http://pixel-mixer.com">PixelMixer</a> et <a href="http://dryicons.com">DryIcons</a><br><br>'."\n";
 	
 	echo '<b>'.$tt_apropos_compat.'</b><br><br>'."\n";
