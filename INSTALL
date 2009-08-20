@@ -40,9 +40,9 @@ find a copy of this license in the file LICENSE.
 Paramètres
 ==========
 
-Le fichier variables.php contient le paramétrage par défaut de
+Le fichier variables.php.template contient le paramétrage par défaut de
 l'application STUdS. Pour personnaliser votre installation, copiez
-ce fichier sous le nom variables.local.php et modifiez ce dernier.
+ce fichier sous le nom variables.php et modifiez ce dernier.
 
 
 Base de données
