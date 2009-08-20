@@ -42,6 +42,8 @@ include '../variables.php';
 
 //recuperation de la date
 $date_courante=date("U");
+$date_humaine=date('H:i:s d/m/Y');
+
 
 //ouverture de la connection avec la base SQL
 $connect=connexion_base();
@@ -59,6 +61,11 @@ for ($compteur=0;$compteur<pg_numrows($sondage);$compteur++){
 		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
 		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
 		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
+
+               // ecriture des traces dans le fichier de logs
+               $fichier_log=fopen('../admin/logs_studs.txt','a');
+               fwrite($fichier_log,"[SUPPRESSION] $date_humaine\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t\n");
+               fclose($fichier_log);
 
 
 	}

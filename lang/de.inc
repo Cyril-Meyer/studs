@@ -54,7 +54,8 @@ $tt_bouton_contact='Kontakt';
 $tt_bouton_sources='Quellen';
 $tt_bouton_apropos='Inbezug';
 $tt_bouton_intranet='Admin';
-$tt_bouton_historique='Chronologischer berblick';
+$tt_bouton_historique='Logs';
+$tt_bouton_nettoyage='Reinigung';
 $tt_bouton_retour='Zur&uuml;ck';
 //Texte de index.php
 $tt_index_titre='Wozu dient STUdS?';

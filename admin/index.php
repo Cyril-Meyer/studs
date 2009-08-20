@@ -80,6 +80,11 @@ if ($_POST["historique"]){
 	exit();
 }
 
+if ($_POST["nettoyage"]){
+	exec("php ../scripts/nettoyage_sondage.php");
+}
+
+
 // Affichage des balises standards
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
@@ -105,9 +110,8 @@ $sondage=pg_exec($connect, "select * from sondage");
 // Nbre de sondages
 $nbsondages=pg_numrows($sondage);
 
-echo'<div class=corps>'."\n";
 
-echo $nbsondages.' '.$tt_admin_nbresondage.'<br><br>'."\n";
+echo'<div class=corps>'."\n";
 
 // Test et affichage du bouton de confirmation en cas de suppression de sondage
 for ($i=0;$i<$nbsondages;$i++){
@@ -121,6 +125,33 @@ for ($i=0;$i<$nbsondages;$i++){
  	}
 
 }
+
+// Traitement de la confirmation de suppression
+for ($i=0;$i<$nbsondages;$i++){
+	if ($_POST["confirmesuppression$i"]){
+
+		$dsondage=pg_fetch_object($sondage,$i);
+
+		$date=date('H:i:s d/m/Y');
+
+		// requetes SQL qui font le ménage dans la base
+		pg_query($connect,"delete from sondage where id_sondage = '$dsondage->id_sondage' ");
+		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
+		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
+		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
+
+		// ecriture des traces dans le fichier de logs
+	        $fichier_log=fopen('./logs_studs.txt','a');
+	        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
+	        fclose($fichier_log);
+
+	}
+}
+
+//recherche et affichage du nombre de sondages
+$sondage=pg_exec($connect, "select * from sondage");
+echo pg_numrows($sondage).' '.$tt_admin_nbresondage.'<br><br>'."\n";
+$nbsondages=pg_numrows($sondage);
 
 // tableau qui affiche tous les sondages de la base
 echo '<table border=1>'."\n";	
@@ -155,6 +186,7 @@ for ($i=0;$i<$nbsondages;$i++){
 
 	echo '</tr>'."\n";
 }
+
 echo '</table>'."\n";	
 echo'</div>'."\n";
 // fin du formulaire et de la page web
@@ -162,33 +194,8 @@ echo '</form>'."\n";
 echo '</body>'."\n";
 echo '</html>'."\n";
 
-// Traitement de la confirmation de suppression
-for ($i=0;$i<$nbsondages;$i++){
-	if ($_POST["confirmesuppression$i"]){
-
-		$dsondage=pg_fetch_object($sondage,$i);
-
-		$date=date('H:i:s d/m/Y');
-
-		// requetes SQL qui font le ménage dans la base
-		pg_query($connect,"delete from sondage where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
-
-		// ecriture des traces dans le fichier de logs
-	        $fichier_log=fopen('logs_studs.txt','a');
-	        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
-	        fclose($fichier_log);
-
-		// rafraichissement de la page
-		echo '<meta http-equiv=refresh content="0">';		
-	}
-}
-
 // si on annule la suppression, rafraichissement de la page
 if ($_POST["annulesuppression"]){
-	echo '<meta http-equiv=refresh content="0">';
 }
 
 ?>

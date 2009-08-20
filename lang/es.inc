@@ -19,6 +19,7 @@ $tt_bouton_sources='Fuentes';
 $tt_bouton_apropos='Acerca de';
 $tt_bouton_intranet='Admin';
 $tt_bouton_historique='Hist&oacute;rico';
+$tt_bouton_nettoyage='Limpieza';
 $tt_bouton_retour='Retroceder';
 
 //Texte de index.php

@@ -56,6 +56,7 @@ $tt_bouton_sources='Sources';
 $tt_bouton_apropos='A propos';
 $tt_bouton_intranet='Admin';
 $tt_bouton_historique='Historique';
+$tt_bouton_nettoyage='Nettoyage';
 $tt_bouton_retour='Retour';
 
 //Texte de index.php
