@@ -625,7 +625,7 @@ else {
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
 	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
 	echo $tt_studs_ajoutcommentaires_nom.' : <input type=text name="commentuser"><br>'."\n";
-	echo '<textarea name="comment" rows="2" cols="40" wrap=hard></textarea>'."\n";
+	echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
 	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
 	
 	pg_close($connect);
