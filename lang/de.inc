@@ -77,7 +77,7 @@ $tt_infos_choix_autre='Andere Umfragen';
 $tt_infos_erreur_titre='Geben sie einen Titel an!';
 $tt_infos_erreur_nom='Geben sie einen Namen an!';
 $tt_infos_erreur_adressemail='Geben sie eine e-mail Adresse an!';
-$tt_infos_erreur_injection='Die Schriftzeichen < > \' und " sind nicht genehmigt!';
+$tt_infos_erreur_injection='Die Schriftzeichen < > und " sind nicht genehmigt!';
 $tt_infos_erreur_mauvaise_adressemail='Die e-mail adresse ist nicht korrekt! (Sie m&uuml;ssen eine g&uuml;tlige e-mail Adresse eintragen)';
 
 //texte de choix_autre.php
@@ -86,7 +86,7 @@ $tt_choixautre_champchoix='Wahl';
 $tt_choixautre_continuer='Weiter';
 $tt_choixautre_ajoutcases='Um 5 weitere Felder zu erstellen';
 $tt_choixautre_erreurvide='Mindestens 1 Feld muss ausgef&uuml;llt sein !';
-$tt_choixautre_erreur_injection='Die Schriftzeichen < > \' und " sind nicht genehmigt !';
+$tt_choixautre_erreur_injection='Die Schriftzeichen < > und " sind nicht genehmigt !';
 $tt_choixautre_presentationfin='Ihre Umfrage wird automatisch nach 6 Monaten gelscht.<br> Sie k&ouml;nnen dennoch eine andere Frist w&auml;hlen.';
 $tt_choixautre_presentationfindate='Enddatum (optional)';
 $tt_choixautre_presentationfinformat='(TT/MM/JJJJ)';

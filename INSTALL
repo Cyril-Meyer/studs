@@ -44,6 +44,11 @@ Le fichier variables.php.template contient le paramétrage par défaut de
 l'application STUdS. Pour personnaliser votre installation, copiez
 ce fichier sous le nom variables.php et modifiez ce dernier.
 
+Configuration du fichier php.ini
+================================
+
+Pour que les quotes simples soient acceptées dans la partie "Création de sondage", il faut que la variable magic_quotes_gpc soit activée ("On") dans le fichier php.ini.
+
 
 Base de données
 ===============

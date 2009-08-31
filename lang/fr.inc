@@ -78,7 +78,7 @@ $tt_infos_choix_autre='Autre sondage';
 $tt_infos_erreur_titre='Il faut remplir un titre !';
 $tt_infos_erreur_nom='Il faut remplir un nom !';
 $tt_infos_erreur_adressemail='Il faut remplir une adresse !';
-$tt_infos_erreur_injection='Les caract&egrave;res < > \' et " ne sont pas autoris&eacute;s !';
+$tt_infos_erreur_injection='Les caract&egrave;res < > et " ne sont pas autoris&eacute;s !';
 $tt_infos_erreur_mauvaise_adressemail='L\'adresse saisie n\'est pas correcte ! (Il faut une adresse valide pour recevoir le lien vers le sondage)';
 
 //texte de choix_autre.php
@@ -87,7 +87,7 @@ $tt_choixautre_champchoix='Choix';
 $tt_choixautre_continuer='Continuer';
 $tt_choixautre_ajoutcases='Pour ajouter 5 cases suppl&eacute;mentaires';
 $tt_choixautre_erreurvide='Il faut remplir au moins un champ !';
-$tt_choixautre_erreur_injection='Les caract&egrave;res \' " < et > ne sont pas autoris&eacute;s !';
+$tt_choixautre_erreur_injection='Les caract&egrave;res " < et > ne sont pas autoris&eacute;s !';
 $tt_choixautre_presentationfin='Votre sondage sera automatiquement effac&eacute; dans 6 mois.<br> N&eacute;anmoins vous pouvez d&eacute;cider ci-dessous d\'une date plus rapproch&eacute;e pour la destruction de votre sondage.';
 $tt_choixautre_presentationfindate='Date de fin (optionnelle)';
 $tt_choixautre_presentationfinformat='(JJ/MM/AAAA)';

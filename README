@@ -36,7 +36,6 @@ find a copy of this license in the file LICENSE.
 
 ==========================================================================
 
-﻿
 =============================================================================
 Fichiers de l'application
 =============================================================================
@@ -137,24 +136,24 @@ La CSS de STUdS est validée CSS 2.1.
 Technologies utilisées
 =============================================================================
 
-- PHP 5.2
-- PostgreSQL 8.0
-- Apache 2.2
-- Subversion 1.5
-- iCalcreator 2.4.3
-- FPDF 1.53
+- PHP
+- PostgreSQL
+- Apache
+- Subversion
+- iCalcreator
+- FPDF
 - Icônes : Deleket (http://deleket.deviantart.com/) et DryIcons (http://dryicons.com)
 
 =============================================================================
 Compatibilités des navigateurs
 =============================================================================
 
-- Firefox 2.0 et 3.0
-- Opera 9
-- Konqueror 3.5
-- Links 2.2
-- Safari 3.1
-- IE 7 
+- Firefox 
+- Opera 
+- Konqueror
+- Links 
+- Safari
+- IE 
 	
 -----------------
 Janvier 2008

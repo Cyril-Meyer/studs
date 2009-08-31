@@ -81,7 +81,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
 	$connect=connexion_base();
-	
+
 	pg_exec ($connect, "insert into sondage values('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', '$date_fin', '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
 	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 

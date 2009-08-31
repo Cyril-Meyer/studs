@@ -75,13 +75,13 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 	if(!eregi ("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{1,4}$",$_POST["adresse"])){
 		$erreur_adresse="yes";
 	}
-	if (ereg("<|>|'|\"",$_POST["titre"])){
+	if (ereg("<|>|\"",$_POST["titre"])){
 		$erreur_injection_titre="yes";
 	}
-	if (ereg("<|>|'|\"",$_POST["nom"])){
+	if (ereg("<|>|\"",$_POST["nom"])){
 		$erreur_injection_nom="yes";
 	}
-	if (ereg("<|>|'|\"",$_POST["commentaires"])){
+	if (ereg("<|>|\"",$_POST["commentaires"])){
 	$erreur_injection_commentaires="yes";
 	}
 }
