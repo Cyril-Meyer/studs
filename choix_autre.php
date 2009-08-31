@@ -112,7 +112,7 @@ else {
 
 	// recuperation des sujets pour sondage AUTRE
 	for ($i=0;$i<$_SESSION["nbrecases"];$i++){
-		if (!ereg("<|>|\"",$_POST["choix"][$i])){
+		if (!ereg("<|>|\"|'",$_POST["choix"][$i])){
 			$_SESSION["choix$i"]=$_POST["choix"][$i];
 		}
 		else {$erreur_injection="yes";}

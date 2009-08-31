@@ -41,7 +41,7 @@ $tt_infos_choix_autre='Encuesta para otras cosas';
 $tt_infos_erreur_titre='Introducza un t&iacute;tulo';
 $tt_infos_erreur_nom='Introduzca un nombre';
 $tt_infos_erreur_adressemail='Introduzca una direcci&oacute;n electr&oacute;nica';
-$tt_infos_erreur_injection='Los caracteres < y > no estan autorizados!';
+$tt_infos_erreur_injection='Los caracteres < > \' y " no estan autorizados!';
 $tt_infos_erreur_mauvaise_adressemail='La direcci&oacute;n electr&oacute;nica no est&aacute; correcta! (Introduzca una direcci&oacute;n electr&oacute;nica valida para recibir el enlace de su encuesta)';
 
 //texte de choix_autre.php
@@ -50,7 +50,7 @@ $tt_choixautre_champchoix='Opci&ograve;n';
 $tt_choixautre_continuer='Seguir';
 $tt_choixautre_ajoutcases='Para a&ntilde;adir 5 campos de texto';
 $tt_choixautre_erreurvide='Introduzca por lo menos un campo!';
-$tt_choixautre_erreur_injection='Los caracteres " < y > no estan autorizados!';
+$tt_choixautre_erreur_injection='Los caracteres \' " < y > no estan autorizados!';
 $tt_choixautre_presentationfin='Su encuesta ser&aacute; automaticamente borrado dentro de 6 meses.<br> Mientras, usted puede cambiar este fecha aqu&iacute;.';
 $tt_choixautre_presentationfindate='Fecha de fin (opcional)';
 $tt_choixautre_presentationfinformat='(DD/MM/AAAA)';

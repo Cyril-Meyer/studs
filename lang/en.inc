@@ -78,7 +78,7 @@ $tt_infos_choix_autre='Make a choice';
 $tt_infos_erreur_titre='Enter a title';
 $tt_infos_erreur_nom='Enter a name';
 $tt_infos_erreur_adressemail='Enter an email address';
-$tt_infos_erreur_injection='Characters < and > are not permitted';
+$tt_infos_erreur_injection='Characters < > \' and " are not permitted';
 $tt_infos_erreur_mauvaise_adressemail='The address is not correct! (You should enter a valid email address in order to receive the link to your poll)';
 
 //texte de choix_autre.php
@@ -87,7 +87,7 @@ $tt_choixautre_champchoix='Choice';
 $tt_choixautre_continuer='Next';
 $tt_choixautre_ajoutcases='5 choices more';
 $tt_choixautre_erreurvide='Enter at least one choice';
-$tt_choixautre_erreur_injection='Characters \", < and > are not permitted';
+$tt_choixautre_erreur_injection='Characters \' " < and > are not permitted';
 $tt_choixautre_presentationfin='Your poll will be automatically removed after 6 months.<br> You can fix another removal date for it.';
 $tt_choixautre_presentationfindate='Removal date (optional)';
 $tt_choixautre_presentationfinformat='(DD/MM/YYYY)';
