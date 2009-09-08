@@ -210,7 +210,7 @@ $tt_contacts_mail_corps_user='Voici une copie de votre question dans STUdS';
 $tt_contacts_mail_reponse_user='Nous allons prendre en compte votre message rapidement.';
 
 //sources.php
-$tt_sources_lien='Voila les <a href="studs.tar.gz" target=_new>sources</a> de STUdS.';
+$tt_sources_lien='Voila les <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> de STUdS.';
 
 //apropos.php
 $tt_apropos_techno='Technologies utilis&eacute;es';
