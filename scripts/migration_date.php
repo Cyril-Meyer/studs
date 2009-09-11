@@ -38,7 +38,7 @@
 //==========================================================================
 
 //ouverture de la connection avec la base SQL
-$connect = pg_connect("host=localhost dbname=studs user=borghesi");
+$connect = pg_connect("host= dbname= user=");
 
 
 $sondage=pg_exec($connect, "select * from sondage where format='D' or format='D+'");
