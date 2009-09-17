@@ -218,7 +218,7 @@ else {
 
 				if ($dsondage->mailsonde=="yes"){
 
-					$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+					$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 					mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 				}
 			}
@@ -263,7 +263,7 @@ else {
 					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 					if ($dsondage->mailsonde=="yes"){
 						
-						$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+						$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 						mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$data->nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 					}
 				}

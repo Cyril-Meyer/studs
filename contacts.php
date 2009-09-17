@@ -103,10 +103,10 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin", "$tt_contacts_mail_corps_admin\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
-		$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+		$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 	}
 

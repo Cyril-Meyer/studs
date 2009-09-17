@@ -350,7 +350,7 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !",$headers);
 
 		}
@@ -458,7 +458,7 @@ else {
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
 
-				$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+				$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !",$headers);
 				
 			}
@@ -586,7 +586,7 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", "$tt_adminstuds_mail_corps_changetitre :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
@@ -596,7 +596,7 @@ else {
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", "$tt_adminstuds_mail_corps_changecomm :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
@@ -606,7 +606,7 @@ else {
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", "$tt_adminstuds_mail_corps_changemail :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
@@ -1103,7 +1103,7 @@ if ($_POST["confirmesuppression"]){
         fclose($fichier_log);
 
 	//envoi du mail a l'administrateur du sondage
-	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", "$tt_adminstuds_mail_corps_supprimesondage :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
 
 	//destruction des données dans la base SQL

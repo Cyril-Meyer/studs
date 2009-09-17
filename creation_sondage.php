@@ -78,7 +78,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 }
 
 	$date=date('H:i:s d/m/Y');
-	$headers="From: STUdS <studs@dpt-info.u-strasbg.fr>\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
 	$connect=connexion_base();
 
