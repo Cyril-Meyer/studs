@@ -224,6 +224,9 @@ echo '</script>'."\n";
 
 echo '<br>'.$tt_infos_asterisque.'<br><br>'."\n";
 
+#affichage du cochage par défaut
+if (!$_SESSION["studsplus"]&&!$_POST["creation_sondage_date"]&&!$_POST["creation_sondage_autre"]&&!$_POST["creation_sondage_date_x"]&&!$_POST["creation_sondage_autre_x"]){$_SESSION["studsplus"]="+";}
+
 if ($_SESSION["studsplus"]=="+"){$cocheplus="checked";}
 echo '<input type=checkbox name=studsplus '.$cocheplus.'>'.$tt_infos_option_modifier.'<br>'."\n";
 if ($_SESSION["mailsonde"]=="yes"){$cochemail="checked";}
