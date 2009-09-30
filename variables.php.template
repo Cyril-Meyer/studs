@@ -53,7 +53,7 @@ putenv("BASE=<nom de la base de données>");
 #nom de l'utilisateur de la base
 putenv("USERBASE=<nom de l'utilisateur>");
 
-#nom de l'utilisateur de la base
+#passwd de l'utilisateur de la base
 putenv("USERPASSWD=<mot de passe>");
 
 #nom du serveur de base de donnees
