@@ -112,7 +112,18 @@ $tt_choixdate_presentationfin='Your poll will expire automatically 2 days after 
 $tt_choixdate_presentationdatefin='Removal date';
 $tt_choixdate_retour_horaires='Back to hours';
 
-//traduction en francais ecrit des valeurs de mois
+//traduction du fichier creation_sondage.php
+$tt_creationsondage_titre_mail_sondes='For sending to the polled users';
+$tt_creationsondage_corps_sondage='Poll';
+$tt_creationsondage_corps_debut="This is the message you have to send to the people you want to poll. \nNow, you have to send this message to everyone you want to poll.";
+$tt_creationsondage_corps_milieu='hast just created a poll called';
+$tt_creationsondage_corps_fin='Thanks for filling the poll at the link above';
+$tt_creationsondage_corps_merci='Thanks for your confidence';
+$tt_creationsondage_titre_mail_admin="Author's message" ;
+$tt_creationsondage_corps_admin_debut="This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou have created a STUdS poll. \nYou can now modify it at the link above";
+
+
+//traduction en anglais des valeurs de mois
 $tt_motmois_un="january";
 $tt_motmois_deux="february";
 $tt_motmois_trois="march";

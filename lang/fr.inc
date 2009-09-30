@@ -112,6 +112,16 @@ $tt_choixdate_presentationfin='Votre sondage sera automatiquement effac&eacute; 
 $tt_choixdate_presentationdatefin='Date de destruction';
 $tt_choixdate_retour_horaires='Retourner aux horaires';
 
+//traduction du fichier creation_sondage.php
+$tt_creationsondage_titre_mail_sondes='Pour diffusion aux sondés';
+$tt_creationsondage_corps_sondage='Sondage';
+$tt_creationsondage_corps_debut="Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.";
+$tt_creationsondage_corps_milieu=' vient de créer un sondage intitulé ';
+$tt_creationsondage_corps_fin='Merci de bien vouloir remplir le sondage à l\'adresse suivante';
+$tt_creationsondage_corps_merci='Merci de votre confiance';
+$tt_creationsondage_titre_mail_admin='Réservé à l\'auteur';
+$tt_creationsondage_corps_admin_debut="Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante ";
+
 //traduction en francais ecrit des valeurs de mois
 $tt_motmois_un="janvier";
 $tt_motmois_deux="f&eacute;vrier";

@@ -59,7 +59,7 @@ putenv("USERPASSWD=<mot de passe>");
 #nom du serveur de base de donnees
 putenv("SERVEURBASE=<nom du serveur avec domaine>");
 
-#nom du serveur de base de donnees
+#Langue par défaut de l'application a choisir entre FR, EN, ES et DE
 putenv("LANGUE=FR");
 
 if (@file_exists('variables.local.php')) {

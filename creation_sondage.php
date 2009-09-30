@@ -43,7 +43,6 @@ include 'variables.php';
 include 'fonctions.php';
 
 
-
 //Generer une chaine de caractere unique et aleatoire
 function random($car) {
 	$string = "";
@@ -56,6 +55,13 @@ function random($car) {
 }
 
 function ajouter_sondage(){
+
+//Choix de la langue
+if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
+if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
+if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
+if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
+
 	$sondage=random(16);
 	$sondage_admin=$sondage.random(8);
 
@@ -86,8 +92,8 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", "[STUdS][Pour diffusion aux sondés] Sondage : ".stripslashes($_SESSION["titre"]), "Ceci est le message qui doit être envoyé aux sondés. \nVous pouvez maintenant transmettre ce message à toutes les personnes susceptibles de participer au vote.\n\n".stripslashes($_SESSION["nom"])." vient de créer un sondage intitulé : \"".stripslashes($_SESSION["titre"])."\".\nMerci de bien vouloir remplir le sondage à l'adresse suivante :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$sondage \n\nMerci de votre confiance,\nSTUdS !",$headers);
-	mail ("$_SESSION[adresse]", "[STUdS][Réservé à l'auteur] Sondage : ".stripslashes($_SESSION["titre"]), "Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\nMerci de votre confiance,\nSTUdS !",$headers);
+	mail ("$_SESSION[adresse]", "[STUdS][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\nSTUdS !",$headers);
+	mail ("$_SESSION[adresse]", "[STUdS][$tt_creationsondage_titre_mail_admin] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_admin_debut :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\n$tt_creationsondage_corps_merci,\nSTUdS !",$headers);
 
 
 	$fichier_log=fopen('admin/logs_studs.txt','a');

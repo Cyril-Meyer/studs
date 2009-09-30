@@ -111,6 +111,16 @@ $tt_choixdate_presentationfin='Ihre Umfrage wird automatisch nach dem letzten ei
 $tt_choixdate_presentationdatefin='Datum an dem die Umfrage gel&ouml;scht werden soll';
 $tt_choixdate_retour_horaires='Zur&uuml;ck zu den Uhrzeiten';
 
+//traduction du fichier creation_sondage.php
+$tt_creationsondage_titre_mail_sondes='Für Verbreiterung an den Befragten';
+$tt_creationsondage_corps_sondage='Umfrage';
+$tt_creationsondage_corps_debut="Das ist die Botschaft die den Befragten gesendet werden soll. \nSie können jetzt diese Botschaft allen Personnen die an der Abstimmung teilnehmen könnten weitergeben.";
+$tt_creationsondage_corps_milieu='hat eine betitelte Umfrage erstellt';
+$tt_creationsondage_corps_fin='Bitte erkundigen Sie die Umfrage an dem folgende Weblink';
+$tt_creationsondage_corps_merci='Danke fur ihr vertrauen';
+$tt_creationsondage_titre_mail_admin='Fur den Autor reserviert';
+$tt_creationsondage_corps_admin_debut="Diese Botschaft soll nicht weitergegeben werden, sie ist fur den Autor reserviert.\n\nSie haben eine Umfrage auf STUdS geschaffen. \nSie können diese Umfrage an dem folgenden Weblink ändern";
+
 //traduction en allemand ecrit des valeurs de mois
 $tt_motmois_un="Januar";
 $tt_motmois_deux="Februar";
