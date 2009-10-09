@@ -52,7 +52,7 @@ $dsujet=pg_fetch_object($sujets,0);
 $nbcolonnes=substr_count($dsujet->sujet,',')+1;
 
 $toutsujet=explode(",",$dsujet->sujet);
-$toutsujet=str_replace("°","'",$toutsujet);	
+#$toutsujet=str_replace("°","'",$toutsujet);	
 
 //affichage des sujets du sondage
 
