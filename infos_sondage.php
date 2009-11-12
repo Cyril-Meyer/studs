@@ -185,7 +185,7 @@ echo '<br>'.$tt_infos_presentation.'<br><br>'."\n";
 //Affichage des différents champs textes a remplir
 echo '<table>'."\n";
 
-echo '<tr><td>'.$tt_infos_champ_titre.'</td><td><input type="text" name="titre" size="40" maxlength="40" value="'.$_SESSION["titre"].'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_titre.'</td><td><input type="text" name="titre" size="40" maxlength="80" value="'.$_SESSION["titre"].'"></td>'."\n";
 if (!$_SESSION["titre"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_titre</font></td>"."\n";
 }
