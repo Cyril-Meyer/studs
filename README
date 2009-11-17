@@ -64,6 +64,8 @@ README
 	Ce fichier
 INSTALL
 	Le fichier contenant les informations d'installation sur l'application
+CHANGELOG
+	Le fichier contenant toutes les modifications de l'application entre les différentes versions
 contacts.php
 	La page permettant aux usagers de poser une question à l'administrateur de l'application
 apropos.php
