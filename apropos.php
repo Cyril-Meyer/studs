@@ -141,7 +141,7 @@ if ($_POST["apropos"]){
  	echo'</p>'."\n"; 
 
 	echo '<b>'.$tt_apropos_merci_titre.'</b><br><br>'."\n";
-	echo  $tt_apropos_merci.'<br><br>'."\n";
+	echo 'Pour leurs contributions techniques ou ergonomiques : Guy, Christophe, Julien, Pierre, Romaric, Matthieu, Catherine, Christine, Olivier et Emmanuel <br><br>'."\n";
 
 	echo '<b>Licence Logicielle de STUdS</b><br><br>'."\n";
 	echo 'STUdS est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";

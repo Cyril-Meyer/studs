@@ -227,7 +227,6 @@ $tt_apropos_compat='Kompatibilit&auml;t des Navigators';
 $tt_apropos_validation_titre='G&uuml;ltigkeit der Seiten';
 $tt_apropos_validation='- Alle seiten von STUdS verf&uuml;gen &uuml;ber der HTML 4.01 G&uuml;ltichkeit des W3C. <br>- Das CSS von STUdS verf&uuml;gt &uuml;ber der CSS 2.1 G&uuml;ltigkeit des W3C.';
 $tt_apropos_merci_titre='Dankesbezeichnung';
-$tt_apropos_merci='- F&uuml;r ihren Technischenbeitrag : Guy, Christophe, Julien und Pierre <br>- F&uuml;r ihre innovativen Beitrage : Romaric, Matthieu und Catherine<br>- F&uuml;r ihre ergonomischen Verbesserungen : Christine und Olivier <br>- F&uuml;r seinen Materielenbeitrag : die Informatikabteilung  der l\'Universit&auml;t Strassburg';
 
 //admin/index.php
 $tt_admin_nbresondage=' In der Basis vorhandene Umfragen';

@@ -228,7 +228,6 @@ $tt_apropos_compat='Compatibilit&eacute;s des navigateurs';
 $tt_apropos_validation_titre='Validations des pages';
 $tt_apropos_validation='- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>- La CSS de STUdS dispose de la validation CSS 2.1 du W3C.';
 $tt_apropos_merci_titre='Remerciements';
-$tt_apropos_merci='- Pour leurs contributions techniques : Guy, Christophe, Julien et Pierre <br>- Pour leurs apports innovants : Romaric, Matthieu et Catherine<br>- Pour leurs am&eacute;liorations ergonomiques : Christine et Olivier <br>- Pour sa contribution mat&eacute;rielle : le D&eacute;partement d\'informatique de l\'Universit&eacute; de Strasbourg';
 
 //admin/index.php
 $tt_admin_nbresondage='sondages dans la base actuellement';

@@ -229,7 +229,6 @@ $tt_apropos_compat='Browser compatibility';
 $tt_apropos_validation_titre='HTML validation';
 $tt_apropos_validation='- Every page of STUdS conforms to W3C HTML 4.01 Strict specification. <br>- The CSS of STUdS conforms to W3C CSS 2.1 specification.';
 $tt_apropos_merci_titre='Thanks';
-$tt_apropos_merci='- For their technical contributions: Guy, Christophe, Julien and Pierre <br>- For their innovating contributions: Romaric, Matthieu and Catherine<br>- For their ergonomical suggestions: Christine and Olivier <br>- For its material contribution: the D&eacute;partement d\'informatique of the Universit&eacute; de Strasbourg';
 
 //admin/index.php
 $tt_admin_nbresondage='polls in the database at this time';
