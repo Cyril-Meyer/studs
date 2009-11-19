@@ -40,7 +40,11 @@
 session_start();
 
 include 'creation_sondage.php';
-include 'bandeaux.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
+
 
 //Choix de langue
 if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
@@ -56,7 +60,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -65,7 +69,7 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>$tt_choix_page_erreur_titre !</H2>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -229,7 +233,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>STUdS !</title>'."\n";
+echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 
 #bloquer la touche entrée

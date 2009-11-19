@@ -40,7 +40,11 @@
 session_start();
 
 include 'variables.php';
-include 'bandeaux.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
+
 
 //tests pour la langue
 if ($_POST["uk"]){
@@ -103,18 +107,18 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin", "$tt_contacts_mail_corps_admin\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
-		$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+		$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 	}
 
 	//affichage de la page de confirmation d'envoi
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
@@ -125,7 +129,7 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>$tt_contacts_envoimail_titre</H2><br><br>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	
@@ -145,7 +149,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";

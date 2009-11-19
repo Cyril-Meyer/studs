@@ -39,7 +39,10 @@
 
 session_start();
 
-include 'bandeaux.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
 include 'fonctions.php';
 
 
@@ -95,7 +98,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -104,7 +107,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>$tt_studs_erreur_titre</H2>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>."."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -218,8 +221,8 @@ else {
 
 				if ($dsondage->mailsonde=="yes"){
 
-					$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-					mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 				}
 			}
 		}
@@ -263,8 +266,8 @@ else {
 					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 					if ($dsondage->mailsonde=="yes"){
 						
-						$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-						mail ("$dsondage->mail_admin", "[STUdS] $tt_studs_mail_sujet : $dsondage->titre", "\"$data->nom\""."$tt_studs_mail_corps :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+						$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+						mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] $tt_studs_mail_sujet : $dsondage->titre", "\"$data->nom\""."$tt_studs_mail_corps :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 					}
 				}
 				$compteur++;
@@ -279,7 +282,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	
 	#bloquer la touche entrée
@@ -410,6 +413,8 @@ else {
 
 }
 	
+//Usager pr�-authentifi� dans la miste?
+	$user_mod = FALSE;
 //affichage des resultats actuels
 	$somme[]=0;
 	$compteur = 0;
@@ -424,7 +429,9 @@ else {
 		echo $nombase.'</td>'."\n";
 // Les réponses qu'il a choisit
 		$ensemblereponses=$data->reponses;
-
+// ligne d'un usager pr�-authentifi�
+		$mod_ok = !isset($_SERVER['REMOTE_USER']) || ($nombase == $_SESSION['nom']);
+		$user_mod |= $mod_ok;
 			//si la ligne n'est pas a changer, on affiche les données
 			if (!$testligneamodifier){
 				for ($k=0;$k<$nbcolonnes;$k++){
@@ -470,7 +477,7 @@ else {
 			}
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
-			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+")){
+			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+") && $mod_ok){
 				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png"></td>'."\n";
 			}
 			
@@ -487,18 +494,24 @@ else {
 	}
 	
 // affichage de la ligne pour un nouvel utilisateur
-	echo '<tr>'."\n";
-	echo '<td class=nom>'."\n";
-	echo '<input type=text name="nom">'."\n";
-	echo '</td>'."\n";
+	if (!isset($_SERVER['REMOTE_USER']) || !$user_mod) {
+		echo '<tr>'."\n";
+		echo '<td class=nom>'."\n";
+		if (isset($_SERVER['REMOTE_USER']))
+			echo '<input type=hidden name="nom" value="'.
+			      $_SESSION['nom'].'">'.$_SESSION['nom']."\n";
+		else
+			echo '<input type=text name="nom">'."\n";
+		echo '</td>'."\n";
 
 // affichage des cases de formulaire checkbox pour un nouveau choix
-	for ($i=0;$i<$nbcolonnes;$i++){
-		echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
+		for ($i=0;$i<$nbcolonnes;$i++){
+			echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
+		}
+		// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
+		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png"></td>'."\n";
+		echo '</tr>'."\n";
 	}
-	// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
-	echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png"></td>'."\n";
-	echo '</tr>'."\n";
 
 //determination de la meilleure date
 
@@ -624,7 +637,11 @@ else {
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
 	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
-	echo $tt_studs_ajoutcommentaires_nom.' : <input type=text name="commentuser"><br>'."\n";
+	echo $tt_studs_ajoutcommentaires_nom.' : ';
+	if (isset($_SERVER['REMOTE_USER']))
+		echo '<input type="hidden" name="commentuser" value="'.$_SESSION['nom'].'">'.$_SESSION['nom'].'<br>'."\n";
+	else
+		echo '<input type="text" name="commentuser"><br>'."\n";
 	echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
 	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
 	

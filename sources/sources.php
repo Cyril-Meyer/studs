@@ -101,7 +101,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>Sources STUdS</title>'."\n";
+echo '<title>Sources '.getenv('NOMAPPLICATION').'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
@@ -114,7 +114,7 @@ bandeau_titre();
 sous_bandeau();
 echo '<div class=corpscentre>'."\n";
 print "<H2>$tt_sources_lien</H2><br><br>"."\n";
-print "$tt_choix_page_erreur_retour<a href=\"../index.php\"> STUdS</A>. "."\n";
+print "$tt_choix_page_erreur_retour <a href=\"../index.php\">".getenv('NOMAPPLICATION')."</A> "."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";
 

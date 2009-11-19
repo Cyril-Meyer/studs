@@ -214,8 +214,8 @@ $tt_contacts_mail_corps_admin='Sie haben eine STUdsben&uuml;tzer Frager.';
 $tt_contacts_mail_utilisateur_admin='Ben&uuml;tzer';
 $tt_contacts_mail_adresse_admin='Email adresse des Ben&uuml;tzers';
 $tt_contacts_mail_message_admin='Email';
-$tt_contacts_mail_sujet_user='[KOPIE] Senden einer STUdSfrage';
-$tt_contacts_mail_corps_user='Kopie ihrer STUdSfrage';
+$tt_contacts_mail_sujet_user='[KOPIE] Senden einer STUdS frage';
+$tt_contacts_mail_corps_user='Kopie ihrer STUdS frage';
 $tt_contacts_mail_reponse_user='Ihre email wird schnell bearbeitet.';
 
 //sources.php

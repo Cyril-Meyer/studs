@@ -41,6 +41,7 @@ session_start();
 
 include 'php2pdf/phpToPDF.php';
 include 'fonctions.php';
+include 'variables.php';
 
 $connect=connexion_base();
 
@@ -60,9 +61,9 @@ $PDF->AddPage();
 $PDF->SetFont('Arial','',11);
 
 //affichage de la date de convocation
-$PDF->Text(140,30,"Strasbourg, le ".date("d/m/Y"));
+$PDF->Text(140,30,"Le ".date("d/m/Y"));
 
-$PDF->Image("./images/logo_uds_lettre.jpg",20,20,65,40);
+$PDF->Image("./".getenv("LOGOLETTRE")."",20,20,65,40);
 
 $PDF->SetFont('Arial','U',11);
 $PDF->Text(40,120,"Objet : ");
@@ -86,7 +87,7 @@ $PDF->Text(55,220,"Cordialement,");
 $PDF->Text(140,240,utf8_decode($dsondage->nom_admin));
 
 $PDF->SetFont('Arial','B',8);
-$PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par STUdS sur http://studs.u-strasbg.fr");
+$PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par ".getenv('NOMAPPLICATION')." sur ".get_server_name());
 
 //Sortie
 $PDF->Output();

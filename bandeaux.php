@@ -1,4 +1,4 @@
-<?php
+<?php 
 //==========================================================================
 //
 //Université de Strasbourg - Direction Informatique
@@ -39,16 +39,16 @@
 
 //le logo
 function logo (){
-	echo '<div class="logo"><img src="images/logo_uds_bandeau.gif" height=74 alt=logo></div>'."\n";
+	echo '<div class="logo"><img src="./'.getenv("LOGOBANDEAU").'" height=74 alt=logo></div>'."\n";
 }
 function sous_logo (){
-	echo '<div class="logo"><img src="../images/logo_uds_bandeau.gif" height=74 alt=logo></div>'."\n";
+	echo '<div class="logo"><img src="../'.getenv("LOGOBANDEAU").'" height=74 alt=logo></div>'."\n";
 }
 
 
 #le bandeau principal
 function bandeau_tete(){
-	echo '<div class="bandeau">STUdS !</div>'."\n";
+	echo '<div class="bandeau">'.getenv('NOMAPPLICATION').'</div>'."\n";
 }
 
 #les bandeaux de titre

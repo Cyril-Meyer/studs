@@ -38,8 +38,12 @@
 //==========================================================================
 
 session_start();
-include 'bandeaux.php';
 include 'fonctions.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
+
 
 if ($_POST["uk"]){
 	$_SESSION["langue"]="EN";
@@ -148,7 +152,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>STUdS !</title>'."\n";
+echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 
 #bloquer la touche entrée
@@ -198,7 +202,11 @@ if ($erreur_injection_commentaires){
 		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>'.$tt_infos_champ_nom.'</td><td><input type="text" name="nom" size="40" maxlength="40" value="'.$_SESSION["nom"].'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_nom.'</td><td>';
+if (isset($_SERVER['REMOTE_USER']))
+	echo '<input type="hidden" name="nom" size="40" maxlength="40" value="'.$_SESSION["nom"].'">'.$_SESSION["nom"].'</td>'."\n";
+else
+	echo '<input type="text" name="nom" size="40" maxlength="40" value="'.$_SESSION["nom"].'"></td>'."\n";
 if (!$_SESSION["nom"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_nom</font></td>"."\n";
 }
@@ -206,7 +214,11 @@ elseif ($erreur_injection_nom){
 		print "<td><font color=\"#FF0000\">$tt_infos_erreur_injection</font></td><br>"."\n";
 }
 echo '</tr>'."\n";
-echo '<tr><td>'.$tt_infos_champ_adressemail.'</td><td><input type="text" name="adresse" size="40" maxlength="64" value="'.$_SESSION["adresse"].'"></td>'."\n";
+echo '<tr><td>'.$tt_infos_champ_adressemail.'</td><td>';
+if (isset($_SERVER['REMOTE_USER']))
+	echo '<input type="hidden" name="adresse" size="40" maxlength="64" value="'.$_SESSION["adresse"].'">'.$_SESSION["adresse"].'</td>'."\n";
+else
+	echo '<input type="text" name="adresse" size="40" maxlength="64" value="'.$_SESSION["adresse"].'"></td>'."\n";
 if (!$_SESSION["adresse"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">$tt_infos_erreur_adressemail </font></td>"."\n";
 }

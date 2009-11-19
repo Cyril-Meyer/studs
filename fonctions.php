@@ -41,7 +41,12 @@ include 'variables.php';
 
 function connexion_base(){
 
-	return pg_connect("host=".getenv('SERVEURBASE')." dbname=".getenv('BASE')." user=".getenv('USERBASE')." password=".getenv('USERPASSWD'));
+       $connectstr = "dbname=".getenv('BASE')." user=".getenv('USERBASE');
+       if (getenv('SERVEURBASE') != '')
+	       $connectstr .= " host=".getenv('SERVEURBASE');
+       if (getenv('USERPASSWD') != '')
+	       $connectstr .= " password=".getenv('USERPASSWD');
+       return pg_connect($connectstr);
 }
 
 function blocage_touche_entree(){
@@ -62,6 +67,13 @@ function blocage_touche_entree(){
 		}
 	document.onkeypress = process_keypress;
 	</script>\n";
+}
+
+function get_server_name() {
+       $scheme = $_SERVER["HTTPS"] == "on" ? "https" : "http";
+       return sprintf("%s://%s%s", $scheme,
+		      $_SERVER["SERVER_NAME"],
+		      dirname($_SERVER["SCRIPT_NAME"]));
 }
 
 ?>

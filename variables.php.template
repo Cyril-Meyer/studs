@@ -37,12 +37,14 @@
 //
 //==========================================================================
 
-
 #Nom du serveur
-putenv("NOMSERVEUR=<nom de votre serveur avec domaine>");
+putenv("NOMSERVEUR=<nom DNS du serveur>");
 
 #racine du serveur web
-putenv("RACINESERVEUR=<repertoire racine du serveur HTTP>");
+putenv("RACINESERVEUR=<repertoire de l'application sur le serveur web>");
+
+#Nom de l'application
+putenv("NOMAPPLICATION=<nom de l'application>");
 
 #adresse mail de l'administrateur de la base
 putenv("ADRESSEMAILADMIN=<adresse mail>");
@@ -56,11 +58,17 @@ putenv("USERBASE=<nom de l'utilisateur>");
 #passwd de l'utilisateur de la base
 putenv("USERPASSWD=<mot de passe>");
 
-#nom du serveur de base de donnees
+#nom du serveur de base de donnees, laisser vide pour utiliser un socket
 putenv("SERVEURBASE=<nom du serveur avec domaine>");
 
 #Langue par défaut de l'application a choisir entre FR, EN, ES et DE
 putenv("LANGUE=FR");
+
+#Nom et emplacement du logo
+putenv("LOGOBANDEAU=<chemin relatif suivi du nom du fichier du logo pour le bandeau>");
+
+#Nom et emplacement du logo de la lettre générée en PDF
+putenv("LOGOLETTRE=<chemin relatif suivi du nom du fichier du logo pour la lettre>");
 
 if (@file_exists('variables.local.php')) {
     include('variables.local.php');

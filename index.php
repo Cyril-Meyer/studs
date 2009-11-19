@@ -37,8 +37,12 @@
 //
 //==========================================================================
 
-include 'bandeaux.php';
+
 include 'variables.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
 
 session_start();
 
@@ -107,7 +111,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>STUdS !</title>'."\n";
+echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";

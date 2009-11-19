@@ -42,7 +42,10 @@ session_start();
 //setlocale(LC_TIME, "fr_FR");
 include 'variables.php';
 include 'fonctions.php';
-include 'bandeaux.php';
+if (file_exists('bandeaux_local.php'))
+	include 'bandeaux_local.php';
+else
+	include 'bandeaux.php';
 
 
 if ($_POST["uk"]){
@@ -93,7 +96,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -103,7 +106,7 @@ if (!$sondage||pg_numrows($sondage)=="0"){
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>$tt_studs_erreur_titre</H2><br><br>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -119,7 +122,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -350,8 +353,8 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !",$headers);
+			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 
 		}
 
@@ -458,8 +461,8 @@ else {
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
 
-				$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\nhttp://studs.u-strasbg.fr/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n STUdS !",$headers);
+				$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 				
 			}
 			else {$erreur_ajout_date="yes";}
@@ -586,8 +589,8 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", "$tt_adminstuds_mail_corps_changetitre :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", "$tt_adminstuds_mail_corps_changetitre :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
 			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -596,8 +599,8 @@ else {
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", "$tt_adminstuds_mail_corps_changecomm :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", "$tt_adminstuds_mail_corps_changecomm :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
 			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -606,8 +609,8 @@ else {
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", "$tt_adminstuds_mail_corps_changemail :\n\nhttp://".getenv('NOMSERVEUR')."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", "$tt_adminstuds_mail_corps_changemail :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -631,7 +634,7 @@ else {
 		echo '<html>'."\n";
 		echo '<head>'."\n";
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-		echo '<title>STUdS !</title>'."\n";
+		echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 		echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 		
 		#bloquer la touche entrée
@@ -1103,8 +1106,8 @@ if ($_POST["confirmesuppression"]){
         fclose($fichier_log);
 
 	//envoi du mail a l'administrateur du sondage
-	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", "$tt_adminstuds_mail_corps_supprimesondage :\n\nhttp://".getenv('NOMSERVEUR')."/index.php \n\n$tt_studs_mail_merci\nSTUdS !",$headers);
+	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", "$tt_adminstuds_mail_corps_supprimesondage :\n\n".get_server_name()."/index.php \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 
 	//destruction des données dans la base SQL
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
@@ -1116,7 +1119,7 @@ if ($_POST["confirmesuppression"]){
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
-	echo '<title>STUdS !</title>'."\n";
+	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -1126,7 +1129,7 @@ if ($_POST["confirmesuppression"]){
 
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>$tt_adminstuds_suppression_titre</H2><br><br>";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> STUdS</A>. "."\n";
+	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();

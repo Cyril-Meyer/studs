@@ -84,7 +84,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 }
 
 	$date=date('H:i:s d/m/Y');
-	$headers="From: STUdS <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
 	$connect=connexion_base();
 
@@ -92,8 +92,8 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", "[STUdS][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\nhttp://".getenv('NOMSERVEUR')."/studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\nSTUdS !",$headers);
-	mail ("$_SESSION[adresse]", "[STUdS][$tt_creationsondage_titre_mail_admin] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_admin_debut :\n\nhttp://studs.u-strasbg.fr/adminstuds.php?sondage=$sondage_admin \n\n$tt_creationsondage_corps_merci,\nSTUdS !",$headers);
+	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
+	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_admin] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_admin_debut :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
 
 
 	$fichier_log=fopen('admin/logs_studs.txt','a');
