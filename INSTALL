@@ -53,6 +53,8 @@ Pour que les quotes simples soient acceptées dans la partie "Création de sonda
 Base de données
 ===============
 
+STUdS ne fonctionne pour l'instant qu'avec PostgreSQL.
+
 Après avoir renseigné les paramètres de la base de données, créez la
 base et pré-chargez les données par défaut. Ceci ressemble à :
 
@@ -60,16 +62,15 @@ base et pré-chargez les données par défaut. Ceci ressemble à :
 % createdb studs
 % psql -d studs -f install.sql
 
-NB : STUdS ne fonctionne pour l'instant qu'avec PostgreSQL.
+Attention : Si vous créez la base de données avec l'utilisateur "pgsql", il vous faudra faire un "grant all on <chaque table> to studs" pour donner les droits à l'utilisateur studs de lire et modifier la base. Les tables de l'applications sont décrites plus loin dans ce fichier dans la partie "Tables de la base de données".
 
 
-Accès aux sources et à la page administrateur
+Accès à la page administrateur
 =============================================
 
-Les répertoires sources/ et admin/ contiennent tous deux un fichier
-.htaccess pour Apache, qui restreint l'accès aux sources de l'appli-
-cation et à la page d'administration de l'application (respectivement).
-Modifiez le contenu de ces fichiers .htaccess pour les adapter à vos
+Le répertoire admin/ contient un fichier .htaccess pour Apache, qui restreint l'accès
+à la page d'administration de l'application.
+Modifiez le contenu de ce fichier .htaccess pour l'adapter à vos
 besoins.
 
 Un fichier admin/logs_studs.txt doit être créé et accessible en écriture

@@ -316,7 +316,7 @@ else {
 						$user=pg_fetch_object($user_studs,$compteur);
 
 						if ($_POST["nom"]==$user->nom){
-							$erreur_prénom="yes";
+							$erreur_prenom="yes";
 						}
 				}
 
@@ -326,7 +326,7 @@ else {
 
 
 				// Ecriture des choix de l'utilisateur dans la base
- 				if (!$erreur_prénom&&!$erreur_injection){
+ 				if (!$erreur_prenom&&!$erreur_injection){
 					$nom=str_replace("'","°",$_POST["nom"]);
  					pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
 				}
@@ -928,7 +928,7 @@ else {
 			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomvide</font>\n";
 			echo '</tr>'."\n"; 
 		}
-		if ($erreur_prénom){
+		if ($erreur_prenom){
 			echo '<tr>'."\n";
 			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomdeja</font></td>\n";
 			echo '</tr>'."\n"; 
