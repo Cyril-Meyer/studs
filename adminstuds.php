@@ -354,7 +354,7 @@ else {
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 
 		}
 
@@ -590,7 +590,7 @@ else {
 
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre", "$tt_adminstuds_mail_corps_changetitre :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changetitre :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
 			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -600,7 +600,7 @@ else {
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm", "$tt_adminstuds_mail_corps_changecomm :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changecomm :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
 			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -610,7 +610,7 @@ else {
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail", "$tt_adminstuds_mail_corps_changemail :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changemail :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec la nouvelle adresse
 			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -1107,7 +1107,7 @@ if ($_POST["confirmesuppression"]){
 
 	//envoi du mail a l'administrateur du sondage
 	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage", "$tt_adminstuds_mail_corps_supprimesondage :\n\n".get_server_name()."/index.php \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_supprimesondage :\n\n".get_server_name()."/index.php \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 
 	//destruction des données dans la base SQL
 	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");

@@ -60,8 +60,8 @@ $tt_bouton_nettoyage='Nettoyage';
 $tt_bouton_retour='Retour';
 
 //Texte de index.php
-$tt_index_titre='A quoi sert STUdS ?';
-$tt_index_presentation='A faire des sondages pour que vous puissiez trouver une date de r&eacute;union qui convienne &agrave; toutes les personnes concern&eacute;es. <br>Vous pouvez &eacute;galement utiliser STUdS pour d&eacute;terminer &agrave; plusieurs un choix quelconque comme un lieu de RV, un th&egrave;me de r&eacute;union ou la marque de votre prochaine machine &agrave; caf&eacute;.';
+$tt_index_titre='A quoi ça sert ?';
+$tt_index_presentation='A faire des sondages pour que vous puissiez trouver une date de r&eacute;union qui convienne &agrave; toutes les personnes concern&eacute;es. <br>Vous pouvez &eacute;galement utiliser cette application pour d&eacute;terminer &agrave; plusieurs un choix quelconque comme un lieu de RV, un th&egrave;me de r&eacute;union ou la marque de votre prochaine machine &agrave; caf&eacute;.';
 $tt_index_bouton='Cr&eacute;er un sondage';
 
 //texte de infos_sondage.php
@@ -120,7 +120,7 @@ $tt_creationsondage_corps_milieu=' vient de créer un sondage intitulé ';
 $tt_creationsondage_corps_fin='Merci de bien vouloir remplir le sondage à l\'adresse suivante';
 $tt_creationsondage_corps_merci='Merci de votre confiance';
 $tt_creationsondage_titre_mail_admin='Réservé à l\'auteur';
-$tt_creationsondage_corps_admin_debut="Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage STUdS.\n\nVous avez créé un sondage sur STUdS. \nVous pouvez modifier ce sondage à l'adresse suivante ";
+$tt_creationsondage_corps_admin_debut="Ce message ne doit PAS être diffusé aux sondés. Il est réservé à l'auteur du sondage.\n\nVous pouvez modifier ce sondage à l'adresse suivante ";
 
 //traduction en francais ecrit des valeurs de mois
 $tt_motmois_un="janvier";
@@ -170,14 +170,14 @@ $tt_studs_ajoutcommentaires_titre='Commentaires des sond&eacute;s';
 $tt_studs_commentaires_erreurvide='Merci de remplir les deux champs !';
 
 //adminstuds.php
-$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATEUR STUdS] Ajout d\'une nouvelle colonne au sondage STUdS';
-$tt_adminstuds_mail_corps_ajoutcolonne="Vous avez fait l'ajout d'une colonne dans votre sondage sur STUdS. \nVous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante";
-$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRATEUR STUdS] Changement du titre du sondage avec STUdS';
-$tt_adminstuds_mail_corps_changetitre="Vous avez fait la modification du titre de votre sondage sur STUdS. \nVous pouvez modifier ce sondage au lien suivant";
-$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRATEUR STUdS] Changement des commentaires du sondage avec STUdS';
-$tt_adminstuds_mail_corps_changecomm="Vous avez fait la modification des commentaires de votre sondage sur STUdS. \nVous pouvez modifier ce sondage au lien suivant";
-$tt_adminstuds_mail_sujet_changemail='[ADMINISTRATEUR STUdS] Changement d\'adresse électronique de l\'administrateur avec STUdS';
-$tt_adminstuds_mail_corps_changemail="Vous avez fait la modification de votre adresse mail sur STUdS. \nVous pouvez modifier ce sondage au lien suivant";
+$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATEUR] Ajout d\'une nouvelle colonne au sondage ';
+$tt_adminstuds_mail_corps_ajoutcolonne="Vous avez fait l'ajout d'une colonne dans votre sondage. \nVous pouvez informer vos utilisateurs de ce changement en leur envoyant l'adresse suivante";
+$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRATEUR] Changement du titre du sondage avec ';
+$tt_adminstuds_mail_corps_changetitre="Vous avez fait la modification du titre de votre sondage. \nVous pouvez modifier ce sondage au lien suivant";
+$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRATEUR] Changement des commentaires du sondage avec ';
+$tt_adminstuds_mail_corps_changecomm="Vous avez fait la modification des commentaires de votre sondage. \nVous pouvez modifier ce sondage au lien suivant";
+$tt_adminstuds_mail_sujet_changemail='[ADMINISTRATEUR] Changement d\'adresse électronique de l\'administrateur avec ';
+$tt_adminstuds_mail_corps_changemail="Vous avez fait la modification de votre adresse mail. \nVous pouvez modifier ce sondage au lien suivant";
 $tt_adminstuds_presentation='En tant qu\'administrateur, vous pouvez modifier toutes les lignes de ce sondage avec <img src="images/info.png" alt="Icone infos">.<br> Vous avez aussi la possibilit&eacute; d\'effacer une colonne ou une ligne avec <img src="images/cancel.png" alt="Annuler">. <br>Si vous avez oubli&eacute; de mettre un choix vous pouvez rajouter une colonne en cliquant sur <img src="images/add-16.png" alt="Annuler"> <br> en bout de ligne des noms de colonne. Vous pouvez enfin &eacute;galement modifier les informations <br>relatives &agrave; ce sondage comme le titre, les commentaires ou encore votre adresse &eacute;lectronique.';
 $tt_adminstuds_erreur_date='La date choisie n\'est pas correcte !';
 $tt_adminstuds_gestion_titre='Gestion de votre sondage';
@@ -193,8 +193,8 @@ $tt_adminstuds_gestion_bouton_suppressionsondage='Suppression du sondage';
 $tt_adminstuds_gestion_confirmesuppression='Confirmer la suppression de votre sondage';
 $tt_adminstuds_gestion_bouton_confirmesuppression='Je supprime ce sondage !';
 $tt_adminstuds_gestion_bouton_annulesuppression='Je garde ce sondage !';
-$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATEUR STUdS] Suppression de sondage avec STUdS';
-$tt_adminstuds_mail_corps_supprimesondage="Vous avez fait la suppression d'un sondage sur STUdS. \nVous pouvez faire de nouveaux sondages au lien suivant";
+$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATEUR] Suppression de sondage avec ';
+$tt_adminstuds_mail_corps_supprimesondage="Vous avez fait la suppression d'un sondage. \nVous pouvez faire de nouveaux sondages au lien suivant";
 $tt_adminstuds_suppression_titre='Votre sondage a &eacute;t&eacute; supprim&eacute; !';
 $tt_adminstuds_ajoutcolonne_titre='Ajout de colonne';
 $tt_adminstuds_ajoutcolonne_autre='Si vous souhaitez ajouter une colonne';
@@ -205,28 +205,28 @@ $tt_adminstuds_ajoutcolonne_date_heurefin='Pour ajouter un horaire de fin (optio
 
 //contacts.php
 $tt_contacts_envoimail_titre='Votre message a bien &eacute;t&eacute; envoy&eacute; !';
-$tt_contacts_presentation='Pour toutes questions ou suggestions relatives &agrave; STUdS vous pouvez laisser un message via ce formulaire.';
+$tt_contacts_presentation='Pour toutes questions ou suggestions vous pouvez laisser un message via ce formulaire.';
 $tt_contacts_nom='Votre nom';
 $tt_contacts_adressemail='Votre adresse &eacute;lectronique ';
 $tt_contacts_question='Question';
 $tt_contacts_bouton_question='Envoyer votre question';
-$tt_contacts_mail_sujet_admin='[CONTACT STUdS] Envoi de question STUdS';
-$tt_contacts_mail_corps_admin='Vous avez une question d\'utilisateur de STUdS.';
+$tt_contacts_mail_sujet_admin='[CONTACT] Envoi de question ';
+$tt_contacts_mail_corps_admin='Vous avez une question d\'utilisateur de ';
 $tt_contacts_mail_utilisateur_admin='Utilisateur';
 $tt_contacts_mail_adresse_admin='Adresse utilisateur';
 $tt_contacts_mail_message_admin='Message';
-$tt_contacts_mail_sujet_user='[COPIE] Envoi de question STUdS';
-$tt_contacts_mail_corps_user='Voici une copie de votre question dans STUdS';
+$tt_contacts_mail_sujet_user='[COPIE] Envoi de question ';
+$tt_contacts_mail_corps_user='Voici une copie de votre question';
 $tt_contacts_mail_reponse_user='Nous allons prendre en compte votre message rapidement.';
 
 //sources.php
-$tt_sources_lien='Voila les <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> de STUdS.';
+$tt_sources_lien='Voila les <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> de ';
 
 //apropos.php
 $tt_apropos_techno='Technologies utilis&eacute;es';
 $tt_apropos_compat='Compatibilit&eacute;s des navigateurs';
 $tt_apropos_validation_titre='Validations des pages';
-$tt_apropos_validation='- Toutes les pages de STUdS disposent de la validation HTML 4.01 Strict du W3C. <br>- La CSS de STUdS dispose de la validation CSS 2.1 du W3C.';
+$tt_apropos_validation='- Toutes les pages disposent de la validation HTML 4.01 Strict du W3C. <br>- La CSS dispose de la validation CSS 2.1 du W3C.';
 $tt_apropos_merci_titre='Remerciements';
 
 //admin/index.php

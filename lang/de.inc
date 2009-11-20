@@ -58,9 +58,9 @@ $tt_bouton_historique='Logs';
 $tt_bouton_nettoyage='Reinigung';
 $tt_bouton_retour='Zur&uuml;ck';
 //Texte de index.php
-$tt_index_titre='Wozu dient STUdS?';
+$tt_index_titre='Warum dies ?';
 $tt_index_presentation='Ein Datum zu finden das allen Betroffenen passt. 
-<br>Sie k&ouml;nnen ebenfalls STUdS ben&ouml;tigen um gemeinsam eine Wahl zu treffen f&uuml;r ein Termin ein Treffpunkt, ein Besprechungsthema oder die Marke ihrer n&auml;chsten Kaffeemaschine ';
+<br>Sie k&ouml;nnen ebenfalls ben&ouml;tigen um gemeinsam eine Wahl zu treffen f&uuml;r ein Termin ein Treffpunkt, ein Besprechungsthema oder die Marke ihrer n&auml;chsten Kaffeemaschine ';
 $tt_index_bouton='Umfrage erstellen';
 
 //texte de infos_sondage.php
@@ -119,7 +119,7 @@ $tt_creationsondage_corps_milieu='hat eine betitelte Umfrage erstellt';
 $tt_creationsondage_corps_fin='Bitte erkundigen Sie die Umfrage an dem folgende Weblink';
 $tt_creationsondage_corps_merci='Danke fur ihr vertrauen';
 $tt_creationsondage_titre_mail_admin='Fur den Autor reserviert';
-$tt_creationsondage_corps_admin_debut="Diese Botschaft soll nicht weitergegeben werden, sie ist fur den Autor reserviert.\n\nSie haben eine Umfrage auf STUdS geschaffen. \nSie können diese Umfrage an dem folgenden Weblink ändern";
+$tt_creationsondage_corps_admin_debut="Diese Botschaft soll nicht weitergegeben werden, sie ist fur den Autor reserviert.\n\nSie können diese Umfrage an dem folgenden Weblink ändern";
 
 //traduction en allemand ecrit des valeurs de mois
 $tt_motmois_un="Januar";
@@ -170,13 +170,13 @@ $tt_studs_commentaires_erreurvide='Geben sie irhen Name und ein Kommentar ein bi
 
 
 //adminstuds.php
-$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATOR STUdS] Einf&uuml;gen einer neuen Spalte in die STUdS Umfrage';
-$tt_adminstuds_mail_corps_ajoutcolonne="Sie haben eine neue Spalte in die STUdS Umfrage eingef&uuml;gt. \nSie k&ouml;nnen die Beteiligten &uuml;ber diese &auml;nderung informieren in dem sie ihen folgende Adresse schicken. ";
-$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRATOR STUdS] &auml;nderung des Titels der STUdS ';
-$tt_adminstuds_mail_corps_changetitre="Sie haben den Titel ihrer STUdS Umfrage ge&auml;ndert. \Sie k&ouml;nnen diese Umfrage mit dem fogenden Link &auml;ndern ";
-$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRATOR STUdS] &auml;nderung der Kommentare der Umfrage mit STUdS';
-$tt_adminstuds_mail_corps_changecomm=" Sie haben die Kommentare ihrer STUdS Umfrage ge&auml;ndert. \ Sie k&ouml;nnen diese Umfrage mit dem fogenden Link &auml;ndern ";
-$tt_adminstuds_mail_sujet_changemail='[ADMINISTRATOR STUdS] &auml;nderung der email Adresse des STUdS administrator';
+$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATOR] Einf&uuml;gen einer neuen Spalte in die Umfrage ';
+$tt_adminstuds_mail_corps_ajoutcolonne="Sie haben eine neue Spalte in die Umfrage eingef&uuml;gt. \nSie k&ouml;nnen die Beteiligten &uuml;ber diese &auml;nderung informieren in dem sie ihen folgende Adresse schicken. ";
+$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRATOR] &auml;nderung des Titels der ';
+$tt_adminstuds_mail_corps_changetitre="Sie haben den Titel ihrer Umfrage ge&auml;ndert. \Sie k&ouml;nnen diese Umfrage mit dem fogenden Link &auml;ndern ";
+$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRATOR] &auml;nderung der Kommentare der Umfrage mit ';
+$tt_adminstuds_mail_corps_changecomm=" Sie haben die Kommentare ihrer Umfrage ge&auml;ndert. \ Sie k&ouml;nnen diese Umfrage mit dem fogenden Link &auml;ndern ";
+$tt_adminstuds_mail_sujet_changemail='[ADMINISTRATOR] &auml;nderung der email Adresse des administrator ';
 $tt_adminstuds_presentation='Als administrator k&ouml;nnen sie alle linien ihrer Umfrage mit  <img src="images/info.png" alt="Icone infos"> &auml;ndern.<br> Sie haben auch die m&ouml;glichkeit eine Spalte oder eine Linie mit <img src="images/cancel.png" alt="Annuler"> zu l&ouml;schen. <br>Falls sie vergessen haben eine Wahlm&ouml;glichkeit einzutragen k&ouml;nnen sie eine Spalte zuf&uuml;gen in dem sie  <img src="images/add-16.png" alt="r&uuml;ckg&auml;ngig"> <br> ausw&auml;hlen. en bout de ligne des noms de colonne. Sie k&ouml;nnen ebenfalls informationen wie den Titel die Kommentare oder ihre email adresse &auml;ndern. ';
 $tt_adminstuds_erreur_date='Das gew&auml;hlte Datum ist nicht korrekt!';
 $tt_adminstuds_gestion_titre='Verwaltung ihrer Umfrage';
@@ -192,8 +192,8 @@ $tt_adminstuds_gestion_bouton_suppressionsondage='L&ouml;schen der Umfrage';
 $tt_adminstuds_gestion_confirmesuppression='Best&auml;tigen sie bitte das l&ouml;schen der Umfrage';
 $tt_adminstuds_gestion_bouton_confirmesuppression='Ich l&ouml;sche die Umfrage!';
 $tt_adminstuds_gestion_bouton_annulesuppression='Ich behalte die Umfrage!';
-$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATOR STUdS] L&ouml;schen der Umfrage mit STUdS';
-$tt_adminstuds_mail_corps_supprimesondage="Sie haben eine StUdS Umfrage. \nMit folgendem k&ouml;nnen sie ein neue Umfrage erstellen.";
+$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATOR] L&ouml;schen der Umfrage mit ';
+$tt_adminstuds_mail_corps_supprimesondage="Sie haben eine Umfrage. \nMit folgendem k&ouml;nnen sie ein neue Umfrage erstellen.";
 $tt_adminstuds_suppression_titre='Ihre Umfrage wurde gel&ouml;scht!';
 $tt_adminstuds_ajoutcolonne_titre='Einf&uuml;gen einer Spalte';
 $tt_adminstuds_ajoutcolonne_autre='Wenn sie eine Spalte einf&uuml;gen m&ouml;chten';
@@ -204,28 +204,28 @@ $tt_adminstuds_ajoutcolonne_date_heurefin='Einf&uuml;gen einer Enduhrzeit (optio
 
 //contacts.php
 $tt_contacts_envoimail_titre='Ihre email wurde erfolgreich gesendet!';
-$tt_contacts_presentation='Fragen oder Vorschl&auml;ge in bezug auf STUdS k&ouml;nnen sie uns mit diesem Formular zukommen lassen.';
+$tt_contacts_presentation='Fragen oder Vorschl&auml;ge in bezug auf k&ouml;nnen sie uns mit diesem Formular zukommen lassen.';
 $tt_contacts_nom='Ihr Name';
 $tt_contacts_adressemail='Ihre Email Adresse ';
 $tt_contacts_question='Frage (english speaking please)';
 $tt_contacts_bouton_question='Senden sie ihre Frage';
-$tt_contacts_mail_sujet_admin='[KONTAKT STUdS] Senden von STUdS Fragen';
-$tt_contacts_mail_corps_admin='Sie haben eine STUdsben&uuml;tzer Frager.';
+$tt_contacts_mail_sujet_admin='[KONTAKT] Senden von Fragen ';
+$tt_contacts_mail_corps_admin='Sie haben eine ben&uuml;tzer Frager ';
 $tt_contacts_mail_utilisateur_admin='Ben&uuml;tzer';
 $tt_contacts_mail_adresse_admin='Email adresse des Ben&uuml;tzers';
 $tt_contacts_mail_message_admin='Email';
-$tt_contacts_mail_sujet_user='[KOPIE] Senden einer STUdS frage';
-$tt_contacts_mail_corps_user='Kopie ihrer STUdS frage';
+$tt_contacts_mail_sujet_user='[KOPIE] Senden einer frage ';
+$tt_contacts_mail_corps_user='Kopie ihrer frage';
 $tt_contacts_mail_reponse_user='Ihre email wird schnell bearbeitet.';
 
 //sources.php
-$tt_sources_lien='Die <a href="http://sourcesup.cru.fr/frs/?group_id=621">Quellen</a> von STUdS.';
+$tt_sources_lien='Die <a href="http://sourcesup.cru.fr/frs/?group_id=621">Quellen</a> von ';
 
 //apropos.php
 $tt_apropos_techno='Benutzertechnologien';
 $tt_apropos_compat='Kompatibilit&auml;t des Navigators';
 $tt_apropos_validation_titre='G&uuml;ltigkeit der Seiten';
-$tt_apropos_validation='- Alle seiten von STUdS verf&uuml;gen &uuml;ber der HTML 4.01 G&uuml;ltichkeit des W3C. <br>- Das CSS von STUdS verf&uuml;gt &uuml;ber der CSS 2.1 G&uuml;ltigkeit des W3C.';
+$tt_apropos_validation='- Alle seiten verf&uuml;gen &uuml;ber der HTML 4.01 G&uuml;ltichkeit des W3C. <br>- Das CSS verf&uuml;gt &uuml;ber der CSS 2.1 G&uuml;ltigkeit des W3C.';
 $tt_apropos_merci_titre='Dankesbezeichnung';
 
 //admin/index.php

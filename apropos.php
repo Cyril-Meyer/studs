@@ -147,15 +147,15 @@ if ($_POST["apropos"]){
 	echo '<b>'.$tt_apropos_merci_titre.'</b><br><br>'."\n";
 	echo 'Pour leurs contributions techniques ou ergonomiques : Guy, Christophe, Julien, Pierre, Romaric, Matthieu, Catherine, Christine, Olivier et Emmanuel <br><br>'."\n";
 
-	echo '<b>Licence Logicielle de STUdS</b><br><br>'."\n";
-	echo 'STUdS est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
+	echo '<b>Licence Logicielle de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
+	echo getenv('NOMAPPLICATION').' est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
 	
-	echo '<b>Les prochaines am&eacute;liorations de STUdS </b><br><br>'."\n";
+	echo '<b>Les prochaines am&eacute;liorations de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
 	echo '- Rien pour l\'instant...<br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
 
-	echo '<b>Les derni&egrave;res am&eacute;liorations de STUdS sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a></b>'."\n";
+	echo '<b>Les derni&egrave;res am&eacute;liorations de '.getenv('NOMAPPLICATION').' sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a></b>'."\n";
 
 	echo '</div>'."\n";
 	

@@ -60,7 +60,7 @@ $tt_bouton_nettoyage='Cleaning';
 $tt_bouton_retour='Back';
 
 //Texte de index.php
-$tt_index_titre='What is STUdS about?';
+$tt_index_titre='What is it about?';
 $tt_index_presentation='Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.';
 $tt_index_bouton='Make a poll';
 
@@ -120,7 +120,7 @@ $tt_creationsondage_corps_milieu='hast just created a poll called';
 $tt_creationsondage_corps_fin='Thanks for filling the poll at the link above';
 $tt_creationsondage_corps_merci='Thanks for your confidence';
 $tt_creationsondage_titre_mail_admin="Author's message" ;
-$tt_creationsondage_corps_admin_debut="This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou have created a STUdS poll. \nYou can now modify it at the link above";
+$tt_creationsondage_corps_admin_debut="This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou can now modify it at the link above";
 
 
 //traduction en anglais des valeurs de mois
@@ -171,13 +171,13 @@ $tt_studs_ajoutcommentaires_titre='Comments';
 $tt_studs_commentaires_erreurvide='Enter a name and a comment!';
 
 //adminstuds.php
-$tt_adminstuds_mail_sujet_ajoutcolonne='[STUdS ADMINISTRATOR] New column for your poll';
+$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRATOR] New column for your poll';
 $tt_adminstuds_mail_corps_ajoutcolonne="You have added a new column in your poll. \nYou can inform the voters of this change with this link";
-$tt_adminstuds_mail_sujet_changetitre='[STUdS ADMINISTRATOR] New title for your poll';
+$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRATOR] New title for your poll';
 $tt_adminstuds_mail_corps_changetitre="You have changed the title of your poll. \nYou can modify this poll with this link";
-$tt_adminstuds_mail_sujet_changecomm='[STUdS ADMINISTRATOR] New comments for your poll';
+$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRATOR] New comments for your poll';
 $tt_adminstuds_mail_corps_changecomm="You have changed the comments of your poll. \nYou can modify this poll with this link";
-$tt_adminstuds_mail_sujet_changemail='[STUdS ADMINISTRATOR] New email address for your poll';
+$tt_adminstuds_mail_sujet_changemail='[ADMINISTRATOR] New email address for your poll';
 $tt_adminstuds_mail_corps_changemail="You have changed your email address in your poll. \nYou can modify this poll with this link";
 $tt_adminstuds_presentation='As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.';
 $tt_adminstuds_erreur_date='The date is not correct !';
@@ -194,7 +194,7 @@ $tt_adminstuds_gestion_bouton_suppressionsondage='Remove the poll';
 $tt_adminstuds_gestion_confirmesuppression='Confirm removal of your poll';
 $tt_adminstuds_gestion_bouton_confirmesuppression='Remove this poll!';
 $tt_adminstuds_gestion_bouton_annulesuppression='Keep this poll!';
-$tt_adminstuds_mail_sujet_supprimesondage='[STUdS ADMINISTRATOR] Removing of your poll';
+$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRATOR] Removing of your poll';
 $tt_adminstuds_mail_corps_supprimesondage="You have removed your poll. \nYou can make new polls with this link";
 $tt_adminstuds_suppression_titre='Your poll has been removed!';
 $tt_adminstuds_ajoutcolonne_titre='Column\'s adding';
@@ -206,28 +206,28 @@ $tt_adminstuds_ajoutcolonne_date_heurefin='Add a end hour (optional)';
 
 //contacts.php
 $tt_contacts_envoimail_titre='Your message has been sent!';
-$tt_contacts_presentation='If you have questions about STUdS, you can send a message here.';
+$tt_contacts_presentation='If you have questions, you can send a message here.';
 $tt_contacts_nom='Your name';
 $tt_contacts_adressemail='Your email address ';
 $tt_contacts_question='Question';
 $tt_contacts_bouton_question='Send your question';
-$tt_contacts_mail_sujet_admin='[STUdS CONTACT] You have sent a question';
-$tt_contacts_mail_corps_admin='You have a question from a user.';
+$tt_contacts_mail_sujet_admin='[CONTACT] You have sent a question ';
+$tt_contacts_mail_corps_admin='You have a question from a user ';
 $tt_contacts_mail_utilisateur_admin='User';
 $tt_contacts_mail_adresse_admin='User\'s email address';
 $tt_contacts_mail_message_admin='Message';
-$tt_contacts_mail_sujet_user='[COPY] Someone has sent a question';
+$tt_contacts_mail_sujet_user='[COPY] Someone has sent a question ';
 $tt_contacts_mail_corps_user='Here is a copy of your question';
 $tt_contacts_mail_reponse_user='We\'re going to answer your question shortly.';
 
 //sources.php
-$tt_sources_lien='Here are the <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> of STUdS.';
+$tt_sources_lien='Here are the <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> of ';
 
 //apropos.php
 $tt_apropos_techno='Softwares inside';
 $tt_apropos_compat='Browser compatibility';
 $tt_apropos_validation_titre='HTML validation';
-$tt_apropos_validation='- Every page of STUdS conforms to W3C HTML 4.01 Strict specification. <br>- The CSS of STUdS conforms to W3C CSS 2.1 specification.';
+$tt_apropos_validation='- Every page conforms to W3C HTML 4.01 Strict specification. <br>- The CSS conforms to W3C CSS 2.1 specification.';
 $tt_apropos_merci_titre='Thanks';
 
 //admin/index.php

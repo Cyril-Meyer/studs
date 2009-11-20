@@ -127,7 +127,7 @@ sous_bandeau();
 
 echo '<div class=corps>'."\n";
 
-echo '<p><b>'.$tt_index_titre.'</b></p>';
+echo '<p><b>'.getenv('NOMAPPLICATION').'<br>'.$tt_index_titre.'</b></p>';
 echo '<p>'.$tt_index_presentation.'</p>'."\n".'<br>'."\n";
 
 echo '<table>'."\n";

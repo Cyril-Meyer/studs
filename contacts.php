@@ -108,10 +108,10 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	
 	//envoi des mails
 	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin", "$tt_contacts_mail_corps_admin\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
+	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_admin ".getenv('NOMAPPLICATION')."\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
 		$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user", "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 	}
 
 	//affichage de la page de confirmation d'envoi

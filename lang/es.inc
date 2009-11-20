@@ -60,8 +60,8 @@ $tt_bouton_nettoyage='Limpieza';
 $tt_bouton_retour='Retroceder';
 
 //Texte de index.php
-$tt_index_titre='&iquest;Para qu&eacute; sirve STUdS?';
-$tt_index_presentation='Hacer encuestas para planificar un evento como una reun&iacute;n de trabajo o una sortida al cine. Sirve de definir la mejora fecha por todos. <br>Usted puede tambi&eacute;n utilizar STUdS para espicificar su preferencia entre pel&iacute;culas, destinos de viaje o cualquier otra selecci&oacute;n.';
+$tt_index_titre='&iquest;Por qu&eacute; esto?';
+$tt_index_presentation='Hacer encuestas para planificar un evento como una reun&iacute;on de trabajo o una sortida al cine. Sirve de definir la mejora fecha por todos. <br>Usted puede tambi&eacute;n utilizarlo para espicificar su preferencia entre pel&iacute;culas, destinos de viaje o cualquier otra selecci&oacute;n.';
 $tt_index_bouton='Crear una encuesta';
 
 //texte de infos_sondage.php
@@ -120,7 +120,7 @@ $tt_creationsondage_corps_milieu='ha creado una encuesta titulado';
 $tt_creationsondage_corps_fin='Gracias de llenar esta encuesta al enlace siguiente';
 $tt_creationsondage_corps_merci='Gracias por su confianza';
 $tt_creationsondage_titre_mail_admin='Reservado al autor';
-$tt_creationsondage_corps_admin_debut="Este mensaje no debe estar enviado a los encuestados. Esta reservado al autor dela encuesta STUdS.\n\nUsted ha creado una encuesta STUdS. \nUsted puede editar esta encuesta al enlace siguiente";
+$tt_creationsondage_corps_admin_debut="Este mensaje no debe estar enviado a los encuestados. Esta reservado al autor dela encuesta.\n\nUsted puede editar esta encuesta al enlace siguiente";
 
 
 //traduction en espagnol des valeurs de mois
@@ -171,13 +171,13 @@ $tt_studs_ajoutcommentaires_titre='Comentarios';
 $tt_studs_commentaires_erreurvide='Introduzca su nombre y un comentario!';
 
 //adminstuds.php
-$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRADOR STUdS] A&ntilde;ado de una nueva columna a la encuesta';
+$tt_adminstuds_mail_sujet_ajoutcolonne='[ADMINISTRADOR] A&ntilde;ado de una nueva columna a la encuesta';
 $tt_adminstuds_mail_corps_ajoutcolonne="Usted ha a&ntilde;ado una nueva columna en su encuesta. \nUsted puede informar sus usuarios de este cambio con el enlace siguiente";
-$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRADOR STUdS] Cambio del titulo dela encuesta';
+$tt_adminstuds_mail_sujet_changetitre='[ADMINISTRADOR] Cambio del titulo dela encuesta';
 $tt_adminstuds_mail_corps_changetitre="Usted ha a&ntilde;ado el titulo de su encuesta. \nUsted puede cambiar su encuesta al enlace siguiente";
-$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRADOR STUdS] Cambio des los comentarios dela encuesta';
+$tt_adminstuds_mail_sujet_changecomm='[ADMINISTRADOR] Cambio des los comentarios dela encuesta';
 $tt_adminstuds_mail_corps_changecomm="Usted ha cambiado los commentarios de su encuesta. \nUsted puede cambiar su encuesta al enlace siguiente";
-$tt_adminstuds_mail_sujet_changemail='[ADMINISTRADOR STUdS] Cambio de su Direcci&oacute;n electr&oacute;nica';
+$tt_adminstuds_mail_sujet_changemail='[ADMINISTRADOR] Cambio de su Direcci&oacute;n electr&oacute;nica';
 $tt_adminstuds_mail_corps_changemail="Usted ha cambiado su direcci&oacute;n elestr&oacute;nica. \nUsted puede cambiar su encuesta al enlace siguiente";
 $tt_adminstuds_presentation='En calidad de administrador, Usted puede cambiar todas la l&iacute;neas de este encuesta con <img src="images/info.png" alt="Icone infos">.<br> Usted puede tambi&eacute;n borrar una columna o una l&iacute;nea con <img src="images/cancel.png" alt="Annuler">. <br> Usted puede a&ntilde;adir une nueva columna con <img src="images/add-16.png" alt="Annuler"> <br>. Para acabar, Usted puede cambiar las informaciones relativas<br> a su encuesta como el titulo, los comentarios o ademas su direcci&oacute;n electr&oacute;nica.';
 $tt_adminstuds_erreur_date='La fecha no esta correcta!';
@@ -194,7 +194,7 @@ $tt_adminstuds_gestion_bouton_suppressionsondage='Borrada de encuesta';
 $tt_adminstuds_gestion_confirmesuppression='Confirmar la borrada de su encuesta';
 $tt_adminstuds_gestion_bouton_confirmesuppression='Borrar este encuesta!';
 $tt_adminstuds_gestion_bouton_annulesuppression='Dejar este encuesta!';
-$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRADOR STUdS] Borrada de su encuesta';
+$tt_adminstuds_mail_sujet_supprimesondage='[ADMINISTRADOR] Borrada de su encuesta';
 $tt_adminstuds_mail_corps_supprimesondage="Usted ha sido la borrada de su encuesta. \nUsted puede hacer nuevas encuestas al enlace siguiente";
 $tt_adminstuds_suppression_titre='Su encuesta ha sido borrado!';
 $tt_adminstuds_ajoutcolonne_titre='A&ntilde;adido de columna';
@@ -206,28 +206,28 @@ $tt_adminstuds_ajoutcolonne_date_heurefin='Para a&ntilde;adir un horario de fin 
 
 //contacts.php
 $tt_contacts_envoimail_titre='Su mensaje ha sido buen expedido!';
-$tt_contacts_presentation='Para todas preguntas relativo a STUdS, Usted puede dejar un mensaje con este pagina.';
+$tt_contacts_presentation='Para todas preguntas, Usted puede dejar un mensaje con este pagina.';
 $tt_contacts_nom='Su nombre';
 $tt_contacts_adressemail='Su direcci&oacute;n electr&oacute;nica ';
 $tt_contacts_question='Pregunta';
 $tt_contacts_bouton_question='Enviar su pregunta';
-$tt_contacts_mail_sujet_admin='[CONTACT STUdS] Envia de pregunta';
-$tt_contacts_mail_corps_admin='Hay une pregunta de usuario de STUdS.';
+$tt_contacts_mail_sujet_admin='[CONTACT] Envia de pregunta ';
+$tt_contacts_mail_corps_admin='Hay une pregunta de usuario de ';
 $tt_contacts_mail_utilisateur_admin='Usuario';
 $tt_contacts_mail_adresse_admin='Direcci&oacute;n electr&oacute;nica del usuario';
 $tt_contacts_mail_message_admin='Mensaje';
-$tt_contacts_mail_sujet_user='[COPIA] Envia de pregunta';
-$tt_contacts_mail_corps_user='Eso es una copia de su pregunta en STUdS';
+$tt_contacts_mail_sujet_user='[COPIA] Envia de pregunta ';
+$tt_contacts_mail_corps_user='Eso es una copia de su pregunta';
 $tt_contacts_mail_reponse_user='Nos tomaremos en cuenta vuestro mensaje rapidamente.';
 
 //sources.php
-$tt_sources_lien='Las <a href="http://sourcesup.cru.fr/frs/?group_id=621">fuentes</a> de STUdS.';
+$tt_sources_lien='Las <a href="http://sourcesup.cru.fr/frs/?group_id=621">fuentes</a> de ';
 
 //apropos.php
 $tt_apropos_techno='Tecnolog&iacute;as utilisadas';
 $tt_apropos_compat='Compatibilitad con los navegadores';
 $tt_apropos_validation_titre='Validaci&oacute;n de las paginas';
-$tt_apropos_validation='- Todas las paginas de STUdS son validadas HTML 4.01 Strict del W3C. <br>- La CSS de STUdS es validada CSS 2.1 del W3C.';
+$tt_apropos_validation='- Todas las paginas son validadas HTML 4.01 Strict del W3C. <br>- La CSS es validada CSS 2.1 del W3C.';
 $tt_apropos_merci_titre='Gracias';
 
 //admin/index.php

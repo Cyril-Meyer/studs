@@ -113,7 +113,7 @@ bandeau_tete();
 bandeau_titre();
 sous_bandeau();
 echo '<div class=corpscentre>'."\n";
-print "<H2>$tt_sources_lien</H2><br><br>"."\n";
+print "<H2>$tt_sources_lien".getenv('NOMAPPLICATION')."</H2><br><br>"."\n";
 print "$tt_choix_page_erreur_retour <a href=\"../index.php\">".getenv('NOMAPPLICATION')."</A> "."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";
