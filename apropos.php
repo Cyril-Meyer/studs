@@ -121,7 +121,15 @@ if ($_POST["apropos"]){
 	//blablabla
 	echo '<div class=corps>'."\n";
 
-	echo '<b>'.$tt_apropos_techno.'</b><br><br>'."\n";
+	if (getenv('NOMAPPLICATION')!="STUdS !"){
+		echo '<b>Application d\'origine</b><br><br>'."\n";
+		echo 'L\'application '.getenv('NOMAPPLICATION').' est une instance du logiciel <b><a href ="http://studs.u-strasbg.fr">STUdS !</a></b> d&eacute;velopp&eacute; &agrave; l\'Universit&eacute; de Strasbourg depuis 2008.<br><br>'."\n";
+	}
+
+	echo '<b>Licence Logicielle de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
+	echo getenv('NOMAPPLICATION').' est plac&eacute; sous la licence logicielle libre <a href="http://www.cecill.info/licences.fr.html">CeCILL-B</a>.<br><br>'."\n";
+
+	echo '<b>Technologies utilis&eacute;es</b><br><br>'."\n";
 	echo '- <a href="http://www.php.net/">PHP</a><br>'."\n";
 	echo '- <a href="http://www.postgresql.org/">PostgreSQL</a><br>'."\n";
 	echo '- <a href="http://www.apache.org/">Apache</a><br>'."\n";
@@ -130,7 +138,7 @@ if ($_POST["apropos"]){
 	echo '- <a href="http://www.fpdf.org/">FPDF</a><br>'."\n";
 	echo '- Ic&ocirc;nes : <a href="http://deleket.deviantart.com/">Deleket</a>, <a href ="http://pixel-mixer.com">PixelMixer</a> et <a href="http://dryicons.com">DryIcons</a><br><br>'."\n";
 	
-	echo '<b>'.$tt_apropos_compat.'</b><br><br>'."\n";
+	echo '<b>Compatibilit&eacute;s des navigateurs</b><br><br>'."\n";
 	echo '- <a href="http://www.mozilla.com/firefox/">Firefox</a><br>'."\n";
 	echo '- <a href="http://www.opera.com/">Op&eacute;ra</a><br>'."\n";
 	echo '- <a href="http://www.konqueror.org/">Konqueror</a><br>'."\n";
@@ -138,24 +146,22 @@ if ($_POST["apropos"]){
 	echo '- <a href="http://www.apple.com/fr/safari/">Safari</a><br>'."\n";
 	echo '- <a href="http://www.mozilla.com/firefox/">IE</a><br><br>'."\n";
 
-	echo '<b>'.$tt_apropos_validation_titre.'</b><br><br>'."\n";
-	echo $tt_apropos_validation."\n";
+	echo '<b>Validations des pages</b><br><br>'."\n";
+	echo '- Toutes les pages disposent de la validation HTML 4.01 Strict du W3C. <br>- La CSS dispose de la validation CSS 2.1 du W3C.'."\n";
  	echo '<p>'."\n"; 
 	echo '<img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !">'."\n";
  	echo'</p>'."\n"; 
 
-	echo '<b>'.$tt_apropos_merci_titre.'</b><br><br>'."\n";
-	echo 'Pour leurs contributions techniques ou ergonomiques : Guy, Christophe, Julien, Pierre, Romaric, Matthieu, Catherine, Christine, Olivier et Emmanuel <br><br>'."\n";
-
-	echo '<b>Licence Logicielle de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
-	echo getenv('NOMAPPLICATION').' est plac&eacute; sous la <a href="http://www.cecill.info/licences.fr.html">licence CeCILL-B</a>.<br><br>'."\n";
+	echo '<b>Propositions am&eacute;liorations de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
 	
-	echo '<b>Les prochaines am&eacute;liorations de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
-	echo '- Rien pour l\'instant...<br><br>'."\n";
-	
-	echo 'Si quelquechose venait &agrave; vous manquer et ne pas appara&icirc;tre encore dans cette liste, vous pouvez m\'en faire part <a href="contacts.php">ici</a>. <br><br><br>'."\n";
+	echo 'Si quelquechose venait &agrave; vous manquer, vous pouvez nous en faire part via le <a href="contacts.php">formulaire en ligne</a>. <br>'."\n";
 
-	echo '<b>Les derni&egrave;res am&eacute;liorations de '.getenv('NOMAPPLICATION').' sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a></b>'."\n";
+	echo 'Les derni&egrave;res am&eacute;liorations de '.getenv('NOMAPPLICATION').' sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a>.<br><br>'."\n";
+	
+	echo '<b>Remerciements</b><br><br>'."\n";
+	echo 'Pour leurs contributions techniques ou ergonomiques : Guy, Christophe, Julien, Pierre, Romaric, Matthieu, Catherine, Christine, Olivier, Emmanuel et Florence <br><br>'."\n";
+
+	
 
 	echo '</div>'."\n";
 	
