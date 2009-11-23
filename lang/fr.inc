@@ -222,13 +222,6 @@ $tt_contacts_mail_reponse_user='Nous allons prendre en compte votre message rapi
 //sources.php
 $tt_sources_lien='Voila les <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> de ';
 
-//apropos.php
-$tt_apropos_techno='Technologies utilis&eacute;es';
-$tt_apropos_compat='Compatibilit&eacute;s des navigateurs';
-$tt_apropos_validation_titre='Validations des pages';
-$tt_apropos_validation='- Toutes les pages disposent de la validation HTML 4.01 Strict du W3C. <br>- La CSS dispose de la validation CSS 2.1 du W3C.';
-$tt_apropos_merci_titre='Remerciements';
-
 //admin/index.php
 $tt_admin_nbresondage='sondages dans la base actuellement';
 $tt_admin_confirmesuppression='Confirmer la suppression du sondage ';

@@ -223,13 +223,6 @@ $tt_contacts_mail_reponse_user='We\'re going to answer your question shortly.';
 //sources.php
 $tt_sources_lien='Here are the <a href="http://sourcesup.cru.fr/frs/?group_id=621">sources</a> of ';
 
-//apropos.php
-$tt_apropos_techno='Softwares inside';
-$tt_apropos_compat='Browser compatibility';
-$tt_apropos_validation_titre='HTML validation';
-$tt_apropos_validation='- Every page conforms to W3C HTML 4.01 Strict specification. <br>- The CSS conforms to W3C CSS 2.1 specification.';
-$tt_apropos_merci_titre='Thanks';
-
 //admin/index.php
 $tt_admin_nbresondage='polls in the database at this time';
 $tt_admin_confirmesuppression='Confirm removal of the poll ';

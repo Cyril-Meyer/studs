@@ -223,13 +223,6 @@ $tt_contacts_mail_reponse_user='Nos tomaremos en cuenta vuestro mensaje rapidame
 //sources.php
 $tt_sources_lien='Las <a href="http://sourcesup.cru.fr/frs/?group_id=621">fuentes</a> de ';
 
-//apropos.php
-$tt_apropos_techno='Tecnolog&iacute;as utilisadas';
-$tt_apropos_compat='Compatibilitad con los navegadores';
-$tt_apropos_validation_titre='Validaci&oacute;n de las paginas';
-$tt_apropos_validation='- Todas las paginas son validadas HTML 4.01 Strict del W3C. <br>- La CSS es validada CSS 2.1 del W3C.';
-$tt_apropos_merci_titre='Gracias';
-
 //admin/index.php
 $tt_admin_nbresondage='encuestas en la basa por el momento';
 $tt_admin_confirmesuppression='Confirmar el borrado dela encuesta';

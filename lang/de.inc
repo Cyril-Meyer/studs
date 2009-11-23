@@ -221,13 +221,6 @@ $tt_contacts_mail_reponse_user='Ihre email wird schnell bearbeitet.';
 //sources.php
 $tt_sources_lien='Die <a href="http://sourcesup.cru.fr/frs/?group_id=621">Quellen</a> von ';
 
-//apropos.php
-$tt_apropos_techno='Benutzertechnologien';
-$tt_apropos_compat='Kompatibilit&auml;t des Navigators';
-$tt_apropos_validation_titre='G&uuml;ltigkeit der Seiten';
-$tt_apropos_validation='- Alle seiten verf&uuml;gen &uuml;ber der HTML 4.01 G&uuml;ltichkeit des W3C. <br>- Das CSS verf&uuml;gt &uuml;ber der CSS 2.1 G&uuml;ltigkeit des W3C.';
-$tt_apropos_merci_titre='Dankesbezeichnung';
-
 //admin/index.php
 $tt_admin_nbresondage=' In der Basis vorhandene Umfragen';
 $tt_admin_confirmesuppression='L&ouml;schen dieser Umfrage best&auml;tigen';
