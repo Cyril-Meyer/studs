@@ -188,7 +188,8 @@ else {
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
 	//Si le nom est bien entré
-		if ($_POST["nom"]){
+#		if ($_POST["nom"]){
+		if ($_POST["nom"] && (!isset($_SERVER['REMOTE_USER']) ||($_POST["nom"] == $_SESSION["nom"]))) {
 			for ($i=0;$i<$nbcolonnes;$i++){
 				
 				// Si la checkbox est enclenchée alors la valeur est 1
@@ -429,7 +430,7 @@ else {
 		echo $nombase.'</td>'."\n";
 // Les réponses qu'il a choisit
 		$ensemblereponses=$data->reponses;
-// ligne d'un usager pr�-authentifi�
+// ligne d'un usager pré-authentifié
 		$mod_ok = !isset($_SERVER['REMOTE_USER']) || ($nombase == $_SESSION['nom']);
 		$user_mod |= $mod_ok;
 			//si la ligne n'est pas a changer, on affiche les données
