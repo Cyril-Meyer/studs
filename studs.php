@@ -188,7 +188,6 @@ else {
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
 	//Si le nom est bien entré
-#		if ($_POST["nom"]){
 		if ($_POST["nom"] && (!isset($_SERVER['REMOTE_USER']) ||($_POST["nom"] == $_SESSION["nom"]))) {
 			for ($i=0;$i<$nbcolonnes;$i++){
 				
