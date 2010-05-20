@@ -75,9 +75,6 @@ bandeau_tete();
 bandeau_titre_admin();
 sous_bandeau_admin();
 
-// ouverture de la base de données
-$connect=connexion_base();
-
 $sondage=$connect->Execute("select * from sondage");
 
 echo'<div class=corps>'."\n";

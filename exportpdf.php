@@ -43,12 +43,9 @@ include 'fpdf/phpToPDF.php';
 include 'fonctions.php';
 include 'variables.php';
 
-$connect=connexion_base();
-
-$sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $_SESSION['numsondage'] . '"');
 $user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 
-$dsondage=$sondage->FetchObject(false);
+$dsondage = get_sondage_from_id($_SESSION['numsondage']);
 $nbcolonnes=substr_count($dsondage->sujet,',')+1;
 
 $datereunion=explode("@",$_SESSION["meilleursujet"]);

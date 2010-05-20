@@ -46,8 +46,6 @@ $date_humaine=date('H:i:s d/m/Y');
 
 
 //ouverture de la connection avec la base SQL
-$connect=connexion_base();
-
 $sondage=$connect->Execute("select * from sondage");
 
 while (	$dsondage=$sondage->FetchNextObject(false)) {

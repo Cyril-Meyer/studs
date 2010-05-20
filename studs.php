@@ -53,19 +53,11 @@ include 'fonctions.php';
 //On récupère le numéro de sondage par le lien web.
 $numsondage=$_GET["sondage"];
 
-// Ouverture de la base de données
-$connect=connexion_base();
-
-if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
-
-	// récupération des données du sondage en fonction de la valeur passée dans l'URL
-	$sondage=$connect->Execute("select sondage.*,sujet_studs.sujet from sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = '$numsondage'");
-	$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
-}
+$dsondage = get_sondage_from_id($_SESSION['numsondage']);
 
 //verification de l'existence du sondage
 // S'il n'existe pas, il affiche une page d'erreur
-	if (!$sondage || $sondage->recordCount() != 1) {
+if (!$dsondage) {
 
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
@@ -88,11 +80,10 @@ if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
 	
 	echo '</body>'."\n";
 	echo '</html>'."\n";
-
+	die();
 }
 
-// Sinon il affiche le sondage concerné
-else {
+$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
 
 	if ($_POST["exportics_x"]){
 		header("Location:exportics.php");
@@ -120,7 +111,6 @@ else {
 	
 
 //On récupere les données et les sujets du sondage
-	$dsondage=$sondage->FetchObject(false);
 	$nbcolonnes=substr_count($dsondage->sujet,',')+1;
 	$nblignes=$user_studs->RecordCount();
 
@@ -168,7 +158,7 @@ else {
 			//on teste pour voir si une ligne doit etre modifiée
 		$testligneamodifier = $testmodifier = false;
 		for ($i=0;$i<$nblignes;$i++){
-			if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+			if (isset($_POST["modifierligne$i"]) || isset($_POST['modifierligne'.$i.'_x'])){
 				$ligneamodifier=$i;
 				$testligneamodifier=true;
 			}
@@ -348,7 +338,7 @@ else {
 //Usager pr�-authentifi� dans la miste?
 	$user_mod = FALSE;
 //affichage des resultats actuels
-	$somme[]=0;
+$somme = array();
 	$compteur = 0;
 	while ($data=$user_studs->FetchNextObject(false)) {
 
@@ -381,14 +371,9 @@ else {
 				//si c'est bien la ligne a modifier on met les checkbox
 				if ($compteur=="$ligneamodifier"){
 					for ($j=0;$j<$nbcolonnes;$j++){
-							
-						$car=substr($ensemblereponses,$j,1);
-						if ($car=="1"){
-							echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value="" checked></td>'."\n";
-						}
-						else {
-							echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value=""></td>'."\n";
-						}
+					  echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value="" ' .
+					    substr($ensemblereponses,$j,1) == '1' ? 'checked="checked"' : '' . 
+					    '></td>'."\n";
 					}
 				}
 				//sinon on affiche les lignes normales
@@ -414,7 +399,7 @@ else {
 			
 			//demande de confirmation pour modification de ligne
 			for ($i=0;$i<$nblignes;$i++){
-				if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+				if (isset($_POST["modifierligne$i"])||isset($_POST['modifierligne'.$i.'_x'])){
 					if ($compteur==$i){
 						echo '<td class=casevide><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
 					}
@@ -515,37 +500,26 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (strpos('@',$toutsujet[$i]) !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						if ($_SESSION["langue"]=="FR"){$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="ES"){$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." ". _("for") ." ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for"). " ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="DE"){$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." ". _("for") ." ".$toutsujetdate[1];}
+						$meilleursujet.=date(_("l, F jS Y") ,$toutsujetdate[0]) . " " . _("for"). " ".$toutsujetdate[1];
 					}
-					else{
-						if ($_SESSION["langue"]=="FR"){$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="ES"){$meilleursujet.=strftime("%A %e de %B %Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="DE"){$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);}
-					}
+					else
+					  $meilleursujet.=date(_("l, F jS Y") ,$toutsujet[$i]);
 				}
-				else{
-					$meilleursujet.=$toutsujet[$i];
-				}
+				else
+				  $meilleursujet.=$toutsujet[$i];
+				
 			$compteursujet++;
 		}
 	}
 	$meilleursujet=substr("$meilleursujet",1);
 
-	// Si le résultat est supérieur à 1 on rajoute un S
-	if ($meilleurecolonne!="1"&&($_SESSION["langue"]=="FR"||$_SESSION["langue"]=="EN"||$_SESSION["langue"]=="ES")){$pluriel="s";}
-	if ($meilleurecolonne!="1"&&$_SESSION["langue"]=="DE"){$pluriel="n";}
-	
 	// Affichage du meilleur choix
 
 	if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.\n";
+	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . ($meilleurecolonne > 1) ? _("votes") : _("vote") . ".\n";
  	}
 	elseif ($meilleurecolonne){
-		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.\n";
+	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . ($meilleurecolonne > 1) ? _("votes") : _("vote") . ".\n";
 	}
 	
 	echo '<br>';
@@ -594,5 +568,5 @@ else {
 	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
-}
+
 ?>

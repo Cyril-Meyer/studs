@@ -47,13 +47,6 @@ else
 
 session_start();
 
-
-
-if (isset($_POST["creation_sondage"])||isset($_POST["creation_sondage_x"])){
-	header("Location:infos_sondage.php");
-	exit();
-}
-
 //affichage de la page
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
@@ -78,9 +71,12 @@ echo '<div class=corps>'."\n";
 echo '<p><b>'.getenv('NOMAPPLICATION').'<br>'. _("What is it about?") .'</b></p>';
 echo '<p>'. _("Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.") .'</p>'."\n".'<br>'."\n";
 
-echo '<table>'."\n";
-echo'<tr><td><b>'. _("Make a poll") .'</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
-echo '</table>'."\n";
+echo '<table>'."\n" . '<tr>' .
+'<td><b>'. _("Make a poll") .'</b></td>'.
+'<td></td>'.
+'<td><a href="' . STUDS_URL. '/' . STUDS_DIR . '/infos_sondage.php"><img alt="' . _('Faire un sondage') . '" src="images/next-32.png" />' . _('Faire un sondage') . '</td>' .
+'</tr>'."\n" . '</table>'."\n";
+
 echo '<br>'."\n";
 echo '<br><br>'."\n";
 echo '</div>'."\n";

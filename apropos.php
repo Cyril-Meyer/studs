@@ -46,8 +46,6 @@ if (file_exists('bandeaux_local.php'))
 else
 	include 'bandeaux.php';
 
-
-
 	//affichage de la page
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";

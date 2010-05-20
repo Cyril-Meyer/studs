@@ -79,8 +79,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$date=date('H:i:s d/m/Y');
 	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
-	$connect=connexion_base();
-
+	global $connect;
 	$connect->Execute('insert into sondage ' .
 			  '(`id_sondage`, `commentaires`, `mail_admin`, `nom_admin`, `titre`, `id_sondage_admin`, `date_fin`, `format`, `mailsonde`) ' .
 			  'VALUES '.

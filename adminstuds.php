@@ -52,10 +52,6 @@ $numsondageadmin=$_GET["sondage"];
 //on découpe le résultat pour avoir le numéro de sondage (16 car.)
 $numsondage=substr($numsondageadmin, 0, 16);
 
-//ouverture de la connection avec la base SQL
-$connect=connexion_base();
-
-
 if (preg_match(";[\w\d]{16};i",$numsondage)){
 
 	$sondage=$connect->Execute("SELECT * FROM sondage WHERE id_sondage_admin = '$numsondageadmin'");

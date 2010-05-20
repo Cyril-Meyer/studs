@@ -46,8 +46,6 @@ if (file_exists('bandeaux_local.php'))
 else
 	include 'bandeaux.php';
 
-
-
 // action du bouton annuler
 if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 
