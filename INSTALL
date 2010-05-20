@@ -53,8 +53,15 @@ Pour que les quotes simples soient acceptées dans la partie "Création de sonda
 Base de données
 ===============
 
-STUdS ne fonctionne pour l'instant qu'avec PostgreSQL.
+STUdS fonctionne indépendemment de la base SQL utilisée, sous réserve que
+le serveur dispose de l'extension PEAR PHP: PDO (http://php.net/manual/en/book.pdo.php)
 
+Cependant la base de donnée doit être créée au préalable.
+Deux scripts le faisant sont fournis :
+install.sql: pour postgresql
+install.mysql.sql: pour mysql
+
+Pour postgresql :
 Après avoir renseigné les paramètres de la base de données, créez la
 base et pré-chargez les données par défaut. Ceci ressemble à :
 
@@ -66,7 +73,7 @@ Attention : Si vous créez la base de données avec l'utilisateur "pgsql", il vo
 
 
 Accès à la page administrateur
-=============================================
+==============================
 
 Le répertoire admin/ contient un fichier .htaccess pour Apache, qui restreint l'accès
 à la page d'administration de l'application.
@@ -138,5 +145,10 @@ Traductions
 
 Pour pouvoir bénéficier de toutes les traductions en FR, EN, DE et ES
 il faut avoir installé les locales fr_FR, de_DE, en_US et es_ES sur le
-serveur qui héberge l'application.
+serveur qui héberge l'application ainsi que disposer de l'extension PHP Gettext.
 
+Export
+======
+
+Pour pouvoir bénéficier de l'export au format PDF, l'extension PHP PEAR
+FPDF (php-fpdf) doit être installée.

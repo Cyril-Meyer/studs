@@ -17,6 +17,8 @@
    */
 
    // drop a $l which contain the array
+if(isset($_SERVER['PHP_SELF']))
+  die(); // die if not run with php-cli
 require_once('/tmp/lang.mod');
 $mypath = '/var/www/studs';
 
