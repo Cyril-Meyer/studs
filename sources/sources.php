@@ -41,29 +41,6 @@ include '../bandeaux.php';
 include '../variables.php';
 session_start();
 
-if ($_POST["uk"]){
-        $_SESSION["langue"]="EN";
-}
-if ($_POST["germany"]){
-        $_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-        $_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-        $_SESSION["langue"]="ES";
-}
-if ($_SESSION["langue"]==""){
-        $_SESSION["langue"]=getenv('LANGUE');
-}
-
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include '../lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include '../lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include '../lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include '../lang/es.inc';}
-
 //action des boutons sous bandeaux
 if ($_POST["intranet"]){
 	header("Location:../admin/index.php");

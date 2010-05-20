@@ -45,14 +45,6 @@ if (file_exists('bandeaux_local.php'))
 else
 	include 'bandeaux.php';
 
-
-//Choix de langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
-
 //si les variables de session ne snot pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
 
@@ -535,10 +527,10 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	//affichage de la liste des jours choisis
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 		echo '<tr>'."\n";
-		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");echo '<td>'.strftime("%A %e %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");echo '<td>'.strftime("%A %e de %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
+		if ($_SESSION["langue"]=="FR"){echo '<td>'.strftime("%A %e %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
+		if ($_SESSION["langue"]=="ES"){echo '<td>'.strftime("%A %e de %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
 		if ($_SESSION["langue"]=="EN"){echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, 'de_DE@euro', 'de_DE', 'de');echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
+		if ($_SESSION["langue"]=="DE"){echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
 		$affichageerreurfindeligne="no";
 		//affichage des cases d'horaires
 		for ($j=0;$j<$_SESSION["nbrecaseshoraires"];$j++){
@@ -576,10 +568,10 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	if ($erreur!="yes"&&($_POST["choixheures"]||$_POST["choixheures_x"])){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
-		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$date_fin=strftime("%A %e %B %Y",$jour_arret);}
-		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$date_fin=strftime("%A %e de %B %Y",$jour_arret);}
+		if ($_SESSION["langue"]=="FR"){$date_fin=strftime("%A %e %B %Y",$jour_arret);}
+		if ($_SESSION["langue"]=="ES"){$date_fin=strftime("%A %e de %B %Y",$jour_arret);}
 		if ($_SESSION["langue"]=="EN"){$date_fin=date("l, F jS Y",$jour_arret);}
-		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
+		if ($_SESSION["langue"]=="DE"){$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
 		echo '<br><div class=presentationdatefin>'. _("Your poll will expire automatically 2 days after the last date of your poll.") .'<br></td></tr><tr><td><br>'. _("Removal date") .' : <b> '.$date_fin.'</b><br><br>'."\n";
 		echo '</div>'."\n";
 		echo '<div class=presentationdatefin>'."\n";

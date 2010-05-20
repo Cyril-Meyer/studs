@@ -39,6 +39,7 @@
 
 
 include 'variables.php';
+include 'i18n.php';
 if (file_exists('bandeaux_local.php'))
 	include 'bandeaux_local.php';
 else
@@ -47,29 +48,6 @@ else
 session_start();
 
 
-if (!isset($_POST["uk"])&&!isset($_POST["espagne"])&&!isset($_POST["germany"])&&!isset($_POST["france"])&&!isset($_POST["creation_sondage_x"])&&!isset($_POST["intranet"])&&!isset($_POST["contact"])&&!isset($_POST["sources"])&&!isset($_POST["exemple"])&&!isset($_POST["apropos"])){
-	session_unset();
-}
-
-if (isset($_POST["uk"])){
-	$_SESSION["langue"]="EN";
-}
-if (isset($_POST["germany"])){
-	$_SESSION["langue"]="DE";
-}
-if (isset($_POST["france"])){
-	$_SESSION["langue"]="FR";
-}
-if (isset($_POST["espagne"])){
-	$_SESSION["langue"]="ES";
-}
-
-if (isset($_SESSION["langue"])==""){
-	$_SESSION["langue"]=getenv('LANGUE');
-}
-
-if (isset($_SESSION["langue"]) && file_exists('lang/' . strtolower($_SESSION["langue"]) . '.inc'))
-  include 'lang/' . strtolower($_SESSION["langue"]) . '.inc';
 
 if (isset($_POST["creation_sondage"])||isset($_POST["creation_sondage_x"])){
 	header("Location:infos_sondage.php");

@@ -44,27 +44,6 @@ include '../variables.php';
 include '../fonctions.php';
 include '../bandeaux.php';
 
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include '../lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include '../lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include '../lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include '../lang/es.inc';}
-
-
 // Ce fichier index.php se trouve dans le sous-repertoire ADMIN de Studs. Il sert à afficher l'intranet de studs 
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
 // de l'application.

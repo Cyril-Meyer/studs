@@ -55,13 +55,6 @@ function random($car) {
 }
 
 function ajouter_sondage(){
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
 	$sondage=random(16);
 	$sondage_admin=$sondage.random(8);
 

@@ -38,6 +38,7 @@
 //==========================================================================
 
 include 'variables.php';
+include_once( 'i18n.php' );
 include('adodb/adodb.inc.php');
 
 function connexion_base(){

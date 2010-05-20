@@ -44,26 +44,6 @@ if (file_exists('bandeaux_local.php'))
 else
 	include 'bandeaux.php';
 
-
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
 #tests
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	$_SESSION["titre"]=$_POST["titre"];

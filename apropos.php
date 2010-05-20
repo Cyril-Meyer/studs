@@ -40,31 +40,12 @@
 session_start();
 
 include 'variables.php';
+include_once( 'i18n.php' );
 if (file_exists('bandeaux_local.php'))
 	include 'bandeaux_local.php';
 else
 	include 'bandeaux.php';
 
-
-//changement de la langue
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
 
 // action du bouton annuler
 if ($_POST["annuler"]){
