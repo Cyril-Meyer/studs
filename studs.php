@@ -60,7 +60,7 @@ if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
 
 	// récupération des données du sondage en fonction de la valeur passée dans l'URL
 	$sondage=$connect->Execute("select sondage.*,sujet_studs.sujet from sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = '$numsondage'");
-	$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users"
+	$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
 }
 
 //verification de l'existence du sondage
