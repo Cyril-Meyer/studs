@@ -76,16 +76,16 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 	if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
 	else {unset($_SESSION["mailsonde"]);}	
 	
-	if(!eregi ("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{1,4}$",$_POST["adresse"])){
+	if(!filter_var($_POST["adresse"], FILTER_VALIDATE_EMAIL) || strpos('@', $_POST["adresse"]) === false)
 		$erreur_adresse="yes";
 	}
-	if (ereg("<|>|\"",$_POST["titre"])){
+	if (preg_match(';<|>|";',$_POST["titre"])){
 		$erreur_injection_titre="yes";
 	}
-	if (ereg("<|>|\"",$_POST["nom"])){
+	if (preg_match(';<|>|";',$_POST["nom"])){
 		$erreur_injection_nom="yes";
 	}
-	if (ereg("<|>|\"",$_POST["commentaires"])){
+	if (preg_match(';<|>|";',$_POST["commentaires"])){
 	$erreur_injection_commentaires="yes";
 	}
 }

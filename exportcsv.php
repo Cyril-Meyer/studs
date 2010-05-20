@@ -66,7 +66,7 @@ for ($i=0;$toutsujet[$i];$i++){
 }
 $input.="\r\n";
 
-if (eregi("@",$dsondage->sujet)){
+if (strpos('@',$dsondage->sujet) !== false){
 	$input.=";";
 	for ($i=0;$toutsujet[$i];$i++){
 		$heures=explode("@",$toutsujet[$i]);

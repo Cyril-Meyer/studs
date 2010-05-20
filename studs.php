@@ -46,28 +46,26 @@ else
 include 'fonctions.php';
 
 
-if ($_POST["uk"]){
+if (isset($_POST["uk"])){
 	$_SESSION["langue"]="EN";
 }
-if ($_POST["germany"]){
+if (isset($_POST["germany"])){
 	$_SESSION["langue"]="DE";
 }
-if ($_POST["france"]){
+if (isset($_POST["france"])){
 	$_SESSION["langue"]="FR";
 }
-if ($_POST["espagne"]){
+if (isset($_POST["espagne"])){
 	$_SESSION["langue"]="ES";
 }
 
-if ($_SESSION["langue"]==""){
+if (isset($_SESSION["langue"])==""){
 	$_SESSION["langue"]=getenv('LANGUE');
 }
 
 //Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
+if (isset($_SESSION["langue"]) && file_exists('lang/' . strtolower($_SESSION["langue"]) . '.inc'))
+  include 'lang/' . strtolower($_SESSION["langue"]) . '.inc';
 
 
 // Le fichier studs.php sert a afficher les résultats d'un sondage à un simple utilisateur. 
@@ -81,7 +79,7 @@ $numsondage=$_GET["sondage"];
 // Ouverture de la base de données
 $connect=connexion_base();
 
-if (eregi("[a-z0-9]{16}",$numsondage)){
+if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
 
 	// récupération des données du sondage en fonction de la valeur passée dans l'URL
 	$sondage=$connect->Execute("select sondage.*,sujet_studs.sujet from sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = '$numsondage'");
@@ -205,7 +203,7 @@ else {
 					}
 			}
 
-			if (ereg("<|>|\"|\'", $_POST["nom"])){
+			if (preg_match(";[\<\>\"'\\];", $_POST["nom"])) {
 				$erreur_injection="yes";
 			}
 
@@ -230,11 +228,7 @@ else {
 				$ligneamodifier=$i;
 				$testligneamodifier=true;
 			}
-		}	
-
 			//test pour voir si une ligne est a modifier
-
-		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST['validermodifier'.$i.'_x']){
 				$modifier=$i;
 				$testmodifier=true;
@@ -380,7 +374,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	}
 	echo '</tr>'."\n";
 		//affichage des horaires	
-	if (eregi("@",$dsondage->sujet)){
+	if (strpos('@',$dsondage->sujet) !== false){
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 				
@@ -575,7 +569,7 @@ else {
 			$meilleursujet.=", ";
 			  	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 					$meilleursujetexport=$toutsujet[$i];
-					if (eregi("@",$toutsujet[$i])){
+					if (strpos('@',$toutsujet[$i]) !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}

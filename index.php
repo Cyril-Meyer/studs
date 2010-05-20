@@ -47,61 +47,57 @@ else
 session_start();
 
 
-if (!$_POST["uk"]&&!$_POST["uk"]&&!$_POST["espagne"]&&!$_POST["germany"]&&!$_POST["france"]&&!$_POST["creation_sondage_x"]&&!$_POST["intranet"]&&!$_POST["contact"]&&!$_POST["sources"]&&!$_POST["exemple"]&&!$_POST["apropos"]){
+if (!isset($_POST["uk"])&&!isset($_POST["espagne"])&&!isset($_POST["germany"])&&!isset($_POST["france"])&&!isset($_POST["creation_sondage_x"])&&!isset($_POST["intranet"])&&!isset($_POST["contact"])&&!isset($_POST["sources"])&&!isset($_POST["exemple"])&&!isset($_POST["apropos"])){
 	session_unset();
 }
 
-if ($_POST["uk"]){
+if (isset($_POST["uk"])){
 	$_SESSION["langue"]="EN";
 }
-if ($_POST["germany"]){
+if (isset($_POST["germany"])){
 	$_SESSION["langue"]="DE";
 }
-if ($_POST["france"]){
+if (isset($_POST["france"])){
 	$_SESSION["langue"]="FR";
 }
-if ($_POST["espagne"]){
+if (isset($_POST["espagne"])){
 	$_SESSION["langue"]="ES";
 }
 
-if ($_SESSION["langue"]==""){
+if (isset($_SESSION["langue"])==""){
 	$_SESSION["langue"]=getenv('LANGUE');
 }
 
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
+if (isset($_SESSION["langue"]) && file_exists('lang/' . strtolower($_SESSION["langue"]) . '.inc'))
+  include 'lang/' . strtolower($_SESSION["langue"]) . '.inc';
 
-if ($_POST["creation_sondage"]||$_POST["creation_sondage_x"]){
-
+if (isset($_POST["creation_sondage"])||isset($_POST["creation_sondage_x"])){
 	header("Location:infos_sondage.php");
 	exit();
 }
 
 //action si bouton intranet est activé. Entrée dans l'intranet
-if ($_POST["intranet"]){
-
-	header("Location:./admin/index.php");
+if (isset($_POST["intranet"])){
+	header("Location:admin/index.php");
 	exit();
 }
 
-if ($_POST["contact"]){
+if (isset($_POST["contact"])){
 	header("Location:contacts.php");
 	exit();
 }
 
-if ($_POST["sources"]){
+if (isset($_POST["sources"])){
 	header("Location:sources/sources.php");
 	exit();
 }
 
-if ($_POST["exemple"]){
+if (isset($_POST["exemple"])){
 	header("Location:studs.php?sondage=aqg259dth55iuhwm");
 	exit();
 }
 
-if ($_POST["apropos"]){
+if (isset($_POST["apropos"])){
 	header("Location:apropos.php");
 	exit();
 }

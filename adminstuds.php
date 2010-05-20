@@ -82,7 +82,7 @@ $numsondage=substr($numsondageadmin, 0, 16);
 $connect=connexion_base();
 
 
-if (eregi("[a-z0-9]{16}",$numsondage)){
+if (preg_match(";[\w\d]{16};i",$numsondage)){
 
 	$sondage=$connect->Execute("SELECT * FROM sondage WHERE id_sondage_admin = '$numsondageadmin'");
 	$sujets=$connect->Execute("SELECT * FROM sujet_studs WHERE id_sondage='$numsondage'");
@@ -320,7 +320,7 @@ else {
 						}
 				}
 
-				if (ereg("<|>|\"|'", $_POST["nom"])){
+				if (preg_match(';<|>|"|\';i', $_POST["nom"])){
 					$erreur_injection="yes";
 				}
 
@@ -736,7 +736,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	echo '<td class="jour"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 			//affichage des horaires	
-	if (eregi("@",$dsujet->sujet)){
+	if (strpos('@',$dsujet->sujet) !== false){
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 		echo '<td></td>'."\n";
@@ -946,7 +946,7 @@ else {
 			$meilleursujet.=", ";
 			  	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 					$meilleursujetexport=$toutsujet[$i];
-					if (eregi("@",$toutsujet[$i])){
+					if (strpos('@',$toutsujet[$i]) !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
 						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}

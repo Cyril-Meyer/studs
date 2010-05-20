@@ -55,12 +55,11 @@ for ($i=0;$i<pg_numrows($sondage);$i++){
 	for ($j=0;$j<count($anciensujethoraires);$j++){
 
 
-		if (eregi("@",$anciensujethoraires[$j])){
+		if (strpos('@',$anciensujethoraires[$j]) !== false){
 
 			$ancientsujet=explode("@",$anciensujethoraires[$j]);
-
-
-			if (eregi("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})",$ancientsujet[0],$registredate)){
+			//;([0-2]\d)/([0-2]\d)/(\d{4});
+			if (preg_match(";(\d{1,2})/(\d{1,2})/(\d{4});",$ancientsujet[0],$registredate)){
 
 				$nouvelledate=mktime(0,0,0,$registredate[2],$registredate[1],$registredate[3]);
 
@@ -73,7 +72,7 @@ for ($i=0;$i<pg_numrows($sondage);$i++){
 
 			else{
 
-				if (eregi("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})",$anciensujethoraires[$j],$registredate)){
+				if (preg_match(";(\d{1,2})/(\d{1,2})/(\d{4});",$anciensujethoraires[$j],$registredate)){
                                 	$nouvelledate=mktime(0,0,0,$registredate[2],$registredate[1],$registredate[3]);
 //					echo $anciensujethoraires[$j].' ---- > '.$nouvelledate.'<br>';
                                 $nouvelledateaffiche.=$nouvelledate.',';

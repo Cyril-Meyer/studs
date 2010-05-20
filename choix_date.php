@@ -409,9 +409,9 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 			$case=$j+1;
 
 			//si c'est un creneau type 8:00-11:00
-			if (ereg("([0-9]{1,2}:[0-9]{2})-([0-9]{1,2}:[0-9]{2})",$_POST["horaires$i"][$j],$creneaux)){
+			if (preg_match("(\d{1,2}:\d{2})-(\d{1,2}:\d{2})",$_POST["horaires$i"][$j],$creneaux)){
 				
-				//on recupere les deux parties du ereg qu'on redécoupe autour des ":"
+				//on recupere les deux parties du preg_match qu'on redécoupe autour des ":"
 				$debutcreneau=explode(":",$creneaux[1]);
 				$fincreneau=explode(":",$creneaux[2]);
 
@@ -428,9 +428,9 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 			}
 
 			//si c'est un creneau type 8h00-11h00
-			elseif (eregi("^([0-9]{1,2}h[0-9]{0,2})-([0-9]{1,2}h[0-9]{0,2})$",$_POST["horaires$i"][$j],$creneaux)){
+			elseif (preg_match(";^(\d{1,2}h\d{0,2})-(\d{1,2}h\d{0,2})$;i",$_POST["horaires$i"][$j],$creneaux)){
 				
-				//on recupere les deux parties du ereg qu'on redécoupe autour des "H"
+				//on recupere les deux parties du preg_match qu'on redécoupe autour des "H"
 				$debutcreneau=preg_split("/h/i",$creneaux[1]);
 				$fincreneau=preg_split("/h/i",$creneaux[2]);
 
@@ -446,7 +446,7 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 					}
 			}
 			//si c'est une heure simple type 8:00
-			elseif (ereg("^([0-9]{1,2}):([0-9]{2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2}):(\d{2})$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<24&&$heures[2]<60){
 					$_SESSION["horaires$i"][$j]=$heures[0];
@@ -458,7 +458,7 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 				}
 			}
 			//si c'est une heure encore plus simple type 8h
-			elseif (eregi("^([0-9]{1,2})h([0-9]{0,2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})h(\d{0,2})$;i",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<24&&$heures[2]<60){
 					$_SESSION["horaires$i"][$j]=$heures[0];
@@ -470,7 +470,7 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 				}
 			}
 			//si c'est un creneau simple type 8-11
-			elseif (ereg("^([0-9]{1,2})-([0-9]{1,2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})-(\d{1,2})$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<$heures[2]&&$heures[1]<24&&$heures[2]<24){
 					$_SESSION["horaires$i"][$j]=$heures[0];
@@ -483,7 +483,7 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 			}
 
 			//si c'est un creneau H type 8h-11h
-			elseif (eregi("^([0-9]{1,2})h-([0-9]{1,2})h$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})h-(\d{1,2})h$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<$heures[2]&&$heures[1]<24&&$heures[2]<24){
 					$_SESSION["horaires$i"][$j]=$heures[0];
