@@ -211,39 +211,6 @@ else {
 	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
 	$nblignes=$user_studs->RecordCount();
 
-	//action du bouton d'annulation
-	if ($_POST["annuler"]){
-		header("Location:index.php");
-		exit();
-	}
-
-	//action si bouton intranet est activé. Entrée dans l'intranet
-	if ($_POST["intranet"]){
-
-        	header("Location:./admin/index.php");
-	        exit();
-	}
-
-	if ($_POST["contact"]){
-        	header("Location:contacts.php");
-	        exit();
-	}
-
-	if ($_POST["sources"]){
-        	header("Location:sources/sources.php");
-	        exit();
-	}
-
-	if ($_POST["exemple"]){
-        	header("Location:studs.php?sondage=aqg259dth55iuhwm");
-	        exit();
-	}
-
-	if ($_POST["apropos"]){
-        	header("Location:apropos.php");
-	        exit();
-	}
-
 	//si on annule la suppression
 	if ($_POST["annulesuppression"]){
 

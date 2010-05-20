@@ -48,12 +48,6 @@ include '../bandeaux.php';
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
 // de l'application.
 
-// action du bouton annuler
-if ($_POST["annuler"]){
-	header("Location:../index.php");
-	exit();
-}
-
 if ($_POST["historique"]){
 	header("Location:logs_studs.txt");
 	exit();

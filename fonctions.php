@@ -71,7 +71,7 @@ function blocage_touche_entree(){
 function get_server_name() {
        $scheme = $_SERVER["HTTPS"] == "on" ? "https" : "http";
 	$url = sprintf("%s://%s%s", $scheme,
-		      getenv('NOMSERVEUR'),
+		      STUDS_URL,
 		      dirname($_SERVER["SCRIPT_NAME"]));
 	if (!preg_match("|/$|", $url)){
 		$url = $url."/";        

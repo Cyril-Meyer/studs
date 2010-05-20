@@ -90,13 +90,26 @@ function liste_lang() {
 
 #Les sous-bandeaux contenant les boutons de navigation
 function sous_bandeau(){
-  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=exemple value="'. _("Example") .'"><input type=submit class=boutonsousbandeau name=contact value="'. _("Contact") .'"><input type=submit class=boutonsousbandeau name=sources value="'. _("Sources") .'"><input type=submit class=boutonsousbandeau name=apropos value="'. _("About") .'"><input type=submit class=boutonsousbandeau name=intranet value="'. _("Admin") .'">' . liste_lang() . '</div>'."\n";
+  echo '<div class="sousbandeau">' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/studs.php?sondage=aqg259dth55iuhwm">'. _("Example") .'</a>' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/contacts.php">'. _("Contact") .'</a>' .
+    //'<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/sources/sources.php">'. _("Sources") .'</a>' . //not implemented
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/apropos.php">'. _("About") .'</a>' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/admin/index.php">'. _("Admin") .'</a>' .
+    liste_lang() . '</div>'."\n";
 }
 function sous_bandeau_admin(){
-  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=historique value="'. _("Logs") .'"><input type=submit class=boutonsousbandeau name=nettoyage value="'. _("Cleaning") .'">' . liste_lang() .'</div>'."\n";
+  echo '<div class="sousbandeau">' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
+    '<input type=submit class=boutonsousbandeau name=historique value="'. _("Logs") .'">' .
+    '<input type=submit class=boutonsousbandeau name=nettoyage value="'. _("Cleaning") .'">' . liste_lang() .'</div>'."\n";
 }
 function sous_bandeau_choix(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=retour value="'. _("Back") .'"></div>'."\n";
+  echo '<div class="sousbandeau">' .
+    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
+    '<input type=submit class=boutonsousbandeau name=retour value="'. _("Back") .'">' .
+    '</div>'."\n";
 }
 
 

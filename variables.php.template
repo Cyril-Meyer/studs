@@ -37,11 +37,12 @@
 //
 //==========================================================================
 
-#Nom du serveur
-putenv("NOMSERVEUR=<nom DNS du serveur>");
+// Nom du serveur
+define('STUDS_URL', 'http://www.mon_domaine.coop');
 
-#racine du serveur web
-putenv("RACINESERVEUR=<repertoire de l'application sur le serveur web>");
+// Répertoire sous lequel se trouve Studs
+// Utilise la racine du serveur telle que définie par STUDS_URL si laissé vide
+define('STUDS_DIR', 'mes_sondages/');
 
 #Nom de l'application
 putenv("NOMAPPLICATION=<nom de l'application>");

@@ -54,32 +54,6 @@ if (isset($_POST["creation_sondage"])||isset($_POST["creation_sondage_x"])){
 	exit();
 }
 
-//action si bouton intranet est activé. Entrée dans l'intranet
-if (isset($_POST["intranet"])){
-	header("Location:admin/index.php");
-	exit();
-}
-
-if (isset($_POST["contact"])){
-	header("Location:contacts.php");
-	exit();
-}
-
-if (isset($_POST["sources"])){
-	header("Location:sources/sources.php");
-	exit();
-}
-
-if (isset($_POST["exemple"])){
-	header("Location:studs.php?sondage=aqg259dth55iuhwm");
-	exit();
-}
-
-if (isset($_POST["apropos"])){
-	header("Location:apropos.php");
-	exit();
-}
-
 //affichage de la page
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";

@@ -41,39 +41,6 @@ include '../bandeaux.php';
 include '../variables.php';
 session_start();
 
-//action des boutons sous bandeaux
-if ($_POST["intranet"]){
-	header("Location:../admin/index.php");
-exit();
-}
-
-if ($_POST["contact"]){
-        header("Location:../contacts.php");
-        exit();
-}
-
-if ($_POST["sources"]){
-        header("Location:sources.php");
-        exit();
-}
-
-if ($_POST["exemple"]){
-        header("Location:../studs.php?sondage=aqg259dth55iuhwm");
-        exit();
-}
-
-if ($_POST["apropos"]){
-        header("Location:../apropos.php");
-        exit();
-}
-//bouton annuler
-if ($_POST["annuler"]||$_POST["annuler_x"]){
-        header("Location:../index.php");
-        exit();
-}
-
-
-
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";

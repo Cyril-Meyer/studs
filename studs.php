@@ -94,39 +94,6 @@ if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
 // Sinon il affiche le sondage concerné
 else {
 
-	//bouton annuler
-	if ($_POST["annuler"]){
-		header("Location:index.php");
-		exit();
-	}
-
-	//action si bouton intranet est activé. Entrée dans l'intranet
-	if ($_POST["intranet"]){
-
-        	header("Location:./admin/index.php");
-	        exit();
-	}
-
-	if ($_POST["contact"]){
-        	header("Location:contacts.php");
-	        exit();
-	}
-
-	if ($_POST["sources"]){
-        	header("Location:sources/sources.php");
-	        exit();
-	}
-
-	if ($_POST["exemple"]){
-        	header("Location:studs.php?sondage=aqg259dth55iuhwm");
-	        exit();
-	}
-
-	if ($_POST["apropos"]){
-        	header("Location:apropos.php");
-	        exit();
-	}
-
 	if ($_POST["exportics_x"]){
 		header("Location:exportics.php");
 		exit();
