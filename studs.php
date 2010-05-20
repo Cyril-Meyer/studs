@@ -393,7 +393,7 @@ $somme = array();
 			}
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
-			if (!$testligneamodifier=="true"&&($dsondage->format=="A+"||$dsondage->format=="D+") && $mod_ok){
+			if (!$testligneamodifier && ($dsondage->format=="A+"||$dsondage->format=="D+") && $mod_ok){
 				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png"></td>'."\n";
 			}
 			
