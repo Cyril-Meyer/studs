@@ -227,9 +227,8 @@ echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+echo '<script type="text/javascript" src="block_enter.js"></script>';
 
-#bloquer la touche entrée
-blocage_touche_entree();
 echo '</head>'."\n";
 echo '<body>'."\n";
 

@@ -206,10 +206,8 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-	
-	#bloquer la touche entrée
-	blocage_touche_entree();
-	
+	echo '<script type="text/javascript" src="block_enter.js"></script>';
+
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
