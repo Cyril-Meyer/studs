@@ -61,8 +61,8 @@ putenv("USERPASSWD=<mot de passe>");
 #nom du serveur de base de donnees, laisser vide pour utiliser un socket
 putenv("SERVEURBASE=<nom du serveur avec domaine>");
 
-#Langue par défaut de l'application a choisir entre FR, EN, ES et DE
-putenv("LANGUE=FR");
+// Langue par défaut de l'application (à choisir dans $ALLOWED_LANGUAGES)
+define('LANGUE', 'fr_FR');
 
 #Nom et emplacement du logo
 putenv("LOGOBANDEAU=<chemin relatif suivi du nom du fichier du logo pour le bandeau>");
@@ -77,5 +77,11 @@ putenv("BASE_TYPE"=<type de BDD>");
 if (@file_exists('variables.local.php')) {
     include('variables.local.php');
 }
+
+/* Do not edit the following */
+$ALLOWED_LANGUAGES = array('fr_FR' => 'french',
+			   'en_GB' => 'english',
+			   'es_ES' => 'spanish',
+			   'de_DE' => 'german' );
 
 ?>
