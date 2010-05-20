@@ -114,8 +114,8 @@ $i=0;
 while($dsondage = $sondage->FetchNextObject(false)) {
  	if ($_POST["supprimersondage$i"]){
 		echo '<table>'."\n";
- 		echo '<tr><td bgcolor="#EE0000" colspan=11>'.$tt_admin_confirmesuppression.'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'.$tt_admin_bouton_confirmesuppression.'">'."\n";
- 		echo '<input type="submit" name="annullesuppression" value="'.$tt_admin_bouton_annulesuppression.'"></td></tr>'."\n";
+ 		echo '<tr><td bgcolor="#EE0000" colspan=11>'. _("Confirm removal of the poll ") .'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'. _("Remove this poll!") .'">'."\n";
+ 		echo '<input type="submit" name="annullesuppression" value="'. _("Keep this poll!") .'"></td></tr>'."\n";
 		echo '</table>'."\n";
 		echo '<br>'."\n";
  	}
@@ -144,12 +144,12 @@ while($dsondage = $sondage->FetchNextObject(false)) {
 $sondage=$connect->Execute("select * from sondage");
 $nbsondages=$sondage->RecordCount();
 
-echo $nbsondages.' '.$tt_admin_nbresondage.'<br><br>'."\n";
+echo $nbsondages.' '. _("polls in the database at this time") .'<br><br>'."\n";
 
 // tableau qui affiche tous les sondages de la base
 echo '<table border=1>'."\n";	
 
-echo '<tr align=center><td>'.$tt_admin_colonne_id.'</td><td>'.$tt_admin_colonne_format.'</td><td>'.$tt_admin_colonne_titre.'</td><td>'.$tt_admin_colonne_auteur.'</td><td>'.$tt_admin_colonne_datefin.'</td><td>'.$tt_admin_colonne_nbreuser.'</td><td colspan=3>'.$tt_admin_colonne_actions.'</td>'."\n";
+echo '<tr align=center><td>'. _("Poll ID") .'</td><td>'. _("Format") .'</td><td>'. _("Title") .'</td><td>'. _("Author") .'</td><td>'. _("Expiration's date") .'</td><td>'. _("Users") .'</td><td colspan=3>'. _("Actions") .'</td>'."\n";
 
 
 $i = 0;
@@ -172,9 +172,9 @@ while($dsondage = $sondage->FetchNextObject(false)) {
 	
 	echo'<td>'.$nbuser.'</td>'."\n";
 
-	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'">'.$tt_admin_lien_voir.'</a></td>'."\n";
-	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'">'.$tt_admin_lien_modifier.'</a></td>'."\n";
-	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="'.$tt_admin_bouton_supprimer.'"></td>'."\n";
+	echo '<td><a href="../studs.php?sondage='.$dsondage->id_sondage.'">'. _("See the poll") .'</a></td>'."\n";
+	echo '<td><a href="../adminstuds.php?sondage='.$dsondage->id_sondage_admin.'">'. _("Change the poll") .'</a></td>'."\n";
+	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="'. _("Remove the poll") .'"></td>'."\n";
 
 	echo '</tr>'."\n";
 	$i++;

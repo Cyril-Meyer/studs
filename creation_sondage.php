@@ -95,8 +95,10 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$connect->Execute("insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_admin] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_admin_debut :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
+	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][" . _("For sending to the polled users") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]), "" . _("This is the message you have to send to the people you want to poll. \nNow, you have to send this message to everyone you want to poll.") . "\n\n".stripslashes($_SESSION["nom"])." " . _("hast just created a poll called") . " : \"".stripslashes($_SESSION["titre"])."\".\n" . _("Thanks for filling the poll at the link above") . " :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n" . _("Thanks for your confidence") . ",\n".getenv('NOMAPPLICATION'),$headers);
+	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][" . _("Author's message") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]),
+	      _("This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou can now modify it at the link above") .
+	      " :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n" . _("Thanks for your confidence") . ",\n".getenv('NOMAPPLICATION'),$headers);
 
 
 	$fichier_log=fopen('admin/logs_studs.txt','a');

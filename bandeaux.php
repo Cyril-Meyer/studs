@@ -53,31 +53,31 @@ function bandeau_tete(){
 
 #les bandeaux de titre
 function bandeau_titre(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Make your polls") .'</div>'."\n";
 }
 function bandeau_titre_infos(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_infos"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 }
 function bandeau_titre_date(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_date"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Poll dates (2 on 2)") .'</div>'."\n";
 }
 function bandeau_titre_autre(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_autre"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Poll subjects (2 on 2)") .'</div>'."\n";
 }
 function bandeau_titre_admin(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_admin"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Polls administrator") .'</div>'."\n";
 }
 function bandeau_titre_contact(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_contact"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Contact us") .'</div>'."\n";
 }
 function bandeau_titre_version(){
 	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_version"].'</div>'."\n";
 }
 function bandeau_titre_erreur(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_erreur"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("Error!") .'</div>'."\n";
 }
 function bandeau_titre_apropos(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_apropos"].'</div>'."\n";
+	echo '<div class="bandeautitre">'. _("About") .'</div>'."\n";
 }
 
 function liste_lang() {
@@ -90,13 +90,13 @@ function liste_lang() {
 
 #Les sous-bandeaux contenant les boutons de navigation
 function sous_bandeau(){
-  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=exemple value="'.$GLOBALS["tt_bouton_exemple"].'"><input type=submit class=boutonsousbandeau name=contact value="'.$GLOBALS["tt_bouton_contact"].'"><input type=submit class=boutonsousbandeau name=sources value="'.$GLOBALS["tt_bouton_sources"].'"><input type=submit class=boutonsousbandeau name=apropos value="'.$GLOBALS["tt_bouton_apropos"].'"><input type=submit class=boutonsousbandeau name=intranet value="'.$GLOBALS["tt_bouton_intranet"].'">' . liste_lang() . '</div>'."\n";
+  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=exemple value="'. _("Example") .'"><input type=submit class=boutonsousbandeau name=contact value="'. _("Contact") .'"><input type=submit class=boutonsousbandeau name=sources value="'. _("Sources") .'"><input type=submit class=boutonsousbandeau name=apropos value="'. _("About") .'"><input type=submit class=boutonsousbandeau name=intranet value="'. _("Admin") .'">' . liste_lang() . '</div>'."\n";
 }
 function sous_bandeau_admin(){
-  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=historique value="'.$GLOBALS["tt_bouton_historique"].'"><input type=submit class=boutonsousbandeau name=nettoyage value="'.$GLOBALS["tt_bouton_nettoyage"].'">' . liste_lang() .'</div>'."\n";
+  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=historique value="'. _("Logs") .'"><input type=submit class=boutonsousbandeau name=nettoyage value="'. _("Cleaning") .'">' . liste_lang() .'</div>'."\n";
 }
 function sous_bandeau_choix(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=retour value="'.$GLOBALS["tt_bouton_retour"].'"></div>'."\n";
+	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'. _("Home") .'"><input type=submit class=boutonsousbandeau name=retour value="'. _("Back") .'"></div>'."\n";
 }
 
 
@@ -105,13 +105,13 @@ function sur_bandeau_pied(){
 	echo '<div class="surbandeaupied"></div>'."\n";
 }
 function bandeau_pied(){
-	echo '<div class="bandeaupied">'.$GLOBALS["tt_bandeau_pied"].'</div>'."\n";
+	echo '<div class="bandeaupied">'. _("Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009") .'</div>'."\n";
 }
 function sur_bandeau_pied_mobile(){
 	echo '<div class="surbandeaupiedmobile"></div>'."\n";
 }
 function bandeau_pied_mobile(){
-	echo '<div class="bandeaupiedmobile">'.$GLOBALS["tt_bandeau_pied"].'</div>'."\n";
+	echo '<div class="bandeaupiedmobile">'. _("Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009") .'</div>'."\n";
 }
 
 

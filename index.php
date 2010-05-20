@@ -123,11 +123,11 @@ sous_bandeau();
 
 echo '<div class=corps>'."\n";
 
-echo '<p><b>'.getenv('NOMAPPLICATION').'<br>'.$tt_index_titre.'</b></p>';
-echo '<p>'.$tt_index_presentation.'</p>'."\n".'<br>'."\n";
+echo '<p><b>'.getenv('NOMAPPLICATION').'<br>'. _("What is it about?") .'</b></p>';
+echo '<p>'. _("Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.") .'</p>'."\n".'<br>'."\n";
 
 echo '<table>'."\n";
-echo'<tr><td><b>'.$tt_index_bouton.'</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
+echo'<tr><td><b>'. _("Make a poll") .'</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br>'."\n";
 echo '<br><br>'."\n";

@@ -108,10 +108,10 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	
 	//envoi des mails
 	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_admin ".getenv('NOMAPPLICATION')."\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
+	mail (getenv('ADRESSEMAILADMIN'), "" . _("[CONTACT] You have sent a question ") . "".getenv('NOMAPPLICATION'), "" . _("You have a question from a user ") . " ".getenv('NOMAPPLICATION')."\n\n" . _("User") . " : ".$_POST["nom"]."\n\n" . _("User's email address") . " : $_POST[adresse_mail]\n\n" . _("Message") . " :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
 		$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+		mail ("$_POST[adresse_mail]", "" . _("[COPY] Someone has sent a question ") . "".getenv('NOMAPPLICATION'), "" . _("Here is a copy of your question") . " :\n\n".$message." \n\n" . _("We're going to answer your question shortly.") . "\n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 	}
 
 	//affichage de la page de confirmation d'envoi
@@ -128,8 +128,8 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	bandeau_titre();
 	
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_contacts_envoimail_titre</H2><br><br>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "<H2>" . _("Your message has been sent!") . "</H2><br><br>"."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	
@@ -165,23 +165,23 @@ else {
 
 	//blablabla
 	echo '<div class=corps>'."\n";
-	echo $tt_contacts_presentation.'<br><br>'."\n";
+	echo _("If you have questions, you can send a message here.") .'<br><br>'."\n";
 
-	echo $tt_contacts_nom.' :<br>'."\n";
+	echo _("Your name") .' :<br>'."\n";
 	echo '<input type="text" size="40" maxlength="64" name="nom" value="'.$_SESSION["nom"].'">';
 
 	if ($_POST["envoiquestion"]&&$_SESSION["nom"]==""){
-		echo ' <font color="#FF0000">'.$tt_infos_erreur_nom.'</font>';
+		echo ' <font color="#FF0000">'. _("Enter a name") .'</font>';
 	}
 
 	echo '<br><br>'."\n";
-	echo $tt_contacts_adressemail.' :<br>'."\n";
+	echo _("Your email address ") .' :<br>'."\n";
 	echo '<input type="text" size="40" maxlength="64" name="adresse_mail" value="'.$_SESSION["adresse_mail"].'">'."\n";
 
 
 	echo '<br><br>';
 
-	echo $tt_contacts_question.' :<br>'."\n";
+	echo _("Question") .' :<br>'."\n";
 	echo '<textarea name="question" rows="7" cols="40">'.$_SESSION["question"].'</textarea>';
 
 	if ($_POST["envoiquestion"]&&$_SESSION["question"]==""){
@@ -190,7 +190,7 @@ else {
 
 	echo '<br><br><br>'."\n";
 	echo '<table>'."\n";
-	echo '<tr><td>'.$tt_contacts_bouton_question.'</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
+	echo '<tr><td>'. _("Send your question") .'</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
 	echo '</table>'."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";

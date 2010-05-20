@@ -67,8 +67,8 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_choix_page_erreur_titre !</H2>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "<H2>" . _("You haven't filled the first section of the poll creation.") . " !</H2>"."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -162,13 +162,13 @@ else {
 	sous_bandeau_choix();
 	
 	echo '<div class=corps>'."\n";
-	echo '<br>'.$tt_choixautre_presentation.'<br><br>'."\n";
+	echo '<br>'. _("Your poll aim is to make a choice between different subjects.<br>Enter the subjects to vote for:") .'<br><br>'."\n";
 	echo '<table>'."\n";
 
 	//affichage des cases texte de formulaire
 	for ($i=0;$i<$_SESSION["nbrecases"];$i++){
 		$j=$i+1;
-		echo '<tr><td>'.$tt_choixautre_champchoix.' '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.str_replace("\\","",$_SESSION["choix$i"]).'" id="choix'.$i.'"></td></tr>'."\n";
+		echo '<tr><td>'. _("Choice") .' '.$j.' : </td><td><input type="text" name="choix[]" size="40" maxlength="40" value="'.str_replace("\\","",$_SESSION["choix$i"]).'" id="choix'.$i.'"></td></tr>'."\n";
 	}	
 
 	echo '</table>'."\n";
@@ -180,12 +180,12 @@ else {
 
 	//ajout de cases supplementaires
 	echo '<table><tr>'."\n";
-	echo '<td>'.$tt_choixautre_ajoutcases.'</td><td><input type="image" name="ajoutcases" value="Retour" src="images/add-16.png"></td>'."\n";
+	echo '<td>'. _("5 choices more") .'</td><td><input type="image" name="ajoutcases" value="Retour" src="images/add-16.png"></td>'."\n";
 	echo '</tr></table>'."\n";
 	echo'<br>'."\n";
 
 	echo '<table><tr>'."\n";
-	echo '<td>'.$tt_choixautre_continuer.'</td><td><input type="image" name="fin_sondage_autre" value="Cr&eacute;er le sondage" src="images/next-32.png"></td>'."\n";
+	echo '<td>'. _("Next") .'</td><td><input type="image" name="fin_sondage_autre" value="Cr&eacute;er le sondage" src="images/next-32.png"></td>'."\n";
 	echo '</tr></table>'."\n";
 
 	//test de remplissage des cases
@@ -195,12 +195,12 @@ else {
 
 	//message d'erreur si aucun champ renseigné
 	if ($testremplissage!="ok"&&($_POST["fin_sondage_autre"]||$_POST["fin_sondage_autre_x"])){
-		print "<br><font color=\"#FF0000\">$tt_choixautre_erreurvide</font><br><br>"."\n";
+		print "<br><font color=\"#FF0000\">" . _("Enter at least one choice") . "</font><br><br>"."\n";
 		$erreur="yes";
 	}
 
 	if ($erreur_injection){
-			print "<font color=#FF0000>$tt_choixautre_erreur_injection</font><br><br>\n";
+			print "<font color=#FF0000>" . _("Characters \" < and > are not permitted") . "</font><br><br>\n";
 	}
 	
 	if (($_POST["fin_sondage_autre"]||$_POST["fin_sondage_autre_x"])&&!$erreur&&!$erreur_injection){
@@ -209,17 +209,17 @@ else {
 
 		echo '<br>'."\n";
 		echo '<div class=presentationdatefin>'."\n";
-		echo '<br>'.$tt_choixautre_presentationfin.'<br><br>'."\n";
+		echo '<br>'. _("Your poll will be automatically removed after 6 months.<br> You can fix another removal date for it.") .'<br><br>'."\n";
 
-		echo $tt_choixautre_presentationfindate.' : <input type="text" name="champdatefin" size="10" maxlength="10"> '.$tt_choixautre_presentationfinformat."\n";
+		echo _("Removal date (optional)") .' : <input type="text" name="champdatefin" size="10" maxlength="10"> '. _("(DD/MM/YYYY)") ."\n";
 		echo '</div>'."\n";
 		echo '<div class=presentationdatefin>'."\n";
-		echo '<font color=#FF0000>'.$tt_choixautre_presentationenvoimail.'</font>'."\n";
+		echo '<font color=#FF0000>'. _("Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.") .'</font>'."\n";
 		echo '</div>'."\n";
 		echo '<br>'."\n";
 
 		echo '<table>'."\n";
-		echo '<tr><td>'.$tt_choix_creation.'</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
+		echo '<tr><td>'. _("Create the poll") .'</td><td><input type="image" name="confirmecreation" value="Valider la cr&eacute;ation"i src="images/add.png"></td></tr>'."\n";
 		echo '</table>'."\n";
 	}
 

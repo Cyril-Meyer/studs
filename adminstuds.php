@@ -105,8 +105,8 @@ if (!$sondage || $sondage->RecordCount() != 1){
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_studs_erreur_titre</H2><br><br>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print "<H2>" . _("This poll doesn't exist !") . "</H2><br><br>"."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -140,15 +140,15 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_adminstuds_ajoutcolonne_titre</H2><br><br>"."\n";
+	print "<H2>" . _("Column's adding") . "</H2><br><br>"."\n";
 	
 	if ($dsondage->format=="A"||$dsondage->format=="A+"){
-		echo $tt_adminstuds_ajoutcolonne_autre.' :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
+		echo _("Add a new column") .' :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
 	}
 	else{
 //ajout d'une date avec creneau horaire 
-		echo $tt_adminstuds_ajoutcolonne_date_presentation.'<br><br> '."\n";
-		echo $tt_adminstuds_ajoutcolonne_date_invit.' :<br><br>'."\n";
+		echo _("You can add a new scheduling date to your poll.<br> If you just want to add a new hour to an existant date, put the same date and choose a new hour.") .'<br><br> '."\n";
+		echo _("Add a date") .' :<br><br>'."\n";
 		echo '<select name="nouveaujour"> '."\n";
 		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=1;$i<32;$i++){
@@ -158,18 +158,18 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 
 		echo '<select name="nouveaumois"> '."\n";
 		echo '<OPTION VALUE="vide"></OPTION>'."\n";
-		echo '<OPTION VALUE="1">'.$tt_motmois_un.'</OPTION>'."\n";
-		echo '<OPTION VALUE="2">'.$tt_motmois_deux.'</OPTION>'."\n";
-		echo '<OPTION VALUE="3">'.$tt_motmois_trois.'</OPTION>'."\n";
-		echo '<OPTION VALUE="4">'.$tt_motmois_quatre.'</OPTION>'."\n";
-		echo '<OPTION VALUE="5">'.$tt_motmois_cinq.'</OPTION>'."\n";
-		echo '<OPTION VALUE="6">'.$tt_motmois_six.'</OPTION>'."\n";
-		echo '<OPTION VALUE="7">'.$tt_motmois_sept.'</OPTION>'."\n";
-		echo '<OPTION VALUE="8">'.$tt_motmois_huit.'</OPTION>'."\n";
-		echo '<OPTION VALUE="9">'.$tt_motmois_neuf.'</OPTION>'."\n";
-		echo '<OPTION VALUE="10">'.$tt_motmois_dix.'</OPTION>'."\n";
-		echo '<OPTION VALUE="11">'.$tt_motmois_onze.'</OPTION>'."\n";
-		echo '<OPTION VALUE="12">'.$tt_motmois_douze.'</OPTION>'."\n";		
+		echo '<OPTION VALUE="1">'. _("january") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="2">'. _("february") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="3">'. _("march") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="4">'. _("april") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="5">'. _("may") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="6">'. _("june") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="7">'. _("july") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="8">'. _("august") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="9">'. _("september") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="10">'. _("october") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="11">'. _("november") .'</OPTION>'."\n";
+		echo '<OPTION VALUE="12">'. _("december") .'</OPTION>'."\n";		
 		echo '</SELECT>'."\n";
 
 		
@@ -179,7 +179,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 			echo '<OPTION VALUE="'.$i.'">'.$i.'</OPTION>'."\n";
 		}
 		echo '</SELECT>'."\n";
-		echo '<br><br>'.$tt_adminstuds_ajoutcolonne_date_heuredebut.' : <br><br>'."\n";
+		echo '<br><br>'. _("Add a start hour (optional)") .' : <br><br>'."\n";
 		echo '<select name="nouvelleheuredebut"> '."\n";
 		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=7;$i<22;$i++){
@@ -193,7 +193,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 			echo '<OPTION VALUE="30">30</OPTION>'."\n";
 			echo '<OPTION VALUE="45">45</OPTION>'."\n";
 		echo '</SELECT>'."\n";
-		echo '<br><br>'.$tt_adminstuds_ajoutcolonne_date_heurefin.' : <br><br>'."\n";
+		echo '<br><br>'. _("Add a end hour (optional)") .' : <br><br>'."\n";
 		echo '<select name="nouvelleheurefin"> '."\n";
 		echo '<OPTION VALUE="vide"></OPTION>'."\n";
 		for ($i=7;$i<22;$i++){
@@ -351,7 +351,7 @@ else {
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll").getenv('NOMAPPLICATION'), "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 
 		}
 
@@ -455,7 +455,7 @@ else {
 				$adresseadmin=$dsondage->mail_admin;
 
 				$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-				mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_ajoutcolonne", "$tt_adminstuds_mail_corps_ajoutcolonne : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n $tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+				mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll")., "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 				
 			}
 			else {$erreur_ajout_date="yes";}
@@ -573,7 +573,9 @@ else {
 
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changetitre :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New title for your poll"). getenv('NOMAPPLICATION'), 
+			      _("You have changed the title of your poll. \nYou can modify this poll with this link") .
+			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
 			$connect->Execute("update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -583,7 +585,7 @@ else {
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changecomm :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New comments for your poll").getenv('NOMAPPLICATION'), "" . _("You have changed the comments of your poll. \nYou can modify this poll with this link") . " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
 			$connect->Execute("update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -593,7 +595,9 @@ else {
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changemail :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+			mail ("$_POST[nouvelleadresse]", "" . _("[ADMINISTRATOR] New email address for your poll").getenv('NOMAPPLICATION'),
+			      _("You have changed your email address in your poll. \nYou can modify this poll with this link") .
+			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec la nouvelle adresse
 			$connect->Execute("update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -640,11 +644,11 @@ else {
 		echo '<H2>'.$titre.'</H2>'."\n";
 
 		//affichage du nom de l'auteur du sondage
-		echo $tt_studs_auteur.' : '.$dsondage->nom_admin.'<br>'."\n";
+		echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br>'."\n";
 
 		//affichage des commentaires du sondage
 		if ($dsondage->commentaires){
-			echo '<br>'.$tt_studs_commentaires.' :<br>'."\n";
+			echo '<br>'. _("Comments") .' :<br>'."\n";
             $commentaires=$dsondage->commentaires;
             $commentaires=str_replace("\\","",$commentaires);       
             echo $commentaires;
@@ -655,7 +659,7 @@ else {
 		echo '</div>'."\n";
 
 		echo '<div class="cadre"> '."\n";
-		echo $tt_adminstuds_presentation."\n";
+		echo _("As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.") ."\n";
 
 		echo '<br><br>'."\n";
 
@@ -879,7 +883,7 @@ else {
               //affichage de la ligne contenant les sommes de chaque colonne
               echo '<tr>'."\n";
 			  echo '<td></td>'."\n";
-              echo '<td align="right">'.$tt_studs_somme.'</td>'."\n";
+              echo '<td align="right">'. _("Addition") .'</td>'."\n";
 
               for ($i=0;$i<$nbcolonnes;$i++){
 	              $affichesomme=$somme[$i];
@@ -909,22 +913,22 @@ else {
 		// S'il a oublié de remplir un nom
 		if (($_POST["boutonp"]||$_POST["boutonp_x"])&&$_POST["nom"]=="") {
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomvide</font>\n";
+			print "<td colspan=10><font color=#FF0000>" . _("Enter a name !") . "</font>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_prenom){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_nomdeja</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>" . _("The name you've chosen already exist in this poll!") . "</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_injection){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>$tt_studs_erreur_injection</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>" . _("Characters \"  '  < et > are not permitted") . "</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		if ($erreur_ajout_date){
 			echo '<tr>'."\n";
-			print "<td colspan=10><font color=#FF0000>$tt_adminstuds_erreur_date</font></td>\n";
+			print "<td colspan=10><font color=#FF0000>" . _("The date is not correct !") . "</font></td>\n";
 			echo '</tr>'."\n"; 
 		}
 		//fin du tableau
@@ -948,10 +952,10 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (strpos('@',$toutsujet[$i]) !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0]). ' ' . _("for")  .' ' . $toutsujetdate[1];}
+						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])."  _("for")  ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
 					}
 					else{
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
@@ -978,10 +982,10 @@ else {
 		echo '<p class=affichageresultats>'."\n";
 		//affichage de la phrase annoncant le meilleur sujet
 		if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\">$tt_studs_meilleurchoix : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\">" . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.<br>\n";
 		}
 		elseif ($meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.<br>\n";
 		}
 
 		echo '<br><br>'."\n";
@@ -989,16 +993,16 @@ else {
 		echo '</form>'."\n";
 		echo '<form name="formulaire2" action="adminstuds.php?sondage='.$numsondageadmin.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		//Gestion du sondage
-		echo '<div class=titregestionadmin>'.$tt_adminstuds_gestion_titre.' :</div>'."\n";
+		echo '<div class=titregestionadmin>'. _("Poll's management") .' :</div>'."\n";
  		echo '<p class=affichageresultats>'."\n"; 
 		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo $tt_adminstuds_gestion_chgttitre.' :<br> <input type="text" name="nouveautitre" size="40" value="'.$titre.'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo _("Change the title") .' :<br> <input type="text" name="nouveautitre" size="40" value="'.$titre.'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
-		echo $tt_adminstuds_gestion_pdf.'<br>';
+		echo _("Generate the convocation letter (.PDF), choose the place to meet and validate") .'<br>';
 		echo '<input type="text" name="lieureunion" size="100" value="'.$_SESSION["lieureunion"].'">';
 		echo ' <input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
 			$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
@@ -1006,24 +1010,24 @@ else {
 	}
 		
 	if ($_POST["exportpdf_x"]&&!$_POST["lieureunion"]){
-		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurpdf.'</font><br><br>'."\n";
+		echo '<font color="#FF0000">'. _("Enter a meeting place!") .'</font><br><br>'."\n";
 	}
 	
 	//si la valeur du nouveau titre est invalide : message d'erreur
 	if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]==""){
-		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurtitre.'</font><br><br>'."\n";
+		echo '<font color="#FF0000">'. _("Enter a new title!") .'</font><br><br>'."\n";
 	}
 
 	//Changer les commentaires du sondage
-	echo  $tt_adminstuds_gestion_commentaires.' :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.$commentaires.'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
+	echo _("Change the comments") .' :<br> <textarea name="nouveauxcommentaires" rows="7" cols="40">'.$commentaires.'</textarea><br><input type="image" name="boutonnouveauxcommentaires" value="Changer les commentaires" src="images/accept.png" alt="Valider"><br><br>'."\n";
 
 
 	//Changer l'adresse de l'administrateur
-	echo $tt_adminstuds_gestion_adressemail.' :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br>'."\n";
+	echo _("Change your email address") .' :<br> <input type="text" name="nouvelleadresse" size="40" value="'.$dsondage->mail_admin.'"> <input type="image" name="boutonnouvelleadresse" value="Changer votre adresse" src="images/accept.png" alt="Valider"><br>'."\n";
 
 	//si l'adresse est invalide ou le champ vide : message d'erreur
 	if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]==""){
-		echo '<font color="#FF0000">'.$tt_adminstuds_gestion_erreurmail.'</font><br><br>'."\n";
+		echo '<font color="#FF0000">'. _("Enter a new email address!") .'</font><br><br>'."\n";
 
 	}
 
@@ -1031,7 +1035,7 @@ else {
 	$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
 	if ($comment_user->RecordCount() != 0){
 
-		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
+		print "<br><b>" . _("Comments") . " :</b><br>\n";
 		$i = 0;
 		while ( $dcomment=$comment_user->FetchNextObject(false)) {
 			print "<input type=\"image\" name=\"suppressioncomment$i\" src=\"images/cancel.png\" alt=\"supprimer commentaires\"> $dcomment->usercomment : $dcomment->comment <br>";
@@ -1041,22 +1045,22 @@ else {
 	}
 	
 	if ($erreur_commentaire_vide=="yes"){
-		print "<font color=#FF0000>$tt_studs_commentaires_erreurvide</font>";
+		print "<font color=#FF0000>" . _("Enter a name and a comment!") . "</font>";
 	}
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
-	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
-	echo $tt_studs_ajoutcommentaires_nom.' : <input type=text name="commentuser"><br>'."\n";
+	print "<br>" . _("Add a comment in the poll") . " :<br>\n";
+	echo _("Name") .' : <input type=text name="commentuser"><br>'."\n";
 	echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
 	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
 	
 	//suppression du sondage
 	echo '<br>'."\n";
-	echo $tt_adminstuds_gestion_suppressionsondage.' : <input type="image" name="suppressionsondage" value="'.$tt_adminstuds_gestion_bouton_suppressionsondage.'" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
+	echo _("Remove your poll") .' : <input type="image" name="suppressionsondage" value="'. _("Remove the poll") .'" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
 	if ($_POST["suppressionsondage"]){
 
-		echo $tt_adminstuds_gestion_confirmesuppression.' : <input type="submit" name="confirmesuppression" value="'.$tt_adminstuds_gestion_bouton_confirmesuppression.'">'."\n";
-		echo '<input type="submit" name="annullesuppression" value="'.$tt_adminstuds_gestion_bouton_annulesuppression.'"><br><br>'."\n";
+		echo _("Confirm removal of your poll") .' : <input type="submit" name="confirmesuppression" value="'. _("Remove this poll!") .'">'."\n";
+		echo '<input type="submit" name="annullesuppression" value="'. _("Keep this poll!") .'"><br><br>'."\n";
 	}
 	echo '<a name=bas></a>'."\n";
 	echo '<br><br>'."\n";
@@ -1089,7 +1093,7 @@ if ($_POST["confirmesuppression"]){
 
 	//envoi du mail a l'administrateur du sondage
 	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_supprimesondage :\n\n".get_server_name()."/index.php \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+	mail ("$adresseadmin", "" . _("[ADMINISTRATOR] Removing of your poll").getenv('NOMAPPLICATION'), "" . _("You have removed your poll. \nYou can make new polls with this link") . " :\n\n".get_server_name()."/index.php \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 
 	//destruction des données dans la base SQL
 	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
@@ -1110,8 +1114,8 @@ if ($_POST["confirmesuppression"]){
 	bandeau_titre();
 
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_adminstuds_suppression_titre</H2><br><br>";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print "<H2>" . _("Your poll has been removed!") . "</H2><br><br>";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();

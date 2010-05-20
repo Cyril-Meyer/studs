@@ -102,8 +102,8 @@ if (preg_match("/^[a-z0-9]{16}$/i",$numsondage)) {
 	bandeau_tete();
 	bandeau_titre_erreur();
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_studs_erreur_titre</H2>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "<H2>" . _("This poll doesn't exist !") . "</H2>"."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -215,7 +215,7 @@ else {
 				if ($dsondage->mailsonde == true || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes"){
 
 					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 				}
 			}
 		}
@@ -255,7 +255,7 @@ else {
 					if ($dsondage->mailsonde=="yes"){
 						
 						$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-						mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] $tt_studs_mail_sujet : $dsondage->titre", "\"$data->nom\""."$tt_studs_mail_corps :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+						mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$data->nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
 					}
 				}
 				$compteur++;
@@ -292,11 +292,11 @@ else {
 	echo '<H2>'.$titre.'</H2>'."\n";
 
 //affichage du nom de l'auteur du sondage
-	echo $tt_studs_auteur.' : '.$dsondage->nom_admin.'<br><br>'."\n";
+	echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br><br>'."\n";
 
 //affichage des commentaires du sondage
 	if ($dsondage->commentaires){
-		echo $tt_studs_commentaires.' :<br>'."\n";
+		echo _("Comments") .' :<br>'."\n";
                 $commentaires=$dsondage->commentaires;
                 $commentaires=str_replace("\\","",$commentaires);       
                 echo $commentaires;
@@ -307,7 +307,7 @@ else {
 	echo '</div>'."\n";
 	echo '<div class="cadre"> '."\n";
 
-	echo $tt_studs_presentation."\n";
+	echo _("If you want to vote in this poll, you have to give your name, choose the values that fit best for you<br>(without paying attention to the choices of the other voters) and validate with the plus button at the end of the line.") ."\n";
 
 	echo '<br><br>'."\n";
 
@@ -514,7 +514,7 @@ else {
 
 // Affichage des différentes sommes des colonnes existantes
 	echo '<tr>'."\n";
-	echo '<td align="right">'.$tt_studs_somme.'</td>'."\n";
+	echo '<td align="right">'. _("Addition") .'</td>'."\n";
 
 	for ($i=0;$i<$nbcolonnes;$i++){
 		$affichesomme=$somme[$i];
@@ -542,13 +542,13 @@ else {
 	echo '<p class=affichageresultats>'."\n";
 	// S'il a oublié de remplir un nom
 	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<font color=#FF0000>$tt_studs_erreur_nomvide</font>\n";
+			print "<font color=#FF0000>" . _("Enter a name !") . "</font>\n";
 		}
 	if ($erreur_prenom){
-			print "<font color=#FF0000>$tt_studs_erreur_nomdeja</font>\n";
+			print "<font color=#FF0000>" . _("The name you've chosen already exist in this poll!") . "</font>\n";
 	}
 	if ($erreur_injection){
-			print "<font color=#FF0000>$tt_studs_erreur_injection</font>\n";
+			print "<font color=#FF0000>" . _("Characters \"  '  < et > are not permitted") . "</font>\n";
 	}
 	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire
@@ -571,10 +571,10 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (strpos('@',$toutsujet[$i]) !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." $tt_studs_a ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0])." ". _("for") ." ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for"). " ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0])." ". _("for") ." ".$toutsujetdate[1];}
 					}
 					else{
 						if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
@@ -598,10 +598,10 @@ else {
 	// Affichage du meilleur choix
 
 	if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.\n";
  	}
 	elseif ($meilleurecolonne){
-		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> $tt_studs_meilleurchoix_pluriel : <b>$meilleursujet </b>$tt_studs_meilleurchoix_avec <b>$meilleurecolonne </b>$tt_studs_meilleurchoix_vote$pluriel.\n";
+		print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.\n";
 	}
 	
 	echo '<br>';
@@ -610,7 +610,7 @@ else {
 	$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
 	if ($comment_user->RecordCount() != 0) {
 
-		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
+		print "<br><b>" . _("Comments") . " :</b><br>\n";
 		while( $dcomment=$comment_user->FetchRow()) {
 			print "$dcomment->usercomment : $dcomment->comment <br>";
 		}
@@ -618,12 +618,12 @@ else {
 	}
 	
 	if ($erreur_commentaire_vide=="yes"){
-		print "<font color=#FF0000>$tt_studs_commentaires_erreurvide</font>";
+		print "<font color=#FF0000>" . _("Enter a name and a comment!") . "</font>";
 	}
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
-	print "<br>$tt_studs_ajoutcommentaires :<br>\n";
-	echo $tt_studs_ajoutcommentaires_nom.' : ';
+	print "<br>" . _("Add a comment in the poll") . " :<br>\n";
+	echo _("Name") .' : ';
 	if (isset($_SERVER['REMOTE_USER']))
 		echo '<input type="hidden" name="commentuser" value="'.$_SESSION['nom'].'">'.$_SESSION['nom'].'<br>'."\n";
 	else
@@ -633,9 +633,9 @@ else {
 	
 	echo '<br><br>'."\n";
 	echo '<p class=affichageexport>'."\n";
-	echo $tt_studs_export.' (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
+	echo _("Export: Spreadsheet") .' (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
  		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
-  			echo $tt_studs_agenda.' (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
+  			echo _("Agenda") .' (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
   			$_SESSION["meilleursujet"]=$meilleursujetexport;
   			$_SESSION["numsondage"]=$numsondage;
   			$_SESSION["sondagetitre"]=$dsondage->titre;
