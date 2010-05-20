@@ -80,12 +80,20 @@ function bandeau_titre_apropos(){
 	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_apropos"].'</div>'."\n";
 }
 
+function liste_lang() {
+  global $ALLOWED_LANGUAGES;
+  $str = '';
+  foreach ($ALLOWED_LANGUAGES as $k => $v )
+    $str .= '<a href="?lang=' . $k . '" class="boutonsousbandeaulangue" >' . $v . '</a>' . "\n" ;
+  return $str;
+}
+
 #Les sous-bandeaux contenant les boutons de navigation
 function sous_bandeau(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=exemple value="'.$GLOBALS["tt_bouton_exemple"].'"><input type=submit class=boutonsousbandeau name=contact value="'.$GLOBALS["tt_bouton_contact"].'"><input type=submit class=boutonsousbandeau name=sources value="'.$GLOBALS["tt_bouton_sources"].'"><input type=submit class=boutonsousbandeau name=apropos value="'.$GLOBALS["tt_bouton_apropos"].'"><input type=submit class=boutonsousbandeau name=intranet value="'.$GLOBALS["tt_bouton_intranet"].'"><input type=submit class=boutonsousbandeaulangue name=france value="FR"><input type=submit class=boutonsousbandeaulangue name=espagne value="ES"><input type=submit class=boutonsousbandeaulangue name=germany value="DE"><input type=submit class=boutonsousbandeaulangue name=uk value="EN"></div>'."\n";
+  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=exemple value="'.$GLOBALS["tt_bouton_exemple"].'"><input type=submit class=boutonsousbandeau name=contact value="'.$GLOBALS["tt_bouton_contact"].'"><input type=submit class=boutonsousbandeau name=sources value="'.$GLOBALS["tt_bouton_sources"].'"><input type=submit class=boutonsousbandeau name=apropos value="'.$GLOBALS["tt_bouton_apropos"].'"><input type=submit class=boutonsousbandeau name=intranet value="'.$GLOBALS["tt_bouton_intranet"].'">' . liste_lang() . '</div>'."\n";
 }
 function sous_bandeau_admin(){
-	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=historique value="'.$GLOBALS["tt_bouton_historique"].'"><input type=submit class=boutonsousbandeau name=nettoyage value="'.$GLOBALS["tt_bouton_nettoyage"].'"><input type=submit class=boutonsousbandeaulangue name=france value="FR"><input type=submit class=boutonsousbandeaulangue name=espagne value="ES"><input type=submit class=boutonsousbandeaulangue name=germany value="DE"><input type=submit class=boutonsousbandeaulangue name=uk value="EN"></div>'."\n";
+  echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=historique value="'.$GLOBALS["tt_bouton_historique"].'"><input type=submit class=boutonsousbandeau name=nettoyage value="'.$GLOBALS["tt_bouton_nettoyage"].'">' . liste_lang() .'</div>'."\n";
 }
 function sous_bandeau_choix(){
 	echo '<div class="sousbandeau"><input type=submit class=boutonsousbandeau name=annuler value="'.$GLOBALS["tt_bouton_accueil"].'"><input type=submit class=boutonsousbandeau name=retour value="'.$GLOBALS["tt_bouton_retour"].'"></div>'."\n";
