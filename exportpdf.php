@@ -39,19 +39,17 @@
 
 session_start();
 
-include 'php2pdf/phpToPDF.php';
+include 'fpdf/phpToPDF.php';
 include 'fonctions.php';
 include 'variables.php';
 
 $connect=connexion_base();
 
-$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$_SESSION[numsondage]'");
-$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$_SESSION[numsondage]'");
-$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$_SESSION[numsondage]' order by id_users");
+$sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $_SESSION['numsondage'] . '"');
+$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 
-$dsondage=pg_fetch_object($sondage,0);
-$dsujet=pg_fetch_object($sujets,0);
-$nbcolonnes=substr_count($dsujet->sujet,',')+1;
+$dsondage=$sondage->FetchObject(false);
+$nbcolonnes=substr_count($dsondage->sujet,',')+1;
 
 $datereunion=explode("@",$_SESSION["meilleursujet"]);
 

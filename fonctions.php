@@ -38,15 +38,13 @@
 //==========================================================================
 
 include 'variables.php';
+include('adodb/adodb.inc.php');
 
 function connexion_base(){
-
-       $connectstr = "dbname=".getenv('BASE')." user=".getenv('USERBASE');
-       if (getenv('SERVEURBASE') != '')
-	       $connectstr .= " host=".getenv('SERVEURBASE');
-       if (getenv('USERPASSWD') != '')
-	       $connectstr .= " password=".getenv('USERPASSWD');
-       return pg_connect($connectstr);
+       $DB = NewADOConnection(getenv('BASE_TYPE'));
+       $DB->Connect(getenv('SERVEURBASE'), getenv('USERBASE'),
+		    getenv('USERPASSWD'), getenv('BASE'));
+       return $DB;
 }
 
 function blocage_touche_entree(){

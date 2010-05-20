@@ -43,15 +43,14 @@ include 'fonctions.php';
 
 $connect=connexion_base();
 
-$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$_SESSION[numsondage]'");
-$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$_SESSION[numsondage]'");
-$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$_SESSION[numsondage]' order by id_users");
+$sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $_SESSION['numsondage'] . '"');
+$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 
-$dsondage=pg_fetch_object($sondage,0);
-$dsujet=pg_fetch_object($sujets,0);
-$nbcolonnes=substr_count($dsujet->sujet,',')+1;
 
-$toutsujet=explode(",",$dsujet->sujet);
+$dsondage=$sondage->FetchObject(false);
+$nbcolonnes=substr_count($dsondage->sujet,',')+1;
+
+$toutsujet=explode(",",$dsondage->sujet);
 #$toutsujet=str_replace("°","'",$toutsujet);	
 
 //affichage des sujets du sondage
@@ -67,7 +66,7 @@ for ($i=0;$toutsujet[$i];$i++){
 }
 $input.="\r\n";
 
-if (eregi("@",$dsujet->sujet)){
+if (eregi("@",$dsondage->sujet)){
 	$input.=";";
 	for ($i=0;$toutsujet[$i];$i++){
 		$heures=explode("@",$toutsujet[$i]);
@@ -76,10 +75,7 @@ if (eregi("@",$dsujet->sujet)){
 	$input.="\r\n";
 }
 
-$compteur = 0;
-while ($compteur<pg_numrows($user_studs)){
-
-	$data=pg_fetch_object($user_studs,$compteur);
+while (	$data=$user_studs->FetchNextObject(false)) {
 // Le nom de l'utilisateur
 	$nombase=str_replace("°","'",$data->nom);
 	$input.='"'.$nombase.'";';
@@ -96,7 +92,6 @@ while ($compteur<pg_numrows($user_studs)){
 		}
 	}
 	$input.="\r\n";
-	$compteur++;
 }
 
 $filesize = strlen( $input );

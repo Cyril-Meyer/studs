@@ -84,15 +84,13 @@ $connect=connexion_base();
 if (eregi("[a-z0-9]{16}",$numsondage)){
 
 	// récupération des données du sondage en fonction de la valeur passée dans l'URL
-	$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$numsondage'");
-	$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$numsondage'");
-	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
-
+	$sondage=$connect->Execute("select sondage.*,sujet_studs.sujet from sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = '$numsondage'");
+	$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users"
 }
 
 //verification de l'existence du sondage
 // S'il n'existe pas, il affiche une page d'erreur
-if (!$sondage||pg_numrows($sondage)=="0"){
+	if (!$sondage || $sondage->recordCount() != 1) {
 
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
@@ -170,7 +168,7 @@ else {
 	//quand on ajoute un commentaire utilisateur
 	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
 		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
-			pg_query($connect,"insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
+		  $connect->Execute("insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
 		}
 		else {
 			$erreur_commentaire_vide="yes";
@@ -180,10 +178,9 @@ else {
 	
 
 //On récupere les données et les sujets du sondage
-	$dsondage=pg_fetch_object($sondage,0);
-	$dsujet=pg_fetch_object($sujets,0);
-	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
-	$nblignes=pg_numrows($user_studs);
+	$dsondage=$sondage->FetchObject(false);
+	$nbcolonnes=substr_count($dsondage->sujet,',')+1;
+	$nblignes=$user_studs->RecordCount();
 
 	// Action quand on clique le bouton participer
 	if ($_POST["boutonp"]||$_POST["boutonp_x"]){
@@ -201,9 +198,7 @@ else {
 				}
 			}
 
-			for ($compteur=0;$compteur<pg_numrows($user_studs);$compteur++){
-
-					$user=pg_fetch_object($user_studs,$compteur);
+			while($user = $user_studs->FetchNextObject(false)) {
 
 					if ($_POST["nom"]==$user->nom){
 						$erreur_prenom="yes";
@@ -217,9 +212,9 @@ else {
 			// Ecriture des choix de l'utilisateur dans la base
  			if (!$erreur_prenom&&!$erreur_injection){
 				$nom=$_POST["nom"];
- 				pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
+ 				$connect->Execute("insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
 
-				if ($dsondage->mailsonde=="yes"){
+				if ($dsondage->mailsonde == true || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes"){
 
 					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] $tt_studs_mail_sujet : $dsondage->titre", "\"$nom\""."$tt_studs_mail_corps :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
@@ -229,10 +224,11 @@ else {
 	}
 	
 			//on teste pour voir si une ligne doit etre modifiée
+		$testligneamodifier = $testmodifier = false;
 		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
 				$ligneamodifier=$i;
-				$testligneamodifier="true";
+				$testligneamodifier=true;
 			}
 		}	
 
@@ -241,7 +237,7 @@ else {
 		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST['validermodifier'.$i.'_x']){
 				$modifier=$i;
-				$testmodifier="true";
+				$testmodifier=true;
 			}
 		}
 		//si le test est valide alors on affiche des checkbox pour entrer de nouvelles valeurs
@@ -258,12 +254,10 @@ else {
 			}
 
 			$compteur=0;
-			while ($compteur<pg_numrows($user_studs)){
-
-				$data=pg_fetch_object($user_studs,$compteur);
+			while ($data=$user_studs->FetchNextObject(false) ) {
 				//mise a jour des données de l'utilisateur dans la base SQL
 				if ($compteur==$modifier){
-					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
+					$connect->Execute("update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 					if ($dsondage->mailsonde=="yes"){
 						
 						$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
@@ -275,7 +269,7 @@ else {
 		}
 	
 //recuperation des utilisateurs du sondage
-	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
+	$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
 
 // Affichage des balises standards et du titre de la page
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
@@ -328,7 +322,7 @@ else {
 	echo '<table class="resultats">'."\n";
 
 //reformatage des données des sujets du sondage
-	$toutsujet=explode(",",$dsujet->sujet);
+	$toutsujet=explode(",",$dsondage->sujet);
 
 //si le sondage est un sondage de date
 if ($dsondage->format=="D"||$dsondage->format=="D+"){
@@ -386,7 +380,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	}
 	echo '</tr>'."\n";
 		//affichage des horaires	
-	if (eregi("@",$dsujet->sujet)){
+	if (eregi("@",$dsondage->sujet)){
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 				
@@ -418,12 +412,11 @@ else {
 //affichage des resultats actuels
 	$somme[]=0;
 	$compteur = 0;
-	while ($compteur<pg_numrows($user_studs)){
+	while ($data=$user_studs->FetchNextObject(false)) {
 
 		echo '<tr>'."\n";
 		echo '<td class="nom">';
 
-		$data=pg_fetch_object($user_studs,$compteur);
 // Le nom de l'utilisateur
 		$nombase=str_replace("°","'",$data->nom);
 		echo $nombase.'</td>'."\n";
@@ -570,7 +563,7 @@ else {
 	echo '</script>'."\n";
 
 // reformatage des données de la base pour les sujets
-	$toutsujet=explode(",",$dsujet->sujet);
+	$toutsujet=explode(",",$dsondage->sujet);
 	$toutsujet=str_replace("°","'",$toutsujet);
 
 // On compare le nombre de résultat avec le meilleur et si le résultat est égal
@@ -620,12 +613,11 @@ else {
 	echo '<br>';
 	
 	//affichage des commentaires des utilisateurs existants
-		$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
-	if (pg_numrows($comment_user)!=0){
+	$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
+	if ($comment_user->RecordCount() != 0) {
 
 		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
-		for ($i=0;$i<pg_numrows($comment_user);$i++){
-			$dcomment=pg_fetch_object($comment_user,$i);
+		while( $dcomment=$comment_user->FetchRow()) {
 			print "$dcomment->usercomment : $dcomment->comment <br>";
 		}
 
@@ -644,8 +636,6 @@ else {
 		echo '<input type="text" name="commentuser"><br>'."\n";
 	echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
 	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
-	
-	pg_close($connect);
 	
 	echo '<br><br>'."\n";
 	echo '<p class=affichageexport>'."\n";

@@ -88,8 +88,11 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 
 	$connect=connexion_base();
 
-	pg_exec ($connect, "insert into sondage values('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', '$date_fin', '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
-	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
+	$connect->Execute('insert into sondage ' .
+			  '(`id_sondage`, `commentaires`, `mail_admin`, `nom_admin`, `titre`, `id_sondage_admin`, `date_fin`, `format`, `mailsonde`) ' .
+			  'VALUES '.
+			  "('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', '$date_fin', '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
+	$connect->Execute("insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
 	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
@@ -100,9 +103,6 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	fwrite($fichier_log,"   [CREATION] $date\t$sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n");
 	fclose($fichier_log);
 
-	pg_close($connect);
-
-	
 	header("Location:studs.php?sondage=$sondage");
 
 	exit();

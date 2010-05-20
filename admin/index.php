@@ -105,40 +105,31 @@ sous_bandeau_admin();
 // ouverture de la base de données
 $connect=connexion_base();
 
-$sondage=pg_exec($connect, "select * from sondage");
-
-// Nbre de sondages
-$nbsondages=pg_numrows($sondage);
-
+$sondage=$connect->Execute("select * from sondage");
 
 echo'<div class=corps>'."\n";
 
 // Test et affichage du bouton de confirmation en cas de suppression de sondage
-for ($i=0;$i<$nbsondages;$i++){
+$i=0;
+while($dsondage = $sondage->FetchNextObject(false)) {
  	if ($_POST["supprimersondage$i"]){
- 		$dsondage=pg_fetch_object($sondage,$i);
 		echo '<table>'."\n";
  		echo '<tr><td bgcolor="#EE0000" colspan=11>'.$tt_admin_confirmesuppression.'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'.$tt_admin_bouton_confirmesuppression.'">'."\n";
  		echo '<input type="submit" name="annullesuppression" value="'.$tt_admin_bouton_annulesuppression.'"></td></tr>'."\n";
 		echo '</table>'."\n";
 		echo '<br>'."\n";
  	}
+	// Traitement de la confirmation de suppression
 
-}
-
-// Traitement de la confirmation de suppression
-for ($i=0;$i<$nbsondages;$i++){
 	if ($_POST["confirmesuppression$i"]){
-
-		$dsondage=pg_fetch_object($sondage,$i);
 
 		$date=date('H:i:s d/m/Y');
 
 		// requetes SQL qui font le ménage dans la base
-		pg_query($connect,"delete from sondage where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
+		$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
+				  'LEFT INNER JOIN user_studs ON user_studs.id_sondage = sondage.id_sondage ' .
+				  'LEFT INNER JOIN comments ON comments.id_sondage = sondage.id_sondage ' .
+				  "WHERE id_sondage = '$dsondage->id_sondage' ");
 
 		// ecriture des traces dans le fichier de logs
 	        $fichier_log=fopen('./logs_studs.txt','a');
@@ -146,12 +137,14 @@ for ($i=0;$i<$nbsondages;$i++){
 	        fclose($fichier_log);
 
 	}
+	$i++;
 }
 
-//recherche et affichage du nombre de sondages
-$sondage=pg_exec($connect, "select * from sondage");
-echo pg_numrows($sondage).' '.$tt_admin_nbresondage.'<br><br>'."\n";
-$nbsondages=pg_numrows($sondage);
+
+$sondage=$connect->Execute("select * from sondage");
+$nbsondages=$sondage->RecordCount();
+
+echo $nbsondages.' '.$tt_admin_nbresondage.'<br><br>'."\n";
 
 // tableau qui affiche tous les sondages de la base
 echo '<table border=1>'."\n";	
@@ -159,15 +152,14 @@ echo '<table border=1>'."\n";
 echo '<tr align=center><td>'.$tt_admin_colonne_id.'</td><td>'.$tt_admin_colonne_format.'</td><td>'.$tt_admin_colonne_titre.'</td><td>'.$tt_admin_colonne_auteur.'</td><td>'.$tt_admin_colonne_datefin.'</td><td>'.$tt_admin_colonne_nbreuser.'</td><td colspan=3>'.$tt_admin_colonne_actions.'</td>'."\n";
 
 
-for ($i=0;$i<$nbsondages;$i++){
+$i = 0;
+while($dsondage = $sondage->FetchNextObject(false)) {
+	/* possible en 1 bonne requête dans $sondage */
+	$sujets=$connect->Execute( "select * from sujet_studs where id_sondage='$dsondage->id_sondage'");
+	$dsujets=$sujets->FetchObject(false);
 
-	$dsondage=pg_fetch_object($sondage,$i);
-
-	$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$dsondage->id_sondage'");
-	$dsujets=pg_fetch_object($sujets,0);
-
-	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$dsondage->id_sondage'");
-	$nbuser=pg_numrows($user_studs);
+	$user_studs=$connect->Execute( "select * from user_studs where id_sondage='$dsondage->id_sondage'");
+	$nbuser=$user_studs->RecordCount();
 
 	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td>';
 	
@@ -185,6 +177,7 @@ for ($i=0;$i<$nbsondages;$i++){
 	echo '<td><input type="submit" name="supprimersondage'.$i.'" value="'.$tt_admin_bouton_supprimer.'"></td>'."\n";
 
 	echo '</tr>'."\n";
+	$i++;
 }
 
 echo '</table>'."\n";	

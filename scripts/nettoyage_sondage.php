@@ -48,19 +48,17 @@ $date_humaine=date('H:i:s d/m/Y');
 //ouverture de la connection avec la base SQL
 $connect=connexion_base();
 
-$sondage=pg_exec($connect, "select * from sondage");
+$sondage=$connect->Execute("select * from sondage");
 
-for ($compteur=0;$compteur<pg_numrows($sondage);$compteur++){
+while (	$dsondage=$sondage->FetchNextObject(false)) {
 
-	$dsondage=pg_fetch_object($sondage,$compteur);
-
-	if ($date_courante>$dsondage->date_fin){
+	if ($date_courante > $dsondage->date_fin){
 
 		//destruction des données dans la base 
-		pg_query($connect,"delete from sondage where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from user_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from sujet_studs where id_sondage = '$dsondage->id_sondage' ");
-		pg_query($connect,"delete from comments where id_sondage = '$dsondage->id_sondage' ");
+	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
+			  'LEFT INNER JOIN user_studs ON user_studs.id_sondage = sondage.id_sondage ' .
+			  'LEFT INNER JOIN comments ON comments.id_sondage = sondage.id_sondage ' .
+			  "WHERE id_sondage = '$dsondage->id_sondage' ");
 
                // ecriture des traces dans le fichier de logs
                $fichier_log=fopen('../admin/logs_studs.txt','a');

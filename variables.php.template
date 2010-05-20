@@ -70,6 +70,10 @@ putenv("LOGOBANDEAU=<chemin relatif suivi du nom du fichier du logo pour le band
 #Nom et emplacement du logo de la lettre générée en PDF
 putenv("LOGOLETTRE=<chemin relatif suivi du nom du fichier du logo pour la lettre>");
 
+#Type de base de données à utiliser (mysql, postgres, ...)
+#http://phplens.com/lens/adodb/docs-adodb.htm#drivers
+putenv("BASE_TYPE"=<type de BDD>");
+
 if (@file_exists('variables.local.php')) {
     include('variables.local.php');
 }

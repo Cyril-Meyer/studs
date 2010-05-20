@@ -84,14 +84,14 @@ $connect=connexion_base();
 
 if (eregi("[a-z0-9]{16}",$numsondage)){
 
-	$sondage=pg_exec($connect, "select * from sondage where id_sondage_admin ilike '$numsondageadmin'");
-	$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$numsondage'");
-	$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
+	$sondage=$connect->Execute("SELECT * FROM sondage WHERE id_sondage_admin = '$numsondageadmin'");
+	$sujets=$connect->Execute("SELECT * FROM sujet_studs WHERE id_sondage='$numsondage'");
+	$user_studs=$connect->Execute("SELECT * FROM user_studs WHERE id_sondage='$numsondage' order by id_users");
 
 }
 
 //verification de l'existence du sondage, s'il n'existe pas on met une page d'erreur
-if (!$sondage||pg_numrows($sondage)=="0"){
+if (!$sondage || $sondage->RecordCount() != 1){
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
@@ -128,8 +128,8 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	echo '<body>'."\n";
 	
 	//on recupere les données et les sujets du sondage
-	$dsujet=pg_fetch_object($sujets,0);
-	$dsondage=pg_fetch_object($sondage,0);
+	$dsujet=$sujets->FetchObject(false);
+	$dsondage=$sondage->FetchObject(false);
 
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	logo();
@@ -229,13 +229,13 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 else {
 
 	//on recupere les données et les sujets du sondage
-	$dsujet=pg_fetch_object($sujets,0);
-	$dsondage=pg_fetch_object($sondage,0);
+	$dsujet=$sujets->FetchObject(false);
+	$dsondage=$sondage->FetchObject(false);
 
 	//affichage des boutons d'effacement de colonne et des sujets
 
 	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
-	$nblignes=pg_numrows($user_studs);
+	$nblignes=$user_studs->RecordCount();
 
 	//action du bouton d'annulation
 	if ($_POST["annuler"]){
@@ -287,7 +287,7 @@ else {
 	//quand on ajoute un commentaire utilisateur
 	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
 		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
-			pg_query($connect,"insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
+			$connect->Execute("INSERT INTO comments VALUES ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
 		}
 		else {
 			$erreur_commentaire_vide="yes";
@@ -314,10 +314,7 @@ else {
 					}
 				}
 
-				for ($compteur=0;$compteur<pg_numrows($user_studs);$compteur++){
-	
-						$user=pg_fetch_object($user_studs,$compteur);
-
+				while( $user=$user_studs->FetchNextObject(false)) {
 						if ($_POST["nom"]==$user->nom){
 							$erreur_prenom="yes";
 						}
@@ -331,7 +328,7 @@ else {
 				// Ecriture des choix de l'utilisateur dans la base
  				if (!$erreur_prenom&&!$erreur_injection){
 					$nom=str_replace("'","°",$_POST["nom"]);
- 					pg_query($connect,"insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
+ 					$connect->Execute("INSERT INTO user_studs VALUES ('$nom', '$numsondage', '$nouveauchoix')");
 				}
 			}
 
@@ -349,7 +346,7 @@ else {
 			$nouveauxsujets=str_replace("'","°",$nouveauxsujets);
 
 			//mise a jour avec les nouveaux sujets dans la base
-			pg_query($connect,"update sujet_studs set sujet = '$nouveauxsujets' where id_sondage = '$numsondage' ");
+			$connect->Execute("UPDATE sujet_studs SET sujet = '$nouveauxsujets' WHERE id_sondage = '$numsondage' ");
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
@@ -425,19 +422,16 @@ else {
 				$dateinsertion=substr("$dateinsertion",1);
 				
 				//mise a jour avec les nouveaux sujets dans la base
-				if (!$erreur_ajout_date){
-					pg_query($connect,"update sujet_studs set sujet = '$dateinsertion' where id_sondage = '$numsondage' ");
+				if (!$erreur_ajout_date){	
+					$connect->Execute("UPDATE sujet_studs SET sujet = '$dateinsertion' WHERE id_sondage = '$numsondage' ");
 					if ($nouvelledate>$dsondage->date_fin){
 						$date_fin=$nouvelledate+200000;
-						pg_query($connect,"update sondage set date_fin = '$date_fin' where id_sondage = '$numsondage' ");
+						$connect->Execute("UPDATE sondage SET date_fin = '$date_fin' WHERE id_sondage = '$numsondage' ");
 					}
 				}
 				
 				//mise a jour des reponses actuelles correspondant au sujet ajouté
-				$compteur = 0;
-				while ($compteur<pg_numrows($user_studs)){
-					
-					$data=pg_fetch_object($user_studs,$compteur);
+				while ( $data=$user_studs->FetchNextObject(false)) {
 					$ensemblereponses=$data->reponses;
 					
 					//parcours de toutes les réponses actuelles
@@ -450,10 +444,9 @@ else {
 						}
 						$newcar.=$car;
 					}
-					$compteur++;
 					//mise a jour des reponses utilisateurs dans la base
 					if (!$erreur_ajout_date){
-						pg_query($connect,"update user_studs set reponses='$newcar' where nom='$data->nom' and id_users=$data->id_users");
+						$connect->Execute("update user_studs set reponses='$newcar' where nom='$data->nom' and id_users=$data->id_users");
 					}
 					$newcar="";
 				}
@@ -472,12 +465,10 @@ else {
 		for ($i=0;$i<$nblignes;$i++){
 			if ($_POST["effaceligne$i"]||$_POST['effaceligne'.$i.'_x']){
 				$compteur=0;
-				while ($compteur<pg_numrows($user_studs)){
-
-					$data=pg_fetch_object($user_studs,$compteur);
+				while ($data=$user_studs->FetchNextObject(false)) {
 
 					if ($compteur==$i){
- 						pg_query($connect,"delete from user_studs where nom = '$data->nom' and id_users = '$data->id_users'");
+ 						$connect->Execute("delete from user_studs where nom = '$data->nom' and id_users = '$data->id_users'");
 					}
 					$compteur++;
 				}
@@ -486,12 +477,13 @@ else {
 
 		//suppression d'un commentaire utilisateur
 
-			$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
-			for ($i=0;$i<pg_numrows($comment_user);$i++){
-				$dcomment=pg_fetch_object($comment_user,$i);
+			$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
+			$i = 0;
+			while ($dcomment = $comment_user->FetchNextObject(false)) {
 				if ($_POST['suppressioncomment'.$i.'_x']){
-					pg_query ($connect,"delete from comments where id_comment = '$dcomment->id_comment'");
+					$connect->Execute("delete from comments where id_comment = '$dcomment->id_comment'");
 				}
+				$i++;
 			}
 		
 		//on teste pour voir si une ligne doit etre modifiée
@@ -500,12 +492,7 @@ else {
 				$ligneamodifier=$i;
 				$testligneamodifier="true";
 			}
-		}	
-
-
-		//test pour voir si une ligne est a modifier
-
-		for ($i=0;$i<$nblignes;$i++){
+			//test pour voir si une ligne est a modifier
 			if ($_POST["validermodifier$i"]){
 				$modifier=$i;
 				$testmodifier="true";
@@ -526,12 +513,10 @@ else {
 			}
 
 			$compteur=0;
-			while ($compteur<pg_numrows($user_studs)){
-
-				$data=pg_fetch_object($user_studs,$compteur);
+			while ( $data=$user_studs->FetchNextObject(false)) {
 				//mise a jour des données de l'utilisateur dans la base SQL
 				if ($compteur==$modifier){
-					pg_query($connect,"update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
+					$connect->Execute("update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 				}
 				$compteur++;
 			}
@@ -558,9 +543,7 @@ else {
 
 				//nettoyage des reponses actuelles correspondant au sujet effacé
 				$compteur = 0;
-				while ($compteur<pg_numrows($user_studs)){
-
-					$data=pg_fetch_object($user_studs,$compteur);
+				while ($data=$user_studs->FetchNextObject(false)) {
 
 					$ensemblereponses=$data->reponses;
 	
@@ -576,11 +559,11 @@ else {
 					$compteur++;
 
 					//mise a jour des reponses utilisateurs dans la base
-					pg_query($connect,"update user_studs set reponses='$newcar' where nom='$data->nom' and id_users=$data->id_users");
+					$connect->Execute("update user_studs set reponses='$newcar' where nom='$data->nom' and id_users=$data->id_users");
 					$newcar="";
 				}
 				//mise a jour des sujets dans la base
-				pg_query($connect,"update sujet_studs set sujet = '$nouveauxsujets' where id_sondage = '$numsondage' ");
+				$connect->Execute("update sujet_studs set sujet = '$nouveauxsujets' where id_sondage = '$numsondage' ");
 
 			}
 
@@ -593,7 +576,7 @@ else {
 			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changetitre".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changetitre :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
-			pg_query($connect,"update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
+			$connect->Execute("update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
 		}
 
 		//si le bouton est activé, quelque soit la valeur du champ textarea
@@ -603,7 +586,7 @@ else {
 			mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_changecomm".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changecomm :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
-			pg_query($connect,"update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
+			$connect->Execute("update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
 		}
 
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
@@ -612,17 +595,17 @@ else {
 			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$_POST[nouvelleadresse]", "$tt_adminstuds_mail_sujet_changemail".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_changemail :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 			//modification de la base SQL avec la nouvelle adresse
-			pg_query($connect,"update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
+			$connect->Execute("update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
 		}
 
 		//recuperation des donnes de la base
-		$sondage=pg_exec($connect, "select * from sondage where id_sondage_admin ilike '$numsondageadmin'");
-		$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$numsondage'");
-		$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$numsondage' order by id_users");
+		$sondage=$connect->Execute("select * from sondage where id_sondage_admin = '$numsondageadmin'");
+		$sujets=$connect->Execute("select * from sujet_studs where id_sondage='$numsondage'");
+		$user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
 		//on recupere les données et les sujets du sondage
-		$dsujet=pg_fetch_object($sujets,0);
-		$dsondage=pg_fetch_object($sondage,0);
+		$dsujet=$sujets->FetchObject(false);
+		$dsondage=$sondage->FetchObject(false);
 	
 		$toutsujet=explode(",",$dsujet->sujet);
 		$toutsujet=str_replace("@","<br>",$toutsujet);
@@ -789,9 +772,7 @@ else {
 		//affichage des resultats
 		$somme[]=0;
 		$compteur = 0;
-		while ($compteur<pg_numrows($user_studs)){
-			//recuperation des données
-			$data=pg_fetch_object($user_studs,$compteur);
+		while ( $data=$user_studs->FetchNextObject(false)) {
 			$ensemblereponses=$data->reponses;
 
 			echo '<tr>'."\n";
@@ -1047,13 +1028,14 @@ else {
 	}
 
 		//affichage des commentaires des utilisateurs existants
-		$comment_user=pg_exec($connect, "select * from comments where id_sondage='$numsondage' order by id_comment");
-	if (pg_numrows($comment_user)!=0){
+	$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
+	if ($comment_user->RecordCount() != 0){
 
 		print "<br><b>$tt_studs_ajoutcommentaires_titre :</b><br>\n";
-		for ($i=0;$i<pg_numrows($comment_user);$i++){
-			$dcomment=pg_fetch_object($comment_user,$i);
+		$i = 0;
+		while ( $dcomment=$comment_user->FetchNextObject(false)) {
 			print "<input type=\"image\" name=\"suppressioncomment$i\" src=\"images/cancel.png\" alt=\"supprimer commentaires\"> $dcomment->usercomment : $dcomment->comment <br>";
+			$i++;
 		}
 		echo '<br>';
 	}
@@ -1092,12 +1074,12 @@ if ($_POST["confirmesuppression"]){
 
 
 	//on recupere les données et les sujets du sondage
-	$dsujet=pg_fetch_object($sujets,0);
-	$dsondage=pg_fetch_object($sondage,0);
+	$dsujet=$sujets->FetchObject(false);
+	$dsondage=$sondage->FetchObject(false);
 
 	$adresseadmin=$dsondage->mail_admin;
 
-        $nbuser=pg_numrows($user_studs);
+        $nbuser=$user_studs->RecordCount();
         $date=date('H:i:s d/m/Y');
 
 	//on ecrit dans le fichier de logs la suppression du sondage
@@ -1110,10 +1092,10 @@ if ($_POST["confirmesuppression"]){
 	mail ("$adresseadmin", "$tt_adminstuds_mail_sujet_supprimesondage".getenv('NOMAPPLICATION'), "$tt_adminstuds_mail_corps_supprimesondage :\n\n".get_server_name()."/index.php \n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
 
 	//destruction des données dans la base SQL
-	pg_query($connect,"delete from sondage where id_sondage = '$numsondage' ");
-	pg_query($connect,"delete from user_studs where id_sondage = '$numsondage' ");
-	pg_query($connect,"delete from sujet_studs where id_sondage = '$numsondage' ");
-	pg_query($connect,"delete from comments where id_sondage = '$numsondage' ");
+	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
+			  'LEFT INNER JOIN user_studs ON user_studs.id_sondage = sondage.id_sondage ' .
+			  'LEFT INNER JOIN comments ON comments.id_sondage = sondage.id_sondage ' .
+			  "WHERE id_sondage = '$numsondage' ");
 
 	//affichage de l'ecran de confirmation de suppression de sondage
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
