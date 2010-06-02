@@ -56,7 +56,7 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 	if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
 	else {unset($_SESSION["mailsonde"]);}	
 	
-	if(!filter_var($_POST["adresse"], FILTER_VALIDATE_EMAIL) || strpos('@', $_POST["adresse"]) === false)
+	if(!filter_var($_POST["adresse"], FILTER_VALIDATE_EMAIL) || strpos('@', $_POST["adresse"]) === false) {
 		$erreur_adresse="yes";
 	}
 	if (preg_match(';<|>|";',$_POST["titre"])){
