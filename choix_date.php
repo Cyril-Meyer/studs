@@ -192,9 +192,9 @@ $premierjourmois=date("N",mktime(0,0,0,$_SESSION["mois"],1,$_SESSION["annee"]))-
 //le format du sondage est DATE
 $_SESSION["formatsondage"]="D".$_SESSION["studsplus"];
 
-//traduction en francais ecrit des valeurs de mois
+//traduction de la valeur du mois
 if (is_integer($_SESSION["mois"]) && $_SESSION["mois"] > 0 && $_SESSION["mois"] < 13)
-  $motmois=strftime('%B');
+  $motmois=strftime('%B', mktime(0, 0, 0, $_SESSION["mois"], 10));
 
 //debut de la page web
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
