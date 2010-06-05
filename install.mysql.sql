@@ -28,10 +28,10 @@ CREATE TABLE IF NOT EXISTS `sujet_studs` (
 --
 
 CREATE TABLE IF NOT EXISTS `user_studs` (
-    `nom` VARCHAR(128),
-    `id_sondage` CHAR(16),
-    `reponses` text,
-    `id_users` INT(11) unsigned NOT NULL,
+    `id_users` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+    `nom` VARCHAR(128) NOT NULL,
+    `id_sondage` CHAR(16) NOT NULL,
+    `reponses` text NOT NULL,
     	     PRIMARY KEY (`id_users`),
 	     FOREIGN KEY (`id_sondage`) REFERENCES sondage(id_sondage) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `user_studs` (
 CREATE TABLE IF NOT EXISTS `comments` (
     `id_comment` INT(11) unsigned NOT NULL AUTO_INCREMENT,
     `id_sondage` CHAR(16) NOT NULL,
-    `comment` text,
+    `comment` text NOT NULL,
     `usercomment` text,
     	     PRIMARY KEY (`id_comment`),
 	     FOREIGN KEY (`id_sondage`) REFERENCES sondage(id_sondage) on delete cascade

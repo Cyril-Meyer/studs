@@ -872,16 +872,16 @@ else {
 					$meilleursujetexport=$toutsujet[$i];
 					if (strpos($toutsujet[$i],'@') !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						if ($_SESSION["langue"]=="FR"){$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0]). ' ' . _("for")  .' ' . $toutsujetdate[1];}
-						if ($_SESSION["langue"]=="ES"){$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];}
-						if ($_SESSION["langue"]=="DE"){$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN")
+						  $meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];
+						else
+						  $meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];
 					}
 					else{
-						if ($_SESSION["langue"]=="FR"){$meilleursujet.=strftime("%A %e %B %Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="ES"){$meilleursujet.=strftime("%A %e de %B %Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujet[$i]);}
-						if ($_SESSION["langue"]=="DE"){$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);}
+						if ($_SESSION["langue"]=="EN")
+						  $meilleursujet.=date("l, F jS Y",$toutsujet[$i]);
+						else
+						  $meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);
 					}
 				}
 				else{

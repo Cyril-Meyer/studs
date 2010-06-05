@@ -112,14 +112,20 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 	
 	
 	//quand on ajoute un commentaire utilisateur
-	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
-		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
-		  $connect->Execute("insert into comments values ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
-		}
-		else {
-			$erreur_commentaire_vide="yes";
-		}
-	}
+if (isset($_SERVER['REMOTE_USER']))
+  $comment_user = $_SESSION['nom'];
+else
+  $comment_user = _('anonyme');
+
+if (isset($_POST["ajoutcomment"])) {
+  if ( ! empty($_POST["comment"]) )
+    $connect->Execute('INSERT INTO comments (id_sondage, comment, usercomment) VALUES ("'.
+		      $numsondage . '","'.
+		      mysql_real_escape_string(strip_tags($_POST['comment'])) . '","' .
+		      $comment_user .'")');
+  else
+    $erreur_commentaire_vide=true;
+}
 	
 	
 
@@ -146,20 +152,20 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 			while($user = $user_studs->FetchNextObject(false)) {
 
 					if ($_POST["nom"]==$user->nom){
-						$erreur_prenom="yes";
+						$erreur_prenom=true;
 					}
 			}
 
 			if (preg_match(";[\<\>\"'\\];", $_POST["nom"])) {
-				$erreur_injection="yes";
+				$erreur_injection=true;
 			}
 
 			// Ecriture des choix de l'utilisateur dans la base
  			if (!$erreur_prenom&&!$erreur_injection){
 				$nom=$_POST["nom"];
- 				$connect->Execute("insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
+ 				$connect->Execute("insert into user_studs (nom,id_sondage,reponses) values ('$nom', '$numsondage', '$nouveauchoix')");
 
-				if ($dsondage->mailsonde == true || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes" || $dsondage->mailsonde=="true"){
+				if ($dsondage->mailsonde || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes" || $dsondage->mailsonde=="true"){
 
 					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
@@ -169,11 +175,11 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 	}
 	
 			//on teste pour voir si une ligne doit etre modifiée
-		$testligneamodifier = $testmodifier = false;
+$testmodifier = false;
+$ligneamodifier = -1;
 		for ($i=0;$i<$nblignes;$i++){
 			if (isset($_POST["modifierligne$i"]) || isset($_POST['modifierligne'.$i.'_x'])){
 				$ligneamodifier=$i;
-				$testligneamodifier=true;
 			}
 			//test pour voir si une ligne est a modifier
 			if ($_POST['validermodifier'.$i.'_x']){
@@ -256,7 +262,6 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 
 	echo '<br><br>'."\n";
 
-
 // Debut de l'affichage des resultats du sondage
 	echo '<table class="resultats">'."\n";
 
@@ -292,10 +297,10 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			if ($_SESSION["langue"]=="FR"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="DE"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
+			if ($_SESSION["langue"]=="EN") // because strftime doesn't support english suffix (like st,nd,rd,th)
+			  echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";
+			else 
+			  echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";
 			$colspan=1;
 		}
 	}
@@ -310,10 +315,10 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			if ($_SESSION["langue"]=="FR"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="DE"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}			
+			if ($_SESSION["langue"]=="EN")
+			  echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";
+			else
+			  echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";
 			$colspan=1;
 		}
 	}
@@ -346,11 +351,12 @@ else {
 
 }
 	
-//Usager pr�-authentifi� dans la miste?
+//Usager pré-authentifié dans la liste?
 	$user_mod = FALSE;
 //affichage des resultats actuels
 $somme = array();
 	$compteur = 0;
+
 	while ($data=$user_studs->FetchNextObject(false)) {
 
 		echo '<tr>'."\n";
@@ -364,49 +370,31 @@ $somme = array();
 // ligne d'un usager pré-authentifié
 		$mod_ok = !isset($_SERVER['REMOTE_USER']) || ($nombase == $_SESSION['nom']);
 		$user_mod |= $mod_ok;
-			//si la ligne n'est pas a changer, on affiche les données
-			if (!$testligneamodifier){
-				for ($k=0;$k<$nbcolonnes;$k++){
-					$car=substr($ensemblereponses,$k,1);
-					if ($car=="1"){
-						echo '<td class="ok">OK</td>'."\n";
-						$somme[$k]++;
-					}
-					else {
-						echo '<td class="non"></td>'."\n";
-					}
-				}
-			}
-			//sinon on remplace les choix de l'utilisateur par une ligne de checkbox pour recuperer de nouvelles valeurs
-			else {
-				//si c'est bien la ligne a modifier on met les checkbox
-				if ($compteur=="$ligneamodifier"){
-					for ($j=0;$j<$nbcolonnes;$j++){
-					  echo '<td class="vide"><input type="checkbox" name="choix'.$j.'" value="" ' .
-					    substr($ensemblereponses,$j,1) == '1' ? 'checked="checked"' : '' . 
-					    '></td>'."\n";
-					}
-				}
-				//sinon on affiche les lignes normales
-				else {
-					for ($k=0;$k<$nbcolonnes;$k++){
-						$car=substr($ensemblereponses,$k,1);
-						if ($car=="1"){
-							echo '<td class="ok">OK</td>'."\n";
-							$somme[$k]++;
-						}
-						else {
-							echo '<td class="non"></td>'."\n";
-						}
-					}
-				}
-
-			}
+		// pour chaque colonne
+		for ($k=0; $k < $nbcolonnes; $k++){
+		  // on remplace les choix de l'utilisateur par une ligne de checkbox pour recuperer de nouvelles valeurs
+		  if ($compteur == $ligneamodifier) {
+		    echo '<td class="vide"><input type="checkbox" name="choix'.$k.'" value="" ';
+		    if(substr($ensemblereponses,$k,1) == '1')
+		      echo 'checked="checked"';
+		    echo ' /></td>'."\n";
+		  }
+		  else {
+		    $car=substr($ensemblereponses,$k,1);
+		    if ($car=="1"){
+		      echo '<td class="ok">OK</td>'."\n";
+		      $somme[$k]++;
+		    }
+		    else {
+		      echo '<td class="non"></td>'."\n";
+		    }
+		  }
+		}
 			
 			//a la fin de chaque ligne se trouve les boutons modifier
-			if (!$testligneamodifier && ($dsondage->format=="A+"||$dsondage->format=="D+") && $mod_ok){
-				echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png"></td>'."\n";
-			}
+		if ($compteur != $ligneamodifier && ($dsondage->format=="A+"||$dsondage->format=="D+") && $mod_ok){
+		  echo '<td class=casevide><input type="image" name="modifierligne'.$compteur.'" value="Modifier" src="images/info.png"></td>'."\n";
+		}
 			
 			//demande de confirmation pour modification de ligne
 			for ($i=0;$i<$nblignes;$i++){
@@ -511,10 +499,17 @@ $somme = array();
 					$meilleursujetexport=$toutsujet[$i];
 					if (strpos($toutsujet[$i],'@') !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
-						$meilleursujet.=date(_("l, F jS Y") ,$toutsujetdate[0]) . " " . _("for"). " ".$toutsujetdate[1];
+						if ($_SESSION["langue"]=="EN")
+						  $meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];
+						else
+						  $meilleursujet.=strftime(_("%A, den %e. %B %Y"),$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];
 					}
-					else
-					  $meilleursujet.=date(_("l, F jS Y") ,$toutsujet[$i]);
+					else {
+					  if ($_SESSION["langue"]=="EN")
+					    $meilleursujet.=date("l, F jS Y",$toutsujet[$i]);
+					  else
+					    $meilleursujet.=strftime(_("%A, den %e. %B %Y"),$toutsujet[$i]);
+					}
 				}
 				else
 				  $meilleursujet.=$toutsujet[$i];
@@ -524,13 +519,16 @@ $somme = array();
 	}
 	$meilleursujet=substr("$meilleursujet",1);
 
-	// Affichage du meilleur choix
+$vote_str = _('vote');
+if ($meilleurecolonne > 1)
+  $vote_str = _('votes');
 
+	// Affichage du meilleur choix
 	if ($compteursujet=="1"&&$meilleurecolonne){
-	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . ($meilleurecolonne > 1) ? _("votes") : _("vote") . ".\n";
+	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".\n";
  	}
 	elseif ($meilleurecolonne){
-	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . ($meilleurecolonne > 1) ? _("votes") : _("vote") . ".\n";
+	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".\n";
 	}
 	
 	echo '<br>';
@@ -540,24 +538,24 @@ $somme = array();
 	if ($comment_user->RecordCount() != 0) {
 
 		print "<br><b>" . _("Comments") . " :</b><br>\n";
-		while( $dcomment=$comment_user->FetchRow()) {
-			print "$dcomment->usercomment : $dcomment->comment <br>";
+		while( $dcomment=$comment_user->FetchNextObject(false)) {
+		  print $dcomment->usercomment . ' : ' . $dcomment->comment . '<br />';
 		}
 
 	}
 	
-	if ($erreur_commentaire_vide=="yes"){
+	if ($erreur_commentaire_vide){
 		print "<font color=#FF0000>" . _("Enter a name and a comment!") . "</font>";
 	}
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
 	print "<br>" . _("Add a comment in the poll") . " :<br>\n";
-	echo _("Name") .' : ';
-	if (isset($_SERVER['REMOTE_USER']))
-		echo '<input type="hidden" name="commentuser" value="'.$_SESSION['nom'].'">'.$_SESSION['nom'].'<br>'."\n";
-	else
-		echo '<input type="text" name="commentuser"><br>'."\n";
-	echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
+
+if (isset($_SERVER['REMOTE_USER']) || isset($_SESSION['nom'])) {
+  echo _("Name") .' : ';
+  echo '<input type="text" name="commentuser"><br>'."\n";
+}
+echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
 	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
 	
 	echo '<br><br>'."\n";
