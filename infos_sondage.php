@@ -185,7 +185,7 @@ echo '<br><table >'."\n";
 echo '<tr><td>'. _("Schedule an event") .'</td><td></td> '."\n";
 echo '<td><input type="image" name="creation_sondage_date" value="Trouver une date" src="images/calendar-32.png"></td></tr>'."\n";
 echo '<tr><td>'. _("Make a choice") .'</td><td></td> '."\n";
-echo '<td><input type="image" name="creation_sondage_autre" value="Faire un sondage" src="images/chart-32.png"></td></tr>'."\n";
+echo '<td><input type="image" name="creation_sondage_autre" value="' . _('Make a poll') . '" src="images/chart-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";
