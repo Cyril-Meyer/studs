@@ -38,11 +38,11 @@
 //==========================================================================
 
 session_start();
-include 'fonctions.php';
+include_once('fonctions.php');
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 #tests
 if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
@@ -50,47 +50,50 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 	$_SESSION["nom"]=$_POST["nom"];
 	$_SESSION["adresse"]=$_POST["adresse"];
 	$_SESSION["commentaires"]=$_POST["commentaires"];
-	if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
-	else {unset($_SESSION["studsplus"]);}
 	
-	if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
-	else {unset($_SESSION["mailsonde"]);}	
+	unset($_SESSION["studsplus"]);
+	if ($_POST["studsplus"])
+	  $_SESSION["studsplus"] =  '+';
 	
-	if(!filter_var($_POST["adresse"], FILTER_VALIDATE_EMAIL) || strpos('@', $_POST["adresse"]) === false) {
-		$erreur_adresse="yes";
+	unset($_SESSION["mailsonde"]);
+	if ($_POST["mailsonde"])
+	  $_SESSION["mailsonde"] = true;
+	
+	if(!filter_var($_POST["adresse"], FILTER_VALIDATE_EMAIL) || strpos($_POST["adresse"], '@') === false) {
+	  $erreur_adresse = true;
 	}
 	if (preg_match(';<|>|";',$_POST["titre"])){
-		$erreur_injection_titre="yes";
+	  $erreur_injection_titre = true;
 	}
 	if (preg_match(';<|>|";',$_POST["nom"])){
-		$erreur_injection_nom="yes";
+	  $erreur_injection_nom = true;
 	}
 	if (preg_match(';<|>|";',$_POST["commentaires"])){
-	$erreur_injection_commentaires="yes";
+	  $erreur_injection_commentaires = true;
 	}
-}
-#Si pas d'erreur dans l'adresse alors on change de page vers date ou autre
-if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])&&$_POST["titre"]&&$_POST["nom"]&&$_POST["adresse"]&&!$erreur_adresse&&!$erreur_injection_titre&&!$erreur_injection_commentaires&&!$erreur_injection_nom){
 	
-	$_SESSION["titre"]=$_POST["titre"];
-	$_SESSION["nom"]=$_POST["nom"];
-	$_SESSION["adresse"]=$_POST["adresse"];
-	$_SESSION["commentaires"]=$_POST["commentaires"];
-
-	if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
-	else {unset($_SESSION["studsplus"]);}
-	if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
-	else {unset($_SESSION["mailsonde"]);}
-
-	if ($_POST["creation_sondage_date"]||$_POST["creation_sondage_date_x"]){
-		header("Location:choix_date.php");
-		exit();
+	// Si pas d'erreur dans l'adresse alors on change de page vers date ou autre
+	if ($_POST["titre"] && $_POST["nom"] && $_POST["adresse"] &&
+	    ! $erreur_adresse && ! $erreur_injection_titre && ! $erreur_injection_commentaires && ! $erreur_injection_nom ){
+	  if ($_POST["creation_sondage_date"]||$_POST["creation_sondage_date_x"]){
+	    header("Location:choix_date.php");
+	    exit();
+	  }
+	  
+	  if ($_POST["creation_sondage_autre"]||$_POST["creation_sondage_autre_x"]){
+	    header("Location:choix_autre.php");
+	    exit();
+	  }
 	}
 
-	if ($_POST["creation_sondage_autre"]||$_POST["creation_sondage_autre_x"]){
-		header("Location:choix_autre.php");
-		exit();
+	//En cas d'erreur, recuperation des variables deja entrées
+	if (empty($_POST["titre"]) || empty($_POST["adresse"]) || empty($_POST["nom"])) {
+	  $_SESSION["titre"]=$_POST["titre"];
+	  $_SESSION["nom"]=$_POST["nom"];
+	  $_SESSION["adresse"]=$_POST["adresse"];
+	  $_SESSION["commentaires"]=$_POST["commentaires"];
 	}
+
 }
 
 //affichage de la page
@@ -110,22 +113,10 @@ echo '<body>'."\n";
 //debut du formulaire
 echo '<form name="formulaire" action="infos_sondage.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 
-//En cas d'erreur, recuperation des variables deja entrées
-if (($_POST["titre"]==""||$_POST["adresse"]==""||$_POST["nom"]=="")&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
-		$_SESSION["titre"]=$_POST["titre"];
-		$_SESSION["nom"]=$_POST["nom"];
-		$_SESSION["adresse"]=$_POST["adresse"];
-		$_SESSION["commentaires"]=$_POST["commentaires"];
-		if ($_POST["studsplus"]){$_SESSION["studsplus"]="+";}
-		else {unset($_SESSION["studsplus"]);}
-		if ($_POST["mailsonde"]){$_SESSION["mailsonde"]="yes";}
-		else {unset($_SESSION["mailsonde"]);}
-}
-
 //affichage des bandeaux de tete
 logo();
 bandeau_tete();
-bandeau_titre_infos();
+echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 sous_bandeau();
  
 echo '<div class=corps>'."\n";
@@ -167,7 +158,7 @@ else
 if (!$_SESSION["adresse"]&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">" . _("Enter an email address") . " </font></td>"."\n";
 }
-elseif ($erreur_adresse=="yes"&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
+elseif ($erreur_adresse&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">" . _("The address is not correct! (You should enter a valid email address in order to receive the link to your poll)") . "</font></td>"."\n";
 }
 echo '</tr>'."\n";
@@ -186,7 +177,7 @@ if (!$_SESSION["studsplus"]&&!$_POST["creation_sondage_date"]&&!$_POST["creation
 
 if ($_SESSION["studsplus"]=="+"){$cocheplus="checked";}
 echo '<input type=checkbox name=studsplus '.$cocheplus.'>'. _(" Voters can modify their vote themselves.") .'<br>'."\n";
-if ($_SESSION["mailsonde"]=="yes"){$cochemail="checked";}
+if ($_SESSION["mailsonde"]){$cochemail="checked";}
 echo '<input type=checkbox name=mailsonde '.$cochemail.'>'. _(" To receive an email for each new vote.") .'<br>'."\n";
 
 //affichage des boutons pour choisir sondage date ou autre

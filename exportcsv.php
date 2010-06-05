@@ -39,7 +39,7 @@
 
 session_start();
 
-include 'fonctions.php';
+include_once('fonctions.php');
 
 $user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 

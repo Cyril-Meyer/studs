@@ -39,12 +39,12 @@
 
 session_start();
 
-include 'variables.php';
+include_once('variables.php');
 include_once( 'i18n.php' );
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 	//affichage de la page
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";

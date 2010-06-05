@@ -138,36 +138,22 @@ div.bandeaupiedmobile{
 	position:static; 
 }
 /*les boutons se trouvant dans le sousbandeau*/
-.boutonsousbandeau {
+div.sousbandeau a, div.sousbandeau span.sousbandeaulangue a {
  	background-color: #0b419b; 
-	width: 65px;
 	height:16px;
-	border:0px;
-	padding:0px;
+	padding: 2px 6px 2px 6px;
 	vertical-align:middle;
 	text-align:center;
 	margin-left:10px;
 	margin-right:10px;
-	cursor:pointer; 
 	font-family:arial;
 	color:white;
 	font-size:10px;
-	float:left;
+	text-decoration:none;
 }
-.boutonsousbandeaulangue {
- 	background-color: #0b419b; 
-	width: 35px;
-	height:16px;
-	border:0px;
-	padding:0px;
-	text-align:center;
-	vertical-align:middle;
+span.sousbandeaulangue {
 	margin-left:6px;
 	margin-right:6px;
-	cursor:pointer; 
-	font-family:arial;
-	color:white;
-	font-size:10px;
 	float:right;
 }
 /*corps de la page index.php*/
@@ -305,14 +291,16 @@ div.cadre td.somme {
 	font-weight:  bold;
 	font-size:14px; 
 }
+
 /*Case de tableau SUJET dans affichage de sondage*/
-div.cadre td.sujet {
+div.cadre td.sujet, div.cadre td.jour, div.cadre td.heure {
 	border: 2px;
 	background-color: #DDDDDD; 
 	font-weight:  bold;
 	font-size:14px;
 	padding:1px 5px;
 }
+
 div.cadre td.annee {
 	border: 2px;
 	background-color: #969696; 
@@ -323,20 +311,6 @@ div.cadre td.annee {
 div.cadre td.mois {
 	border: 2px;
 	background-color: #C0C0C0; 
-	font-weight:  bold;
-	font-size:14px;
-	padding:1px 5px;
-}
-div.cadre td.jour {
-	border: 2px;
-	background-color: #DDDDDD; 
-	font-weight:  bold;
-	font-size:14px;
-	padding:1px 5px;
-}
-div.cadre td.heure {
-	border: 2px;
-	background-color: #DDDDDD; 
 	font-weight:  bold;
 	font-size:14px;
 	padding:1px 5px;
@@ -400,14 +374,13 @@ p.affichageresultats{
 	font-size:13px;
 	margin:-10px;
 }
-/* Le paragraphe de fin */
-p.textesouligne{
-	text-decoration: underline;
-}
-p.affichageexport{
+
+a.affichageexport{
 	text-align: center;
 	font-family:arial;
 	font-size:10px;
+	margin-left:10px;
+	text-decoration: none;
 }
 div.titregestionadmin{
 	text-align: center;
@@ -415,10 +388,10 @@ div.titregestionadmin{
 	font-size:18px;
 	padding:10px;
 }
-/*les boutons pour choisir un jour non selectionné*/
-.boutonON {
+
+
+.bouton {
 	width: 65px;
-	background-color: #66FF99;
 	border:0px;
 	padding:0px 0 0 0;
 	margin:0px;
@@ -426,14 +399,12 @@ div.titregestionadmin{
 	font-family:arial;
 	font-size:13px;
 }
+/*les boutons pour choisir un jour non selectionné*/
+.ON {
+    background-color: #66FF99;
+}
+
 /*les boutons pour deselectionner un jour deja choisi*/
-.boutonOFF {
-	width: 65px;
-	background-color: #0077DD;
-	border:0px;
-	padding:0px 0 0 0;
-	margin:0px;
-	cursor:pointer;
-	font-family:arial;
-	font-size:13px;
+.OFF {
+    background-color: #0077DD;
 }

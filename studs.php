@@ -40,10 +40,10 @@
 session_start();
 
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
-include 'fonctions.php';
+	include_once('bandeaux.php');
+include_once('fonctions.php');
 
 // Le fichier studs.php sert a afficher les résultats d'un sondage à un simple utilisateur. 
 // C'est également l'interface pour ajouter une valeur à un sondage deja créé.
@@ -52,8 +52,11 @@ include 'fonctions.php';
 
 //On récupère le numéro de sondage par le lien web.
 $numsondage=$_GET["sondage"];
-
-$dsondage = get_sondage_from_id($_SESSION['numsondage']);
+$dsondage = false;
+if(! empty($numsondage))
+  $dsondage = get_sondage_from_id($numsondage);
+elseif(! empty($_SESSION['numsondage']))
+  $dsondage = get_sondage_from_id($_SESSION['numsondage']);
 
 //verification de l'existence du sondage
 // S'il n'existe pas, il affiche une page d'erreur
@@ -146,7 +149,7 @@ $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numso
 				$nom=$_POST["nom"];
  				$connect->Execute("insert into user_studs values ('$nom', '$numsondage', '$nouveauchoix')");
 
-				if ($dsondage->mailsonde == true || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes"){
+				if ($dsondage->mailsonde == true || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes" || $dsondage->mailsonde=="true"){
 
 					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);

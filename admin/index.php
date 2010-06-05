@@ -40,23 +40,18 @@
 
 session_start();
 
-include '../variables.php';
-include '../fonctions.php';
-include '../bandeaux.php';
+include_once('../variables.php');
+include_once('../fonctions.php');
+include_once('../bandeaux.php');
 
 // Ce fichier index.php se trouve dans le sous-repertoire ADMIN de Studs. Il sert à afficher l'intranet de studs 
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
 // de l'application.
 
-if ($_POST["historique"]){
+if (isset($_GET["log"]) && $_GET["log"] == 1 /*&& is_admin() | htaccess setup */ ) {
 	header("Location:logs_studs.txt");
 	exit();
 }
-
-if ($_POST["nettoyage"]){
-	exec("php ../scripts/nettoyage_sondage.php");
-}
-
 
 // Affichage des balises standards
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
@@ -132,12 +127,12 @@ while($dsondage = $sondage->FetchNextObject(false)) {
 	$nbuser=$user_studs->RecordCount();
 
 	echo '<tr align=center><td>'.$dsondage->id_sondage.'</td><td>'.$dsondage->format.'</td><td>'.$dsondage->titre.'</td><td>'.$dsondage->nom_admin.'</td>';
-	
-	if ($dsondage->date_fin>time()){
-		echo '<td>'.date("d/m/y",$dsondage->date_fin).'</td>';
+
+	if (strtotime($dsondage->date_fin) > time()){
+	  echo '<td>'.date("d/m/y",strtotime($dsondage->date_fin)).'</td>';
 	}
 	else{
-		echo '<td><font color=#FF0000>'.date("d/m/y",$dsondage->date_fin).'</font></td>';
+	  echo '<td><font color=#FF0000>'.date("d/m/y",strtotime($dsondage->date_fin)).'</font></td>';
 	}
 	
 	echo'<td>'.$nbuser.'</td>'."\n";

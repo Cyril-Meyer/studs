@@ -37,8 +37,7 @@
 //
 //==========================================================================
 
-include '../fonctions.php';
-include '../variables.php';
+include_once('../fonctions.php');
 
 //recuperation de la date
 $date_courante=date("U");
@@ -50,7 +49,7 @@ $sondage=$connect->Execute("select * from sondage");
 
 while (	$dsondage=$sondage->FetchNextObject(false)) {
 
-	if ($date_courante > $dsondage->date_fin){
+  if ($date_courante > strtotime($dsondage->date_fin)){
 
 		//destruction des données dans la base 
 	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.

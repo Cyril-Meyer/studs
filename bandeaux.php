@@ -37,6 +37,9 @@
 //
 //==========================================================================
 
+// pour get_server_name()
+include_once('fonctions.php');
+
 //le logo
 function logo (){
 	echo '<div class="logo"><img src="./'.getenv("LOGOBANDEAU").'" height=74 alt=logo></div>'."\n";
@@ -54,9 +57,6 @@ function bandeau_tete(){
 #les bandeaux de titre
 function bandeau_titre(){
 	echo '<div class="bandeautitre">'. _("Make your polls") .'</div>'."\n";
-}
-function bandeau_titre_infos(){
-	echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 }
 function bandeau_titre_date(){
 	echo '<div class="bandeautitre">'. _("Poll dates (2 on 2)") .'</div>'."\n";
@@ -84,31 +84,39 @@ function liste_lang() {
   global $ALLOWED_LANGUAGES;
   $str = '';
   foreach ($ALLOWED_LANGUAGES as $k => $v )
-    $str .= '<a href="?lang=' . $k . '" class="boutonsousbandeaulangue" >' . $v . '</a>' . "\n" ;
+    $str .= '<a href="' . $_SERVER['PHP_SELF'] . '?lang=' . $k . '">' . $v . '</a>' . "\n" ;
   return $str;
 }
 
 #Les sous-bandeaux contenant les boutons de navigation
 function sous_bandeau(){
   echo '<div class="sousbandeau">' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/studs.php?sondage=aqg259dth55iuhwm">'. _("Example") .'</a>' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/contacts.php">'. _("Contact") .'</a>' .
-    //'<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/sources/sources.php">'. _("Sources") .'</a>' . //not implemented
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/apropos.php">'. _("About") .'</a>' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/admin/index.php">'. _("Admin") .'</a>' .
-    liste_lang() . '</div>'."\n";
+    '<a href="' . get_server_name() . 'index.php">'. _("Home") .'</a>' .
+    '<a href="' . get_server_name() . 'studs.php?sondage=aqg259dth55iuhwm">'. _("Example") .'</a>' .
+    '<a href="' . get_server_name() . 'contacts.php">'. _("Contact") .'</a>' .
+    //'<a href="' . get_server_name() . 'sources/sources.php">'. _("Sources") .'</a>' . //not implemented
+    '<a href="' . get_server_name() . 'apropos.php">'. _("About") .'</a>' .
+    '<a href="' . get_server_name() . 'admin/index.php">'. _("Admin") .'</a>' .
+
+    '<span class="sousbandeau sousbandeaulangue">' .
+    liste_lang() . '</span>'.
+
+    '</div>' . "\n";
 }
 function sous_bandeau_admin(){
   echo '<div class="sousbandeau">' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
-    '<input type=submit class=boutonsousbandeau name=historique value="'. _("Logs") .'">' .
-    '<input type=submit class=boutonsousbandeau name=nettoyage value="'. _("Cleaning") .'">' . liste_lang() .'</div>'."\n";
+    '<a href="' . get_server_name() . 'index.php">'. _("Home") .'</a>' .
+    '<a href="' . get_server_name() . 'admin/?log=1">'. _("Logs") .'</a>' .
+    '<a href="' . get_server_name() . 'scripts/nettoyage_sondage.php">'. _("Cleaning") .'</a>' .
+
+    '<span class="sousbandeau sousbandeaulangue">' .
+    liste_lang() . '</span>'.
+
+    '</div>'."\n";
 }
 function sous_bandeau_choix(){
   echo '<div class="sousbandeau">' .
-    '<a class="boutonsousbandeau" href="' . STUDS_URL. '/' . STUDS_DIR . '/index.php">'. _("Home") .'</a>' .
-    '<input type=submit class=boutonsousbandeau name=retour value="'. _("Back") .'">' .
+    '<a href="' . get_server_name() . 'index.php">'. _("Home") .'</a>' .
     '</div>'."\n";
 }
 

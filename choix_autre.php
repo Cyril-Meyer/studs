@@ -38,11 +38,11 @@
 //==========================================================================
 
 session_start();
-include 'creation_sondage.php';
+include_once('creation_sondage.php');
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 //si les variables de session ne sont pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){

@@ -39,8 +39,7 @@
 
 session_start();
 
-include 'variables.php';
-include 'fonctions.php';
+include_once('fonctions.php');
 
 
 //Generer une chaine de caractere unique et aleatoire

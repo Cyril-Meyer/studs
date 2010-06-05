@@ -40,12 +40,12 @@
 session_start();
 
 //setlocale(LC_TIME, "fr_FR");
-include 'variables.php';
-include 'fonctions.php';
+include_once('variables.php');
+include_once('fonctions.php');
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 // recuperation du numero de sondage admin (24 car.) dans l'URL
 $numsondageadmin=$_GET["sondage"];
@@ -128,18 +128,8 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 
 		echo '<select name="nouveaumois"> '."\n";
 		echo '<OPTION VALUE="vide"></OPTION>'."\n";
-		echo '<OPTION VALUE="1">'. _("january") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="2">'. _("february") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="3">'. _("march") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="4">'. _("april") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="5">'. _("may") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="6">'. _("june") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="7">'. _("july") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="8">'. _("august") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="9">'. _("september") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="10">'. _("october") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="11">'. _("november") .'</OPTION>'."\n";
-		echo '<OPTION VALUE="12">'. _("december") .'</OPTION>'."\n";		
+		for($i=1;$i<13;$i++)
+		  echo '<OPTION VALUE="'.$i.'">'.strftime('%B').'</OPTION>'."\n";
 		echo '</SELECT>'."\n";
 
 		
@@ -361,7 +351,7 @@ else {
 				//mise a jour avec les nouveaux sujets dans la base
 				if (!$erreur_ajout_date){	
 					$connect->Execute("UPDATE sujet_studs SET sujet = '$dateinsertion' WHERE id_sondage = '$numsondage' ");
-					if ($nouvelledate>$dsondage->date_fin){
+					if ($nouvelledate > strtotime($dsondage->date_fin)){
 						$date_fin=$nouvelledate+200000;
 						$connect->Execute("UPDATE sondage SET date_fin = '$date_fin' WHERE id_sondage = '$numsondage' ");
 					}
@@ -913,16 +903,16 @@ else {
 		$meilleursujet=str_replace("°","'",$meilleursujet);
 
 		//ajout du S si plusieurs votes
-		if ($meilleurecolonne!="1"&&($_SESSION["langue"]=="FR"||$_SESSION["langue"]=="EN"||$_SESSION["langue"]=="ES")){$pluriel="s";}
-		if ($meilleurecolonne!="1"&&$_SESSION["langue"]=="DE"){$pluriel="n";}
-
+		$vote_str = _('vote');
+		if ($meilleurecolonne!="1")
+		  $vote_str = _('votes');
 		echo '<p class=affichageresultats>'."\n";
 		//affichage de la phrase annoncant le meilleur sujet
 		if ($compteursujet=="1"&&$meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\">" . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\">" . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".<br>\n";
 		}
 		elseif ($meilleurecolonne){
-			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . _("vote") . "$pluriel.<br>\n";
+			print "<img src=\"images/medaille.png\" alt=\"Meilleur resultat\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".<br>\n";
 		}
 
 		echo '<br><br>'."\n";

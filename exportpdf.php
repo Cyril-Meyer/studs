@@ -39,9 +39,9 @@
 
 session_start();
 
-include 'fpdf/phpToPDF.php';
-include 'fonctions.php';
-include 'variables.php';
+include_once('fpdf/phpToPDF.php');
+include_once('fonctions.php');
+include_once('variables.php');
 
 $user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 

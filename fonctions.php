@@ -37,9 +37,9 @@
 //
 //==========================================================================
 
-include 'variables.php';
-include_once( 'i18n.php' );
-include('adodb/adodb.inc.php');
+include_once('variables.php');
+include_once('i18n.php');
+include_once('adodb/adodb.inc.php');
 
 function connexion_base(){
        $DB = NewADOConnection(getenv('BASE_TYPE'));
@@ -49,7 +49,7 @@ function connexion_base(){
 }
 
 function get_server_name() {
-       $scheme = $_SERVER["HTTPS"] == "on" ? "https" : "http";
+  $scheme = (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? 'https' : 'http';
 	$url = sprintf("%s://%s%s", $scheme,
 		      STUDS_URL,
 		      dirname($_SERVER["SCRIPT_NAME"]));
@@ -64,7 +64,8 @@ function get_sondage_from_id($id) {
   // Ouverture de la base de données
   if(preg_match(";^[\w\d]{16}$;i",$id)) {
     $sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $id . '"');
-    return $sondage->FetchObject(false);
+    $psondage = $sondage->FetchObject(false);
+    $psondage->date_fin = strtotime($psondage->date_fin);
   }
   return false;
 }

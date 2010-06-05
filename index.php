@@ -38,12 +38,11 @@
 //==========================================================================
 
 
-include 'variables.php';
-include 'i18n.php';
-if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+include_once('fonctions.php');
+if (is_readable('bandeaux_local.php'))
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 session_start();
 
@@ -74,7 +73,7 @@ echo '<p>'. _("Making polls to schedule meetings or events, quickly and easily. 
 echo '<table>'."\n" . '<tr>' .
 '<td><b>'. _("Make a poll") .'</b></td>'.
 '<td></td>'.
-'<td><a href="' . STUDS_URL. '/' . STUDS_DIR . '/infos_sondage.php"><img alt="' . _('Faire un sondage') . '" src="images/next-32.png" />' . _('Faire un sondage') . '</td>' .
+'<td><a href="' . get_server_name() . 'infos_sondage.php"><img alt="' . _('Faire un sondage') . '" src="images/next-32.png" />' . _('Faire un sondage') . '</td>' .
 '</tr>'."\n" . '</table>'."\n";
 
 echo '<br>'."\n";
