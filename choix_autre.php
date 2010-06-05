@@ -114,18 +114,6 @@ else {
 		else {$erreur_injection="yes";}
 	}
 
-	//bouton annuler
-	if ($_POST["annuler"]||$_POST["annuler_x"]){
-		header("Location:index.php");
-		exit();
-	}
-
-	//bouton retour
-	if ($_POST["retour"]||$_POST["retour_x"]){
-		header("Location:infos_sondage.php");
-		exit();
-	}
-
 	//nombre de cases par défaut
 	if(!$_SESSION["nbrecases"]){
 		$_SESSION["nbrecases"]=10;

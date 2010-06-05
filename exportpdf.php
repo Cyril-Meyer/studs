@@ -43,12 +43,9 @@ include_once('fpdf/phpToPDF.php');
 include_once('fonctions.php');
 include_once('variables.php');
 
-$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
-
-$dsondage = get_sondage_from_id($_SESSION['numsondage']);
-$nbcolonnes=substr_count($dsondage->sujet,',')+1;
-
-$datereunion=explode("@",$_SESSION["meilleursujet"]);
+$dsondage = get_sondage_from_id($_POST['numsondage']);
+$lieureunion=stripcslashes($_POST["lieureunion"]);
+$datereunion=explode("@",$_POST["meilleursujet"]);
 
 //creation du fichier PDF
 $PDF=new phpToPDF();
@@ -68,7 +65,6 @@ $PDF->Text(55,120," Convocation");
 $PDF->Text(55,140,"Bonjour,");
 
 $PDF->Text(40,150,"Vous êtes conviés à la réunion \"".utf8_decode($dsondage->titre)."\".");
-$lieureunion=str_replace("\\","",$_SESSION["lieureunion"]);
 
 $PDF->SetFont('Arial','B',11);
 $PDF->Text(40,170,"Informations sur la réunion");

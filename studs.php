@@ -50,13 +50,23 @@ include_once('fonctions.php');
 
 
 
+$numsondage = false;
+
 //On récupère le numéro de sondage par le lien web.
-$numsondage=$_GET["sondage"];
-$dsondage = false;
-if(! empty($numsondage))
+if(isset($_GET["sondage"])) {
+  $numsondage=$_GET["sondage"];
+  $_SESSION["numsondage"] = $numsondage;
+ }
+elseif(isset($_COOKIE["sondage"])) {
+  $numsondage=$_COOKIE["sondage"];
+}
+elseif(isset($_SESSION["numsondage"])) {
+  $numsondage=$_SESSION["numsondage"];
+}
+
+if($numsondage) {
   $dsondage = get_sondage_from_id($numsondage);
-elseif(! empty($_SESSION['numsondage']))
-  $dsondage = get_sondage_from_id($_SESSION['numsondage']);
+}
 
 //verification de l'existence du sondage
 // S'il n'existe pas, il affiche une page d'erreur
@@ -309,7 +319,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	}
 	echo '</tr>'."\n";
 		//affichage des horaires	
-	if (strpos('@',$dsondage->sujet) !== false){
+	if (strpos($dsondage->sujet, '@') !== false){
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 				
@@ -499,7 +509,7 @@ $somme = array();
 			$meilleursujet.=", ";
 			  	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 					$meilleursujetexport=$toutsujet[$i];
-					if (strpos('@',$toutsujet[$i]) !== false){
+					if (strpos($toutsujet[$i],'@') !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
 						$meilleursujet.=date(_("l, F jS Y") ,$toutsujetdate[0]) . " " . _("for"). " ".$toutsujetdate[1];
 					}

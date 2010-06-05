@@ -84,6 +84,7 @@ if (!$sondage || $sondage->RecordCount() != 1){
 	
 	echo'</body>'."\n";
 	echo '</html>'."\n";
+	die();
 }
 
 elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
@@ -201,15 +202,6 @@ else {
 	if ($_POST["annulesuppression"]){
 
 	}
-	
-	if ($_POST["exportpdf_x"]&&$_POST["lieureunion"]){
-		$_SESSION["numsondage"]=$numsondage;
-		$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
-		$_SESSION["lieureunion"]=$_POST["lieureunion"];
-		header("Location:exportpdf.php");
-		exit();
-	}
-
 	
 	//quand on ajoute un commentaire utilisateur
 	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
@@ -382,7 +374,10 @@ else {
 				$adresseadmin=$dsondage->mail_admin;
 
 				$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-				mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll")., "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+				mail ($adresseadmin, 
+				      _("[ADMINISTRATOR] New column for your poll"),
+				      _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),
+				      $headers);
 				
 			}
 			else {$erreur_ajout_date="yes";}
@@ -415,12 +410,12 @@ else {
 		
 		//on teste pour voir si une ligne doit etre modifiée
 		for ($i=0;$i<$nblignes;$i++){
-			if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+			if (isset($_POST["modifierligne$i"])||isset($_POST['modifierligne'.$i.'_x'])){
 				$ligneamodifier=$i;
 				$testligneamodifier="true";
 			}
 			//test pour voir si une ligne est a modifier
-			if ($_POST["validermodifier$i"]){
+			if (isset($_POST["validermodifier$i"])){
 				$modifier=$i;
 				$testmodifier="true";
 			}
@@ -451,7 +446,7 @@ else {
 
 		//suppression de colonnes dans la base
 		for ($i=0;$i<$nbcolonnes;$i++){
-			if (($_POST["effacecolonne$i"]||$_POST['effacecolonne'.$i.'_x'])&&$nbcolonnes>1){
+			if ((isset($_POST["effacecolonne$i"])||isset($_POST['effacecolonne'.$i.'_x']))&&$nbcolonnes>1){
 	
 				$toutsujet=explode(",",$dsujet->sujet);
 				$j=0;
@@ -550,10 +545,8 @@ else {
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 		echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
 		echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+		echo '<script type="text/javascript" src="block_enter.js"></script>';
 		
-		#bloquer la touche entrée
-		blocage_touche_entree();
-
 		echo '</head>'."\n";
 		echo '<body>'."\n";
 
@@ -586,7 +579,7 @@ else {
 		echo '</div>'."\n";
 
 		echo '<div class="cadre"> '."\n";
-		echo _("As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.") ."\n";
+		echo _('As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.') ."\n";
 
 		echo '<br><br>'."\n";
 
@@ -667,7 +660,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	echo '<td class="jour"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
 	echo '</tr>'."\n";
 			//affichage des horaires	
-	if (strpos('@',$dsujet->sujet) !== false){
+	if (strpos($dsujet->sujet,'@') !== false){
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 		echo '<td></td>'."\n";
@@ -767,7 +760,7 @@ else {
 
                         //demande de confirmation pour modification de ligne
                        for ($i=0;$i<$nblignes;$i++){
-				if ($_POST["modifierligne$i"]||$_POST['modifierligne'.$i.'_x']){
+				if (isset($_POST["modifierligne$i"])||isset($_POST['modifierligne'.$i.'_x'])){
 					if ($compteur==$i){
 						echo '<td><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png"  alt="Icone valider"></td>'."\n";
 					}
@@ -877,11 +870,11 @@ else {
 			$meilleursujet.=", ";
 			  	if ($dsondage->format=="D"||$dsondage->format=="D+"){
 					$meilleursujetexport=$toutsujet[$i];
-					if (strpos('@',$toutsujet[$i]) !== false){
+					if (strpos($toutsujet[$i],'@') !== false){
 						$toutsujetdate=explode("@",$toutsujet[$i]);
 						if ($_SESSION["langue"]=="FR"){$meilleursujet.=strftime("%A %e %B %Y",$toutsujetdate[0]). ' ' . _("for")  .' ' . $toutsujetdate[1];}
 						if ($_SESSION["langue"]=="ES"){$meilleursujet.=strftime("%A %e de %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
-						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])."  _("for")  ".$toutsujetdate[1];}
+						if ($_SESSION["langue"]=="EN"){$meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];}
 						if ($_SESSION["langue"]=="DE"){$meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];}
 					}
 					else{
@@ -918,24 +911,30 @@ else {
 		echo '<br><br>'."\n";
 		echo '</p>'."\n";
 		echo '</form>'."\n";
-		echo '<form name="formulaire2" action="adminstuds.php?sondage='.$numsondageadmin.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+		echo '<form name="formulaire4" action="#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		//Gestion du sondage
 		echo '<div class=titregestionadmin>'. _("Poll's management") .' :</div>'."\n";
  		echo '<p class=affichageresultats>'."\n"; 
 		echo '<br>'."\n";
 	//Changer le titre du sondage
 	$adresseadmin=$dsondage->mail_admin;
-	echo _("Change the title") .' :<br> <input type="text" name="nouveautitre" size="40" value="'.$titre.'"> <input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
-
+	echo _("Change the title") .' :<br>' .
+	  '<input type="text" name="nouveautitre" size="40" value="'.$titre.'">'.
+	  '<input type="image" name="boutonnouveautitre" value="Changer le titre" src="images/accept.png" alt="Valider"><br><br>'."\n";
+		echo '</form>'."\n";
 
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
+	  echo '<form name="formulaire2" action="exportpdf.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		echo _("Generate the convocation letter (.PDF), choose the place to meet and validate") .'<br>';
-		echo '<input type="text" name="lieureunion" size="100" value="'.$_SESSION["lieureunion"].'">';
-		echo ' <input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
-			$_SESSION["lieureunion"]=str_replace("\\","",$_SESSION["lieureunion"]);
-			$_SESSION["meilleursujet"]=$meilleursujetexport;
+		echo '<input type="text" name="lieureunion" size="100" value="" />';
+		echo '<input type="hidden" name="sondage" value="$numsondageadmin" />';
+		echo '<input type="hidden" name="meilleursujet" value="$meilleursujetexport" />';
+		echo '<input type="image" name="exportpdf" value="Export en PDF" src="images/accept.png" alt="Export PDF"><br><br>';
+		echo '</form>'."\n";
+		// '<font color="#FF0000">'. _("Enter a meeting place!") .'</font><br><br>'."\n";
 	}
 		
+	// TODO
 	if ($_POST["exportpdf_x"]&&!$_POST["lieureunion"]){
 		echo '<font color="#FF0000">'. _("Enter a meeting place!") .'</font><br><br>'."\n";
 	}

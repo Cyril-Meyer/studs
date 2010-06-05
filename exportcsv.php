@@ -40,7 +40,7 @@
 session_start();
 
 include_once('fonctions.php');
-
+//TODO, don't use $_SESSION[]
 $user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 
 $dsondage = get_sondage_from_id($_SESSION['numsondage']);
@@ -62,7 +62,7 @@ for ($i=0;$toutsujet[$i];$i++){
 }
 $input.="\r\n";
 
-if (strpos('@',$dsondage->sujet) !== false){
+if (strpos($dsondage->sujet,'@') !== false){
 	$input.=";";
 	for ($i=0;$toutsujet[$i];$i++){
 		$heures=explode("@",$toutsujet[$i]);
