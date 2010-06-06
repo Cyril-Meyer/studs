@@ -42,9 +42,8 @@ include_once('i18n.php');
 include_once('adodb/adodb.inc.php');
 
 function connexion_base(){
-       $DB = NewADOConnection(getenv('BASE_TYPE'));
-       $DB->Connect(getenv('SERVEURBASE'), getenv('USERBASE'),
-		    getenv('USERPASSWD'), getenv('BASE'));
+       $DB = NewADOConnection(BASE_TYPE);
+       $DB->Connect(SERVEURBASE, USERBASE, USERPASSWD, BASE);
        return $DB;
 }
 

@@ -41,7 +41,7 @@ include_once('../fonctions.php');
 
 //recuperation de la date
 $date_courante=date("U");
-$date_humaine=date('H:i:s d/m/Y');
+$date=date('H:i:s d/m/Y:');
 
 
 //ouverture de la connection avec la base SQL
@@ -58,14 +58,7 @@ while (	$dsondage=$sondage->FetchNextObject(false)) {
 			  "WHERE id_sondage = '$dsondage->id_sondage' ");
 
                // ecriture des traces dans le fichier de logs
-               $fichier_log=fopen('../admin/logs_studs.txt','a');
-               fwrite($fichier_log,"[SUPPRESSION] $date_humaine\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t\n");
-               fclose($fichier_log);
-
-
+               error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin", '../admin/logs_studs.txt');
 	}
-
-
 }
-
 ?>

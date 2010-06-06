@@ -52,29 +52,29 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail (getenv('ADRESSEMAILADMIN'), "" . _("[CONTACT] You have sent a question ") . "".getenv('NOMAPPLICATION'), "" . _("You have a question from a user ") . " ".getenv('NOMAPPLICATION')."\n\n" . _("User") . " : ".$_POST["nom"]."\n\n" . _("User's email address") . " : $_POST[adresse_mail]\n\n" . _("Message") . " :".$message,$headers);
+	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	mail (ADRESSEMAILADMIN, "" . _("[CONTACT] You have sent a question ") . "".NOMAPPLICATION, "" . _("You have a question from a user ") . " ".NOMAPPLICATION."\n\n" . _("User") . " : ".$_POST["nom"]."\n\n" . _("User's email address") . " : $_POST[adresse_mail]\n\n" . _("Message") . " :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
-		$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-		mail ("$_POST[adresse_mail]", "" . _("[COPY] Someone has sent a question ") . "".getenv('NOMAPPLICATION'), "" . _("Here is a copy of your question") . " :\n\n".$message." \n\n" . _("We're going to answer your question shortly.") . "\n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+		$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+		mail ("$_POST[adresse_mail]", "" . _("[COPY] Someone has sent a question ") . "".NOMAPPLICATION, "" . _("Here is a copy of your question") . " :\n\n".$message." \n\n" . _("We're going to answer your question shortly.") . "\n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 	}
 
 	//affichage de la page de confirmation d'envoi
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre();
+	bandeau_titre(_("Make your polls"));
 	
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>" . _("Your message has been sent!") . "</H2><br><br>"."\n";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	
@@ -94,7 +94,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -105,7 +105,7 @@ else {
 	//bandeaux de tete
 	logo();
 	bandeau_tete();
-	bandeau_titre_contact();
+	bandeau_titre(_("Contact us"));
 	sous_bandeau();
 
 	//blablabla

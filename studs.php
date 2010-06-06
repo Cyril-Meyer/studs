@@ -71,21 +71,20 @@ if($numsondage) {
 //verification de l'existence du sondage
 // S'il n'existe pas, il affiche une page d'erreur
 if (!$dsondage) {
-
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre_erreur();
-	echo '<div class=corpscentre>'."\n";
+	bandeau_titre(_("Error!"));
+	echo '<div class="corpscentre">'."\n";
 	print "<H2>" . _("This poll doesn't exist !") . "</H2>"."\n";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>."."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -98,20 +97,7 @@ if (!$dsondage) {
 
 $user_studs=$connect->Execute("select * from user_studs where id_sondage='$numsondage' order by id_users");
 
-	if ($_POST["exportics_x"]){
-		header("Location:exportics.php");
-		exit();
-
-	}
-	if ($_POST["exportcsv_x"]){
-		$_SESSION["numsondage"]=$_GET["sondage"];
-		header("Location:exportcsv.php");
-		exit();
-
-	}
-	
-	
-	//quand on ajoute un commentaire utilisateur
+// quand on ajoute un commentaire utilisateur
 if (isset($_SERVER['REMOTE_USER']))
   $comment_user = $_SESSION['nom'];
 else
@@ -162,13 +148,14 @@ if (isset($_POST["ajoutcomment"])) {
 
 			// Ecriture des choix de l'utilisateur dans la base
  			if (!$erreur_prenom&&!$erreur_injection){
-				$nom=$_POST["nom"];
+			  // TODO: throw error
+			  $nom=substr($_POST["nom"],0,64);
  				$connect->Execute("insert into user_studs (nom,id_sondage,reponses) values ('$nom', '$numsondage', '$nouveauchoix')");
 
 				if ($dsondage->mailsonde || /* compatibility for non boolean DB */ $dsondage->mailsonde=="yes" || $dsondage->mailsonde=="true"){
 
-					$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-					mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+					$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+					mail ("$dsondage->mail_admin", "[".NOMAPPLICATION."] " . _("Poll's participation") . " : $dsondage->titre", "\"$nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 				}
 			}
 		}
@@ -207,8 +194,8 @@ $ligneamodifier = -1;
 					$connect->Execute("update user_studs set reponses='$nouveauchoix' where nom='$data->nom' and id_users='$data->id_users'");
 					if ($dsondage->mailsonde=="yes"){
 						
-						$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-						mail ("$dsondage->mail_admin", "[".getenv('NOMAPPLICATION')."] " . _("Poll's participation") . " : $dsondage->titre", "\"$data->nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+						$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+						mail ("$dsondage->mail_admin", "[".NOMAPPLICATION."] " . _("Poll's participation") . " : $dsondage->titre", "\"$data->nom\""."" . _("has filled a line.\nYou can find your poll at the link") . " :\n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 					}
 				}
 				$compteur++;
@@ -223,7 +210,7 @@ $ligneamodifier = -1;
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '<script type="text/javascript" src="block_enter.js"></script>';
 
@@ -234,7 +221,7 @@ $ligneamodifier = -1;
 	echo '<form name="formulaire" action="studs.php?sondage='.$numsondage.'#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	logo();
  	bandeau_tete();
-	bandeau_titre();
+bandeau_titre(_("Make your polls"));
 	sous_bandeau();
 	echo '<div class="presentationdate"> '."\n";
 
@@ -243,7 +230,7 @@ $ligneamodifier = -1;
 	echo '<H2>'.$titre.'</H2>'."\n";
 
 //affichage du nom de l'auteur du sondage
-	echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br><br>'."\n";
+echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br><br>'."\n";
 
 //affichage des commentaires du sondage
 	if ($dsondage->commentaires){
@@ -411,12 +398,12 @@ $somme = array();
 // affichage de la ligne pour un nouvel utilisateur
 	if (!isset($_SERVER['REMOTE_USER']) || !$user_mod) {
 		echo '<tr>'."\n";
-		echo '<td class=nom>'."\n";
+		echo '<td class="nom">'."\n";
 		if (isset($_SERVER['REMOTE_USER']))
 			echo '<input type=hidden name="nom" value="'.
 			      $_SESSION['nom'].'">'.$_SESSION['nom']."\n";
 		else
-			echo '<input type=text name="nom">'."\n";
+			echo '<input type=text name="nom" maxlength="64">'."\n";
 		echo '</td>'."\n";
 
 // affichage des cases de formulaire checkbox pour un nouveau choix
@@ -424,7 +411,7 @@ $somme = array();
 			echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
 		}
 		// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
-		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png"></td>'."\n";
+		echo '<td><input type="image" name="boutonp" value="' . _('Participate') . '" src="images/add-24.png"></td>'."\n";
 		echo '</tr>'."\n";
 	}
 
@@ -455,7 +442,7 @@ $somme = array();
 	echo '<td class="somme"></td>'."\n";
 	for ($i=0;$i<$nbcolonnes;$i++){
 		if ($somme[$i]==$meilleurecolonne&&$somme[$i]){
-			echo '<td class="somme"><img src="images/medaille.png" alt="Meilleur choix"></td>'."\n";
+		  echo '<td class="somme"><img src="images/medaille.png" alt="' . _('Best choice') . '"></td>'."\n";
 		}
 		else {
 			echo '<td class="somme"></td>'."\n";
@@ -467,17 +454,17 @@ $somme = array();
 	echo '</table>'."\n";
 	echo '</div>'."\n";
 
-	echo '<p class=affichageresultats>'."\n";
+	echo '<p class="affichageresultats">'."\n";
 	// S'il a oublié de remplir un nom
-	if ($_POST["boutonp_x"]&&$_POST["nom"]=="") {
-			print "<font color=#FF0000>" . _("Enter a name !") . "</font>\n";
-		}
-	if ($erreur_prenom){
-			print "<font color=#FF0000>" . _("The name you've chosen already exist in this poll!") . "</font>\n";
-	}
-	if ($erreur_injection){
-			print "<font color=#FF0000>" . _("Characters \"  '  < et > are not permitted") . "</font>\n";
-	}
+if (isset($_POST["boutonp_x"]) && empty($_POST["nom"]))
+  print '<font color="#FF0000">' . _("Enter a name!") . "</font>\n";
+
+if ($erreur_prenom)
+  print '<font color="#FF0000">' . _("The name you've chosen already exist in this poll!") . "</font>\n";
+
+if ($erreur_injection)
+  print '<font color="#FF0000">' . _("Characters \"  '  < et > are not permitted") . "</font>\n";
+
 	echo '<br>'."\n";
 // Focus javascript sur la case de texte du formulaire
 	echo '<script type="text/javascript">'."\n";
@@ -525,10 +512,10 @@ if ($meilleurecolonne > 1)
 
 	// Affichage du meilleur choix
 	if ($compteursujet=="1"&&$meilleurecolonne){
-	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The best choice at this time is") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".\n";
+	  print '<img src="images/medaille.png" alt="Meilleur choix"> ' . _('The best choice at this time is:') . "<b>$meilleursujet</b> " . _('with') . " <b>$meilleurecolonne </b>" . $vote_str . ".\n";
  	}
 	elseif ($meilleurecolonne){
-	  print "<img src=\"images/medaille.png\" alt=\"Meilleur choix\"> " . _("The bests choices at this time are") . " : <b>$meilleursujet </b>" . _("with") . " <b>$meilleurecolonne </b>" . $vote_str . ".\n";
+	  print '<img src="images/medaille.png" alt="Meilleur choix"> ' . _('The bests choices at this time are:') . " <b>$meilleursujet</b> " . _('with') . "  <b>$meilleurecolonne </b>" . $vote_str . ".\n";
 	}
 	
 	echo '<br>';
@@ -537,7 +524,7 @@ if ($meilleurecolonne > 1)
 	$comment_user=$connect->Execute("select * from comments where id_sondage='$numsondage' order by id_comment");
 	if ($comment_user->RecordCount() != 0) {
 
-		print "<br><b>" . _("Comments") . " :</b><br>\n";
+		print "<br><b>" . _("Comments of polled people") . " :</b><br>\n";
 		while( $dcomment=$comment_user->FetchNextObject(false)) {
 		  print $dcomment->usercomment . ' : ' . $dcomment->comment . '<br />';
 		}
@@ -545,36 +532,42 @@ if ($meilleurecolonne > 1)
 	}
 	
 	if ($erreur_commentaire_vide){
-		print "<font color=#FF0000>" . _("Enter a name and a comment!") . "</font>";
+		print '<font color="#FF0000">' . _('Enter a name and a comment!') . "</font>";
 	}
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
-	print "<br>" . _("Add a comment in the poll") . " :<br>\n";
+	print "<br>" . _("Add a comment in the poll:") . "<br>\n";
 
 if (isset($_SERVER['REMOTE_USER']) || isset($_SESSION['nom'])) {
   echo _("Name") .' : ';
-  echo '<input type="text" name="commentuser"><br>'."\n";
+  echo '<input type="text" name="commentuser" maxlength="64"><br>'."\n";
 }
 echo '<textarea name="comment" rows="2" cols="40"></textarea>'."\n";
-	echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
-	
-	echo '<br><br>'."\n";
-	echo '<p class=affichageexport>'."\n";
-	echo _("Export: Spreadsheet") .' (.CSV) <input type="image" name="exportcsv" value="Export en CSV" src="images/csv.png" alt="Export CSV">  ';
- 		if (($dsondage->format=="D"||$dsondage->format=="D+")&&$compteursujet=="1"&&$meilleurecolonne){
-  			echo _("Agenda") .' (.ICS) :<input type="image" name="exportics" value="Export en iCal" src="images/ical.png" alt="Export iCal">';
-  			$_SESSION["meilleursujet"]=$meilleursujetexport;
-  			$_SESSION["numsondage"]=$numsondage;
-  			$_SESSION["sondagetitre"]=$dsondage->titre;
-  		}
+echo '<input type="image" name="ajoutcomment" value="Ajouter un commentaire" src="images/accept.png" alt="Valider"><br>'."\n";
+echo '</form>'."\n";
+echo '<br><br>'."\n";
+
+
+echo '<img alt="' . _('Export to CSV') . '" src="images/csv.png"/>'.
+'<a class="affichageexport" href="exportcsv.php?numsondage=' . $numsondage . '">'.
+_("Export: Spreadsheet") .' (.CSV)' . '</a>';
+
+if ( ($dsondage->format == 'D' || $dsondage->format == 'D+') &&
+    $compteursujet=="1" && 
+    $meilleurecolonne &&
+    file_exists('iCalcreator/iCalcreator.class.php') 
+     && false /* TODO: later */){
+  echo '<br/><img alt="' . _('Export iCal') . '" src="images/ical.png">' .
+    '<a class="affichageexport" href="exportics.php?numsondage=' . $numsondage . '">'.
+    _("Agenda") .' (.ICS)' . '</a>';
+ }
+
 	echo '<br><br>'."\n";
 	echo '<a name=bas></a>'."\n";
 	echo '</p>'."\n";
 
-	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	// Affichage du bandeau de pied
-	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
 

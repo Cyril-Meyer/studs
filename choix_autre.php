@@ -51,16 +51,16 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre_erreur();
+	bandeau_titre(_("Error!"));
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>" . _("You haven't filled the first section of the poll creation.") . " !</H2>"."\n";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -126,7 +126,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '<script type="text/javascript" src="block_enter.js"></script>';
 
@@ -137,7 +137,7 @@ else {
 	echo '<form name="formulaire" action="choix_autre.php#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre_autre();
+	bandeau_titre(_("Poll subjects (2 on 2)"));
 	sous_bandeau_choix();
 	
 	echo '<div class=corps>'."\n";
@@ -209,7 +209,6 @@ else {
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
-	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 
 	echo '</body>'."\n";

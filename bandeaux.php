@@ -42,42 +42,18 @@ include_once('fonctions.php');
 
 //le logo
 function logo (){
-	echo '<div class="logo"><img src="./'.getenv("LOGOBANDEAU").'" height=74 alt=logo></div>'."\n";
+  if(defined('LOGOBANDEAU'))
+    echo '<div class="logo"><img src="./'. LOGOBANDEAU .'" height="74" alt="logo"></div>'."\n";
 }
-function sous_logo (){
-	echo '<div class="logo"><img src="../'.getenv("LOGOBANDEAU").'" height=74 alt=logo></div>'."\n";
-}
-
 
 #le bandeau principal
 function bandeau_tete(){
-	echo '<div class="bandeau">'.getenv('NOMAPPLICATION').'</div>'."\n";
+	echo '<div class="bandeau">'.NOMAPPLICATION.'</div>'."\n";
 }
 
-#les bandeaux de titre
-function bandeau_titre(){
-	echo '<div class="bandeautitre">'. _("Make your polls") .'</div>'."\n";
-}
-function bandeau_titre_date(){
-	echo '<div class="bandeautitre">'. _("Poll dates (2 on 2)") .'</div>'."\n";
-}
-function bandeau_titre_autre(){
-	echo '<div class="bandeautitre">'. _("Poll subjects (2 on 2)") .'</div>'."\n";
-}
-function bandeau_titre_admin(){
-	echo '<div class="bandeautitre">'. _("Polls administrator") .'</div>'."\n";
-}
-function bandeau_titre_contact(){
-	echo '<div class="bandeautitre">'. _("Contact us") .'</div>'."\n";
-}
-function bandeau_titre_version(){
-	echo '<div class="bandeautitre">'.$GLOBALS["tt_bandeau_titre_version"].'</div>'."\n";
-}
-function bandeau_titre_erreur(){
-	echo '<div class="bandeautitre">'. _("Error!") .'</div>'."\n";
-}
-function bandeau_titre_apropos(){
-	echo '<div class="bandeautitre">'. _("About") .'</div>'."\n";
+// bandeaux de titre
+function bandeau_titre($titre){
+	echo '<div class="bandeautitre">'. $titre .'</div>'."\n";
 }
 
 function liste_lang() {
@@ -105,9 +81,10 @@ function sous_bandeau(){
 }
 function sous_bandeau_admin(){
   echo '<div class="sousbandeau">' .
-    '<a href="' . get_server_name() . 'index.php">'. _("Home") .'</a>' .
-    '<a href="' . get_server_name() . 'admin/?log=1">'. _("Logs") .'</a>' .
-    '<a href="' . get_server_name() . 'scripts/nettoyage_sondage.php">'. _("Cleaning") .'</a>' .
+    '<a href="' . get_server_name() . 'index.php">'. _("Home") .'</a>';
+  if(is_readable('logs_studs.txt'))
+    echo '<a href="' . get_server_name() . 'logs_studs.txt">'. _("Logs") .'</a>';
+  echo '<a href="' . get_server_name() . '../scripts/nettoyage_sondage.php">'. _("Cleaning") .'</a>' .
 
     '<span class="sousbandeau sousbandeaulangue">' .
     liste_lang() . '</span>'.
@@ -128,11 +105,9 @@ function sur_bandeau_pied(){
 function bandeau_pied(){
 	echo '<div class="bandeaupied">'. _("Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009") .'</div>'."\n";
 }
-function sur_bandeau_pied_mobile(){
-	echo '<div class="surbandeaupiedmobile"></div>'."\n";
-}
 function bandeau_pied_mobile(){
-	echo '<div class="bandeaupiedmobile">'. _("Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009") .'</div>'."\n";
+	echo '<div class="surbandeaupiedmobile"></div>'."\n" .
+	  '<div class="bandeaupiedmobile">'. _("Universit&eacute; de Strasbourg. Creation: Guilhem BORGHESI. 2008-2009") .'</div>'."\n";
 }
 
 

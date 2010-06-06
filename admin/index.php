@@ -48,38 +48,32 @@ include_once('../bandeaux.php');
 // pour modifier les sondages directement sans avoir reçu les mails. C'est l'interface d'aministration
 // de l'application.
 
-if (isset($_GET["log"]) && $_GET["log"] == 1 /*&& is_admin() | htaccess setup */ ) {
-	header("Location:logs_studs.txt");
-	exit();
-}
-
 // Affichage des balises standards
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>ADMINISTRATEUR de la base '.getenv('NOMAPPLICATION').'</title>'."\n";
+echo '<title>ADMINISTRATEUR de la base '.NOMAPPLICATION.'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
 
 //Affichage des bandeaux et début du formulaire
-echo '<form action="index.php" method="POST">'."\n";
-sous_logo();
+logo();
 bandeau_tete();
-bandeau_titre_admin();
+bandeau_titre(_("Polls administrator"));
 sous_bandeau_admin();
 
 $sondage=$connect->Execute("select * from sondage");
 
 echo'<div class=corps>'."\n";
-
+echo '<form action="index.php" method="POST">'."\n";
 // Test et affichage du bouton de confirmation en cas de suppression de sondage
 $i=0;
 while($dsondage = $sondage->FetchNextObject(false)) {
  	if ($_POST["supprimersondage$i"]){
 		echo '<table>'."\n";
- 		echo '<tr><td bgcolor="#EE0000" colspan=11>'. _("Confirm removal of the poll ") .'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'. _("Remove this poll!") .'">'."\n";
+ 		echo '<tr><td bgcolor="#EE0000" colspan="11">'. _("Confirm removal of the poll ") .'"'.$dsondage->id_sondage.'" : <input type="submit" name="confirmesuppression'.$i.'" value="'. _("Remove this poll!") .'">'."\n";
  		echo '<input type="submit" name="annullesuppression" value="'. _("Keep this poll!") .'"></td></tr>'."\n";
 		echo '</table>'."\n";
 		echo '<br>'."\n";
@@ -97,9 +91,7 @@ while($dsondage = $sondage->FetchNextObject(false)) {
 				  "WHERE id_sondage = '$dsondage->id_sondage' ");
 
 		// ecriture des traces dans le fichier de logs
-	        $fichier_log=fopen('./logs_studs.txt','a');
-	        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
-	        fclose($fichier_log);
+		error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet", 'logs_studs.txt');
 
 	}
 	$i++;

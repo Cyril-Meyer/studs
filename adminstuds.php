@@ -66,17 +66,17 @@ if (!$sondage || $sondage->RecordCount() != 1){
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 
 	logo();
 	bandeau_tete();
-	bandeau_titre_erreur();
+	bandeau_titre(_("Error!"));
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>" . _("This poll doesn't exist !") . "</H2><br><br>"."\n";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>. "."\n";
 	echo '<br><br><br><br>'."\n";
 	echo '</div>'."\n";
 #	sur_bandeau_pied();
@@ -93,7 +93,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -105,7 +105,7 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre();
+	bandeau_titre(_("Make your polls"));
 	sous_bandeau();
 
 	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
@@ -269,8 +269,8 @@ else {
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
 			$adresseadmin=$dsondage->mail_admin;
-			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll").getenv('NOMAPPLICATION'), "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll").NOMAPPLICATION, "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 
 		}
 
@@ -373,10 +373,10 @@ else {
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
 
-				$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+				$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 				mail ($adresseadmin, 
 				      _("[ADMINISTRATOR] New column for your poll"),
-				      _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),
+				      _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,
 				      $headers);
 				
 			}
@@ -494,10 +494,10 @@ else {
 		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
 
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New title for your poll"). getenv('NOMAPPLICATION'), 
+			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New title for your poll"). NOMAPPLICATION, 
 			      _("You have changed the title of your poll. \nYou can modify this poll with this link") .
-			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 			//modification de la base SQL avec le nouveau titre
 			$nouveautitre=$_POST["nouveautitre"];
 			$connect->Execute("update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
@@ -506,8 +506,8 @@ else {
 		//si le bouton est activé, quelque soit la valeur du champ textarea
 		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New comments for your poll").getenv('NOMAPPLICATION'), "" . _("You have changed the comments of your poll. \nYou can modify this poll with this link") . " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New comments for your poll").NOMAPPLICATION, "" . _("You have changed the comments of your poll. \nYou can modify this poll with this link") . " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 			//modification de la base SQL avec les nouveaux commentaires
 			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
 			$connect->Execute("update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
@@ -516,10 +516,10 @@ else {
 		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
 		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
 			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$_POST[nouvelleadresse]", "" . _("[ADMINISTRATOR] New email address for your poll").getenv('NOMAPPLICATION'),
+			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+			mail ("$_POST[nouvelleadresse]", "" . _("[ADMINISTRATOR] New email address for your poll").NOMAPPLICATION,
 			      _("You have changed your email address in your poll. \nYou can modify this poll with this link") .
-			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 			//modification de la base SQL avec la nouvelle adresse
 			$connect->Execute("update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
 
@@ -543,7 +543,7 @@ else {
 		echo '<html>'."\n";
 		echo '<head>'."\n";
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-		echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+		echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 		echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 		echo '<script type="text/javascript" src="block_enter.js"></script>';
 		
@@ -554,7 +554,7 @@ else {
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 		logo();
 		bandeau_tete();
-		bandeau_titre();
+		bandeau_titre(_("Make your polls"));
 		sous_bandeau();
 	
 		echo '<div class="presentationdate"> '."\n";
@@ -618,7 +618,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan=1;
 		}
 	}
-	echo '<td class="annee"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+	echo '<td class="annee"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="' . _('Add') . '"></td>'."\n";
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";	
 	echo '<td></td>'."\n";
@@ -630,15 +630,15 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			if ($_SESSION["langue"]=="FR"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="DE"){echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";}
-			$colspan=1;
+		  if ($_SESSION["langue"]=="EN")
+		    echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";
+		  else
+		    echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";
+		  $colspan=1;
 		}
 	}
 
-	echo '<td class="mois"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+	echo '<td class="mois"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="' . _('Add') . '"></td>'."\n";
 	echo '</tr>'."\n";
 	echo '<tr>'."\n";		
 	echo '<td></td>'."\n";
@@ -650,14 +650,14 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$colspan++;
 		}
 		else {
-			if ($_SESSION["langue"]=="FR"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="ES"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="EN"){echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";}
-			if ($_SESSION["langue"]=="DE"){echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";}			
+			if ($_SESSION["langue"]=="EN")
+			  echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";
+			else
+			  echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";
 			$colspan=1;
 		}
 	}
-	echo '<td class="jour"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+	echo '<td class="jour"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="' . _('Add') . '"></td>'."\n";
 	echo '</tr>'."\n";
 			//affichage des horaires	
 	if (strpos($dsujet->sujet,'@') !== false){
@@ -669,7 +669,7 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 			$heures=explode("@",$toutsujet[$i]);
 			echo '<td class="heure">'.$heures[1].'</td>'."\n";
 		}
-		echo '<td class="heure"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+		echo '<td class="heure"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="' . _('Add') . '"></td>'."\n";
 		echo '</tr>'."\n";
 	}
 	
@@ -687,7 +687,7 @@ else {
 	
 		echo '<td class="sujet">'.$toutsujet[$i].'</td>'."\n";
 	}
-	echo '<td class="sujet"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="Icone ajout"></td>'."\n";
+	echo '<td class="sujet"><input type="image" name="ajoutsujet" src="images/add-16.png"  alt="' . _('Add') . '"></td>'."\n";
 	echo '</tr>'."\n";
 
 }
@@ -778,7 +778,7 @@ else {
 		echo '<tr>'."\n";
 		echo '<td></td>'."\n";
 		echo '<td class=nom>'."\n";
-		echo '<input type=text name="nom"><br>'."\n";
+		echo '<input type="text" name="nom"><br>'."\n";
 		echo '</td>'."\n";
 
 		//une ligne de checkbox pour le choix du nouvel utilisateur
@@ -786,7 +786,7 @@ else {
 			echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value=""></td>'."\n";
 		}
 		// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
-		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png" alt="Ajouter"></td>'."\n";
+		echo '<td><input type="image" name="boutonp" value="Participer" src="images/add-24.png" alt="' . _('Add') . '"></td>'."\n";
 
 		echo '</tr>'."\n";
 
@@ -982,17 +982,16 @@ else {
 	
 	//suppression du sondage
 	echo '<br>'."\n";
-	echo _("Remove your poll") .' : <input type="image" name="suppressionsondage" value="'. _("Remove the poll") .'" src="images/cancel.png" alt="Annuler"><br><br>'."\n";
+	echo _("Remove your poll") .' : <input type="image" name="suppressionsondage" value="'. _("Remove the poll") .'" src="images/cancel.png" alt="' . _('Cancel') . '"><br><br>'."\n";
 	if ($_POST["suppressionsondage"]){
 
 		echo _("Confirm removal of your poll") .' : <input type="submit" name="confirmesuppression" value="'. _("Remove this poll!") .'">'."\n";
 		echo '<input type="submit" name="annullesuppression" value="'. _("Keep this poll!") .'"><br><br>'."\n";
 	}
-	echo '<a name=bas></a>'."\n";
+	echo '<a name="bas"></a>'."\n";
 	echo '<br><br>'."\n";
 	//fin de la partie GESTION et beandeau de pied
 	echo '</p>'."\n";
-	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	echo '</form>'."\n";
 	echo '</body>'."\n";
@@ -1010,16 +1009,14 @@ if ($_POST["confirmesuppression"]){
 	$adresseadmin=$dsondage->mail_admin;
 
         $nbuser=$user_studs->RecordCount();
-        $date=date('H:i:s d/m/Y');
+        $date=date('H:i:s d/m/Y:');
 
-	//on ecrit dans le fichier de logs la suppression du sondage
-        $fichier_log=fopen('admin/logs_studs.txt','a');
-        fwrite($fichier_log,"[SUPPRESSION] $date\t$dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n");
-        fclose($fichier_log);
+	// on ecrit dans le fichier de logs la suppression du sondage
+	error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet", 3, 'admin/logs_studs.txt');
 
 	//envoi du mail a l'administrateur du sondage
-	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail ("$adresseadmin", "" . _("[ADMINISTRATOR] Removing of your poll").getenv('NOMAPPLICATION'), "" . _("You have removed your poll. \nYou can make new polls with this link") . " :\n\n".get_server_name()."/index.php \n\n" . _("Thanks for your confidence.") . "\n".getenv('NOMAPPLICATION'),$headers);
+	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	mail ("$adresseadmin", "" . _("[ADMINISTRATOR] Removing of your poll").NOMAPPLICATION, "" . _("You have removed your poll. \nYou can make new polls with this link") . " :\n\n".get_server_name()."index.php \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 
 	//destruction des données dans la base SQL
 	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
@@ -1031,17 +1028,17 @@ if ($_POST["confirmesuppression"]){
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre();
+	bandeau_titre(_("Make your polls"));
 
-	echo '<div class=corpscentre>'."\n";
+	echo '<div class="corpscentre">'."\n";
 	print "<H2>" . _("Your poll has been removed!") . "</H2><br><br>";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>. "."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	sur_bandeau_pied();

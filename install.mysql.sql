@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `sondage` (
        `id_sondage` CHAR(16) NOT NULL,
        `commentaires` text,
        `mail_admin` VARCHAR(128),
-       `nom_admin` VARCHAR(128),
+       `nom_admin` VARCHAR(64),
        `titre` text,
        `id_sondage_admin` CHAR(24),
        `date_fin` TIMESTAMP,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `sujet_studs` (
 
 CREATE TABLE IF NOT EXISTS `user_studs` (
     `id_users` INT(11) unsigned NOT NULL AUTO_INCREMENT,
-    `nom` VARCHAR(128) NOT NULL,
+    `nom` VARCHAR(64) NOT NULL,
     `id_sondage` CHAR(16) NOT NULL,
     `reponses` text NOT NULL,
     	     PRIMARY KEY (`id_users`),

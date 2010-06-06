@@ -38,31 +38,25 @@
 //==========================================================================
 
 include '../bandeaux.php';
-include '../variables.php';
-session_start();
 
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>Sources '.getenv('NOMAPPLICATION').'</title>'."\n";
+echo '<title>Sources '.NOMAPPLICATION.'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="../style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
 
-echo '<form name=formulaire action="sources.php" method="POST">'."\n";
-
-sous_logo();
+logo();
 bandeau_tete();
-bandeau_titre();
+bandeau_titre(_("Make your polls"));
 sous_bandeau();
 echo '<div class=corpscentre>'."\n";
-print "<H2>$tt_sources_lien".getenv('NOMAPPLICATION')."</H2><br><br>"."\n";
-print "$tt_choix_page_erreur_retour <a href=\"../index.php\">".getenv('NOMAPPLICATION')."</A> "."\n";
+print '<H2>' ._('Back to the homepage of') . ' ' .NOMAPPLICATION."</H2><br><br>"."\n";
+print _('Back to the homepage of') . ' <a href="../index.php">' . NOMAPPLICATION . '</A>'."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";
-
-echo '</form>'."\n";
 
 // Affichage du bandeau de pied
 bandeau_pied();

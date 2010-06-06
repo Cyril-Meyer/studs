@@ -52,16 +52,16 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre_erreur();
+	bandeau_titre(_("Error!"));
 	echo '<div class=corpscentre>'."\n";
 	print "<H2>" . _("You haven't filled the first section of the poll creation.") . " !</H2>"."\n";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print _("Back to the homepage of ") . ' ' . '<a href="index.php">' . NOMAPPLICATION . '</a>.' . "\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -195,13 +195,15 @@ $_SESSION["formatsondage"]="D".$_SESSION["studsplus"];
 //traduction de la valeur du mois
 if (is_integer($_SESSION["mois"]) && $_SESSION["mois"] > 0 && $_SESSION["mois"] < 13)
   $motmois=strftime('%B', mktime(0, 0, 0, $_SESSION["mois"], 10));
+else
+  $motmois=strftime('%B');
 
 //debut de la page web
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 echo '<script type="text/javascript" src="block_enter.js"></script>';
 
@@ -209,10 +211,10 @@ echo '</head>'."\n";
 echo '<body>'."\n";
 
 //Debut du formulaire et bandeaux de tete
-echo '<form name=formulaire action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+echo '<form name="formulaire" action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 logo();
 bandeau_tete();
-bandeau_titre_date();
+bandeau_titre(_("Poll dates (2 on 2)"));
 sous_bandeau_choix();
 
 //affichage de l'aide pour les jours
@@ -223,14 +225,14 @@ echo '</div>'."\n";
 //debut du tableau qui affiche le calendrier
 echo '<div class=calendrier>'."\n";
 echo '<table align=center>'."\n";
-echo '<tr><td><input type=image name=anneeavant value="<<" src="images/rewind.png"></td><td><input type=image name=moisavant value="<" src="images/first.png"></td><td width=150px align=center> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type=image name=moisapres value=">" src="images/last.png"></td><td><input type=image name=anneeapres value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type=image name=retourmois value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
+echo '<tr><td><input type="image" name="anneeavant" value="<<" src="images/rewind.png"></td><td><input type="image" name="moisavant" value="<" src="images/first.png"></td><td width="150px" align="center"> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type="image" name="moisapres" value=">" src="images/last.png"></td><td><input type="image" name="anneeapres" value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type="image" name="retourmois" value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<table>'."\n";
 
 echo '<tr>'."\n";
-
 //affichage des jours de la semaine en haut du tableau
-echo '<td class=joursemaine>'. _("monday") .'</td><td class=joursemaine>'. _("tuesday") .'</td><td class=joursemaine>'. _("wednesday") .'</td><td class=joursemaine>'. _("thursday") .'</td><td class=joursemaine>'. _("friday") .'</td><td class=jourwe>'. _("saturday") .'</td><td class=jourwe>'. _("sunday") .'</td>'."\n";
+for($i = 0; $i < 7; $i++)
+  echo '<td class="joursemaine">'. strftime('%A',mktime(0,0,0,0,$i,10)) .'</td>';
 echo '</tr>'."\n";
 
 
@@ -501,24 +503,24 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur)){
 	//affichage de la liste des jours choisis
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 		echo '<tr>'."\n";
-		if ($_SESSION["langue"]=="FR"){echo '<td>'.strftime("%A %e %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="ES"){echo '<td>'.strftime("%A %e de %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="EN"){echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="DE"){echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		$affichageerreurfindeligne="no";
+		if ($_SESSION["langue"]=="EN")
+		  echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
+		else
+		  echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
+		$affichageerreurfindeligne=false;
 		//affichage des cases d'horaires
 		for ($j=0;$j<$_SESSION["nbrecaseshoraires"];$j++){
 			//si on voit une erreur, le fond de la case est rouge
 			if ($errheure[$i][$j]){
 				echo '<td><input type=text size="10" maxlength="11" name=horaires'.$i.'[] value="'.$_SESSION["horaires$i"][$j].'" style="background-color:#FF6666;"></td>'."\n";
-				$affichageerreurfindeligne="yes";
+				$affichageerreurfindeligne=true;
 			}
 			//sinon la case est vide normalement
 			else {
 				echo '<td><input type=text size="10" maxlength="11" name=horaires'.$i.'[] value="'.$_SESSION["horaires$i"][$j].'"></td>'."\n";
 			}
 		}
-		if ($affichageerreurfindeligne=="yes"){
+		if ($affichageerreurfindeligne){
 			echo '<td><b><font color=#FF0000>'. _("Bad format!") .'</font></b></td>'."\n";	
 		}
 		echo '</tr>'."\n";
@@ -542,21 +544,21 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur)){
 	if ( ! $erreur &&($_POST["choixheures"]||$_POST["choixheures_x"])){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
-		if ($_SESSION["langue"]=="FR"){$date_fin=strftime("%A %e %B %Y",$jour_arret);}
-		if ($_SESSION["langue"]=="ES"){$date_fin=strftime("%A %e de %B %Y",$jour_arret);}
-		if ($_SESSION["langue"]=="EN"){$date_fin=date("l, F jS Y",$jour_arret);}
-		if ($_SESSION["langue"]=="DE"){$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
-		echo '<br><div class=presentationdatefin>'. _("Your poll will expire automatically 2 days after the last date of your poll.") .'<br></td></tr><tr><td><br>'. _("Removal date") .' : <b> '.$date_fin.'</b><br><br>'."\n";
+		if ($_SESSION["langue"]=="EN")
+		  $date_fin=date("l, F jS Y",$jour_arret);
+		else
+		  $date_fin=strftime("%A, den %e. %B %Y",$jour_arret);
+		echo '<br><div class="presentationdatefin">'. _("Your poll will expire automatically 2 days after the last date of your poll.") .'<br></td></tr><tr><td><br>'. _("Removal date") .' : <b> '.$date_fin.'</b><br><br>'."\n";
 		echo '</div>'."\n";
-		echo '<div class=presentationdatefin>'."\n";
-		echo '<font color=#FF0000>'. _("Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.") .'</font>'."\n";
+		echo '<div class="presentationdatefin">'."\n";
+		echo '<font color="#FF0000">'. _("Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.") .'</font>'."\n";
 		echo'</div>'."\n";
 		// echo'<p class=affichageexport>'."\n";
 		// echo 'Pour finir la cr&eacute;ation du sondage, cliquez sur le bouton <img src="images/add-16.png" alt="ajout"> ci-dessous'."\n";
 		// echo '</p>'."\n";
 		echo '<table>'."\n";
-		echo '<tr><td>'. _("Back to hours") .'</td><td></td><td><input type=image name=retourhoraires src="images/back-32.png"></td></tr>'."\n";
-		echo'<tr><td>'. _("Create the poll") .'</td><td></td><td><input type=image name=confirmation value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
+		echo '<tr><td>'. _("Back to hours") .'</td><td></td><td><input type="image" name="retourhoraires" src="images/back-32.png"></td></tr>'."\n";
+		echo'<tr><td>'. _("Create the poll") .'</td><td></td><td><input type="image" name="confirmation" value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
 		echo '</table>'."\n";
 	}
 	echo '</tr>'."\n";
@@ -569,7 +571,6 @@ echo '</form>'."\n";
 echo '<br><br><br><br>'."\n";
 
 echo '</div>'."\n";
-sur_bandeau_pied_mobile();
 bandeau_pied_mobile();
 echo '</body>'."\n";
 echo '</html>'."\n";
@@ -585,7 +586,7 @@ if ($_POST["reset"]){
 
 	unset($_SESSION["totalchoixjour"]);
 	unset($_SESSION["nbrecaseshoraires"]);
-	echo '<meta http-equiv=refresh content="0">';
+	echo '<meta http-equiv="refresh" content="0">';
 }
 
 }

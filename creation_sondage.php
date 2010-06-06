@@ -75,8 +75,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$date_fin=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
 }
 
-	$date=date('H:i:s d/m/Y');
-	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
 	global $connect;
 	$connect->Execute('insert into sondage ' .
@@ -86,19 +85,17 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$connect->Execute("insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][" . _("For sending to the polled users") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]), "" . _("This is the message you have to send to the people you want to poll. \nNow, you have to send this message to everyone you want to poll.") . "\n\n".stripslashes($_SESSION["nom"])." " . _("hast just created a poll called") . " : \"".stripslashes($_SESSION["titre"])."\".\n" . _("Thanks for filling the poll at the link above") . " :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n" . _("Thanks for your confidence") . ",\n".getenv('NOMAPPLICATION'),$headers);
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][" . _("Author's message") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]),
+	mail ("$_SESSION[adresse]", "[".NOMAPPLICATION."][" . _("For sending to the polled users") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]), "" . _("This is the message you have to send to the people you want to poll. \nNow, you have to send this message to everyone you want to poll.") . "\n\n".stripslashes($_SESSION["nom"])." " . _("hast just created a poll called") . " : \"".stripslashes($_SESSION["titre"])."\".\n" . _("Thanks for filling the poll at the link above") . " :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n" . _("Thanks for your confidence") . ",\n".NOMAPPLICATION,$headers);
+	mail ("$_SESSION[adresse]", "[".NOMAPPLICATION."][" . _("Author's message") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]),
 	      _("This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou can now modify it at the link above") .
-	      " :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n" . _("Thanks for your confidence") . ",\n".getenv('NOMAPPLICATION'),$headers);
+	      " :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n" . _("Thanks for your confidence") . ",\n".NOMAPPLICATION,$headers);
 
-
-	$fichier_log=fopen('admin/logs_studs.txt','a');
-	fwrite($fichier_log,"   [CREATION] $date\t$sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n");
-	fclose($fichier_log);
+	$date=date('H:i:s d/m/Y:');
+	error_log($date . " CREATION: $sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]", 3, 'admin/logs_studs.txt'); 
 
 	header("Location:studs.php?sondage=$sondage");
 
 	exit();
 	session_unset();
-}	
+}
 ?>
