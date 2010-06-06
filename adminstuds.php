@@ -1012,7 +1012,7 @@ if ($_POST["confirmesuppression"]){
         $date=date('H:i:s d/m/Y:');
 
 	// on ecrit dans le fichier de logs la suppression du sondage
-	error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet", 3, 'admin/logs_studs.txt');
+	error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n", 3, 'admin/logs_studs.txt');
 
 	//envoi du mail a l'administrateur du sondage
 	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";

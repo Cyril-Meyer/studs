@@ -134,7 +134,7 @@ else {
 	echo '<body>'."\n";
 
 
-	echo '<form name="formulaire" action="choix_autre.php#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+	echo '<form name="formulaire" action="#bas" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 	logo();
 	bandeau_tete();
 	bandeau_titre(_("Poll subjects (2 on 2)"));

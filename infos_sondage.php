@@ -98,26 +98,17 @@ if (($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["
 
 //affichage de la page
 
-echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
-echo '<html>'."\n";
-echo '<head>'."\n";
-echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>'.NOMAPPLICATION.'</title>'."\n";
-echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-echo '<script type="text/javascript" src="block_enter.js"></script>';
-
-echo '</head>'."\n";
+print_header(true);
 echo '<body>'."\n";
-
-
-//debut du formulaire
-echo '<form name="formulaire" action="infos_sondage.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 
 //affichage des bandeaux de tete
 logo();
 bandeau_tete();
 echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 sous_bandeau();
+
+//debut du formulaire
+echo '<form name="formulaire" action="infos_sondage.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
  
 echo '<div class=corps>'."\n";
 echo '<br>'. _("You are in the poll creation section. <br> Required fields cannot be left blank") .'<br><br>'."\n";
@@ -185,7 +176,8 @@ echo '<br><table >'."\n";
 echo '<tr><td>'. _("Schedule an event") .'</td><td></td> '."\n";
 echo '<td><input type="image" name="creation_sondage_date" value="Trouver une date" src="images/calendar-32.png"></td></tr>'."\n";
 echo '<tr><td>'. _("Make a choice") .'</td><td></td> '."\n";
-echo '<td><input type="image" name="creation_sondage_autre" value="' . _('Make a poll') . '" src="images/chart-32.png"></td></tr>'."\n";
+echo '<td><input type="image" name="creation_sondage_autre" value="'
+	 . _('Make a poll') . '" src="images/chart-32.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<br><br><br>'."\n";
 echo '</div>'."\n";

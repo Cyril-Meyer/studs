@@ -91,7 +91,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	      " :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n" . _("Thanks for your confidence") . ",\n".NOMAPPLICATION,$headers);
 
 	$date=date('H:i:s d/m/Y:');
-	error_log($date . " CREATION: $sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]", 3, 'admin/logs_studs.txt'); 
+	error_log($date . " CREATION: $sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n", 3, 'admin/logs_studs.txt'); 
 
 	header("Location:studs.php?sondage=$sondage");
 

@@ -58,7 +58,7 @@ while (	$dsondage=$sondage->FetchNextObject(false)) {
 			  "WHERE id_sondage = '$dsondage->id_sondage' ");
 
                // ecriture des traces dans le fichier de logs
-               error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin", '../admin/logs_studs.txt');
+               error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\n", '../admin/logs_studs.txt');
 	}
 }
 ?>

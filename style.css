@@ -254,35 +254,34 @@ div.cadre table.resultats {
 	text-align: center;
 	margin:0 auto;
 }
+
+div.cadre td {
+	height:21px;
+}
 /*case de tableau OK dans affichage de sondage*/
 div.cadre td.ok {
 	background-color: #66FF99; 
-	height:21px;
 	font-size:12px;	
 	text-align:center;
 }
 /*Case de tableau NON dans affichage de sondage*/
 div.cadre td.non {
 	background-color: #FF7777; 
-	height:21px;
 	width:35px;
 }
 /*Case de tableau VIDE dans affichage de sondage*/
 div.cadre td.vide {
 	background-color: #DDDDDD; 
-	height:21px;
 	text-align:center;
 }
 /*Case de tableau contenant les noms dans affichage de sondage*/
 div.cadre td.nom {
 	background-color: #DDDDDD; 
-	height:21px;
 	font-size:12px;	 
 	text-align:center;
 }
 div.cadre td.casevide {
 	background-color: white; 
-	height:21px;
 	text-align:center;
 }
 /*les cases contenant les sommes de chaque colonne dans l'affichage de calendrier*/
@@ -372,7 +371,6 @@ p.affichageresultats{
 	text-align: center;
 	font-family:arial;
 	font-size:13px;
-	margin:-10px;
 }
 
 a.affichageexport{
@@ -418,4 +416,18 @@ div.nouveau_sondage span img {
 }
 div.nouveau_sondage span {
     margin-left: 20px;
+}
+
+div.error, div.addcomment {
+    text-align:center;
+    border: 1px;
+    font-family: arial;
+    font-size: 13px;
+}
+ul.exports {
+    text-align:center;
+    list-style-type : none ;
+}
+li.error {
+    color: red;
 }

@@ -37,7 +37,6 @@
 //
 //==========================================================================
 
-
 include_once('fonctions.php');
 if (is_readable('bandeaux_local.php'))
 	include_once('bandeaux_local.php');
@@ -70,7 +69,10 @@ echo '<div class=corps>'."\n";
 echo '<p><b>'.NOMAPPLICATION.'<br>'. _("What is it about?") .'</b></p>';
 echo '<p>'. _("Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.") .'</p>'."\n".'<br>'."\n";
 
-echo '<div class="nouveau_sondage"><b>'. _("Make a poll") .'</b><span>' . '<a href="' . get_server_name() . 'infos_sondage.php"><img alt="' . _('Make a poll') . '" src="images/next-32.png" /></a></span></div>' . "\n";
+echo '<div class="nouveau_sondage"><b>'. _("Make a poll") .'</b>' .
+	 '<span>' .
+	 '<a href="' . get_server_name() . 'infos_sondage.php"><img alt="' . _('Make a poll') . '" src="images/next-32.png" /></a>' .
+	 '</span></div>' . "\n";
 
 echo '<br>'."\n";
 echo '<br><br>'."\n";

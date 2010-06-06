@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Studs 0.6.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-06 13:35+0100\n"
-"PO-Revision-Date: 2010-06-06 13:36+0100\n"
+"POT-Creation-Date: 2010-06-06 15:31+0100\n"
+"PO-Revision-Date: 2010-06-06 15:31+0100\n"
 "Last-Translator: Raphaël Droz <raphael.droz@gmail.com>\n"
 "Language-Team: Guilhem Borghesi, Raphaël Droz\n"
 "Language: \n"
@@ -98,7 +98,7 @@ msgstr ""
 "Vous pouvez modifier ce sondage à l'adresse suivante "
 
 #: choix_date.php:61
-#: studs.php:84
+#: studs.php:175
 #: choix_autre.php:60
 #: adminstuds.php:76
 msgid "Error!"
@@ -111,7 +111,7 @@ msgstr "Vous n'avez pas renseign&eacute; la premi&egrave;re page du sondage"
 
 #: choix_date.php:64
 #: contacts.php:77
-#: studs.php:87
+#: studs.php:198
 #: choix_autre.php:63
 #: adminstuds.php:79
 #: adminstuds.php:1041
@@ -252,8 +252,9 @@ msgstr "Sondage pour choisir une date"
 msgid "Make a choice"
 msgstr "Autre sondage"
 
-#: infos_sondage.php:188
-#: index.php:73
+#: infos_sondage.php:189
+#: index.php:72
+#: index.php:74
 msgid "Make a poll"
 msgstr "Cr&eacute;er un sondage"
 
@@ -290,8 +291,8 @@ msgid "We're going to answer your question shortly."
 msgstr "Nous allons prendre en compte votre message rapidement."
 
 #: contacts.php:59
-#: studs.php:158
-#: studs.php:198
+#: studs.php:155
+#: studs.php:283
 #: adminstuds.php:273
 #: adminstuds.php:379
 #: adminstuds.php:500
@@ -302,8 +303,8 @@ msgid "Thanks for your confidence."
 msgstr "Merci de votre confiance."
 
 #: contacts.php:73
-#: studs.php:224
-#: index.php:65
+#: studs.php:171
+#: index.php:64
 #: adminstuds.php:108
 #: adminstuds.php:557
 #: adminstuds.php:1037
@@ -338,22 +339,17 @@ msgstr "Question"
 msgid "Send your question"
 msgstr "Envoyer votre question"
 
-#: studs.php:86
-#: adminstuds.php:78
-msgid "This poll doesn't exist !"
-msgstr "Ce sondage n'existe pas !"
-
-#: studs.php:104
+#: studs.php:94
 msgid "anonyme"
 msgstr "anonyme"
 
-#: studs.php:158
-#: studs.php:198
+#: studs.php:150
+#: studs.php:283
 msgid "Poll's participation"
 msgstr "Participation au sondage"
 
-#: studs.php:158
-#: studs.php:198
+#: studs.php:153
+#: studs.php:283
 msgid ""
 "has filled a line.\n"
 "You can find your poll at the link"
@@ -361,124 +357,130 @@ msgstr ""
 " vient de remplir une ligne.\n"
 "Vous pouvez retrouver votre sondage au lien suivant"
 
-#: studs.php:233
+#: studs.php:179
+#: adminstuds.php:836
+msgid "Enter a name !"
+msgstr "Vous n'avez pas saisi de nom !"
+
+#: studs.php:182
+#: adminstuds.php:841
+msgid "The name you've chosen already exist in this poll!"
+msgstr "Le nom que vous avez choisi existe d&eacute;j&agrave; !"
+
+#: studs.php:186
+#: studs.php:564
+#: adminstuds.php:974
+msgid "Enter a name and a comment!"
+msgstr "Merci de remplir les deux champs !"
+
+#: studs.php:190
+msgid "Failed to insert the comment!"
+msgstr "Échec à l'insertion du commentaire !"
+
+#: studs.php:197
+#: adminstuds.php:78
+msgid "This poll doesn't exist !"
+msgstr "Ce sondage n'existe pas !"
+
+#: studs.php:222
 #: adminstuds.php:567
 msgid "Initiator of the poll"
 msgstr "Auteur du sondage"
 
-#: studs.php:237
+#: studs.php:226
 #: adminstuds.php:571
 #: adminstuds.php:964
 msgid "Comments"
 msgstr "Commentaires des sond&eacute;s"
 
-#: studs.php:248
+#: studs.php:237
 msgid "If you want to vote in this poll, you have to give your name, choose the values that fit best for you<br>(without paying attention to the choices of the other voters) and validate with the plus button at the end of the line."
 msgstr "Pour participer &agrave; ce sondage, veuillez entrer votre nom, choisir toutes les valeurs qui vous conviennent <br>(sans tenir compte des disponibilit&eacute;s des autres sond&eacute;s) et valider votre choix avec le bouton en bout de ligne."
 
-#: studs.php:414
+#: studs.php:453
 msgid "Participate"
 msgstr "Participation au sondage"
 
-#: studs.php:432
+#: studs.php:471
 #: adminstuds.php:806
 msgid "Addition"
 msgstr "Somme"
 
-#: studs.php:445
+#: studs.php:484
 msgid "Best choice"
 msgstr "Meilleur choix"
 
-#: studs.php:460
-msgid "Enter a name!"
-msgstr "Vous n'avez pas saisi de nom !"
-
-#: studs.php:463
-#: adminstuds.php:841
-msgid "The name you've chosen already exist in this poll!"
-msgstr "Le nom que vous avez choisi existe d&eacute;j&agrave; !"
-
-#: studs.php:466
-#: adminstuds.php:846
-msgid "Characters \"  '  < et > are not permitted"
-msgstr "Les caract&egrave;res \"  '  < et > ne sont pas autoris&eacute;s !"
-
-#: studs.php:490
-#: studs.php:492
+#: studs.php:519
+#: studs.php:521
 #: adminstuds.php:876
 #: adminstuds.php:878
 msgid "for"
 msgstr "&agrave"
 
-#: studs.php:492
-#: studs.php:498
+#: studs.php:521
+#: studs.php:527
 msgid "%A, den %e. %B %Y"
 msgstr "%A %e %B %Y"
 
-#: studs.php:509
+#: studs.php:538
 #: adminstuds.php:899
 msgid "vote"
 msgstr "vote"
 
-#: studs.php:511
+#: studs.php:540
 #: adminstuds.php:901
 msgid "votes"
 msgstr "votes"
 
-#: studs.php:515
+#: studs.php:544
 msgid "The best choice at this time is:"
 msgstr "Le meilleur choix pour l'instant est :"
 
-#: studs.php:515
-#: studs.php:518
+#: studs.php:544
+#: studs.php:547
 #: adminstuds.php:905
 #: adminstuds.php:908
 msgid "with"
 msgstr "avec"
 
-#: studs.php:518
+#: studs.php:547
 msgid "The bests choices at this time are:"
 msgstr "Les meilleurs choix pour l'instant sont :"
 
-#: studs.php:527
+#: studs.php:556
 msgid "Comments of polled people"
 msgstr "Commentaires de sondés"
 
-#: studs.php:535
-#: adminstuds.php:974
-msgid "Enter a name and a comment!"
-msgstr "Merci de remplir les deux champs !"
-
-#: studs.php:539
+#: studs.php:568
 msgid "Add a comment in the poll:"
 msgstr "Ajoutez un commentaire dans ce sondage :"
 
-#: studs.php:542
+#: studs.php:571
 #: adminstuds.php:979
 msgid "Name"
 msgstr "Nom"
 
-#: studs.php:551
+#: studs.php:580
 msgid "Export to CSV"
 msgstr "Export to CSV"
 
-#: studs.php:553
+#: studs.php:582
 msgid "Export: Spreadsheet"
 msgstr "Export : Tableur"
 
-#: studs.php:560
+#: studs.php:589
 msgid "Export iCal"
 msgstr "Export iCal"
 
-#: studs.php:562
+#: studs.php:591
 msgid "Agenda"
 msgstr "Agenda"
 
-#: index.php:70
+#: index.php:69
 msgid "What is it about?"
 msgstr "A quoi ça sert ?"
 
-#: index.php:71
+#: index.php:70
 msgid "Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays."
 msgstr "A faire des sondages pour que vous puissiez trouver une date de r&eacute;union qui convienne &agrave; toutes les personnes concern&eacute;es. <br>Vous pouvez &eacute;galement utiliser cette application pour d&eacute;terminer &agrave; plusieurs un choix quelconque comme un lieu de RV, un th&egrave;me de r&eacute;union ou la marque de votre prochaine machine &agrave; caf&eacute;."
 
@@ -605,9 +607,9 @@ msgstr "En tant qu'administrateur, vous pouvez modifier toutes les lignes de ce 
 msgid "Add"
 msgstr "Ajouter"
 
-#: adminstuds.php:836
-msgid "Enter a name !"
-msgstr "Vous n'avez pas saisi de nom !"
+#: adminstuds.php:846
+msgid "Characters \"  '  < et > are not permitted"
+msgstr "Les caract&egrave;res \"  '  < et > ne sont pas autoris&eacute;s !"
 
 #: adminstuds.php:851
 msgid "The date is not correct !"
@@ -729,6 +731,11 @@ msgstr "Lieu"
 msgid "Cordially,"
 msgstr "Cordiallement"
 
+#: sources/sources.php:56
+#: sources/sources.php:57
+msgid "Back to the homepage of"
+msgstr "Retournez &agrave; la page d'accueil de"
+
 #: admin/index.php:64
 msgid "Polls administrator"
 msgstr "Administrateur de la base"
@@ -737,46 +744,48 @@ msgstr "Administrateur de la base"
 msgid "Confirm removal of the poll "
 msgstr "Confirmer la suppression du sondage "
 
-#: admin/index.php:106
+#: admin/index.php:104
 msgid "polls in the database at this time"
 msgstr "sondages dans la base actuellement"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Poll ID"
 msgstr "ID sondage"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Format"
 msgstr "Format"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Title"
 msgstr "Titre"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Author"
 msgstr "Auteur"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Expiration's date"
 msgstr "Date d'expiration"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Users"
 msgstr "Nombre d'utilisateurs"
 
-#: admin/index.php:111
+#: admin/index.php:109
 msgid "Actions"
 msgstr "Actions"
 
-#: admin/index.php:134
+#: admin/index.php:132
 msgid "See the poll"
 msgstr "Voir le sondage"
 
-#: admin/index.php:135
+#: admin/index.php:133
 msgid "Change the poll"
 msgstr "Modifier le sondage"
 
+#~ msgid "Enter a name!"
+#~ msgstr "Vous n'avez pas saisi de nom !"
 #~ msgid "monday"
 #~ msgstr "lundi"
 #~ msgid "tuesday"
