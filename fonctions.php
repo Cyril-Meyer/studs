@@ -72,15 +72,17 @@ function get_sondage_from_id($id) {
 
 $connect=connexion_base();
 
-define('COMMENT_EMPTY',         0x000000001);
-define('COMMENT_USER_EMPTY',    0x000000010);
-define('COMMENT_INSERT_FAILED', 0x000000100);
-define('NAME_EMPTY',            0x000001000);
-define('NAME_TAKEN',            0x000010000);
-define('NO_POLL',               0x000100000);
-define('NO_POLL_ID',            0x001000000);
-define('INVALID_EMAIL',         0x010000000);
-$err = 0x000000000;
+define('COMMENT_EMPTY',         0x0000000001);
+define('COMMENT_USER_EMPTY',    0x0000000010);
+define('COMMENT_INSERT_FAILED', 0x0000000100);
+define('NAME_EMPTY',            0x0000001000);
+define('NAME_TAKEN',            0x0000010000);
+define('NO_POLL',               0x0000100000);
+define('NO_POLL_ID',            0x0001000000);
+define('INVALID_EMAIL',         0x0010000000);
+define('TITLE_EMPTY',           0x0100000000);
+define('INVALID_DATE',          0x1000000000);
+$err = 0;
 
 function is_error($cerr) {
   global $err;

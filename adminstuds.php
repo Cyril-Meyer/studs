@@ -62,14 +62,8 @@ if (preg_match(";[\w\d]{16};i",$numsondage)){
 
 //verification de l'existence du sondage, s'il n'existe pas on met une page d'erreur
 if (!$sondage || $sondage->RecordCount() != 1){
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
-	echo '<html>'."\n";
-	echo '<head>'."\n";
-	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-	echo '</head>'."\n";
-	echo '<body>'."\n";
+  print_header(false);
+  echo '<body>'."\n";
 
 	logo();
 	bandeau_tete();
@@ -87,31 +81,91 @@ if (!$sondage || $sondage->RecordCount() != 1){
 	die();
 }
 
-elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
+$dsujet=$sujets->FetchObject(false);
+$dsondage=$sondage->FetchObject(false);
 
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
-	echo '<html>'."\n";
-	echo '<head>'."\n";
-	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-	echo '</head>'."\n";
-	echo '<body>'."\n";
+
+//si la valeur du nouveau titre est valide et que le bouton est activé
+$adresseadmin = $dsondage->mail_admin;
+$headers_str = <<<EOF
+From: %s <%s>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+EOF;
+$header = sprintf($headers_str, NOMAPPLICATION, ADRESSEMAILADMIN );
+
+
+if (isset($_POST["boutonnouveautitre"])) {
+  if(! isset($_POST["nouveautitre"]) || empty($_POST["nouveautitre"]))
+    $err |= TITLE_EMPTY;
+  else {
+    //envoi du mail pour prevenir l'admin de sondage
+    mail ($adresseadmin,
+	  _("[ADMINISTRATOR] New title for your poll") . ' ' . NOMAPPLICATION, 
+	  _("You have changed the title of your poll. \nYou can modify this poll with this link") .
+	  " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" .
+	  _("Thanks for your confidence.") . "\n" . NOMAPPLICATION,
+	  $headers);
+
+    //modification de la base SQL avec le nouveau titre
+    $connect->Execute('UPDATE sondage SET titre = "' . mysql_real_escape_string(strip_tags($_POST['nouveautitre'])) . '" WHERE id_sondage = "' . $numsondage . '"');
+  }
+}
+  
+// si le bouton est activé, quelque soit la valeur du champ textarea
+if (isset($_POST["boutonnouveauxcommentaires"])) {
+  if(! isset($_POST["nouveautitre"]) || empty($_POST["nouveautitre"]))
+    $err |= COMMENT_EMPTY;
+  else {
+    //envoi du mail pour prevenir l'admin de sondage
+    mail ($adresseadmin,
+	  _("[ADMINISTRATOR] New comments for your poll") . ' ' . NOMAPPLICATION,
+	  _("You have changed the comments of your poll. \nYou can modify this poll with this link") .
+	  " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" .
+	  _("Thanks for your confidence.") . "\n" . NOMAPPLICATION,
+	  $headers);
+    
+    //modification de la base SQL avec les nouveaux commentaires
+    $connect->Execute('UPDATE sondage SET commentaires = "' . mysql_real_escape_string(strip_tags($nouveauxcommentaires)) . '" WHERE id_sondage = "' . $numsondage . '"');
+  }
+}
+
+//si la valeur de la nouvelle adresse est valide et que le bouton est activé
+if (isset($_POST["boutonnouvelleadresse"])){
+  if(! isset($_POST["nouvelleadresse"]) || empty($_POST["nouvelleadresse"]) ||
+     ! filter_var($_POST["nouvelleadresse"], FILTER_VALIDATE_EMAIL) || strpos($_POST["nouvelleadresse"], '@') === false) 
+    $err |= INVALID_EMAIL;
+  else {
+    //envoi du mail pour prevenir l'admin de sondage
+    mail ($_POST['nouvelleadresse'],
+	  _("[ADMINISTRATOR] New email address for your poll") . ' ' . NOMAPPLICATION,
+	  _("You have changed your email address in your poll. \nYou can modify this poll with this link") .
+	  " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" .
+	  _("Thanks for your confidence.") . "\n" . NOMAPPLICATION,
+	  $headers);
+    //modification de la base SQL avec la nouvelle adresse
+    $connect->Execute('UPDATE sondage SET mail_admin = "' . $_POST['nouvelleadresse'] . '" WHERE id_sondage = "' . $numsondage . '"');
+  }
+}
+
+// reload
+$dsujet=$sujets->FetchObject(false);
+$dsondage=$sondage->FetchObject(false);
+
+if ($_POST["ajoutsujet_x"]){
+
+  print_header(true);
+  echo '<body>'."\n";
+  logo();
+  bandeau_tete();
+  bandeau_titre(_("Make your polls"));
+  sous_bandeau();
 	
-	//on recupere les données et les sujets du sondage
-	$dsujet=$sujets->FetchObject(false);
-	$dsondage=$sondage->FetchObject(false);
-
-	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
-	logo();
-	bandeau_tete();
-	bandeau_titre(_("Make your polls"));
-	sous_bandeau();
-
-	echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
-	
-	echo '<div class=corpscentre>'."\n";
-	print "<H2>" . _("Column's adding") . "</H2><br><br>"."\n";
+  //on recupere les données et les sujets du sondage
+  echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+  	
+  echo '<div class="corpscentre">'."\n";
+  print "<H2>" . _("Column's adding") . "</H2><br><br>"."\n";
 	
 	if ($dsondage->format=="A"||$dsondage->format=="A+"){
 		echo _("Add a new column") .' :<br> <input type="text" name="nouvellecolonne" size="40"> <input type="image" name="ajoutercolonne" value="Ajouter une colonne" src="images/accept.png" alt="Valider"><br><br>'."\n";
@@ -183,39 +237,108 @@ elseif ($_POST["ajoutsujet_x"]||$_POST["ajoutsujet"]){
 	
 	echo'</body>'."\n";
 	echo '</html>'."\n";
-	
-	}
+	die();	
+}
+
+//action si bouton confirmation de suppression est activé
+if ($_POST["confirmesuppression"]){
+        $nbuser=$user_studs->RecordCount();
+        $date=date('H:i:s d/m/Y:');
+
+	// on ecrit dans le fichier de logs la suppression du sondage
+	error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n", 3, 'admin/logs_studs.txt');
+
+	//envoi du mail a l'administrateur du sondage
+	mail ($adresseadmin, 
+	      _("[ADMINISTRATOR] Removing of your poll") . ' ' . NOMAPPLICATION,
+	      _("You have removed your poll. \nYou can make new polls with this link") .
+	      " :\n\n".get_server_name()."index.php \n\n" .
+	      _("Thanks for your confidence.") . "\n" . NOMAPPLICATION,
+	      $headers);
+
+	//destruction des données dans la base SQL
+	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
+			  'LEFT INNER JOIN user_studs ON user_studs.id_sondage = sondage.id_sondage ' .
+			  'LEFT INNER JOIN comments ON comments.id_sondage = sondage.id_sondage ' .
+			  "WHERE id_sondage = '$numsondage' ");
+
+	//affichage de l'ecran de confirmation de suppression de sondage
+	print_header();
+	echo '<body>'."\n";
+	logo();
+	bandeau_tete();
+	bandeau_titre(_("Make your polls"));
+
+	echo '<div class="corpscentre">'."\n";
+	print "<H2>" . _("Your poll has been removed!") . "</H2><br><br>";
+	print  _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>."."\n";
+	echo '<br><br><br>'."\n";
+	echo '</div>'."\n";
+	sur_bandeau_pied();
+	bandeau_pied();
+	echo '</form>'."\n";
+	echo '</body>'."\n";
+	echo '</html>'."\n";
+	die();
+}
+
+// quand on ajoute un commentaire utilisateur
+if(isset($_POST['ajoutcomment'])) {
+  if(!isset($_POST["commentuser"]) || empty($_POST["commentuser"]))
+    $err |= COMMENT_USER_EMPTY;
+  else
+    $comment_user = mysql_real_escape_string(strip_tags($_POST["commentuser"]));
+  if(empty($_POST["comment"]))
+    $err |= COMMENT_EMPTY;
+
+  if (isset($_POST["comment"]) &&
+      ! is_error(COMMENT_EMPTY) && ! is_error(NO_POLL) &&
+      ! is_error(COMMENT_USER_EMPTY)) {
+    if( ! $connect->Execute('INSERT INTO comments ' .
+			    '(id_sondage, comment, usercomment) VALUES ("'.
+			    $numsondage . '","'.
+			    mysql_real_escape_string(strip_tags($_POST['comment'])).
+			    '","' .
+			    $comment_user .'")') );
+    $err |= COMMENT_INSERT_FAILED;
+  }
+}
+
 
 //s'il existe on affiche la page normale
-else {
-
-	//on recupere les données et les sujets du sondage
-	$dsujet=$sujets->FetchObject(false);
-	$dsondage=$sondage->FetchObject(false);
-
-	//affichage des boutons d'effacement de colonne et des sujets
-
-	$nbcolonnes=substr_count($dsujet->sujet,',')+1;
-	$nblignes=$user_studs->RecordCount();
-
-	//si on annule la suppression
-	if ($_POST["annulesuppression"]){
-
-	}
+// DEBUT DE L'AFFICHAGE DE LA PAGE HTML
+print_header(true);
+echo '<body>'."\n";
+logo();
+bandeau_tete();
+bandeau_titre(_("Make your polls"));
+sous_bandeau();
 	
-	//quand on ajoute un commentaire utilisateur
-	if ($_POST["ajoutcomment"]||$_POST["ajoutcomment_x"]){
-		if ($_POST["comment"]!=""&&$_POST["commentuser"]!=""){
-			$connect->Execute("INSERT INTO comments VALUES ('$numsondage','$_POST[comment]','$_POST[commentuser]')");
-		}
-		else {
-			$erreur_commentaire_vide="yes";
-		}
-	}
-	
-	
-	//si il n'y a pas suppression alors on peut afficher normalement le tableau
-	if (!$_POST["confirmesuppression"]){
+echo '<div class="presentationdate"> '."\n";
+
+//affichage du titre du sondage
+$titre=str_replace("\\","",$dsondage->titre);       
+echo '<H2>'.$titre.'</H2>'."\n";
+
+//affichage du nom de l'auteur du sondage
+echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br>'."\n";
+
+//affichage des commentaires du sondage
+if ($dsondage->commentaires){
+  echo '<br>'. _("Comments") .' :<br>'."\n";
+  $commentaires=$dsondage->commentaires;
+  $commentaires=str_replace("\\","",$commentaires);       
+  echo $commentaires;
+  echo '<br>'."\n";
+}
+echo '<br>'."\n";
+echo '</div>'."\n";
+
+
+$nbcolonnes=substr_count($dsujet->sujet,',')+1;
+$nblignes=$user_studs->RecordCount();
+
+//si il n'y a pas suppression alors on peut afficher normalement le tableau
 
 		//action si le bouton participer est cliqué
 		if ($_POST["boutonp"]||$_POST["boutonp_x"]){
@@ -268,7 +391,6 @@ else {
 			$connect->Execute("UPDATE sujet_studs SET sujet = '$nouveauxsujets' WHERE id_sondage = '$numsondage' ");
 
 			//envoi d'un mail pour prévenir l'administrateur du changement
-			$adresseadmin=$dsondage->mail_admin;
 			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New column for your poll").NOMAPPLICATION, "" . _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 
@@ -373,7 +495,6 @@ else {
 				//envoi d'un mail pour prévenir l'administrateur du changement
 				$adresseadmin=$dsondage->mail_admin;
 
-				$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 				mail ($adresseadmin, 
 				      _("[ADMINISTRATOR] New column for your poll"),
 				      _("You have added a new column in your poll. \nYou can inform the voters of this change with this link") . " : \n\n".get_server_name()."/studs.php?sondage=$numsondage \n\n " . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,
@@ -490,40 +611,6 @@ else {
 			}
 
 		}
-		//si la valeur du nouveau titre est valide et que le bouton est activé
-		if (($_POST["boutonnouveautitre"]||$_POST["boutonnouveautitre_x"]) && $_POST["nouveautitre"]!=""){
-
-			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New title for your poll"). NOMAPPLICATION, 
-			      _("You have changed the title of your poll. \nYou can modify this poll with this link") .
-			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
-			//modification de la base SQL avec le nouveau titre
-			$nouveautitre=$_POST["nouveautitre"];
-			$connect->Execute("update sondage set titre = '$nouveautitre' where id_sondage = '$numsondage' ");
-		}
-
-		//si le bouton est activé, quelque soit la valeur du champ textarea
-		if ($_POST["boutonnouveauxcommentaires"]||$_POST["boutonnouveauxcommentaires_x"]){
-			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$adresseadmin", "" . _("[ADMINISTRATOR] New comments for your poll").NOMAPPLICATION, "" . _("You have changed the comments of your poll. \nYou can modify this poll with this link") . " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
-			//modification de la base SQL avec les nouveaux commentaires
-			$nouveauxcommentaires=$_POST["nouveauxcommentaires"];
-			$connect->Execute("update sondage set commentaires = '$nouveauxcommentaires' where id_sondage = '$numsondage' ");
-		}
-
-		//si la valeur de la nouvelle adresse est valide et que le bouton est activé
-		if (($_POST["boutonnouvelleadresse"]||$_POST["boutonnouvelleadresse_x"]) && $_POST["nouvelleadresse"]!=""){
-			//envoi du mail pour prevenir l'admin de sondage
-			$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-			mail ("$_POST[nouvelleadresse]", "" . _("[ADMINISTRATOR] New email address for your poll").NOMAPPLICATION,
-			      _("You have changed your email address in your poll. \nYou can modify this poll with this link") .
-			      " :\n\n".get_server_name()."/adminstuds.php?sondage=$numsondageadmin\n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
-			//modification de la base SQL avec la nouvelle adresse
-			$connect->Execute("update sondage set  mail_admin= '$_POST[nouvelleadresse]' where id_sondage = '$numsondage' ");
-
-		}
 
 		//recuperation des donnes de la base
 		$sondage=$connect->Execute("select * from sondage where id_sondage_admin = '$numsondageadmin'");
@@ -538,46 +625,7 @@ else {
 		$toutsujet=str_replace("°","'",$toutsujet);
 		$nbcolonnes=substr_count($dsujet->sujet,',')+1;
 
-/*DEBUT DE L'AFFICHAGE DE LA PAGE HTML*/
-		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
-		echo '<html>'."\n";
-		echo '<head>'."\n";
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-		echo '<title>'.NOMAPPLICATION.'</title>'."\n";
-		echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-		echo '<script type="text/javascript" src="block_enter.js"></script>';
-		
-		echo '</head>'."\n";
-		echo '<body>'."\n";
-
-		//debut du formulaire et affichage des bandeaux
 		echo '<form name="formulaire" action="adminstuds.php?sondage='.$numsondageadmin.'" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
-		logo();
-		bandeau_tete();
-		bandeau_titre(_("Make your polls"));
-		sous_bandeau();
-	
-		echo '<div class="presentationdate"> '."\n";
-
-		//affichage du titre du sondage
-		$titre=str_replace("\\","",$dsondage->titre);       
-		echo '<H2>'.$titre.'</H2>'."\n";
-
-		//affichage du nom de l'auteur du sondage
-		echo _("Initiator of the poll") .' : '.$dsondage->nom_admin.'<br>'."\n";
-
-		//affichage des commentaires du sondage
-		if ($dsondage->commentaires){
-			echo '<br>'. _("Comments") .' :<br>'."\n";
-            $commentaires=$dsondage->commentaires;
-            $commentaires=str_replace("\\","",$commentaires);       
-            echo $commentaires;
-			echo '<br>'."\n";
-		}
-		echo '<br>'."\n";
-
-		echo '</div>'."\n";
-
 		echo '<div class="cadre"> '."\n";
 		echo _('As poll administrator, you can change all the lines of this poll with <img src="images/info.png" alt="infos">.<br> You can, as well, remove a column or a line with <img src="images/cancel.png" alt="Cancel">. <br>You can also add a new column with <img src="images/add-16.png" alt="Add column">.<br> Finally, you can change the informations of this poll like the title, the comments or your email address.') ."\n";
 
@@ -996,58 +1044,8 @@ else {
 	echo '</form>'."\n";
 	echo '</body>'."\n";
 	echo '</html>'."\n";
-}
-
-//action si bouton confirmation de suppression est activé
-if ($_POST["confirmesuppression"]){
 
 
-	//on recupere les données et les sujets du sondage
-	$dsujet=$sujets->FetchObject(false);
-	$dsondage=$sondage->FetchObject(false);
 
-	$adresseadmin=$dsondage->mail_admin;
-
-        $nbuser=$user_studs->RecordCount();
-        $date=date('H:i:s d/m/Y:');
-
-	// on ecrit dans le fichier de logs la suppression du sondage
-	error_log($date . " SUPPRESSION: $dsondage->id_sondage\t$dsondage->format\t$dsondage->nom_admin\t$dsondage->mail_admin\t$nbuser\t$dsujets->sujet\n", 3, 'admin/logs_studs.txt');
-
-	//envoi du mail a l'administrateur du sondage
-	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail ("$adresseadmin", "" . _("[ADMINISTRATOR] Removing of your poll").NOMAPPLICATION, "" . _("You have removed your poll. \nYou can make new polls with this link") . " :\n\n".get_server_name()."index.php \n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
-
-	//destruction des données dans la base SQL
-	$connect->Execute('DELETE FROM sondage LEFT INNER JOIN sujet_studs ON sujet_studs.id_sondage = sondage.id_sondage '.
-			  'LEFT INNER JOIN user_studs ON user_studs.id_sondage = sondage.id_sondage ' .
-			  'LEFT INNER JOIN comments ON comments.id_sondage = sondage.id_sondage ' .
-			  "WHERE id_sondage = '$numsondage' ");
-
-	//affichage de l'ecran de confirmation de suppression de sondage
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
-	echo '<html>'."\n";
-	echo '<head>'."\n";
-	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
-	echo '</head>'."\n";
-	echo '<body>'."\n";
-	logo();
-	bandeau_tete();
-	bandeau_titre(_("Make your polls"));
-
-	echo '<div class="corpscentre">'."\n";
-	print "<H2>" . _("Your poll has been removed!") . "</H2><br><br>";
-	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>. "."\n";
-	echo '<br><br><br>'."\n";
-	echo '</div>'."\n";
-	sur_bandeau_pied();
-	bandeau_pied();
-	echo '</form>'."\n";
-	echo '</body>'."\n";
-	echo '</html>'."\n";
-}
-
-}
 ?>
 
