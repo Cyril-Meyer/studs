@@ -122,17 +122,6 @@ locale/
 	Le répertoire qui contient les fichiers de traduction modifiables (.po) et compilés (.mo)
 	au format gettext
 
-lang/
-	Le répertoire qui contient les traductions de toutes les chaines de caractères
-lang/fr.inc
-	Le fichier qui contient toutes les chaines de caractères en français
-lang/en.inc
-	Le fichier qui contient toutes les chaines de caractères en anglais
-lang/de.inc
-	Le fichier qui contient toutes les chaines de caractères en allemand
-lang/es.inc
-	Le fichier qui contient toutes les chaines de caractères en espagnol
-
 =============================================================================
 	Validations des pages
 =============================================================================
