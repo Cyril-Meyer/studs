@@ -37,47 +37,62 @@
 //
 //==========================================================================
 
-session_start();
-require_once 'iCalcreator/iCalcreator.class.php';
+
+// TODO: no easy way to retrieve the best(s) choice(s) 
+header('Location: studs.php');
 
 $meilleursujet=$_SESSION["meilleursujet"];
 
+
+session_start();
+require_once('iCalcreator/iCalcreator.class.php');
 
 $v = new vcalendar(); // create a new calendar instance
 $v->setConfig( 'unique_id', $_SESSION["numsondage"] ); // set Your unique id
 $v->setProperty( 'method', 'PUBLISH' ); // required of some calendar software
 
+
 $vevent = new vevent(); // create an event calendar component
 
-if(preg_match (";(\d{10});", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>0, 'min'=>0, 'sec'=>0 ), array( 'VALUE' => 'DATE' ));
+/*
+  tested with :
+  $test = array( '1275818164@12h-15h', '1275818164@12h15-15h57', '1275818164@12:15-15:57',  '1275818164@8:30',  '1275818164@8h30');
+  foreach($test as $meilleursujet) {
+*/
+$adate = strtok($meilleursujet, "@");
+$dtstart = $dtend = array(
+			  'year'=>intval(date("Y",$adate)),
+			  'month'=>intval(date("n",$adate)),
+			  'day'=>intval(date("j",$adate)),
+			  'hour'=>0,
+			  'min'=>0,
+			  'sec'=>0
+			  );
+$double_time = false;
+if(strpos($meilleursujet, '-') !== false)
+  $double_time = true;
+
+$dtstart['hour'] = intval(strtok(":Hh"));
+$a = intval(strtok(":Hh-"));
+$b = intval(strtok(":Hh-"));
+if($b === false) {
+  if($double_time)
+    $dtend['hour'] = $a;
+  else
+    $dtstart['min'] = $a;
+} else {
+  $dtstart['min'] = $a;
+  $dtend['hour'] = $b;
+  $dtend['min'] = intval(strtok(":Hh-"));
 }
 
-if(preg_match (";(\d{10})@(\d{1,2}):(\d{1,2});", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2], 'min'=>$registreics[3], 'sec'=>0 ));
-	$vevent->setProperty( 'dtend', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2]+1, 'min'=>$registreics[3], 'sec'=>0 ));
+if(! $double_time ) {
+  $dtend['hour'] = $dtstart['hour'] + 1;
+  $dtend['min'] = $dtstart['min'];
 }
 
-if(preg_match (";(\d{10})@(\d{1,2})h(\d{0,2});i", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2], 'min'=>$registreics[3], 'sec'=>0 ));
-	$vevent->setProperty( 'dtend', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2]+1, 'min'=>$registreics[3], 'sec'=>0 ));
-}
-
-if(preg_match (";(\d{10})@(\d{1,2}):(\d{1,2})-(\d{1,2}):(\d{1,2});", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2], 'min'=>$registreics[3], 'sec'=>0 ));
-	$vevent->setProperty( 'dtend', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[4], 'min'=>$registreics[5], 'sec'=>0 ));
-}
-
-if(preg_match (";(\d{10})@(\d{1,2})h(\d{0,2})-(\d{1,2})h(\d{0,2});i", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2], 'min'=>$registreics[3], 'sec'=>0 ));
-	$vevent->setProperty( 'dtend', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[4], 'min'=>$registreics[5], 'sec'=>0 ));
-}
-
-if(preg_match (";(\d{10})@(\d{1,2})-(\d{1,2});", $meilleursujet, $registreics)){
-	$vevent->setProperty( 'dtstart', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[2], 'min'=>0, 'sec'=>0 ));
-	$vevent->setProperty( 'dtend', array( 'year'=>date("Y",$registreics[1]), 'month'=>date("n",$registreics[1]), 'day'=>date("j",$registreics[1]), 'hour'=>$registreics[3], 'min'=>0, 'sec'=>0 ));
-}
-
+$vevent->setProperty( 'dtstart', $dtstart);
+$vevent->setProperty( 'dtend', $dtend);
 $vevent->setProperty( 'summary', $_SESSION["sondagetitre"] );
 
 $v->setComponent ( $vevent ); // add event to calendar
