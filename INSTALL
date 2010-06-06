@@ -77,11 +77,14 @@ Accès à la page administrateur
 
 Le répertoire admin/ contient un fichier .htaccess pour Apache, qui restreint l'accès
 à la page d'administration de l'application.
-Modifiez le contenu de ce fichier .htaccess pour l'adapter à vos
-besoins.
+Modifiez le contenu de ce fichier .htaccess pour l'adapter au chemin du fichier .htpasswd
+sur votre serveur.
+Le fichier .htpasswd à besoin d'être créé par vos soins en utilisant par exemple la commande
+suivante :
+htpasswd -mnb <admin_username> <admin_password>
 
 Un fichier admin/logs_studs.txt doit être créé et accessible en écriture
-pour votre serveur Web. Quelque chose comme :
+par votre serveur Web. Quelque chose comme :
 
 % touch admin/logs_studs.txt
 % chmod 700 admin/logs_studs.txt
@@ -89,6 +92,16 @@ pour votre serveur Web. Quelque chose comme :
 
 devrait convenir.
 
+Maintenance
+===========
+Studs dispose d'une possibilité de mise en maintenance par le biais
+d'un fichier .htaccess.
+La section <Directory> relative à Studs, dans la configuration d'Apache
+doit au moins contenir :
+AllowOverride AuthConfig Options
+Le fichier .htaccess correspondant doit être modifier pour y configurer
+l'adresse IP depuis laquelle s'effectue la maintenance.
+N'oubliez pas de le recommenter en intégralité une fois la maintenance effectuée.
 
 Tables de la base de données
 ============================

@@ -1,0 +1,7 @@
+# Options +FollowSymlinks
+# RewriteEngine on
+# RewriteCond %{REQUEST_URI} !/maintenance.php$
+# RewriteCond %{REQUEST_URI} !/admin/(.*)$
+# RewriteCond %{REQUEST_URI} !/style.css$
+# RewriteCond %{REMOTE_HOST} !^ALL\.OW\.ED\.IP
+# RewriteRule $ /maintenance.php [R=302,L]
