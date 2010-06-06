@@ -37,13 +37,14 @@
 //
 //==========================================================================
 
-session_start();
-
 include_once('fonctions.php');
-//TODO, don't use $_SESSION[]
-$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_SESSION['numsondage'] . '" ORDER BY id_users');
 
-$dsondage = get_sondage_from_id($_SESSION['numsondage']);
+if(!isset($_GET['numsondage']))
+   header('Location: studs.php');
+
+$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_GET['numsondage'] . '" ORDER BY id_users');
+
+$dsondage = get_sondage_from_id($_GET['numsondage']);
 $nbcolonnes=substr_count($dsondage->sujet,',')+1;
 
 $toutsujet=explode(",",$dsondage->sujet);
@@ -54,10 +55,10 @@ $toutsujet=explode(",",$dsondage->sujet);
 $input.=";";
 for ($i=0;$toutsujet[$i];$i++){
 	if ($dsondage->format=="D"||$dsondage->format=="D+"){
-		$input.='"'.date("j/n/Y",$toutsujet[$i]).'";';
+		$input.=''.date("j/n/Y",$toutsujet[$i]).';';
 	}
 	else{
-		$input.='"'.$toutsujet[$i].'";';
+		$input.=''.$toutsujet[$i].';';
 	}
 }
 $input.="\r\n";
@@ -66,7 +67,7 @@ if (strpos($dsondage->sujet,'@') !== false){
 	$input.=";";
 	for ($i=0;$toutsujet[$i];$i++){
 		$heures=explode("@",$toutsujet[$i]);
-		$input.='"'.$heures[1].'";';
+		$input.=''.$heures[1].';';
 	}
 	$input.="\r\n";
 }
@@ -74,24 +75,24 @@ if (strpos($dsondage->sujet,'@') !== false){
 while (	$data=$user_studs->FetchNextObject(false)) {
 // Le nom de l'utilisateur
 	$nombase=str_replace("°","'",$data->nom);
-	$input.='"'.$nombase.'";';
+	$input.=$nombase.';';
 //affichage des resultats
 	$ensemblereponses=$data->reponses;
 	for ($k=0;$k<$nbcolonnes;$k++){
 		$car=substr($ensemblereponses,$k,1);
 		if ($car=="1"){
-			$input.='"OK";';
+			$input.='OK;';
 			$somme[$k]++;
 		}
 		else {
-			$input.='"";';
+			$input.=';';
 		}
 	}
 	$input.="\r\n";
 }
 
 $filesize = strlen( $input );
-$filename=$_SESSION["numsondage"].".csv";
+$filename=$_GET["numsondage"].".csv";
 
  header( 'Content-Type: text/csv; charset=utf-8' );
  header( 'Content-Length: '.$filesize );
