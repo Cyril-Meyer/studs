@@ -47,7 +47,6 @@ include_once('fonctions.php');
 
 // Le fichier studs.php sert a afficher les résultats d'un sondage à un simple utilisateur. 
 // C'est également l'interface pour ajouter une valeur à un sondage deja créé.
-
 $numsondage = false;
 
 //On récupère le numéro de sondage par le lien web.
@@ -113,6 +112,7 @@ if(isset($_POST['ajoutcomment'])) {
 
 // Action quand on clique le bouton participer
 $user_studs=$connect->Execute("SELECT * FROM user_studs WHERE id_sondage='$numsondage' ORDER BY id_users");
+$nbcolonnes=substr_count($dsondage->sujet,',')+1;
 if ( ! is_error(NO_POLL) && isset($_POST["boutonp"]) ){
   //Si le nom est bien entré
   if (! isset($_POST["nom"]) || empty($_POST['nom']))
@@ -121,7 +121,7 @@ if ( ! is_error(NO_POLL) && isset($_POST["boutonp"]) ){
      (!isset($_SERVER['REMOTE_USER']) || $_POST["nom"] == $_SESSION["nom"]) ) {
     for ($i=0;$i<$nbcolonnes;$i++){
       // Si la checkbox est enclenchée alors la valeur est 1
-      if (isset($_POST["choix$i"])){
+      if (isset($_POST["choix$i"]) && $_POST["choix$i"] == '1'){
 	$nouveauchoix.="1";
       }
       // sinon c'est 0
@@ -243,7 +243,6 @@ echo '<input type="hidden" name="sondage" value="' . $numsondage . '"/>';
 	echo '<table class="resultats">'."\n";
 
 //On récupere les données et les sujets du sondage
-	$nbcolonnes=substr_count($dsondage->sujet,',')+1;
 	$nblignes=$user_studs->RecordCount();
 
 	
@@ -265,7 +264,7 @@ $ligneamodifier = -1;
 
 			for ($i=0;$i<$nbcolonnes;$i++){
 				//recuperation des nouveaux choix de l'utilisateur
-				if (isset($_POST["choix$i"])){
+				if (isset($_POST["choix$i"]) && $_POST["choix$i"] == 1){
 					$nouveauchoix.="1";
 				}
 				else {
@@ -400,7 +399,7 @@ $somme = array();
 		// pour chaque colonne
 		for ($k=0; $k < $nbcolonnes; $k++){
 		  // on remplace les choix de l'utilisateur par une ligne de checkbox pour recuperer de nouvelles valeurs
-		  if ($compteur == $ligneamodifier || ( isset($_POST['choix'.$k]) && $_POST['choix'.$k] == '1' && is_error(NAME_EMPTY) )) {
+		  if ($compteur == $ligneamodifier) {
 		    echo '<td class="vide"><input type="checkbox" name="choix'.$k.'" value="1" ';
 		    if(substr($ensemblereponses,$k,1) == '1')
 		      echo 'checked="checked"';
@@ -427,7 +426,7 @@ $somme = array();
 			for ($i=0;$i<$nblignes;$i++){
 				if (isset($_POST["modifierligne$i"])||isset($_POST['modifierligne'.$i.'_x'])){
 					if ($compteur==$i){
-						echo '<td class=casevide><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
+						echo '<td class="casevide"><input type="image" name="validermodifier'.$compteur.'" value="Valider la modification" src="images/accept.png" ></td>'."\n";
 					}
 				}
 			}
@@ -448,7 +447,10 @@ $somme = array();
 
 // affichage des cases de formulaire checkbox pour un nouveau choix
 		for ($i=0;$i<$nbcolonnes;$i++){
-			echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value="1"></td>'."\n";
+		  echo '<td class="vide"><input type="checkbox" name="choix'.$i.'" value="1"';
+		  if ( isset($_POST['choix'.$i]) && $_POST['choix'.$i] == '1' && is_error(NAME_EMPTY) )
+		    echo ' checked="checked"';
+		  echo '></td>'."\n";
 		}
 		// Affichage du bouton de formulaire pour inscrire un nouvel utilisateur dans la base
 		echo '<td><input type="image" name="boutonp" value="' . _('Participate') . '" src="images/add-24.png"></td>'."\n";
@@ -554,10 +556,6 @@ if ($meilleurecolonne > 1)
 		  print $dcomment->usercomment . ' : ' . $dcomment->comment . '<br />';
 		}
 
-	}
-	
-	if ($erreur_commentaire_vide){
-		print '<font color="#FF0000">' . _('Enter a name and a comment!') . "</font>";
 	}
 	
 	//affichage de la case permettant de rajouter un commentaire par les utilisateurs
