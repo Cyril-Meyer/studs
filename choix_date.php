@@ -39,19 +39,11 @@
 
 session_start();
 
-include 'creation_sondage.php';
+include_once('creation_sondage.php');
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
-
-
-//Choix de langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
+	include_once('bandeaux.php');
 
 //si les variables de session ne snot pas valides, il y a une erreur
 if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SESSION["mail"]){
@@ -60,16 +52,16 @@ if (!$_SESSION["nom"]&&!$_SESSION["adresse"]&&!$_SESSION["commentaires"]&&!$_SES
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre_erreur();
+	bandeau_titre(_("Error!"));
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_choix_page_erreur_titre !</H2>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>. "."\n";
+	print "<H2>" . _("You haven't filled the first section of the poll creation.") . " !</H2>"."\n";
+	print _("Back to the homepage of ") . ' ' . '<a href="index.php">' . NOMAPPLICATION . '</a>.' . "\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	//bandeau de pied
@@ -109,26 +101,12 @@ if ($_POST["confirmation"]||$_POST["confirmation_x"]){
 
 }
 
-//bouton annuler
-if ($_POST["annuler"]||$_POST["annuler_x"]){
-	header("Location:index.php");
-	exit();
-}
-
-//bouton retour
-if ($_POST["retour"]||$_POST["retour_x"]){
-	header("Location:infos_sondage.php");
-	exit();
-}
-
 //nombre de cases par défaut
 if(!$_SESSION["nbrecaseshoraires"]){
 	$_SESSION["nbrecaseshoraires"]=5;
 }
-if (($_POST["ajoutcases"]||$_POST["ajoutcases_x"])&&$_SESSION["nbrecaseshoraires"]==5){
-	$_SESSION["nbrecaseshoraires"]=$_SESSION["nbrecaseshoraires"]+5;
-}
-
+elseif ($_POST["ajoutcases"] && $_SESSION["nbrecaseshoraires"] == 5)
+  $_SESSION["nbrecaseshoraires"]=10;
 
 //valeurs de la date du jour actuel
 $jourAJ=date("j");
@@ -149,7 +127,7 @@ if ($_POST["moisavant"]||$_POST["moisavant_x"]){
 		$_SESSION["annee"]=$_SESSION["annee"]-1;
 	}
 	else {
-		$_SESSION["mois"]=$_SESSION["mois"]-1;
+		$_SESSION["mois"] -= 1;
 	}
 
 	//On sauvegarde les heures deja entrées
@@ -165,10 +143,10 @@ if ($_POST["moisavant"]||$_POST["moisavant_x"]){
 if ($_POST["moisapres"]||$_POST["moisapres_x"]){
 	if ($_SESSION["mois"]==12){
 		$_SESSION["mois"]=1;
-		$_SESSION["annee"]=$_SESSION["annee"]+1;
+		$_SESSION["annee"] += 1;
 	}
 	else {
-		$_SESSION["mois"]=$_SESSION["mois"]+1;
+	  $_SESSION["mois"] += 1;
 	}
 
 	//On sauvegarde les heures deja entrées
@@ -183,7 +161,7 @@ if ($_POST["moisapres"]||$_POST["moisapres_x"]){
 
 //mise a jour des valeurs de session si annee avant
 if ($_POST["anneeavant"]||$_POST["anneeavant_x"]){
-		$_SESSION["annee"]=$_SESSION["annee"]-1;
+  $_SESSION["annee"] -= 1;
 
 	//On sauvegarde les heures deja entrées
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
@@ -196,7 +174,7 @@ if ($_POST["anneeavant"]||$_POST["anneeavant_x"]){
 
 //mise a jour des valeurs de session si annee apres
 if ($_POST["anneeapres"]||$_POST["anneeapres_x"]){
-		$_SESSION["annee"]=$_SESSION["annee"]+1;
+  $_SESSION["annee"] += 1;
 
 	//On sauvegarde les heures deja entrées
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
@@ -214,77 +192,67 @@ $premierjourmois=date("N",mktime(0,0,0,$_SESSION["mois"],1,$_SESSION["annee"]))-
 //le format du sondage est DATE
 $_SESSION["formatsondage"]="D".$_SESSION["studsplus"];
 
-//traduction en francais ecrit des valeurs de mois
-if ($_SESSION["mois"]==1){$motmois=$tt_motmois_un;}
-if ($_SESSION["mois"]==2){$motmois=$tt_motmois_deux;}
-if ($_SESSION["mois"]==3){$motmois=$tt_motmois_trois;}
-if ($_SESSION["mois"]==4){$motmois=$tt_motmois_quatre;}
-if ($_SESSION["mois"]==5){$motmois=$tt_motmois_cinq;}
-if ($_SESSION["mois"]==6){$motmois=$tt_motmois_six;}
-if ($_SESSION["mois"]==7){$motmois=$tt_motmois_sept;}
-if ($_SESSION["mois"]==8){$motmois=$tt_motmois_huit;}
-if ($_SESSION["mois"]==9){$motmois=$tt_motmois_neuf;}
-if ($_SESSION["mois"]==10){$motmois=$tt_motmois_dix;}
-if ($_SESSION["mois"]==11){$motmois=$tt_motmois_onze;}
-if ($_SESSION["mois"]==12){$motmois=$tt_motmois_douze;}
+//traduction de la valeur du mois
+if (is_integer($_SESSION["mois"]) && $_SESSION["mois"] > 0 && $_SESSION["mois"] < 13)
+  $motmois=strftime('%B', mktime(0, 0, 0, $_SESSION["mois"], 10));
+else
+  $motmois=strftime('%B');
 
 //debut de la page web
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
+echo '<script type="text/javascript" src="block_enter.js"></script>';
 
-#bloquer la touche entrée
-blocage_touche_entree();
 echo '</head>'."\n";
 echo '<body>'."\n";
 
 //Debut du formulaire et bandeaux de tete
-echo '<form name=formulaire action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
+echo '<form name="formulaire" action="choix_date.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
 logo();
 bandeau_tete();
-bandeau_titre_date();
+bandeau_titre(_("Poll dates (2 on 2)"));
 sous_bandeau_choix();
 
 //affichage de l'aide pour les jours
 echo '<div class=bodydate>'."\n";
-echo $tt_choixdate_presentation."\n";
+echo _("Select your dates amoung the free days (green). The selected days are in blue.<br> You can unselect a day previously selected by clicking again on it.") ."\n";
 echo '</div>'."\n";
 
 //debut du tableau qui affiche le calendrier
 echo '<div class=calendrier>'."\n";
 echo '<table align=center>'."\n";
-echo '<tr><td><input type=image name=anneeavant value="<<" src="images/rewind.png"></td><td><input type=image name=moisavant value="<" src="images/previous.png"></td><td width=150px align=center> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type=image name=moisapres value=">" src="images/next.png"></td><td><input type=image name=anneeapres value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type=image name=retourmois value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
+echo '<tr><td><input type="image" name="anneeavant" value="<<" src="images/rewind.png"></td><td><input type="image" name="moisavant" value="<" src="images/previous.png"></td><td width="150px" align="center"> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type="image" name="moisapres" value=">" src="images/next.png"></td><td><input type="image" name="anneeapres" value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type="image" name="retourmois" value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<table>'."\n";
 
 echo '<tr>'."\n";
-
 //affichage des jours de la semaine en haut du tableau
-echo '<td class=joursemaine>'.$tt_motjour_un.'</td><td class=joursemaine>'.$tt_motjour_deux.'</td><td class=joursemaine>'.$tt_motjour_trois.'</td><td class=joursemaine>'.$tt_motjour_quatre.'</td><td class=joursemaine>'.$tt_motjour_cinq.'</td><td class=jourwe>'.$tt_motjour_six.'</td><td class=jourwe>'.$tt_motjour_sept.'</td>'."\n";
+for($i = 0; $i < 7; $i++)
+  echo '<td class="joursemaine">'. strftime('%A',mktime(0,0,0,0,$i,10)) .'</td>';
 echo '</tr>'."\n";
 
 
 //ajout d'une entrée dans la variable de session qui contient toutes les dates
 if ($_POST["choixjourajout"]){
-
-	if (!$_SESSION["totalchoixjour"]){
-		$_SESSION["totalchoixjour"]=array();
-	}
+  if (!isset($_SESSION["totalchoixjour"])){
+    $_SESSION["totalchoixjour"]=array();
+  }
 
 // Test pour éviter les doublons dans la variable qui contient toutes les dates
-	$journeuf="yes";
+  $journeuf=true;
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 
 		if ($_SESSION["totalchoixjour"][$i]==mktime (0,0,0,$_SESSION["mois"],$_POST["choixjourajout"][0],$_SESSION["annee"])){
-			$journeuf="no";
+		  $journeuf=false;
 		}
 	}
 
 // Si le test est passé, alors on insere la valeur dans la variable de session qui contient les dates
-	if ($journeuf=="yes"){
+	if ($journeuf){
 	
 		array_push ($_SESSION["totalchoixjour"],mktime (0,0,0,$_SESSION["mois"],$_POST["choixjourajout"][0],$_SESSION["annee"]));
 		sort ($_SESSION["totalchoixjour"]);
@@ -366,7 +334,7 @@ for ($i=0;$i<$nbrejourmois+$premierjourmois;$i++){
 		for ($j=0;$j<count($_SESSION["totalchoixjour"]);$j++){
 			//affichage des boutons ROUGES
 			if (date("j",$_SESSION["totalchoixjour"][$j])==$numerojour&&date("n",$_SESSION["totalchoixjour"][$j])==$_SESSION["mois"]&&date("Y",$_SESSION["totalchoixjour"][$j])==$_SESSION["annee"]){
-				echo '<td align=center class=choisi><input type=submit class=boutonOFF name="choixjourretrait[]" value="'.$numerojour.'"></td>'."\n";
+				echo '<td align=center class=choisi><input type=submit class="bouton OFF" name="choixjourretrait[]" value="'.$numerojour.'"></td>'."\n";
 				$dejafait=$numerojour;
 			}
 		}
@@ -375,7 +343,7 @@ for ($i=0;$i<$nbrejourmois+$premierjourmois;$i++){
 
 			//bouton vert
 			if (($numerojour>=$jourAJ&&$_SESSION["mois"]==$moisAJ&&$_SESSION["annee"]==$anneeAJ)||($_SESSION["mois"]>$moisAJ&&$_SESSION["annee"]==$anneeAJ)||$_SESSION["annee"]>$anneeAJ){
-				echo '<td align=center class=libre><input type=submit class=boutonON name="choixjourajout[]" value="'.$numerojour.'"></td>'."\n";
+				echo '<td align=center class=libre><input type=submit class="bouton ON" name="choixjourajout[]" value="'.$numerojour.'"></td>'."\n";
 			}
 			//bouton gris
 			else{
@@ -391,8 +359,8 @@ echo '</table>'."\n";
 echo '</div>'."\n";
 
 //traitement de l'entrée des heures dans les cases texte
+$errheure = $erreur = false;
 if ($_POST["choixheures"]||$_POST["choixheures_x"]){
-	
 	//On sauvegarde les heures deja entrées
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 		//affichage des 5 cases horaires
@@ -409,9 +377,9 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 			$case=$j+1;
 
 			//si c'est un creneau type 8:00-11:00
-			if (ereg("([0-9]{1,2}:[0-9]{2})-([0-9]{1,2}:[0-9]{2})",$_POST["horaires$i"][$j],$creneaux)){
+			if (preg_match("/(\d{1,2}:\d{2})-(\d{1,2}:\d{2})/",$_POST["horaires$i"][$j],$creneaux)){
 				
-				//on recupere les deux parties du ereg qu'on redécoupe autour des ":"
+				//on recupere les deux parties du preg_match qu'on redécoupe autour des ":"
 				$debutcreneau=explode(":",$creneaux[1]);
 				$fincreneau=explode(":",$creneaux[2]);
 
@@ -422,15 +390,15 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 					}
 					//sinon message d'erreur et nettoyage de la case
 					else {
-						$errheure[$i][$j]="yes";
-						$erreur="yes";
+						$errheure[$i][$j]=true;
+						$erreur=true;
 					}
 			}
 
 			//si c'est un creneau type 8h00-11h00
-			elseif (eregi("^([0-9]{1,2}h[0-9]{0,2})-([0-9]{1,2}h[0-9]{0,2})$",$_POST["horaires$i"][$j],$creneaux)){
+			elseif (preg_match(";^(\d{1,2}h\d{0,2})-(\d{1,2}h\d{0,2})$;i",$_POST["horaires$i"][$j],$creneaux)){
 				
-				//on recupere les deux parties du ereg qu'on redécoupe autour des "H"
+				//on recupere les deux parties du preg_match qu'on redécoupe autour des "H"
 				$debutcreneau=preg_split("/h/i",$creneaux[1]);
 				$fincreneau=preg_split("/h/i",$creneaux[2]);
 
@@ -441,57 +409,57 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 					}
 					//sinon message d'erreur et nettoyage de la case
 					else {
-						$errheure[$i][$j]="yes";
-						$erreur="yes";
+						$errheure[$i][$j]=true;
+						$erreur=true;
 					}
 			}
 			//si c'est une heure simple type 8:00
-			elseif (ereg("^([0-9]{1,2}):([0-9]{2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2}):(\d{2})$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<24&&$heures[2]<60){
 					$_SESSION["horaires$i"][$j]=$heures[0];
 				}
 				//sinon message d'erreur et nettoyage de la case
 				else {
-					$errheure[$i][$j]="yes";
-					$erreur="yes";
+					$errheure[$i][$j]=true;
+					$erreur=true;
 				}
 			}
 			//si c'est une heure encore plus simple type 8h
-			elseif (eregi("^([0-9]{1,2})h([0-9]{0,2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})h(\d{0,2})$;i",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<24&&$heures[2]<60){
 					$_SESSION["horaires$i"][$j]=$heures[0];
 				}
 				//sinon message d'erreur et nettoyage de la case
 				else {
-					$errheure[$i][$j]="yes";
-					$erreur="yes";
+					$errheure[$i][$j]=true;
+					$erreur=true;
 				}
 			}
 			//si c'est un creneau simple type 8-11
-			elseif (ereg("^([0-9]{1,2})-([0-9]{1,2})$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})-(\d{1,2})$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<$heures[2]&&$heures[1]<24&&$heures[2]<24){
 					$_SESSION["horaires$i"][$j]=$heures[0];
 				}
 				//sinon message d'erreur et nettoyage de la case
 				else {
-					$errheure[$i][$j]="yes";
-					$erreur="yes";
+					$errheure[$i][$j]=true;
+					$erreur=true;
 				}
 			}
 
 			//si c'est un creneau H type 8h-11h
-			elseif (eregi("^([0-9]{1,2})h-([0-9]{1,2})h$",$_POST["horaires$i"][$j],$heures)){
+			elseif (preg_match(";^(\d{1,2})h-(\d{1,2})h$;",$_POST["horaires$i"][$j],$heures)){
 				//si valeures correctes, on entre les données dans la variables de session
 				if ($heures[1]<$heures[2]&&$heures[1]<24&&$heures[2]<24){
 					$_SESSION["horaires$i"][$j]=$heures[0];
 				}
 				//sinon message d'erreur et nettoyage de la case
 				else {
-					$errheure[$i][$j]="yes";
-					$erreur="yes";
+					$errheure[$i][$j]=true;
+					$erreur=true;
 				}
 			}
 			
@@ -502,8 +470,8 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 			}
 			//pour tout autre format, message d'erreur
 			else{
-				$errheure[$i][$j]="yes";
-				$erreur="yes";
+				$errheure[$i][$j]=true;
+				$erreur=true;
 				$_SESSION["horaires$i"][$j]=$_POST["horaires$i"][$j];
 			}
 		}
@@ -512,20 +480,20 @@ if ($_POST["choixheures"]||$_POST["choixheures_x"]){
 echo '<div class=bodydate>'."\n";
 
 //affichage de tous les jours choisis
-if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
+if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur)){
 
 	//affichage des jours
 	echo '<br>'."\n";
-	echo '<H2>'.$tt_choixdate_titreheure.' :</H2>'."\n";
+	echo '<H2>'. _("Selected days") .' :</H2>'."\n";
 	//affichage de l'aide pour les jours
-	echo $tt_choixdate_presentationheure.'<br><br>'."\n";
+	echo _("For each selected day, you can choose, or not, meeting hours in the following format :<br>- empty,<br>- \"8h\", \"8H\" or \"8:00\" to give a meeting's start hour,<br>- \"8-11\", \"8h-11h\", \"8H-11H\" ou \"8:00-11:00\" to give a meeting's start and end hour,<br>- \"8h15-11h15\", \"8H15-11H15\" ou \"8:15-11:15\" for the same thing but with minutes.") .'<br><br>'."\n";
 	echo '<table>'."\n";
 
 	echo '<tr>'."\n";
 	echo '<td></td>'."\n";
 	for ($i=0;$i<$_SESSION["nbrecaseshoraires"];$i++){
 		$j=$i+1;
-		echo '<td classe=somme>'.$tt_choixdate_titrecolonne.' '.$j.'</center></td>'."\n";
+		echo '<td classe=somme>'. _("Time") .' '.$j.'</center></td>'."\n";
 	}
 	if ($_SESSION["nbrecaseshoraires"]<10){
 		echo '<td classe=somme><input type="image" name="ajoutcases" src="images/add-16.png"></td>'."\n";
@@ -535,25 +503,25 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	//affichage de la liste des jours choisis
 	for ($i=0;$i<count($_SESSION["totalchoixjour"]);$i++){
 		echo '<tr>'."\n";
-		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");echo '<td>'.strftime("%A %e %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");echo '<td>'.strftime("%A %e de %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="EN"){echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, 'de_DE@euro', 'de_DE', 'de');echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";}
-		$affichageerreurfindeligne="no";
+		if ($_SESSION["langue"]=="EN")
+		  echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
+		else
+		  echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
+		$affichageerreurfindeligne=false;
 		//affichage des cases d'horaires
 		for ($j=0;$j<$_SESSION["nbrecaseshoraires"];$j++){
 			//si on voit une erreur, le fond de la case est rouge
-			if ($errheure[$i][$j]=="yes"){
+			if ($errheure[$i][$j]){
 				echo '<td><input type=text size="10" maxlength="11" name=horaires'.$i.'[] value="'.$_SESSION["horaires$i"][$j].'" style="background-color:#FF6666;"></td>'."\n";
-				$affichageerreurfindeligne="yes";
+				$affichageerreurfindeligne=true;
 			}
 			//sinon la case est vide normalement
 			else {
 				echo '<td><input type=text size="10" maxlength="11" name=horaires'.$i.'[] value="'.$_SESSION["horaires$i"][$j].'"></td>'."\n";
 			}
 		}
-		if ($affichageerreurfindeligne=="yes"){
-			echo '<td><b><font color=#FF0000>'.$tt_choixdate_erreur_format.'</font></b></td>'."\n";	
+		if ($affichageerreurfindeligne){
+			echo '<td><b><font color=#FF0000>'. _("Bad format!") .'</font></b></td>'."\n";	
 		}
 		echo '</tr>'."\n";
 	}
@@ -562,35 +530,35 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur=="yes")){
 	//affichage des boutons de formulaire pour annuler, effacer les jours ou créer le sondage
 	echo '<table>'."\n";
 	echo '<tr>'."\n";
-	echo '<td><input type=submit name="reset" value="'.$tt_choixdate_bouton_effacer_jours.'"></td><td><input type=submit name="reporterhoraires" value="'.$tt_choixdate_bouton_reporter.'"></td><td><input type=submit name="resethoraires" value="'.$tt_choixdate_bouton_effacer_horaires.'"></td></tr>'."\n";
+	echo '<td><input type=submit name="reset" value="'. _("Remove all days") .'"></td><td><input type=submit name="reporterhoraires" value="'. _("Copy hours of the first day") .'"></td><td><input type=submit name="resethoraires" value="'. _("Remove all hours") .'"></td></tr>'."\n";
 	echo'<tr><td><br></td></tr>'."\n";
-	echo '<tr><td>'.$tt_choixdate_continuer.'</td><td><input type=image name="choixheures" value="'.$tt_choixdate_continuer.'" src="images/next-32.png"></td></tr>'."\n";
+	echo '<tr><td>'. _("Next") .'</td><td><input type=image name="choixheures" value="'. _("Next") .'" src="images/next-32.png"></td></tr>'."\n";
 	echo '</table>'."\n";
 	//si un seul jour et aucunes horaires choisies, : message d'erreur
 	if (($_POST["choixheures"]||$_POST["choixheures_x"])&&(count($_SESSION["totalchoixjour"])=="1"&&$_POST["horaires0"][0]==""&&$_POST["horaires0"][1]==""&&$_POST["horaires0"][2]==""&&$_POST["horaires0"][3]==""&&$_POST["horaires0"][4]=="")){
-			echo '<table><tr><td colspan=3><font color=#FF0000>'.$tt_choixdate_erreur_choix.'</font><br></td></tr></table>'."\n";
-			$erreur="yes";
+			echo '<table><tr><td colspan=3><font color=#FF0000>'. _("Enter more choices for the voters") .'</font><br></td></tr></table>'."\n";
+			$erreur=true;
 	}
 }
 	//s'il n'y a pas d'erreur et que le bouton de creation est activé, on demande confirmation
-	if ($erreur!="yes"&&($_POST["choixheures"]||$_POST["choixheures_x"])){
+	if ( ! $erreur &&($_POST["choixheures"]||$_POST["choixheures_x"])){
 		$taille_tableau=sizeof($_SESSION["totalchoixjour"])-1;
 		$jour_arret=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
-		if ($_SESSION["langue"]=="FR"){setlocale(LC_TIME, "fr_FR.UTF8");$date_fin=strftime("%A %e %B %Y",$jour_arret);}
-		if ($_SESSION["langue"]=="ES"){setlocale(LC_ALL, "es_ES.UTF8");$date_fin=strftime("%A %e de %B %Y",$jour_arret);}
-		if ($_SESSION["langue"]=="EN"){$date_fin=date("l, F jS Y",$jour_arret);}
-		if ($_SESSION["langue"]=="DE"){setlocale(LC_ALL, "de_DE");$date_fin=strftime("%A, den %e. %B %Y",$jour_arret);}
-		echo '<br><div class=presentationdatefin>'.$tt_choixdate_presentationfin.'<br></td></tr><tr><td><br>'.$tt_choixdate_presentationdatefin.' : <b> '.$date_fin.'</b><br><br>'."\n";
+		if ($_SESSION["langue"]=="EN")
+		  $date_fin=date("l, F jS Y",$jour_arret);
+		else
+		  $date_fin=strftime("%A, den %e. %B %Y",$jour_arret);
+		echo '<br><div class="presentationdatefin">'. _("Your poll will expire automatically 2 days after the last date of your poll.") .'<br></td></tr><tr><td><br>'. _("Removal date") .' : <b> '.$date_fin.'</b><br><br>'."\n";
 		echo '</div>'."\n";
-		echo '<div class=presentationdatefin>'."\n";
-		echo '<font color=#FF0000>'.$tt_choixautre_presentationenvoimail.'</font>'."\n";
+		echo '<div class="presentationdatefin">'."\n";
+		echo '<font color="#FF0000">'. _("Once you have confirmed the creation of your poll, you will be automatically redirected on the page of your poll. <br><br>Then, you will receive quickly an email contening the link to your poll for sending it to the voters.") .'</font>'."\n";
 		echo'</div>'."\n";
 		// echo'<p class=affichageexport>'."\n";
 		// echo 'Pour finir la cr&eacute;ation du sondage, cliquez sur le bouton <img src="images/add-16.png" alt="ajout"> ci-dessous'."\n";
 		// echo '</p>'."\n";
 		echo '<table>'."\n";
-		echo '<tr><td>'.$tt_choixdate_retour_horaires.'</td><td></td><td><input type=image name=retourhoraires src="images/back-32.png"></td></tr>'."\n";
-		echo'<tr><td>'.$tt_choix_creation.'</td><td></td><td><input type=image name=confirmation value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
+		echo '<tr><td>'. _("Back to hours") .'</td><td></td><td><input type="image" name="retourhoraires" src="images/back-32.png"></td></tr>'."\n";
+		echo'<tr><td>'. _("Create the poll") .'</td><td></td><td><input type="image" name="confirmation" value="Valider la cr&eacute;ation" src="images/add.png"></td></tr>'."\n";
 		echo '</table>'."\n";
 	}
 	echo '</tr>'."\n";
@@ -603,7 +571,6 @@ echo '</form>'."\n";
 echo '<br><br><br><br>'."\n";
 
 echo '</div>'."\n";
-sur_bandeau_pied_mobile();
 bandeau_pied_mobile();
 echo '</body>'."\n";
 echo '</html>'."\n";
@@ -619,7 +586,7 @@ if ($_POST["reset"]){
 
 	unset($_SESSION["totalchoixjour"]);
 	unset($_SESSION["nbrecaseshoraires"]);
-	echo '<meta http-equiv=refresh content="0">';
+	echo '<meta http-equiv="refresh" content="0">';
 }
 
 }

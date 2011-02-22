@@ -37,42 +37,20 @@
 //
 //==========================================================================
 
-include 'variables.php';
+include_once('variables.php');
+include_once('i18n.php');
+include_once('adodb/adodb.inc.php');
 
 function connexion_base(){
-
-       $connectstr = "dbname=".getenv('BASE')." user=".getenv('USERBASE');
-       if (getenv('SERVEURBASE') != '')
-	       $connectstr .= " host=".getenv('SERVEURBASE');
-       if (getenv('USERPASSWD') != '')
-	       $connectstr .= " password=".getenv('USERPASSWD');
-       return pg_connect($connectstr);
-}
-
-function blocage_touche_entree(){
-	print "
-	<script type=\"text/javascript\">
-		if (document.layers)
-		document.captureEvents(Event.KEYPRESS)
-
-		function process_keypress(e) {
-			if(window.event){
-				if (window.event.type == \"keypress\" & window.event.keyCode == 13)
-					return !(window.event.type == \"keypress\" & window.event.keyCode == 13);
-				}
-			if(e){
-				if (e.type == \"keypress\" & e.keyCode == 13)
-				return !e;
-			}
-		}
-	document.onkeypress = process_keypress;
-	</script>\n";
+       $DB = NewADOConnection(BASE_TYPE);
+       $DB->Connect(SERVEURBASE, USERBASE, USERPASSWD, BASE);
+       return $DB;
 }
 
 function get_server_name() {
-       $scheme = $_SERVER["HTTPS"] == "on" ? "https" : "http";
+  $scheme = (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? 'https' : 'http';
 	$url = sprintf("%s://%s%s", $scheme,
-		      getenv('NOMSERVEUR'),
+		      STUDS_URL,
 		      dirname($_SERVER["SCRIPT_NAME"]));
 	if (!preg_match("|/$|", $url)){
 		$url = $url."/";        
@@ -80,4 +58,55 @@ function get_server_name() {
 	return $url;
 }
 
+function get_sondage_from_id($id) {
+  global $connect;
+  // Ouverture de la base de données
+  if(preg_match(";^[\w\d]{16}$;i",$id)) {
+    $sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $id . '"');
+    $psondage = $sondage->FetchObject(false);
+    $psondage->date_fin = strtotime($psondage->date_fin);
+    return $psondage;
+  }
+  return false;
+}
+
+$connect=connexion_base();
+
+define('COMMENT_EMPTY',         0x0000000001);
+define('COMMENT_USER_EMPTY',    0x0000000010);
+define('COMMENT_INSERT_FAILED', 0x0000000100);
+define('NAME_EMPTY',            0x0000001000);
+define('NAME_TAKEN',            0x0000010000);
+define('NO_POLL',               0x0000100000);
+define('NO_POLL_ID',            0x0001000000);
+define('INVALID_EMAIL',         0x0010000000);
+define('TITLE_EMPTY',           0x0100000000);
+define('INVALID_DATE',          0x1000000000);
+$err = 0;
+
+function is_error($cerr) {
+  global $err;
+  if ( $err == 0 )
+    return false;
+  return (($err & $cerr) != 0 );
+}
+
+
+function is_user() {
+  return isset($_SERVER['REMOTE_USER']) || (isset($_SESSION['nom']));
+}
+
+function print_header($js = false) {
+  ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title><?php echo NOMAPPLICATION; ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+<?php
+if($js)
+  echo '<script type="text/javascript" src="block_enter.js"></script>';
+echo '</head>';
+}
 ?>

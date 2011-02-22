@@ -39,67 +39,12 @@
 
 session_start();
 
-include 'variables.php';
+include_once('variables.php');
+include_once( 'i18n.php' );
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
-
-
-//tests pour la langue
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
-// action du bouton annuler
-if ($_POST["annuler"]){
-	header("Location:index.php");
-	exit();
-}
-
-//action si bouton intranet est activé. Entrée dans l'intranet
-if ($_POST["intranet"]){
-
-        header("Location:./admin/index.php");
-        exit();
-}
-
-if ($_POST["contact"]){
-        header("Location:contacts.php");
-        exit();
-}
-
-if ($_POST["sources"]){
-        header("Location:sources/sources.php");
-        exit();
-}
-
-if ($_POST["exemple"]){
-        header("Location:studs.php?sondage=aqg259dth55iuhwm");
-        exit();
-}
-
-if ($_POST["apropos"]){
-        header("Location:apropos.php");
-        exit();
-}
+	include_once('bandeaux.php');
 
 // action du bouton annuler
 if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
@@ -107,29 +52,29 @@ if ($_POST["envoiquestion"]&&$_POST["nom"]!=""&&$_POST["question"]!=""){
 	$message=str_replace("\\","",$_POST["question"]);
 	
 	//envoi des mails
-	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-	mail (getenv('ADRESSEMAILADMIN'), "$tt_contacts_mail_sujet_admin".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_admin ".getenv('NOMAPPLICATION')."\n\n$tt_contacts_mail_utilisateur_admin : ".$_POST["nom"]."\n\n$tt_contacts_mail_adresse_admin : $_POST[adresse_mail]\n\n$tt_contacts_mail_message_admin :".$message,$headers);
+	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	mail (ADRESSEMAILADMIN, "" . _("[CONTACT] You have sent a question ") . "".NOMAPPLICATION, "" . _("You have a question from a user ") . " ".NOMAPPLICATION."\n\n" . _("User") . " : ".$_POST["nom"]."\n\n" . _("User's email address") . " : $_POST[adresse_mail]\n\n" . _("Message") . " :".$message,$headers);
 	if ($_POST["adresse_mail"]!=""){
-		$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
-		mail ("$_POST[adresse_mail]", "$tt_contacts_mail_sujet_user".getenv('NOMAPPLICATION'), "$tt_contacts_mail_corps_user :\n\n".$message." \n\n$tt_contacts_mail_reponse_user\n\n$tt_studs_mail_merci\n".getenv('NOMAPPLICATION'),$headers);
+		$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+		mail ("$_POST[adresse_mail]", "" . _("[COPY] Someone has sent a question ") . "".NOMAPPLICATION, "" . _("Here is a copy of your question") . " :\n\n".$message." \n\n" . _("We're going to answer your question shortly.") . "\n\n" . _("Thanks for your confidence.") . "\n".NOMAPPLICATION,$headers);
 	}
 
 	//affichage de la page de confirmation d'envoi
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
 	logo();
 	bandeau_tete();
-	bandeau_titre();
+	bandeau_titre(_("Make your polls"));
 	
 	echo '<div class=corpscentre>'."\n";
-	print "<H2>$tt_contacts_envoimail_titre</H2><br><br>"."\n";
-	print "$tt_choix_page_erreur_retour <a href=\"index.php\"> ".getenv('NOMAPPLICATION')."</A>."."\n";
+	print "<H2>" . _("Your message has been sent!") . "</H2><br><br>"."\n";
+	print "" . _("Back to the homepage of ") . " <a href=\"index.php\"> ".NOMAPPLICATION."</A>."."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";
 	
@@ -149,7 +94,7 @@ else {
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -160,28 +105,28 @@ else {
 	//bandeaux de tete
 	logo();
 	bandeau_tete();
-	bandeau_titre_contact();
+	bandeau_titre(_("Contact us"));
 	sous_bandeau();
 
 	//blablabla
 	echo '<div class=corps>'."\n";
-	echo $tt_contacts_presentation.'<br><br>'."\n";
+	echo _("If you have questions, you can send a message here.") .'<br><br>'."\n";
 
-	echo $tt_contacts_nom.' :<br>'."\n";
+	echo _("Your name") .' :<br>'."\n";
 	echo '<input type="text" size="40" maxlength="64" name="nom" value="'.$_SESSION["nom"].'">';
 
 	if ($_POST["envoiquestion"]&&$_SESSION["nom"]==""){
-		echo ' <font color="#FF0000">'.$tt_infos_erreur_nom.'</font>';
+		echo ' <font color="#FF0000">'. _("Enter a name") .'</font>';
 	}
 
 	echo '<br><br>'."\n";
-	echo $tt_contacts_adressemail.' :<br>'."\n";
+	echo _("Your email address ") .' :<br>'."\n";
 	echo '<input type="text" size="40" maxlength="64" name="adresse_mail" value="'.$_SESSION["adresse_mail"].'">'."\n";
 
 
 	echo '<br><br>';
 
-	echo $tt_contacts_question.' :<br>'."\n";
+	echo _("Question") .' :<br>'."\n";
 	echo '<textarea name="question" rows="7" cols="40">'.$_SESSION["question"].'</textarea>';
 
 	if ($_POST["envoiquestion"]&&$_SESSION["question"]==""){
@@ -190,7 +135,7 @@ else {
 
 	echo '<br><br><br>'."\n";
 	echo '<table>'."\n";
-	echo '<tr><td>'.$tt_contacts_bouton_question.'</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
+	echo '<tr><td>'. _("Send your question") .'</td><td><input type="image" name="envoiquestion" value="Envoyer votre question" src="images/next-32.png"></td></tr>'."\n";
 	echo '</table>'."\n";
 	echo '<br><br><br>'."\n";
 	echo '</div>'."\n";

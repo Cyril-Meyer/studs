@@ -39,8 +39,7 @@
 
 session_start();
 
-include 'variables.php';
-include 'fonctions.php';
+include_once('fonctions.php');
 
 
 //Generer une chaine de caractere unique et aleatoire
@@ -55,13 +54,6 @@ function random($car) {
 }
 
 function ajouter_sondage(){
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
 	$sondage=random(16);
 	$sondage_admin=$sondage.random(8);
 
@@ -83,29 +75,27 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 	$date_fin=$_SESSION["totalchoixjour"][$taille_tableau]+200000;
 }
 
-	$date=date('H:i:s d/m/Y');
-	$headers="From: ".getenv('NOMAPPLICATION')." <".getenv('ADRESSEMAILADMIN').">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
+	$headers="From: ".NOMAPPLICATION." <".ADRESSEMAILADMIN.">\r\nContent-Type: text/plain; charset=\"UTF-8\"\nContent-Transfer-Encoding: 8bit";
 
-	$connect=connexion_base();
-
-	pg_exec ($connect, "insert into sondage values('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', '$date_fin', '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
-	pg_exec($connect, "insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
-
-	
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_sondes] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_debut\n\n".stripslashes($_SESSION["nom"])." $tt_creationsondage_corps_milieu : \"".stripslashes($_SESSION["titre"])."\".\n$tt_creationsondage_corps_fin :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
-	mail ("$_SESSION[adresse]", "[".getenv('NOMAPPLICATION')."][$tt_creationsondage_titre_mail_admin] $tt_creationsondage_corps_sondage : ".stripslashes($_SESSION["titre"]), "$tt_creationsondage_corps_admin_debut :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n$tt_creationsondage_corps_merci,\n".getenv('NOMAPPLICATION'),$headers);
-
-
-	$fichier_log=fopen('admin/logs_studs.txt','a');
-	fwrite($fichier_log,"   [CREATION] $date\t$sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n");
-	fclose($fichier_log);
-
-	pg_close($connect);
+	global $connect;
+	$connect->Execute('insert into sondage ' .
+			  '(`id_sondage`, `commentaires`, `mail_admin`, `nom_admin`, `titre`, `id_sondage_admin`, `date_fin`, `format`, `mailsonde`) ' .
+			  'VALUES '.
+			  "('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', FROM_UNIXTIME('$date_fin'), '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
+	$connect->Execute("insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");
 
 	
+	mail ("$_SESSION[adresse]", "[".NOMAPPLICATION."][" . _("For sending to the polled users") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]), "" . _("This is the message you have to send to the people you want to poll. \nNow, you have to send this message to everyone you want to poll.") . "\n\n".stripslashes($_SESSION["nom"])." " . _("hast just created a poll called") . " : \"".stripslashes($_SESSION["titre"])."\".\n" . _("Thanks for filling the poll at the link above") . " :\n\n".get_server_name()."studs.php?sondage=$sondage \n\n" . _("Thanks for your confidence") . ",\n".NOMAPPLICATION,$headers);
+	mail ("$_SESSION[adresse]", "[".NOMAPPLICATION."][" . _("Author's message") . "] " . _("Poll") . " : ".stripslashes($_SESSION["titre"]),
+	      _("This message should NOT be sended to the polled people. It is private for the poll's creator.\n\nYou can now modify it at the link above") .
+	      " :\n\n".get_server_name()."adminstuds.php?sondage=$sondage_admin \n\n" . _("Thanks for your confidence") . ",\n".NOMAPPLICATION,$headers);
+
+	$date=date('H:i:s d/m/Y:');
+	error_log($date . " CREATION: $sondage\t$_SESSION[formatsondage]\t$_SESSION[nom]\t$_SESSION[adresse]\t \t$_SESSION[toutchoix]\n", 3, 'admin/logs_studs.txt'); 
+
 	header("Location:studs.php?sondage=$sondage");
 
 	exit();
 	session_unset();
-}	
+}
 ?>

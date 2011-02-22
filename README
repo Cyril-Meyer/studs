@@ -60,6 +60,8 @@ variables.php
 	Le fichier contenant les variables à changer en fonction de la machine locale
 fonctions.php
 	Le fichier contenant quelques fonctions récurrentes de l'application
+i18n.php
+	Le fichier contenant quelques fonctions récurrentes de l'application relatives à l'internationalisation
 README
 	Ce fichier
 INSTALL
@@ -116,16 +118,9 @@ scripts/
 sources/
 	Le répertoire qui contient les sources de l'application disponible sur la page sources.php
 
-lang/
-	Le répertoire qui contient les traductions de toutes les chaines de caractères
-lang/fr.inc
-	Le fichier qui contient toutes les chaines de caractères en français
-lang/en.inc
-	Le fichier qui contient toutes les chaines de caractères en anglais
-lang/de.inc
-	Le fichier qui contient toutes les chaines de caractères en allemand
-lang/es.inc
-	Le fichier qui contient toutes les chaines de caractères en espagnol
+locale/
+	Le répertoire qui contient les fichiers de traduction modifiables (.po) et compilés (.mo)
+	au format gettext
 
 =============================================================================
 	Validations des pages
@@ -138,12 +133,12 @@ La CSS de STUdS est validée CSS 2.1.
 Technologies utilisées
 =============================================================================
 
-- PHP
-- PostgreSQL
+- PHP, php-fpdf, php-pdo, php-gettext
+- PostgreSQL, mysql
 - Apache
 - Subversion
 - iCalcreator
-- FPDF
+- POedit
 - Icônes : Deleket (http://deleket.deviantart.com/) et DryIcons (http://dryicons.com)
 
 =============================================================================
@@ -161,3 +156,7 @@ Compatibilités des navigateurs
 Janvier 2008
 Guilhem BORGHESI
 Université de Strasbourg
+
+Mai 2010
+Raphaël DROZ, raphael.droz@gmail.com
+

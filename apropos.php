@@ -39,72 +39,19 @@
 
 session_start();
 
-include 'variables.php';
+include_once('variables.php');
+include_once( 'i18n.php' );
 if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
-
-
-//changement de la langue
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-//Choix de la langue
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
-// action du bouton annuler
-if ($_POST["annuler"]){
-        header("Location:index.php");
-        exit();
-}
-
-//action si bouton intranet est activé. Entrée dans l'intranet
-if ($_POST["intranet"]){
-
-        header("Location:./admin/index.php");
-        exit();
-}
-
-if ($_POST["contact"]){
-        header("Location:contacts.php");
-        exit();
-}
-
-if ($_POST["sources"]){
-        header("Location:sources/sources.php");
-        exit();
-}
-
-if ($_POST["exemple"]){
-        header("Location:studs.php?sondage=aqg259dth55iuhwm");
-        exit();
-}
-
-if ($_POST["apropos"]){
-        header("Location:apropos.php");
-        exit();
-}
+	include_once('bandeaux.php');
 
 	//affichage de la page
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 	echo '<html>'."\n";
 	echo '<head>'."\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-	echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+	echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 	echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 	echo '</head>'."\n";
 	echo '<body>'."\n";
@@ -115,19 +62,19 @@ if ($_POST["apropos"]){
 	//bandeaux de tete
 	logo();
 	bandeau_tete();
-	bandeau_titre_apropos();
+bandeau_titre(_("About"));
 	sous_bandeau();
 
 	//blablabla
 	echo '<div class=corps>'."\n";
 
-	if (getenv('NOMAPPLICATION')!="STUdS !"){
+	if (NOMAPPLICATION!="STUdS !"){
 		echo '<b>Application d\'origine</b><br><br>'."\n";
-		echo 'L\'application '.getenv('NOMAPPLICATION').' est une instance du logiciel <b><a href ="http://studs.u-strasbg.fr">STUdS !</a></b> d&eacute;velopp&eacute; &agrave; l\'Universit&eacute; de Strasbourg depuis 2008.<br><br>'."\n";
+		echo 'L\'application '.NOMAPPLICATION.' est une instance du logiciel <b><a href ="http://studs.u-strasbg.fr">STUdS !</a></b> d&eacute;velopp&eacute; &agrave; l\'Universit&eacute; de Strasbourg depuis 2008.<br><br>'."\n";
 	}
 
-	echo '<b>Licence Logicielle de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
-	echo getenv('NOMAPPLICATION').' est plac&eacute; sous la licence logicielle libre <a href="http://www.cecill.info/licences.fr.html">CeCILL-B</a>.<br><br>'."\n";
+	echo '<b>Licence Logicielle de '.NOMAPPLICATION.'</b><br><br>'."\n";
+	echo NOMAPPLICATION.' est plac&eacute; sous la licence logicielle libre <a href="http://www.cecill.info/licences.fr.html">CeCILL-B</a>.<br><br>'."\n";
 
 	echo '<b>Technologies utilis&eacute;es</b><br><br>'."\n";
 	echo '- <a href="http://www.php.net/">PHP</a><br>'."\n";
@@ -152,11 +99,11 @@ if ($_POST["apropos"]){
 	echo '<img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !">'."\n";
  	echo'</p>'."\n"; 
 
-	echo '<b>Propositions am&eacute;liorations de '.getenv('NOMAPPLICATION').'</b><br><br>'."\n";
+	echo '<b>Propositions am&eacute;liorations de '.NOMAPPLICATION.'</b><br><br>'."\n";
 	
 	echo 'Si quelquechose venait &agrave; vous manquer, vous pouvez nous en faire part via le <a href="contacts.php">formulaire en ligne</a>. <br>'."\n";
 
-	echo 'Les derni&egrave;res am&eacute;liorations de '.getenv('NOMAPPLICATION').' sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a>.<br><br>'."\n";
+	echo 'Les derni&egrave;res am&eacute;liorations de '.NOMAPPLICATION.' sont visibles dans le fichier <a href="CHANGELOG">CHANGELOG</a>.<br><br>'."\n";
 	
 	echo '<b>Remerciements</b><br><br>'."\n";
 	echo 'Pour leurs contributions techniques ou ergonomiques : Guy, Christophe, Julien, Pierre, Romaric, Matthieu, Catherine, Christine, Olivier, Emmanuel et Florence <br><br>'."\n";
@@ -165,7 +112,6 @@ if ($_POST["apropos"]){
 
 	echo '</div>'."\n";
 	
-	sur_bandeau_pied_mobile();
 	bandeau_pied_mobile();
 	echo '</form>'."\n";
 	echo '</body>'."\n";

@@ -37,41 +37,55 @@
 //
 //==========================================================================
 
-#Nom du serveur
-putenv("NOMSERVEUR=<nom DNS du serveur>");
+// Nom du serveur
+define('STUDS_URL', 'www.mon_domaine.coop');
 
-#racine du serveur web
-putenv("RACINESERVEUR=<repertoire de l'application sur le serveur web>");
+// Répertoire sous lequel se trouve Studs
+// Utilise la racine du serveur telle que définie par STUDS_URL si laissé vide
+define('STUDS_DIR', 'mes_sondages/');
 
-#Nom de l'application
-putenv("NOMAPPLICATION=<nom de l'application>");
+// Nom de l'application
+define('NOMAPPLICATION', "<nom de l'application>");
 
-#adresse mail de l'administrateur de la base
-putenv("ADRESSEMAILADMIN=<adresse mail>");
+// adresse mail de l'administrateur de la base
+define('ADRESSEMAILADMIN', '<adresse mail>');
 
-#nom de la base de donnees
-putenv("BASE=<nom de la base de données>");
+// nom de la base de donnees
+define('BASE', '<nom de la base de données>');
 
-#nom de l'utilisateur de la base
-putenv("USERBASE=<nom de l'utilisateur>");
+// nom de l'utilisateur de la base
+define('USERBASE', "<nom de l'utilisateur>");
 
-#passwd de l'utilisateur de la base
-putenv("USERPASSWD=<mot de passe>");
+// passwd de l'utilisateur de la base
+define('USERPASSWD', '<mot de passe>');
 
-#nom du serveur de base de donnees, laisser vide pour utiliser un socket
-putenv("SERVEURBASE=<nom du serveur avec domaine>");
+// nom du serveur de base de donnees, laisser vide pour utiliser un socket
+define('SERVEURBASE', '<nom du serveur avec domaine>');
 
-#Langue par défaut de l'application a choisir entre FR, EN, ES et DE
-putenv("LANGUE=FR");
+// Type de base de données à utiliser (mysql, postgres, ...)
+// http://phplens.com/lens/adodb/docs-adodb.htm#drivers
+define('BASE_TYPE', '<type de BDD>');
 
-#Nom et emplacement du logo
-putenv("LOGOBANDEAU=<chemin relatif suivi du nom du fichier du logo pour le bandeau>");
+// Langue par défaut de l'application (à choisir dans $ALLOWED_LANGUAGES)
+define('LANGUE', 'fr_FR');
 
-#Nom et emplacement du logo de la lettre générée en PDF
-putenv("LOGOLETTRE=<chemin relatif suivi du nom du fichier du logo pour la lettre>");
+// Nom et emplacement du logo
+define('LOGOBANDEAU', '<chemin relatif suivi du nom du fichier du logo pour le bandeau>');
+
+// Nom et emplacement du logo de la lettre générée en PDF
+define('LOGOLETTRE', '<chemin relatif suivi du nom du fichier du logo pour la lettre>');
 
 if (@file_exists('variables.local.php')) {
     include('variables.local.php');
 }
+
+// Studs version
+define('STUDS_VERSION', 'svn-pdo_i18n');
+
+// Do not edit the following
+$ALLOWED_LANGUAGES = array('fr_FR' => 'french',
+			   'en_GB' => 'english',
+			   'es_ES' => 'spanish',
+			   'de_DE' => 'german' );
 
 ?>

@@ -39,21 +39,12 @@
 
 session_start();
 
-include 'php2pdf/phpToPDF.php';
-include 'fonctions.php';
-include 'variables.php';
+require_once('fpdf/phpToPDF.php');
+include_once('fonctions.php');
 
-$connect=connexion_base();
-
-$sondage=pg_exec($connect, "select * from sondage where id_sondage ilike '$_SESSION[numsondage]'");
-$sujets=pg_exec($connect, "select * from sujet_studs where id_sondage='$_SESSION[numsondage]'");
-$user_studs=pg_exec($connect, "select * from user_studs where id_sondage='$_SESSION[numsondage]' order by id_users");
-
-$dsondage=pg_fetch_object($sondage,0);
-$dsujet=pg_fetch_object($sujets,0);
-$nbcolonnes=substr_count($dsujet->sujet,',')+1;
-
-$datereunion=explode("@",$_SESSION["meilleursujet"]);
+$dsondage = get_sondage_from_id($_POST['numsondage']);
+$lieureunion=stripcslashes($_POST["lieureunion"]);
+$datereunion=explode("@",$_POST["meilleursujet"]);
 
 //creation du fichier PDF
 $PDF=new phpToPDF();
@@ -63,31 +54,31 @@ $PDF->SetFont('Arial','',11);
 //affichage de la date de convocation
 $PDF->Text(140,30,"Le ".date("d/m/Y"));
 
-$PDF->Image("./".getenv("LOGOLETTRE")."",20,20,65,40);
+$PDF->Image("./".LOGOLETTRE."",20,20,65,40);
 
 $PDF->SetFont('Arial','U',11);
 $PDF->Text(40,120,"Objet : ");
 $PDF->SetFont('Arial','',11);
-$PDF->Text(55,120," Convocation");
+$PDF->Text(55,120,_(' Convocation'));
 
-$PDF->Text(55,140,"Bonjour,");
+$PDF->Text(55,140,_('Hello,'));
 
-$PDF->Text(40,150,"Vous êtes conviés à la réunion \"".utf8_decode($dsondage->titre)."\".");
-$lieureunion=str_replace("\\","",$_SESSION["lieureunion"]);
+$PDF->Text(40,150,_("You're invited at the meeting") . ' "'.utf8_decode($dsondage->titre).'".');
 
 $PDF->SetFont('Arial','B',11);
-$PDF->Text(40,170,"Informations sur la réunion");
+$PDF->Text(40,170,_('Informations about the meeting'));
 
 $PDF->SetFont('Arial','',11);
-$PDF->Text(60,180,"Date : ".date("d/m/Y", "$datereunion[0]")." à ".$datereunion[1]);
-$PDF->Text(60,185,"Lieu :  ".utf8_decode($lieureunion));
+$PDF->Text(60,180,_('Date') . ' : '.date("d/m/Y", "$datereunion[0]").' ' . _('at') . ' '.$datereunion[1]);
+$PDF->Text(60,185,_('Place') . ' : ' . utf8_decode($lieureunion));
 
-$PDF->Text(55,220,"Cordialement,");
+$PDF->Text(55,220,_('Cordially,'));
 
 $PDF->Text(140,240,utf8_decode($dsondage->nom_admin));
 
 $PDF->SetFont('Arial','B',8);
-$PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par ".getenv('NOMAPPLICATION')." sur ".get_server_name());
+// TODO: translate
+$PDF->Text(35,275,"Cette lettre de convocation a été générée automatiquement par ".NOMAPPLICATION." sur ".get_server_name());
 
 //Sortie
 $PDF->Output();

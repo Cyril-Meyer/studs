@@ -37,81 +37,20 @@
 //
 //==========================================================================
 
-
-include 'variables.php';
-if (file_exists('bandeaux_local.php'))
-	include 'bandeaux_local.php';
+include_once('fonctions.php');
+if (is_readable('bandeaux_local.php'))
+	include_once('bandeaux_local.php');
 else
-	include 'bandeaux.php';
+	include_once('bandeaux.php');
 
 session_start();
-
-
-if (!$_POST["uk"]&&!$_POST["uk"]&&!$_POST["espagne"]&&!$_POST["germany"]&&!$_POST["france"]&&!$_POST["creation_sondage_x"]&&!$_POST["intranet"]&&!$_POST["contact"]&&!$_POST["sources"]&&!$_POST["exemple"]&&!$_POST["apropos"]){
-	session_unset();
-}
-
-if ($_POST["uk"]){
-	$_SESSION["langue"]="EN";
-}
-if ($_POST["germany"]){
-	$_SESSION["langue"]="DE";
-}
-if ($_POST["france"]){
-	$_SESSION["langue"]="FR";
-}
-if ($_POST["espagne"]){
-	$_SESSION["langue"]="ES";
-}
-
-if ($_SESSION["langue"]==""){
-	$_SESSION["langue"]=getenv('LANGUE');
-}
-
-if ($_SESSION["langue"]=="FR"){ include 'lang/fr.inc';}
-if ($_SESSION["langue"]=="EN"){ include 'lang/en.inc';}
-if ($_SESSION["langue"]=="DE"){ include 'lang/de.inc';}
-if ($_SESSION["langue"]=="ES"){ include 'lang/es.inc';}
-
-if ($_POST["creation_sondage"]||$_POST["creation_sondage_x"]){
-
-	header("Location:infos_sondage.php");
-	exit();
-}
-
-//action si bouton intranet est activé. Entrée dans l'intranet
-if ($_POST["intranet"]){
-
-	header("Location:./admin/index.php");
-	exit();
-}
-
-if ($_POST["contact"]){
-	header("Location:contacts.php");
-	exit();
-}
-
-if ($_POST["sources"]){
-	header("Location:sources/sources.php");
-	exit();
-}
-
-if ($_POST["exemple"]){
-	header("Location:studs.php?sondage=aqg259dth55iuhwm");
-	exit();
-}
-
-if ($_POST["apropos"]){
-	header("Location:apropos.php");
-	exit();
-}
 
 //affichage de la page
 echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">'."\n";
 echo '<html>'."\n";
 echo '<head>'."\n";
 echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'."\n";
-echo '<title>'.getenv('NOMAPPLICATION').'</title>'."\n";
+echo '<title>'.NOMAPPLICATION.'</title>'."\n";
 echo '<link rel="stylesheet" type="text/css" href="style.css">'."\n";
 echo '</head>'."\n";
 echo '<body>'."\n";
@@ -122,17 +61,19 @@ echo '<form name=formulaire action="index.php" method="POST">'."\n";
 //bandeaux de tete
 logo();
 bandeau_tete();
-bandeau_titre();
+bandeau_titre(_("Make your polls"));
 sous_bandeau();
 
 echo '<div class=corps>'."\n";
 
-echo '<p><b>'.getenv('NOMAPPLICATION').'<br>'.$tt_index_titre.'</b></p>';
-echo '<p>'.$tt_index_presentation.'</p>'."\n".'<br>'."\n";
+echo '<p><b>'.NOMAPPLICATION.'<br>'. _("What is it about?") .'</b></p>';
+echo '<p>'. _("Making polls to schedule meetings or events, quickly and easily. <br> You can also run polls to determine what will be your next meeting place, the meeting topic or anything like the country you would like to visit during your next holidays.") .'</p>'."\n".'<br>'."\n";
 
-echo '<table>'."\n";
-echo'<tr><td><b>'.$tt_index_bouton.'</b></td><td></td><td><input type="image" name="creation_sondage" value="Faire un sondage" src="images/next-32.png"></td></tr>'."\n";
-echo '</table>'."\n";
+echo '<div class="nouveau_sondage"><b>'. _("Make a poll") .'</b>' .
+	 '<span>' .
+	 '<a href="' . get_server_name() . 'infos_sondage.php"><img alt="' . _('Make a poll') . '" src="images/next-32.png" /></a>' .
+	 '</span></div>' . "\n";
+
 echo '<br>'."\n";
 echo '<br><br>'."\n";
 echo '</div>'."\n";

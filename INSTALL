@@ -53,8 +53,15 @@ Pour que les quotes simples soient acceptées dans la partie "Création de sonda
 Base de données
 ===============
 
-STUdS ne fonctionne pour l'instant qu'avec PostgreSQL.
+STUdS fonctionne indépendemment de la base SQL utilisée, sous réserve que
+le serveur dispose de l'extension PEAR PHP: PDO (http://php.net/manual/en/book.pdo.php)
 
+Cependant la base de donnée doit être créée au préalable.
+Deux scripts le faisant sont fournis :
+install.sql: pour postgresql
+install.mysql.sql: pour mysql
+
+Pour postgresql :
 Après avoir renseigné les paramètres de la base de données, créez la
 base et pré-chargez les données par défaut. Ceci ressemble à :
 
@@ -66,15 +73,18 @@ Attention : Si vous créez la base de données avec l'utilisateur "pgsql", il vo
 
 
 Accès à la page administrateur
-=============================================
+==============================
 
 Le répertoire admin/ contient un fichier .htaccess pour Apache, qui restreint l'accès
 à la page d'administration de l'application.
-Modifiez le contenu de ce fichier .htaccess pour l'adapter à vos
-besoins.
+Modifiez le contenu de ce fichier .htaccess pour l'adapter au chemin du fichier .htpasswd
+sur votre serveur.
+Le fichier .htpasswd à besoin d'être créé par vos soins en utilisant par exemple la commande
+suivante :
+htpasswd -mnb <admin_username> <admin_password>
 
 Un fichier admin/logs_studs.txt doit être créé et accessible en écriture
-pour votre serveur Web. Quelque chose comme :
+par votre serveur Web. Quelque chose comme :
 
 % touch admin/logs_studs.txt
 % chmod 700 admin/logs_studs.txt
@@ -82,6 +92,16 @@ pour votre serveur Web. Quelque chose comme :
 
 devrait convenir.
 
+Maintenance
+===========
+Studs dispose d'une possibilité de mise en maintenance par le biais
+d'un fichier .htaccess.
+La section <Directory> relative à Studs, dans la configuration d'Apache
+doit au moins contenir :
+AllowOverride AuthConfig Options
+Le fichier .htaccess correspondant doit être modifier pour y configurer
+l'adresse IP depuis laquelle s'effectue la maintenance.
+N'oubliez pas de le recommenter en intégralité une fois la maintenance effectuée.
 
 Tables de la base de données
 ============================
@@ -104,7 +124,7 @@ SONDAGE
 	nom_admin					text				nom de l'auteur du sondage
 	titre						text				titre du sondage
 	id_sondage_admin			alpha-numérique		numéro du sondage pour le lien d'administration
-	date_fin					alpha-numérique		date de fin su sondage au format Unix
+	date_fin					alpha-numérique		date de fin su sondage au format SQL
 	format						text				format du sondage : D/D+ pour Date, A/A+ pour Autre
 	mailsonde					text				envoi de mail a l'auteur du sondage a chaque participation ("yes" ou vide)
 	
@@ -138,5 +158,10 @@ Traductions
 
 Pour pouvoir bénéficier de toutes les traductions en FR, EN, DE et ES
 il faut avoir installé les locales fr_FR, de_DE, en_US et es_ES sur le
-serveur qui héberge l'application.
+serveur qui héberge l'application ainsi que disposer de l'extension PHP Gettext.
 
+Export
+======
+
+Pour pouvoir bénéficier de l'export au format PDF, l'extension PHP PEAR
+FPDF (php-fpdf) doit être installée.
