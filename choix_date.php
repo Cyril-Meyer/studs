@@ -256,7 +256,7 @@ echo '</div>'."\n";
 //debut du tableau qui affiche le calendrier
 echo '<div class=calendrier>'."\n";
 echo '<table align=center>'."\n";
-echo '<tr><td><input type=image name=anneeavant value="<<" src="images/rewind.png"></td><td><input type=image name=moisavant value="<" src="images/first.png"></td><td width=150px align=center> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type=image name=moisapres value=">" src="images/last.png"></td><td><input type=image name=anneeapres value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type=image name=retourmois value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
+echo '<tr><td><input type=image name=anneeavant value="<<" src="images/rewind.png"></td><td><input type=image name=moisavant value="<" src="images/previous.png"></td><td width=150px align=center> '.$motmois.' '.$_SESSION["annee"].' </td><td><input type=image name=moisapres value=">" src="images/next.png"></td><td><input type=image name=anneeapres value=">>" src="images/fforward.png"></td><td></td><td></td><td></td><td></td><td></td><td><input type=image name=retourmois value="Aujourd\'hui" src="images/reload.png"></td></tr>'."\n";
 echo '</table>'."\n";
 echo '<table>'."\n";
 
