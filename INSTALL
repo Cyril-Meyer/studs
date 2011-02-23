@@ -54,7 +54,7 @@ Base de données
 ===============
 
 STUdS fonctionne indépendemment de la base SQL utilisée, sous réserve que
-le serveur dispose de l'extension PEAR PHP: PDO (http://php.net/manual/en/book.pdo.php)
+le serveur dispose de l'extension ADOdb (http://sourceforge.net/projects/adodb)
 
 Cependant la base de donnée doit être créée au préalable.
 Deux scripts le faisant sont fournis :
@@ -165,3 +165,22 @@ Export
 
 Pour pouvoir bénéficier de l'export au format PDF, l'extension PHP PEAR
 FPDF (php-fpdf) doit être installée.
+
+Synthèses des librairies utilisées
+==================================
+
+ADOdb
+http://sourceforge.net/projects/adodb
+paquet: php5-adodb
+
+fpdf
+http://www.fpdf.org
+paquet: php-fpdf
+
+gettext
+https://launchpad.net/php-gettext
+paquet: php-gettext
+
+Sous GNU/Linux,
+disposer des locales utf-8 suivantes pour la glibc:
+FR, EN, ES, DE (/etc/locales.gen)

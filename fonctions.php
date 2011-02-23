@@ -39,7 +39,7 @@
 
 include_once('variables.php');
 include_once('i18n.php');
-include_once('adodb/adodb.inc.php');
+require_once('adodb/adodb.inc.php');
 
 function connexion_base(){
        $DB = NewADOConnection(BASE_TYPE);
