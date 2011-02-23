@@ -506,7 +506,7 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur)){
 		if ($_SESSION["langue"]=="EN")
 		  echo '<td>'.date("l, F jS Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
 		else
-		  echo '<td>'.strftime("%A, den %e. %B %Y",$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
+		  echo '<td>'.strftime(_("%A, den %e. %B %Y"),$_SESSION["totalchoixjour"][$i]).' : </td>'."\n";
 		$affichageerreurfindeligne=false;
 		//affichage des cases d'horaires
 		for ($j=0;$j<$_SESSION["nbrecaseshoraires"];$j++){
@@ -547,7 +547,7 @@ if ($_SESSION["totalchoixjour"]&&(!$_POST["choixheures_x"]||$erreur)){
 		if ($_SESSION["langue"]=="EN")
 		  $date_fin=date("l, F jS Y",$jour_arret);
 		else
-		  $date_fin=strftime("%A, den %e. %B %Y",$jour_arret);
+		  $date_fin=strftime(_("%A, den %e. %B %Y"),$jour_arret);
 		echo '<br><div class="presentationdatefin">'. _("Your poll will expire automatically 2 days after the last date of your poll.") .'<br></td></tr><tr><td><br>'. _("Removal date") .' : <b> '.$date_fin.'</b><br><br>'."\n";
 		echo '</div>'."\n";
 		echo '<div class="presentationdatefin">'."\n";

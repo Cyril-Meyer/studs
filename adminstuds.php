@@ -923,13 +923,13 @@ else {
 						if ($_SESSION["langue"]=="EN")
 						  $meilleursujet.=date("l, F jS Y",$toutsujetdate[0])." " . _("for") ." ".$toutsujetdate[1];
 						else
-						  $meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];
+						  $meilleursujet.=strftime(_("%A, den %e. %B %Y"),$toutsujetdate[0]). ' ' . _("for")  . ' ' . $toutsujetdate[1];
 					}
 					else{
 						if ($_SESSION["langue"]=="EN")
 						  $meilleursujet.=date("l, F jS Y",$toutsujet[$i]);
 						else
-						  $meilleursujet.=strftime("%A, den %e. %B %Y",$toutsujet[$i]);
+						  $meilleursujet.=strftime(_("%A, den %e. %B %Y"),$toutsujet[$i]);
 					}
 				}
 				else{
