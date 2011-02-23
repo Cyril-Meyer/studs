@@ -37,6 +37,9 @@
 //
 //==========================================================================
 
+if(ini_get('date.timezone') == '')
+  date_default_timezone_set("Europe/Paris");
+
 include_once('variables.php');
 include_once('i18n.php');
 require_once('adodb/adodb.inc.php');
