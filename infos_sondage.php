@@ -107,6 +107,17 @@ bandeau_tete();
 echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 sous_bandeau();
 
+// premier sondage ? test l'existence des schémas SQL avant d'aller plus loin
+if(! mysql_num_rows( mysql_query("SHOW TABLES LIKE 'sondage'") ) ) {
+  echo '<p style="color:#FF0000; text-align:center">' .
+    _("STUdS is not properly installed, please check the 'INSTALL' to setup the database before continuing") .
+    "</p>"."\n";
+  bandeau_pied();
+  echo '</body>'."\n";
+  echo '</html>'."\n";
+  die();
+}
+
 //debut du formulaire
 echo '<form name="formulaire" action="infos_sondage.php" method="POST" onkeypress="javascript:process_keypress(event)">'."\n";
  
@@ -152,6 +163,7 @@ if (!$_SESSION["adresse"]&&($_POST["creation_sondage_date"]||$_POST["creation_so
 elseif ($erreur_adresse&&($_POST["creation_sondage_date"]||$_POST["creation_sondage_autre"]||$_POST["creation_sondage_date_x"]||$_POST["creation_sondage_autre_x"])){
 	print "<td><font color=\"#FF0000\">" . _("The address is not correct! (You should enter a valid email address in order to receive the link to your poll)") . "</font></td>"."\n";
 }
+
 echo '</tr>'."\n";
 
 echo '</table>'."\n";
