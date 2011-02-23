@@ -304,11 +304,11 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	//affichage des années
 	$colspan=1;
 	for ($i=0;$i<count($toutsujet);$i++){
-	  if (date('Y',$toutsujet[$i])==date('Y',$toutsujet[$i+1])){
+	  if (date('Y', intval($toutsujet[$i])) == date('Y', intval($toutsujet[$i+1]))){
 			$colspan++;
 		}
 		else {
-		  echo '<td colspan='.$colspan.' class="annee">'.date('Y',$toutsujet[$i]).'</td>'."\n";
+		  echo '<td colspan='.$colspan.' class="annee">'.date('Y', intval($toutsujet[$i])).'</td>'."\n";
 		  $colspan=1;
 		}
 	}
@@ -319,14 +319,17 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 	//affichage des mois
 	$colspan=1;
 	for ($i=0;$i<count($toutsujet);$i++){
-		if (strftime("%B",$toutsujet[$i])==strftime("%B",$toutsujet[$i+1])&&date('Y',$toutsujet[$i])==date('Y',$toutsujet[$i+1])){
+	  // intval() est utiliser pour supprimer le suffixe @* qui déplaît logiquement à strftime()
+	  $cur = intval($toutsujet[$i]);
+	  $next = intval($toutsujet[$i+1]);
+		if (strftime("%B", $cur) == strftime("%B", $next)&&date('Y',$cur)==date('Y',$next)){
 			$colspan++;
 		}
 		else {
 			if ($_SESSION["langue"]=="EN") // because strftime doesn't support english suffix (like st,nd,rd,th)
-			  echo '<td colspan='.$colspan.' class="mois">'.date("F",$toutsujet[$i]).'</td>'."\n";
+			  echo '<td colspan='.$colspan.' class="mois">'.date("F",$cur).'</td>'."\n";
 			else 
-			  echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$toutsujet[$i]).'</td>'."\n";
+			  echo '<td colspan='.$colspan.' class="mois">'.strftime("%B",$cur).'</td>'."\n";
 			$colspan=1;
 		}
 	}
@@ -337,14 +340,16 @@ if ($dsondage->format=="D"||$dsondage->format=="D+"){
 		//affichage des jours
 	$colspan=1;
 	for ($i=0;$i<count($toutsujet);$i++){
-		if (strftime("%a %e",$toutsujet[$i])==strftime("%a %e",$toutsujet[$i+1])&&strftime("%B",$toutsujet[$i])==strftime("%B",$toutsujet[$i+1])){
+	  $cur = intval($toutsujet[$i]);
+	  $next = intval($toutsujet[$i+1]);
+		if (strftime("%a %e",$cur)==strftime("%a %e",$next)&&strftime("%B",$cur)==strftime("%B",$next)){
 			$colspan++;
 		}
 		else {
 			if ($_SESSION["langue"]=="EN")
-			  echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$toutsujet[$i]).'</td>'."\n";
+			  echo '<td colspan='.$colspan.' class="jour">'.date("D jS",$cur).'</td>'."\n";
 			else
-			  echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$toutsujet[$i]).'</td>'."\n";
+			  echo '<td colspan='.$colspan.' class="jour">'.strftime("%a %e",$cur).'</td>'."\n";
 			$colspan=1;
 		}
 	}
