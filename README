@@ -133,7 +133,7 @@ La CSS de STUdS est validée CSS 2.1.
 Technologies utilisées
 =============================================================================
 
-- PHP, php-fpdf, php-pdo, php-gettext
+- PHP, php-fpdf, php-adodb, php-gettext
 - PostgreSQL, mysql
 - Apache
 - Subversion

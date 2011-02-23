@@ -1,4 +1,11 @@
 Les dernières améliorations de STUdS
+	Changelog version 0.6.6 (XXX 2011) :
+	- internationalisation avec gettext
+	- abstraction de la base de données avec ADOdb
+	- support de mysql (fichier d'initialisation disponible)
+	- meilleure compatibilité avec le mode strict de PHP
+	- factorisation de code et de CSS
+	- moins de boutons de formulaire, plus de liens <a href>
 
 	Changelog version 0.6.5 (juin 2010) :
 	- Changement de deux icones dans la creation d'un sondage.
