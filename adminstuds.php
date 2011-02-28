@@ -40,7 +40,6 @@
 session_start();
 
 //setlocale(LC_TIME, "fr_FR");
-include_once('variables.php');
 include_once('fonctions.php');
 if (file_exists('bandeaux_local.php'))
 	include_once('bandeaux_local.php');
