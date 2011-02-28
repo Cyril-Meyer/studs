@@ -112,4 +112,13 @@ if($js)
   echo '<script type="text/javascript" src="block_enter.js"></script>';
 echo '</head>';
 }
+
+function check_table_sondage() {
+  global $connect;
+  $tables = $connect->MetaTables('TABLES');
+  if (in_array("sondage", $tables))
+    return true;
+  return false;
+}
+
 ?>

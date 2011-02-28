@@ -108,7 +108,7 @@ echo '<div class="bandeautitre">'. _("Poll creation (1 on 2)") .'</div>'."\n";
 sous_bandeau();
 
 // premier sondage ? test l'existence des schémas SQL avant d'aller plus loin
-if(! mysql_num_rows( mysql_query("SHOW TABLES LIKE 'sondage'") ) ) {
+if(! check_table_sondage() ) {
   echo '<p style="color:#FF0000; text-align:center">' .
     _("STUdS is not properly installed, please check the 'INSTALL' to setup the database before continuing") .
     "</p>"."\n";
