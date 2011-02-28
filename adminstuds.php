@@ -107,7 +107,7 @@ if (isset($_POST["boutonnouveautitre"])) {
 	  $headers);
 
     //modification de la base SQL avec le nouveau titre
-    $connect->Execute('UPDATE sondage SET titre = "' . mysql_real_escape_string(strip_tags($_POST['nouveautitre'])) . '" WHERE id_sondage = "' . $numsondage . '"');
+    $connect->Execute('UPDATE sondage SET titre = "' . $connect->qstr(strip_tags($_POST['nouveautitre'])) . '" WHERE id_sondage = "' . $numsondage . '"');
   }
 }
   
@@ -125,7 +125,7 @@ if (isset($_POST["boutonnouveauxcommentaires"])) {
 	  $headers);
     
     //modification de la base SQL avec les nouveaux commentaires
-    $connect->Execute('UPDATE sondage SET commentaires = "' . mysql_real_escape_string(strip_tags($nouveauxcommentaires)) . '" WHERE id_sondage = "' . $numsondage . '"');
+    $connect->Execute('UPDATE sondage SET commentaires = "' . $connect->qstr(strip_tags($nouveauxcommentaires)) . '" WHERE id_sondage = "' . $numsondage . '"');
   }
 }
 
@@ -286,7 +286,7 @@ if(isset($_POST['ajoutcomment'])) {
   if(!isset($_POST["commentuser"]) || empty($_POST["commentuser"]))
     $err |= COMMENT_USER_EMPTY;
   else
-    $comment_user = mysql_real_escape_string(strip_tags($_POST["commentuser"]));
+    $comment_user = $connect->qstr(strip_tags($_POST["commentuser"]));
   if(empty($_POST["comment"]))
     $err |= COMMENT_EMPTY;
 
@@ -296,7 +296,7 @@ if(isset($_POST['ajoutcomment'])) {
     if( ! $connect->Execute('INSERT INTO comments ' .
 			    '(id_sondage, comment, usercomment) VALUES ("'.
 			    $numsondage . '","'.
-			    mysql_real_escape_string(strip_tags($_POST['comment'])).
+			    $connect->qstr(strip_tags($_POST['comment'])).
 			    '","' .
 			    $comment_user .'")') );
     $err |= COMMENT_INSERT_FAILED;

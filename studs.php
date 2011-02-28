@@ -88,7 +88,7 @@ if(isset($_POST['ajoutcomment'])) {
   if (isset($_SERVER['REMOTE_USER']))
     $comment_user = $_SESSION['nom'];
   elseif(isset($_POST["commentuser"]) && ! empty($_POST["commentuser"]))
-    $comment_user = mysql_real_escape_string(strip_tags($_POST["commentuser"]));
+    $comment_user = $connect->qstr(strip_tags($_POST["commentuser"]));
   elseif(isset($_POST["commentuser"]))
     $err |= COMMENT_USER_EMPTY;
   else
@@ -102,7 +102,7 @@ if(isset($_POST['ajoutcomment'])) {
     if( ! $connect->Execute('INSERT INTO comments ' .
 			    '(id_sondage, comment, usercomment) VALUES ("'.
 			    $numsondage . '","'.
-			    mysql_real_escape_string(strip_tags($_POST['comment'])).
+			    $connect->qstr(strip_tags($_POST['comment'])).
 			    '","' .
 			    $comment_user .'")') );
     $err |= COMMENT_INSERT_FAILED;
