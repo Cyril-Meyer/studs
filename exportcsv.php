@@ -39,10 +39,10 @@
 
 include_once('fonctions.php');
 
-if(!isset($_GET['numsondage']))
+if(!isset($_GET['numsondage']) || ! preg_match(";^[\w\d]{16}$;i", $_GET['numsondage']))
    header('Location: studs.php');
 
-$user_studs=$connect->Execute('SELECT * FROM user_studs WHERE id_sondage="' . $_GET['numsondage'] . '" ORDER BY id_users');
+$user_studs=$connect->Execute("SELECT * FROM user_studs WHERE id_sondage=" . $_GET['numsondage'] . " ORDER BY id_users");
 
 $dsondage = get_sondage_from_id($_GET['numsondage']);
 $nbcolonnes=substr_count($dsondage->sujet,',')+1;

@@ -107,7 +107,7 @@ if (isset($_POST["boutonnouveautitre"])) {
 	  $headers);
 
     //modification de la base SQL avec le nouveau titre
-    $connect->Execute('UPDATE sondage SET titre = "' . $connect->qstr(strip_tags($_POST['nouveautitre'])) . '" WHERE id_sondage = "' . $numsondage . '"');
+    $connect->Execute("UPDATE sondage SET titre = '" . $connect->qstr(strip_tags($_POST['nouveautitre'])) . "' WHERE id_sondage = '" . $numsondage . "'");
   }
 }
   
@@ -125,7 +125,7 @@ if (isset($_POST["boutonnouveauxcommentaires"])) {
 	  $headers);
     
     //modification de la base SQL avec les nouveaux commentaires
-    $connect->Execute('UPDATE sondage SET commentaires = "' . $connect->qstr(strip_tags($nouveauxcommentaires)) . '" WHERE id_sondage = "' . $numsondage . '"');
+    $connect->Execute("UPDATE sondage SET commentaires = '" . $connect->qstr(strip_tags($nouveauxcommentaires)) . "' WHERE id_sondage = '" . $numsondage . "'");
   }
 }
 
@@ -143,7 +143,7 @@ if (isset($_POST["boutonnouvelleadresse"])){
 	  _("Thanks for your confidence.") . "\n" . NOMAPPLICATION,
 	  $headers);
     //modification de la base SQL avec la nouvelle adresse
-    $connect->Execute('UPDATE sondage SET mail_admin = "' . $_POST['nouvelleadresse'] . '" WHERE id_sondage = "' . $numsondage . '"');
+    $connect->Execute("UPDATE sondage SET mail_admin = '" . $_POST['nouvelleadresse'] . "' WHERE id_sondage = '" . $numsondage . "'");
   }
 }
 

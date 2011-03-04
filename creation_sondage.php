@@ -79,7 +79,7 @@ if ($_SESSION["formatsondage"]=="D"||$_SESSION["formatsondage"]=="D+"){
 
 	global $connect;
 	$connect->Execute('insert into sondage ' .
-			  '(`id_sondage`, `commentaires`, `mail_admin`, `nom_admin`, `titre`, `id_sondage_admin`, `date_fin`, `format`, `mailsonde`) ' .
+			  '(id_sondage, commentaires, mail_admin, nom_admin, titre, id_sondage_admin, date_fin, format, mailsonde) ' .
 			  'VALUES '.
 			  "('$sondage','$_SESSION[commentaires]', '$_SESSION[adresse]', '$_SESSION[nom]', '$_SESSION[titre]','$sondage_admin', FROM_UNIXTIME('$date_fin'), '$_SESSION[formatsondage]','$_SESSION[mailsonde]'  )");
 	$connect->Execute("insert into sujet_studs values ('$sondage', '$_SESSION[toutchoix]' )");

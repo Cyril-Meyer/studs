@@ -47,6 +47,7 @@ require_once('adodb/adodb.inc.php');
 function connexion_base(){
        $DB = NewADOConnection(BASE_TYPE);
        $DB->Connect(SERVEURBASE, USERBASE, USERPASSWD, BASE);
+       //$DB->debug = true;
        return $DB;
 }
 
@@ -65,7 +66,9 @@ function get_sondage_from_id($id) {
   global $connect;
   // Ouverture de la base de données
   if(preg_match(";^[\w\d]{16}$;i",$id)) {
-    $sondage=$connect->Execute('SELECT sondage.*,sujet_studs.sujet FROM sondage LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage WHERE sondage.id_sondage = "' . $id . '"');
+    $sondage=$connect->Execute("SELECT sondage.*,sujet_studs.sujet FROM sondage".
+			       " LEFT OUTER JOIN sujet_studs ON sondage.id_sondage = sujet_studs.id_sondage".
+			       " WHERE sondage.id_sondage = $id");
     $psondage = $sondage->FetchObject(false);
     $psondage->date_fin = strtotime($psondage->date_fin);
     return $psondage;

@@ -90,6 +90,9 @@ CREATE TABLE comments (
     id_comment serial NOT NULL
 );
 
+CREATE OR REPLACE FUNCTION from_unixtime(integer) RETURNS timestamp AS
+'SELECT $1::abstime::timestamp without time zone AS result' LANGUAGE 'SQL';
+
 --
 -- Data for Name: sondage; Type: TABLE DATA;
 --
